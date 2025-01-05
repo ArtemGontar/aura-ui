@@ -1,0 +1,35 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Dependency directories
+backend/node_modules/
+frontend/node_modules/
+my-typescript-project/node_modules/
+
+# Build directories
+backend/dist/
+frontend/build/
+my-typescript-project/dist/
+
+# Environment variables
+backend/.env
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE files
+.vscode/
+.idea/
+.DS_Store
+
+# Miscellaneous
+*.swp
+*.swo

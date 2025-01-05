@@ -1,0 +1,1 @@
+// This file exports types or interfaces used throughout the application.
