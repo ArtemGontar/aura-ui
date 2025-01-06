@@ -1,42 +1,24 @@
-import React, { useState } from 'react';
-import './App.css';
-import Tarot from './components/Tarot/Tarot';
-import Runes from './components/Runes/Runes';
-import Psychological from './components/Psychological/Psychological';
-import MagicBall from './components/MagicBall/MagicBall';
-import Astrology from './components/Astrology/Astrology';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Navigation from "./components/Navigation/Navigation";
+import Home from "./components/Home/Home";
+import Profile from "./components/Profile/Profile";
+import styles from "./App.module.css";
 
 const App: React.FC = () => {
-  const [selectedReading, setSelectedReading] = useState<string>('');
-
-  const renderReadingComponent = () => {
-    switch (selectedReading) {
-      case 'Tarot':
-        return <Tarot />;
-      case 'Runes':
-        return <Runes />;
-      case 'Psychological':
-        return <Psychological />;
-      case 'MagicBall':
-        return <MagicBall />;
-      case 'Astrology':
-        return <Astrology />;
-      default:
-        return <p>Please select a type of reading.</p>;
-    }
-  };
-
   return (
-    <div className="container">
-      <h1>Fortune Teller</h1>
-      <div>
-        <button onClick={() => setSelectedReading('Tarot')}>Tarot</button>
-        <button onClick={() => setSelectedReading('Runes')}>Runes</button>
-        <button onClick={() => setSelectedReading('Psychological')}>Psychological</button>
-        <button onClick={() => setSelectedReading('MagicBall')}>Magic Ball</button>
-        <button onClick={() => setSelectedReading('Astrology')}>Astrology</button>
-      </div>
-      {renderReadingComponent()}
+    <div className={styles.app}>
+      <Router>
+        <div className={styles.content}>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/some" element={<Navigate to="/home" />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+        </div>
+        <Navigation />
+      </Router>
     </div>
   );
 };
