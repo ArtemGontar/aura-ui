@@ -1,30 +1,42 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import './App.css';
+import Tarot from './components/Tarot/Tarot';
+import Runes from './components/Runes/Runes';
+import Psychological from './components/Psychological/Psychological';
+import MagicBall from './components/MagicBall/MagicBall';
+import Astrology from './components/Astrology/Astrology';
 
 const App: React.FC = () => {
-  const [question, setQuestion] = useState<string>("");
-  const [response, setResponse] = useState<string>("");
+  const [selectedReading, setSelectedReading] = useState<string>('');
 
-  const handleAsk = async () => {
-    try {
-      const res = await axios.post("http://localhost:8000/api/fortune", { question });
-      setResponse(res.data.response);
-    } catch (error) {
-      setResponse("Something went wrong. Please try again.");
+  const renderReadingComponent = () => {
+    switch (selectedReading) {
+      case 'Tarot':
+        return <Tarot />;
+      case 'Runes':
+        return <Runes />;
+      case 'Psychological':
+        return <Psychological />;
+      case 'MagicBall':
+        return <MagicBall />;
+      case 'Astrology':
+        return <Astrology />;
+      default:
+        return <p>Please select a type of reading.</p>;
     }
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Fortune Teller</h1>
-      <input
-        type="text"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Ask your question..."
-      />
-      <button onClick={handleAsk}>Get Fortune</button>
-      {response && <p>{response}</p>}
+      <div>
+        <button onClick={() => setSelectedReading('Tarot')}>Tarot</button>
+        <button onClick={() => setSelectedReading('Runes')}>Runes</button>
+        <button onClick={() => setSelectedReading('Psychological')}>Psychological</button>
+        <button onClick={() => setSelectedReading('MagicBall')}>Magic Ball</button>
+        <button onClick={() => setSelectedReading('Astrology')}>Astrology</button>
+      </div>
+      {renderReadingComponent()}
     </div>
   );
 };
