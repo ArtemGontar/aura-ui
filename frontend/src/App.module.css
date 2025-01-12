@@ -9,5 +9,5 @@
 .content {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 56px; /* Ensures space for the bottom navigation */
+  padding-bottom: 56px;
 }

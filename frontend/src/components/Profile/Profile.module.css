@@ -1,8 +1,17 @@
+/* Container for all content */
 .container {
   padding: 20px;
   font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%; /* Ensures responsiveness on smaller screens */
+  box-sizing: border-box;
 }
 
+/* Profile Info Section */
 .profileInfo {
   display: flex;
   align-items: center;
@@ -11,6 +20,8 @@
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .avatar {
@@ -18,6 +29,7 @@
   height: 80px;
   border-radius: 50%;
   margin-right: 15px;
+  flex-shrink: 0;
 }
 
 .userInfo {
@@ -28,20 +40,25 @@
   font-size: 24px;
   font-weight: bold;
   margin: 0;
+  word-wrap: break-word; /* Handle long names */
 }
 
 .email {
   font-size: 16px;
   color: #555;
   margin: 5px 0 0;
+  word-wrap: break-word; /* Handle long email addresses */
 }
 
+/* Subscription Section */
 .subscription {
   background: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .subscription h3 {
@@ -63,14 +80,17 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
+  width: 100%;
 }
 
 .subscribeButton:hover {
   background: #8b30d9;
 }
 
+/* Prediction History Section */
 .history {
   margin-top: 20px;
+  width: 100%;
 }
 
 .history h3 {
@@ -94,4 +114,39 @@
 
 .predictionItem p {
   margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .name {
+    font-size: 20px;
+  }
+
+  .email {
+    font-size: 14px;
+  }
+
+  .subscribeButton {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .predictionItem {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 10px;
+  }
+
+  .subscription, .profileInfo, .history {
+    padding: 10px;
+  }
 }
