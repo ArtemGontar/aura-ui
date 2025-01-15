@@ -11,6 +11,7 @@ const DailyHoroscope: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchBirthDate = async () => {
@@ -25,6 +26,8 @@ const DailyHoroscope: React.FC = () => {
         }
       } catch (err) {
         console.error("Failed to fetch birth date", err);
+      } finally {
+        setIsFetching(false);
       }
     };
 
@@ -68,7 +71,7 @@ const DailyHoroscope: React.FC = () => {
     <div className={styles.card}>
       <h2 className={styles.title}>Daily Horoscope</h2>
       <p className={styles.description}>Discover what the stars have in store for you today.</p>
-      {!birthDateExists && (
+      {!isFetching && !birthDateExists && (
         <>
           <label className={styles.label}>Enter your date of birth:</label>
           <div className={styles.datePicker}>
@@ -100,8 +103,8 @@ const DailyHoroscope: React.FC = () => {
           <p className={styles.comment}>This data will be saved to the server and you can change it later in your profile.</p>
         </>
       )}
-      <button onClick={requestHoroscope} className={styles.button} disabled={loading}>
-        {loading ? "Loading..." : "Get Horoscope"}
+      <button onClick={requestHoroscope} className={styles.button} disabled={loading || isFetching}>
+        {loading || isFetching ? "Loading..." : "Get Horoscope"}
       </button>
       {error && <p className={styles.error}>{error}</p>}
       {horoscope && <p className={styles.horoscope}>{horoscope}</p>}

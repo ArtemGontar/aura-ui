@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
-import Horoscope from "../Cards/DailyHoroscope/DailyHoroscope";
-import Psychological from "../Cards/Psychological/Psychological";
-import Astrology from "../Cards/Astrology/Astrology";
-import MagicBall from "../Cards/MagicBall/MagicBall";
-import Tarot from "../Cards/Tarot/Tarot";
-import Runes from "../Cards/Runes/Runes";
 import { saveUserData } from "../../services/userMockService"; // Use this for mock service
 import { UserData } from "../../types/user";
-import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -60,12 +54,30 @@ const Home: React.FC = () => {
         )}
       </div>
       <div className={styles.cards}>
-        <div onClick={() => handleNavigation("/horoscope")} className={styles.card}><Horoscope /></div>
-        <div onClick={() => handleNavigation("/psychological")} className={styles.card}><Psychological /></div>
-        <div onClick={() => handleNavigation("/astrology")} className={styles.card}><Astrology /></div>
-        <div onClick={() => handleNavigation("/magicball")} className={styles.card}><MagicBall /></div>
-        <div onClick={() => handleNavigation("/tarot")} className={styles.card}><Tarot /></div>
-        <div onClick={() => handleNavigation("/runes")} className={styles.card}><Runes /></div>
+        <div onClick={() => handleNavigation("/horoscope")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Horoscope</h3>
+          <p className={styles.cardDescription}>Get your daily horoscope reading.</p>
+        </div>
+        <div onClick={() => handleNavigation("/psychological")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Psychological</h3>
+          <p className={styles.cardDescription}>Explore psychological insights.</p>
+        </div>
+        <div onClick={() => handleNavigation("/astrology")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Astrology</h3>
+          <p className={styles.cardDescription}>Discover astrological predictions.</p>
+        </div>
+        <div onClick={() => handleNavigation("/magicball")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Magic Ball</h3>
+          <p className={styles.cardDescription}>Ask the magic ball for answers.</p>
+        </div>
+        <div onClick={() => handleNavigation("/tarot")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Tarot</h3>
+          <p className={styles.cardDescription}>Get a tarot card reading.</p>
+        </div>
+        <div onClick={() => handleNavigation("/runes")} className={styles.card}>
+          <h3 className={styles.cardTitle}>Runes</h3>
+          <p className={styles.cardDescription}>Read your rune stones.</p>
+        </div>
       </div>
     </div>
   );
