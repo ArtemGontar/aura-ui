@@ -1,30 +1,19 @@
-.card {
-  border-radius: 12px;
-  margin: 20px auto;
-  max-width: 500px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 24px;
-  text-align: center;
-}
-
-.title {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 12px;
+.label {
+  font-size: 16px;
+  margin-bottom: 8px;
   color: #333;
+  display: block;
 }
 
-.description {
-  font-size: 18px;
-  margin-bottom: 24px;
-  color: #666;
-}
-
-.input {
-  width: 100%;
-  padding: 12px;
+.datePicker {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 16px;
+}
+
+.select {
+  width: 30%;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
@@ -32,9 +21,16 @@
   transition: border-color 0.2s;
 }
 
-.input:focus {
+.select:focus {
   border-color: #007acc;
   outline: none;
+}
+
+.comment {
+  font-size: 14px;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 16px;
 }
 
 .button {
@@ -58,25 +54,34 @@
   cursor: not-allowed;
 }
 
+.error {
+  color: #e74c3c;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.horoscope {
+  margin-top: 24px;
+  font-size: 20px;
+  color: #333;
+}
+
 /* Responsive adjustments */
 @media (min-width: 768px) {
-  .card {
-    padding: 32px;
+
+  .label {
+    font-size: 18px;
   }
 
-  .title {
-    font-size: 30px;
-  }
-
-  .description {
-    font-size: 20px;
-  }
-
-  .input {
+  .select {
     font-size: 18px;
   }
 
   .button {
     font-size: 18px;
+  }
+
+  .horoscope {
+    font-size: 22px;
   }
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import styles from "../Cards.module.css";
+import commonStyles from "../Cards.module.css";
+import styles from "./DailyHoroscope.module.css";
 import { saveUserBirthDate, getUserBirthDate } from "../../../services/userMockService"; // or userService
 import { getHoroscope } from "../../../services/predictionMockService"; // or predictionService
 
@@ -68,9 +69,9 @@ const DailyHoroscope: React.FC = () => {
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
 
   return (
-    <div className={styles.card}>
-      <h2 className={styles.title}>Daily Horoscope</h2>
-      <p className={styles.description}>Discover what the stars have in store for you today.</p>
+    <div className={commonStyles.card}>
+      <h2 className={commonStyles.title}>Daily Horoscope</h2>
+      <p className={commonStyles.description}>Discover what the stars have in store for you today.</p>
       {!isFetching && !birthDateExists && (
         <>
           <label className={styles.label}>Enter your date of birth:</label>
