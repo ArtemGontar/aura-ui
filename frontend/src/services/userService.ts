@@ -20,3 +20,22 @@ export const getUserData = async (userId: string) => {
     throw error;
   }
 };
+
+export const saveUserBirthDate = async (dateOfBirth: string): Promise<void> => {
+  try {
+    await axios.post("/api/saveUserBirthDate", { dateOfBirth });
+  } catch (error) {
+    console.error("Error saving user birth date", error);
+    throw error;
+  }
+};
+
+export const getUserBirthDate = async (): Promise<string | null> => {
+  try {
+    const response = await axios.get("/api/getUserBirthDate");
+    return response.data.birthDate || null;
+  } catch (error) {
+    console.error("Error fetching user birth date", error);
+    throw error;
+  }
+};

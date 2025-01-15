@@ -4,8 +4,16 @@
   max-width: 500px;
   width: 100%;
   box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 24px;
+  background-color: #ffffff;
   text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .title {
@@ -21,10 +29,22 @@
   color: #666;
 }
 
-.input {
-  width: 100%;
-  padding: 12px;
+.label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #333;
+  display: block;
+}
+
+.datePicker {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 16px;
+}
+
+.select {
+  width: 30%;
+  padding: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
@@ -32,9 +52,16 @@
   transition: border-color 0.2s;
 }
 
-.input:focus {
+.select:focus {
   border-color: #007acc;
   outline: none;
+}
+
+.comment {
+  font-size: 14px;
+  color: #666;
+  margin-top: -10px;
+  margin-bottom: 16px;
 }
 
 .button {
@@ -84,7 +111,11 @@
     font-size: 20px;
   }
 
-  .input {
+  .label {
+    font-size: 18px;
+  }
+
+  .select {
     font-size: 18px;
   }
 
