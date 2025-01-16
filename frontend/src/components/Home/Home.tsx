@@ -7,6 +7,7 @@ import { UserData } from "../../types/user";
 const Home: React.FC = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [streak, setStreak] = useState<number>(0);
+  const [crystal, setCrystal] = useState<number>(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +18,10 @@ const Home: React.FC = () => {
     // Mock function to get the daily prediction streak
     const dailyStreak = getDailyPredictionStreak();
     setStreak(dailyStreak);
+
+    // Mock function to get the daily prediction streak
+    const crystal = getCrystal();
+    setCrystal(crystal);
   }, []);
 
   const getUserDataFromTelegram = (): UserData => {
@@ -30,7 +35,11 @@ const Home: React.FC = () => {
 
   const getDailyPredictionStreak = (): number => {
     // Mock function to return a streak value
-    return 0; // Example streak value
+    return 12; // Example streak value
+  };
+
+  const getCrystal = (): number => {
+    return 12131;
   };
 
   const handleNavigation = (path: string) => {
@@ -45,6 +54,12 @@ const Home: React.FC = () => {
           {userData ? userData.firstName : "[User's Telegram Name]"}
         </h1>
         <p className={styles.subtitle}>We hope you have a magical day!</p>
+        <p className={styles.crystalContainer}>
+          <span className={styles.crystal}>
+            <span className={styles.crystalEmoji}>💎</span> 
+            <span className={styles.crystalAmount}>{crystal}</span>
+          </span>
+        </p>
       </div>
       <div className={styles.cards}>
         <div onClick={() => handleNavigation("/horoscope")} className={`${styles.card} ${styles.cardHoroscope}`}>
