@@ -47,29 +47,25 @@ const Home: React.FC = () => {
         <p className={styles.subtitle}>We hope you have a magical day!</p>
       </div>
       <div className={styles.cards}>
-        <div onClick={() => handleNavigation("/horoscope")} className={styles.card}>
+        <div onClick={() => handleNavigation("/horoscope")} className={`${styles.card} ${styles.cardHoroscope}`}>
           <h3 className={styles.cardTitle}>Horoscope</h3>
           <p className={styles.cardDescription}>Get your daily horoscope reading.</p>
         </div>
-        <div onClick={() => handleNavigation("/psychological")} className={styles.card}>
+        <div onClick={() => handleNavigation("/psychological")} className={`${styles.card} ${styles.cardPsychological}`}>
           <h3 className={styles.cardTitle}>Psychological</h3>
           <p className={styles.cardDescription}>Explore psychological insights.</p>
         </div>
-        <div onClick={() => handleNavigation("/astrology")} className={styles.card}>
+        <div onClick={() => handleNavigation("/astrology")} className={`${styles.card} ${styles.cardAstrology}`}>
           <h3 className={styles.cardTitle}>Astrology</h3>
           <p className={styles.cardDescription}>Discover astrological predictions.</p>
         </div>
-        <div onClick={() => handleNavigation("/magicball")} className={styles.card}>
+        <div onClick={() => handleNavigation("/magicball")} className={`${styles.card} ${styles.cardMagicBall}`}>
           <h3 className={styles.cardTitle}>Magic Ball</h3>
           <p className={styles.cardDescription}>Ask the magic ball for answers.</p>
         </div>
-        <div onClick={() => handleNavigation("/tarot")} className={styles.card}>
+        <div onClick={() => handleNavigation("/tarot")} className={`${styles.card} ${styles.cardTarot}`}>
           <h3 className={styles.cardTitle}>Tarot</h3>
           <p className={styles.cardDescription}>Get a tarot card reading.</p>
-        </div>
-        <div onClick={() => handleNavigation("/runes")} className={styles.card}>
-          <h3 className={styles.cardTitle}>Runes</h3>
-          <p className={styles.cardDescription}>Read your rune stones.</p>
         </div>
       </div>
     </div>

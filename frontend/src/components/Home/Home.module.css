@@ -76,23 +76,40 @@
   color: #666;
 }
 
-.streak .emoji {
-  font-size: 48px;
-  margin-bottom: 10px;
+.cardHoroscope {
+  background-image: url("/src/assets/pattern-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.streak .text {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+.cardPsychological {
+  background-image: url("/src/assets/pattern-2.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.streak .encouragement {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+.cardAstrology {
+  background-image: url("/src/assets/pattern-3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
+.cardMagicBall {
+  background-image: url("/src/assets/pattern-4.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cardTarot {
+  background-image: url("/src/assets/pattern-5.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 /* Responsive adjustments */
 @media (min-width: 768px) {
   .cards {
