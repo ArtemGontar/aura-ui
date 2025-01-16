@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const getUserDataFromTelegram = (): UserData => {
     return {
       telegramId: "123456789",
-      firstName: "John",
+      firstName: "Jason",
       lastName: "Doe",
       username: "johndoe",
     };
@@ -39,19 +39,12 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.home}>
-      <h1 className={styles.welcome}>
-        👋 Welcome, {userData ? userData.firstName : "[User's Telegram Name]"}!
-      </h1>
-      <p className={styles.subtitle}>We hope you have a magical day!</p>
-      <div className={styles.streak}>
-        {streak > 0 ? (
-          <>
-            <div className={styles.emoji}>🔥</div>
-            <div className={styles.text}>{streak} days straight</div>
-          </>
-        ) : (
-          <div className={styles.encouragement}>Start your streak today!</div>
-        )}
+      <div className={styles.welcomeContainer}>
+        <p className={styles.streak}>{streak} days streak {streak > 0 ? "🔥" : "" }</p>
+        <h1 className={styles.welcome}>
+          {userData ? userData.firstName : "[User's Telegram Name]"}
+        </h1>
+        <p className={styles.subtitle}>We hope you have a magical day!</p>
       </div>
       <div className={styles.cards}>
         <div onClick={() => handleNavigation("/horoscope")} className={styles.card}>

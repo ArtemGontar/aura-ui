@@ -10,6 +10,7 @@ import Astrology from "./components/Cards/Astrology/Astrology";
 import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
+import Affirmations from "./components/Affirmations/Affirmations";
 
 const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const App: React.FC = () => {
         <div className={styles.content}>
           <Routes>
             <Route path="/home" element={<Home />} />
+            <Route path="/affirmations" element={<Affirmations />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/horoscope" element={<DailyHoroscope />} />
             <Route path="/psychological" element={<Psychological />} />
