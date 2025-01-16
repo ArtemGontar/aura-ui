@@ -3,6 +3,7 @@ import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import { saveUserBirthDate, getUserBirthDate } from "../../../services/userMockService"; // or userService
 import { getHoroscope } from "../../../services/predictionMockService"; // or predictionService
+import DatePicker from "../../DatePicker/DatePicker";
 
 const DailyHoroscope: React.FC = () => {
   const [day, setDay] = useState<string>("");
@@ -64,6 +65,11 @@ const DailyHoroscope: React.FC = () => {
     }
   };
 
+  const saveBirthDate = () => {
+    // Save birth date logic here
+    setBirthDateExists(true);
+  };
+
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
@@ -74,34 +80,20 @@ const DailyHoroscope: React.FC = () => {
       <p className={commonStyles.description}>Discover what the stars have in store for you today.</p>
       {!isFetching && !birthDateExists && (
         <>
-          <label className={styles.label}>Enter your date of birth:</label>
-          <div className={styles.datePicker}>
-            <select value={day} onChange={handleDayChange} className={styles.select}>
-              <option value="">Day</option>
-              {days.map((d) => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
-            <select value={month} onChange={handleMonthChange} className={styles.select}>
-              <option value="">Month</option>
-              {months.map((m) => (
-                <option key={m} value={m}>
-                  {m}
-                </option>
-              ))}
-            </select>
-            <select value={year} onChange={handleYearChange} className={styles.select}>
-              <option value="">Year</option>
-              {years.map((y) => (
-                <option key={y} value={y}>
-                  {y}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p className={styles.comment}>This data will be saved to the server and you can change it later in your profile.</p>
+         <DatePicker
+            day={day}
+            month={month}
+            year={year}
+            days={days}
+            months={months}
+            years={years}
+            handleDayChange={handleDayChange}
+            handleMonthChange={handleMonthChange}
+            handleYearChange={handleYearChange}
+          />
+          <button onClick={saveBirthDate} className={styles.button}>
+            Save Date of Birth
+          </button>
         </>
       )}
       <button onClick={requestHoroscope} className={styles.button} disabled={loading || isFetching}>
