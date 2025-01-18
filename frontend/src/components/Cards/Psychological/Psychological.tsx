@@ -12,9 +12,22 @@ const Psychological: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [insight, setInsight] = useState<string>('');
 
-  const focusAreaArray = ['Career', 'Relationships', 'Health', 'Personal Growth', 'Other'];
-  const emotionalStateArray = ['Happy', 'Sad', 'Anxious', 'Angry', 'Other'];
-
+  const focusAreaArray = [
+    { option: 'Career', imageUrl: '/src/assets/area-of-life/career.png' },
+    { option: 'Family', imageUrl: '/src/assets/area-of-life/family.png' },
+    { option: 'Health', imageUrl: '/src/assets/area-of-life/health.png' },
+    { option: 'Sleep', imageUrl: '/src/assets/area-of-life/sleep.png' },
+    { option: 'Sport', imageUrl: '/src/assets/area-of-life/sport.png' },
+    { option: 'Other', imageUrl: '/src/assets/area-of-life/other.png' },
+  ];
+  const emotionalStateArray = [
+    { option: 'Happy', imageUrl: '/src/assets/emotions/happy.png' },
+    { option: 'Sad', imageUrl: '/src/assets/emotions/sad.png' },
+    { option: 'Anxious', imageUrl: '/src/assets/emotions/anxious.png' },
+    { option: 'Cry', imageUrl: '/src/assets/emotions/cry.png' },
+    { option: 'Distruct', imageUrl: '/src/assets/emotions/distruct.png' },
+    { option: 'Other', imageUrl: '/src/assets/emotions/other.png' },
+  ];
   const handleNextStep = () => {
     setStep(step + 1);
   };
@@ -51,12 +64,13 @@ const Psychological: React.FC = () => {
           <p className={commonStyles.description}>Choose your focus area</p>
           <div className={styles.step}>
             <div className={styles.optionsGrid}>
-              {focusAreaArray.map((option) => (
+              {focusAreaArray.map((area) => (
                 <OptionCard
-                  key={option}
-                  option={option}
-                  onClick={() => handleOptionClick(option)}
-                  selected={selectedOption === option}
+                  key={area.option}
+                  option={area.option}
+                  imageUrl={area.imageUrl}
+                  onClick={() => handleOptionClick(area.option)}
+                  selected={selectedOption === area.option}
                 />
               ))}
             </div>
@@ -75,12 +89,13 @@ const Psychological: React.FC = () => {
           <p className={commonStyles.description}>How are you feeling emotionally?</p>
           <div className={styles.step}>
             <div className={styles.optionsGrid}>
-              {emotionalStateArray.map((option) => (
+              {emotionalStateArray.map((emotionalState) => (
                 <OptionCard
-                  key={option}
-                  option={option}
-                  onClick={() => handleOptionClick(option)}
-                  selected={selectedOption === option}
+                  key={emotionalState.option}
+                  option={emotionalState.option}
+                  imageUrl={emotionalState.imageUrl}
+                  onClick={() => handleOptionClick(emotionalState.option)}
+                  selected={selectedOption === emotionalState.option}
                 />
               ))}
             </div>
@@ -90,8 +105,10 @@ const Psychological: React.FC = () => {
                 <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
               </label>
             )}
-            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+            <div className={styles.buttonGroup}>
+              <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+              <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+            </div>
           </div>
         </>
       )}
@@ -101,8 +118,10 @@ const Psychological: React.FC = () => {
             What is your goal or hope?
             <input type="text" value={goal} onChange={(e) => setGoal(e.target.value)} className={styles.input} placeholder="What is your goal or hope?" />
           </label>
-          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-          <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!goal}>Next</button>
+          <div className={styles.buttonGroup}>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!goal}>Next</button>
+          </div>
         </div>
       )}
       {step === 3 && (
@@ -111,8 +130,10 @@ const Psychological: React.FC = () => {
             Provide any background information
             <input type="text" value={backgroundInfo} onChange={(e) => setBackgroundInfo(e.target.value)} className={styles.input} placeholder="Provide any background information" />
           </label>
-          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-          <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!backgroundInfo}>Next</button>
+          <div className={styles.buttonGroup}>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!backgroundInfo}>Next</button>
+          </div>
         </div>
       )}
       {step === 4 && (
@@ -132,8 +153,10 @@ const Psychological: React.FC = () => {
               <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
             </label>
           )}
-          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-          <button onClick={requestInsight} className={`${commonStyles.button} ${styles.button}`} disabled={loading || !selectedOption || (selectedOption === 'Other' && !otherOption)}>Get Insight</button>
+          <div className={styles.buttonGroup}>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+            <button onClick={requestInsight} className={`${commonStyles.button} ${styles.button}`} disabled={loading || !selectedOption || (selectedOption === 'Other' && !otherOption)}>Get Insight</button>
+          </div>
         </div>
       )}
       {insight && (

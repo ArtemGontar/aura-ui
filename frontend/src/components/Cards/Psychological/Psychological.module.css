@@ -39,8 +39,17 @@
   outline: none;
 }
 
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
 .button {
+  flex: 1;
   margin-top: 20px;
+  margin: 10px 8px 0 8px;
+  background-color: #FE958F;
 }
 
 .insight {

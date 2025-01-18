@@ -117,7 +117,7 @@ const DailyHoroscope: React.FC = () => {
           </>
         )}
       </div>
-      { birthDateExists && <button onClick={requestHoroscope} className={styles.button} disabled={loading || isFetching}>
+      { birthDateExists && <button onClick={requestHoroscope} className={`${commonStyles.button} ${styles.button}`} disabled={loading || isFetching}>
         {loading || isFetching ? "Loading..." : "Get Horoscope"}
       </button>}
       {error && <p className={styles.error}>{error}</p>}
