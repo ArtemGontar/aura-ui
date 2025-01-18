@@ -1,22 +1,32 @@
-import React, { useState } from "react";
-import commonStyles from "../Cards.module.css";
-import styles from "./Psychological.module.css";
-import { getPsychologicalInsight } from "../../../services/predictionMockService"; // or predictionService
+import React, { useState } from 'react';
+import OptionCard from '../../OptionCard/OptionCard';
+import styles from './Psychological.module.css';
+import commonStyles from '../Cards.module.css';
 
 const Psychological: React.FC = () => {
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const [otherOption, setOtherOption] = useState<string>("");
-  const [concern, setConcern] = useState<string>("");
-  const [emotionalState, setEmotionalState] = useState<string>("");
-  const [goal, setGoal] = useState<string>("");
-  const [backgroundInfo, setBackgroundInfo] = useState<string>("");
-  const [insight, setInsight] = useState<string>("");
+  const [step, setStep] = useState<number>(0);
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [otherOption, setOtherOption] = useState<string>('');
+  const [goal, setGoal] = useState<string>('');
+  const [backgroundInfo, setBackgroundInfo] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [insight, setInsight] = useState<string>('');
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(e.target.value);
-    if (e.target.value !== "Other") {
-      setOtherOption("");
+  const focusAreaArray = ['Career', 'Relationships', 'Health', 'Personal Growth', 'Other'];
+  const emotionalStateArray = ['Happy', 'Sad', 'Anxious', 'Angry', 'Other'];
+
+  const handleNextStep = () => {
+    setStep(step + 1);
+  };
+
+  const handlePreviousStep = () => {
+    setStep(step - 1);
+  };
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
+    if (option !== 'Other') {
+      setOtherOption('');
     }
   };
 
@@ -24,112 +34,114 @@ const Psychological: React.FC = () => {
     setOtherOption(e.target.value);
   };
 
-  const handleConcernChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setConcern(e.target.value);
-  };
-
-  const handleEmotionalStateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmotionalState(e.target.value);
-  };
-
-  const handleGoalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGoal(e.target.value);
-  };
-
-  const handleBackgroundInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBackgroundInfo(e.target.value);
-  };
-
-  const requestInsight = async () => {
+  const requestInsight = () => {
+    // Mock insight generation
     setLoading(true);
-    try {
-      const focusArea = selectedOption === "Other" ? otherOption : selectedOption;
-      const insight = await getPsychologicalInsight({
-        focusArea,
-        concern,
-        emotionalState,
-        goal,
-        backgroundInfo,
-      });
-      setInsight(insight);
-    } catch (error) {
-      console.error("Failed to get psychological insight", error);
-    } finally {
+    setTimeout(() => {
+      setInsight('Your psychological insight will be displayed here.');
       setLoading(false);
-    }
+    }, 2000);
   };
 
   return (
     <div className={commonStyles.card}>
-      <h2 className={commonStyles.title}>Psychological</h2>
-      <p className={commonStyles.description}>Gain insights into your personality and mental well-being.</p>
-      <label className={styles.label}>
-        Focus Area
-        <select value={selectedOption} onChange={handleOptionChange} className={styles.select}>
-          <option value="">Select an option</option>
-          <option value="Career">Career</option>
-          <option value="Relationships">Relationships</option>
-          <option value="Health">Health</option>
-          <option value="Personal Growth">Personal Growth</option>
-          <option value="Other">Other</option>
-        </select>
-      </label>
-      {selectedOption === "Other" && (
-        <label className={styles.label}>
-          Please specify
-          <input
-            type="text"
-            value={otherOption}
-            onChange={handleOtherOptionChange}
-            className={styles.input}
-            placeholder="Please specify"
-          />
-        </label>
+      <h2 className={commonStyles.title}>Psychological Insight</h2>
+      {step === 0 && (
+        <>
+          <p className={commonStyles.description}>Choose your focus area</p>
+          <div className={styles.step}>
+            <div className={styles.optionsGrid}>
+              {focusAreaArray.map((option) => (
+                <OptionCard
+                  key={option}
+                  option={option}
+                  onClick={() => handleOptionClick(option)}
+                  selected={selectedOption === option}
+                />
+              ))}
+            </div>
+            {selectedOption === 'Other' && (
+              <label className={styles.label}>
+                Please specify
+                <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+              </label>
+            )}
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+          </div>
+        </>
       )}
-      <label className={styles.label}>
-        Current Concern
-        <input
-          type="text"
-          value={concern}
-          onChange={handleConcernChange}
-          className={styles.input}
-          placeholder="Describe your current concern"
-        />
-      </label>
-      <label className={styles.label}>
-        Emotional State
-        <input
-          type="text"
-          value={emotionalState}
-          onChange={handleEmotionalStateChange}
-          className={styles.input}
-          placeholder="Describe your emotional state"
-        />
-      </label>
-      <label className={styles.label}>
-        Goal or Hope
-        <input
-          type="text"
-          value={goal}
-          onChange={handleGoalChange}
-          className={styles.input}
-          placeholder="What is your goal or hope?"
-        />
-      </label>
-      <label className={styles.label}>
-        Background Info
-        <input
-          type="text"
-          value={backgroundInfo}
-          onChange={handleBackgroundInfoChange}
-          className={styles.input}
-          placeholder="Provide any background information"
-        />
-      </label>
-      <button onClick={requestInsight} className={styles.button} disabled={loading || !selectedOption || (selectedOption === "Other" && !otherOption) || !concern || !emotionalState || !goal || !backgroundInfo}>
-        {loading ? "Loading..." : "Get Insight"}
-      </button>
-      {insight && <p className={styles.insight}>{insight}</p>}
+      {step === 1 && (
+        <>
+          <p className={commonStyles.description}>How are you feeling emotionally?</p>
+          <div className={styles.step}>
+            <div className={styles.optionsGrid}>
+              {emotionalStateArray.map((option) => (
+                <OptionCard
+                  key={option}
+                  option={option}
+                  onClick={() => handleOptionClick(option)}
+                  selected={selectedOption === option}
+                />
+              ))}
+            </div>
+            {selectedOption === 'Other' && (
+              <label className={styles.label}>
+                Please specify
+                <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+              </label>
+            )}
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+          </div>
+        </>
+      )}
+      {step === 2 && (
+        <div className={styles.step}>
+          <label className={styles.label}>
+            What is your goal or hope?
+            <input type="text" value={goal} onChange={(e) => setGoal(e.target.value)} className={styles.input} placeholder="What is your goal or hope?" />
+          </label>
+          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+          <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!goal}>Next</button>
+        </div>
+      )}
+      {step === 3 && (
+        <div className={styles.step}>
+          <label className={styles.label}>
+            Provide any background information
+            <input type="text" value={backgroundInfo} onChange={(e) => setBackgroundInfo(e.target.value)} className={styles.input} placeholder="Provide any background information" />
+          </label>
+          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+          <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!backgroundInfo}>Next</button>
+        </div>
+      )}
+      {step === 4 && (
+        <div className={styles.step}>
+          <label className={styles.label}>
+            Select an option
+            <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className={styles.select}>
+              <option value="">Select an option</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+          {selectedOption === 'Other' && (
+            <label className={styles.label}>
+              Please specify
+              <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+            </label>
+          )}
+          <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
+          <button onClick={requestInsight} className={`${commonStyles.button} ${styles.button}`} disabled={loading || !selectedOption || (selectedOption === 'Other' && !otherOption)}>Get Insight</button>
+        </div>
+      )}
+      {insight && (
+        <div className={styles.insight}>
+          <h3>Your Psychological Insight</h3>
+          <p>{insight}</p>
+        </div>
+      )}
     </div>
   );
 };

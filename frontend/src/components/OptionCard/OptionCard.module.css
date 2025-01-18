@@ -1,0 +1,22 @@
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #BFCDF0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70px;
+}
+
+.card:hover {
+  background-color: #EE726B;
+}
+
+.selected {
+  background-color: #FE958F;
+}

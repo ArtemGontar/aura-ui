@@ -5,7 +5,7 @@ const mockUserData: UserData = {
   firstName: "John",
   lastName: "Doe",
   username: "johndoe",
-  // dateOfBirth: "1990-04-30", // Added dateOfBirth field
+  dateOfBirth: "1990-04-30", // Added dateOfBirth field
 };
 
 export const saveUserData = async (userData: UserData): Promise<UserData> => {

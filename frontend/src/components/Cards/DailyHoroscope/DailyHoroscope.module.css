@@ -13,36 +13,6 @@
   display: block;
 }
 
-.button {
-  display: inline-block; /* Makes the button adaptable to text size */
-  padding: 15px 60px; /* Adjusts space inside the button */
-  background-color: #171346; /* Button background color (matches the image) */
-  color: white; /* Text color */
-  font-family: 'Poppins', sans-serif; /* Text font */
-  font-weight: 600; /* Bold text */
-  text-align: center; /* Centers the text */
-  border: none; /* Removes default borders */
-  border-radius: 25px; /* Rounds the corners */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
-  transition: all 0.3s ease; /* Smooth transition for hover effects */
-}
-
-.button:hover {
-  background-color: #EE726B; /* Slightly lighter color on hover */
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
-}
-
-.button:active {
-  background-color: #FE958F; /* Darker color when clicked */
-  box-shadow: none; /* Removes shadow when clicked */
-}
-
-.button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
 .error {
   color: #e74c3c;
   margin-top: 12px;
