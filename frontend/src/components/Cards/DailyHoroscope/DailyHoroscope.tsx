@@ -60,6 +60,7 @@ const DailyHoroscope: React.FC = () => {
       const dateOfBirth = `${year}-${month}-${day}`;
       const horoscope = await getHoroscope(dateOfBirth);
       setHoroscope(horoscope);
+      console.log(horoscope);
       if (!birthDateExists) {
         await saveUserBirthDate(dateOfBirth);
       }
@@ -97,30 +98,33 @@ const DailyHoroscope: React.FC = () => {
           backgroundImage: backgroundImage || 'none',
         }}
       >
+        {!isFetching && !birthDateExists && (
+          <>
+          <DatePicker
+              day={day}
+              month={month}
+              year={year}
+              days={days}
+              months={months}
+              years={years}
+              handleDayChange={handleDayChange}
+              handleMonthChange={handleMonthChange}
+              handleYearChange={handleYearChange}
+            />
+            <button onClick={saveBirthDate} className={styles.button}>
+              Save Date of Birth
+            </button>
+          </>
+        )}
       </div>
-      {!isFetching && !birthDateExists && (
-        <>
-         <DatePicker
-            day={day}
-            month={month}
-            year={year}
-            days={days}
-            months={months}
-            years={years}
-            handleDayChange={handleDayChange}
-            handleMonthChange={handleMonthChange}
-            handleYearChange={handleYearChange}
-          />
-          <button onClick={saveBirthDate} className={styles.button}>
-            Save Date of Birth
-          </button>
-        </>
-      )}
-      <button onClick={requestHoroscope} className={styles.button} disabled={loading || isFetching}>
+      { birthDateExists && <button onClick={requestHoroscope} className={styles.button} disabled={loading || isFetching}>
         {loading || isFetching ? "Loading..." : "Get Horoscope"}
-      </button>
+      </button>}
       {error && <p className={styles.error}>{error}</p>}
-      {horoscope && <p className={styles.horoscope}>{horoscope}</p>}
+      {horoscope && 
+       <div className={styles.citationWindow}>
+        <p className={styles.citationText}>{horoscope}</p>
+       </div>}
     </div>
   );
 };

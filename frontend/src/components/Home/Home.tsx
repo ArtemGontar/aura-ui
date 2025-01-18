@@ -50,9 +50,9 @@ const Home: React.FC = () => {
     <div className={styles.home}>
       <div className={styles.welcomeContainer}>
         <p className={styles.streak}>{streak} days streak {streak > 0 ? "🔥" : "" }</p>
-        <h1 className={styles.welcome}>
+        <h2 className={styles.welcome}>
           {userData ? userData.firstName : "[User's Telegram Name]"}
-        </h1>
+        </h2>
         <p className={styles.subtitle}>We hope you have a magical day!</p>
         <p className={styles.crystalContainer}>
           <span className={styles.crystal}>
