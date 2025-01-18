@@ -4,6 +4,7 @@ import styles from "./DailyHoroscope.module.css";
 import { saveUserBirthDate, getUserBirthDate } from "../../../services/userMockService"; // or userService
 import { getHoroscope } from "../../../services/predictionMockService"; // or predictionService
 import DatePicker from "../../DatePicker/DatePicker";
+import { getHoroscopeSign } from "../../../utils/horoscopeFn";
 
 const DailyHoroscope: React.FC = () => {
   const [day, setDay] = useState<string>("");
@@ -14,6 +15,8 @@ const DailyHoroscope: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(true);
+  const [horoscopeSign, setHoroscopeSign] = useState<string | null>(null);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBirthDate = async () => {
@@ -25,6 +28,8 @@ const DailyHoroscope: React.FC = () => {
           setMonth(month);
           setDay(day);
           setBirthDateExists(true);
+          const sign = getHoroscopeSign(parseInt(day), parseInt(month));
+          setHoroscopeSign(sign);
         }
       } catch (err) {
         console.error("Failed to fetch birth date", err);
@@ -68,7 +73,15 @@ const DailyHoroscope: React.FC = () => {
   const saveBirthDate = () => {
     // Save birth date logic here
     setBirthDateExists(true);
+    const sign = getHoroscopeSign(parseInt(day), parseInt(month));
+    setHoroscopeSign(sign);
   };
+
+  useEffect(() => {
+    if (horoscopeSign) {
+      setBackgroundImage(`url(/src/assets/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
+    }
+  }, [horoscopeSign]);
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -77,7 +90,14 @@ const DailyHoroscope: React.FC = () => {
   return (
     <div className={commonStyles.card}>
       <h2 className={commonStyles.title}>Daily Horoscope</h2>
-      <p className={commonStyles.description}>Discover what the stars have in store for you today.</p>
+      <p className={commonStyles.description}>Discover what the stars have in store for you today.</p>  
+      <div 
+        className={styles.titleContainer}
+        style={{
+          backgroundImage: backgroundImage || 'none',
+        }}
+      >
+      </div>
       {!isFetching && !birthDateExists && (
         <>
          <DatePicker
