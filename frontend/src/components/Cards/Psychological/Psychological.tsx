@@ -13,20 +13,20 @@ const Psychological: React.FC = () => {
   const [insight, setInsight] = useState<string>('');
 
   const focusAreaArray = [
-    { option: 'Career', imageUrl: '/src/assets/area-of-life/career.png' },
-    { option: 'Family', imageUrl: '/src/assets/area-of-life/family.png' },
-    { option: 'Health', imageUrl: '/src/assets/area-of-life/health.png' },
-    { option: 'Sleep', imageUrl: '/src/assets/area-of-life/sleep.png' },
-    { option: 'Sport', imageUrl: '/src/assets/area-of-life/sport.png' },
-    { option: 'Other', imageUrl: '/src/assets/area-of-life/other.png' },
+    { option: 'Career', imageUrl: '/images/area-of-life/career.png' },
+    { option: 'Family', imageUrl: '/images/area-of-life/family.png' },
+    { option: 'Health', imageUrl: '/images/area-of-life/health.png' },
+    { option: 'Sleep', imageUrl: '/images/area-of-life/sleep.png' },
+    { option: 'Sport', imageUrl: '/images/area-of-life/sport.png' },
+    { option: 'Other', imageUrl: '/images/area-of-life/other.png' },
   ];
   const emotionalStateArray = [
-    { option: 'Happy', imageUrl: '/src/assets/emotions/happy.png' },
-    { option: 'Sad', imageUrl: '/src/assets/emotions/sad.png' },
-    { option: 'Anxious', imageUrl: '/src/assets/emotions/anxious.png' },
-    { option: 'Cry', imageUrl: '/src/assets/emotions/cry.png' },
-    { option: 'Distruct', imageUrl: '/src/assets/emotions/distruct.png' },
-    { option: 'Other', imageUrl: '/src/assets/emotions/other.png' },
+    { option: 'Happy', imageUrl: '/images/emotions/happy.png' },
+    { option: 'Sad', imageUrl: '/images/emotions/sad.png' },
+    { option: 'Anxious', imageUrl: '/images/emotions/anxious.png' },
+    { option: 'Cry', imageUrl: '/images/emotions/cry.png' },
+    { option: 'Distruct', imageUrl: '/images/emotions/distruct.png' },
+    { option: 'Other', imageUrl: '/images/emotions/other.png' },
   ];
   const handleNextStep = () => {
     setStep(step + 1);

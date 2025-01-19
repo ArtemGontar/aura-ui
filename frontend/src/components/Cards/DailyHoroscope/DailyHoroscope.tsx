@@ -80,7 +80,7 @@ const DailyHoroscope: React.FC = () => {
 
   useEffect(() => {
     if (horoscopeSign) {
-      setBackgroundImage(`url(/src/assets/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
+      setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
     }
   }, [horoscopeSign]);
 

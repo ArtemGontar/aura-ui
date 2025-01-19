@@ -12,7 +12,7 @@
 .welcomeContainer {
   width: 100%;
   height: 200px;
-  background-image: url("/src/assets/order-flowers.svg");
+  background-image: url("/images/order-flowers.svg");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -39,6 +39,7 @@
 }
 
 .crystal {
+  font-style: normal;
   display: flex;
   align-items: center;
   font-size: 24px;
@@ -95,35 +96,35 @@
 }
 
 .cardHoroscope {
-  background-image: url("/src/assets/pattern-1.jpg");
+  background-image: url("/images/pattern-1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .cardPsychological {
-  background-image: url("/src/assets/pattern-2.jpg");
+  background-image: url("/images/pattern-2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .cardAstrology {
-  background-image: url("/src/assets/pattern-3.jpg");
+  background-image: url("/images/pattern-3.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .cardMagicBall {
-  background-image: url("/src/assets/pattern-4.jpg");
+  background-image: url("/images/pattern-4.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .cardTarot {
-  background-image: url("/src/assets/pattern-5.jpg");
+  background-image: url("/images/pattern-5.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
