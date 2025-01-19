@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.magicBall {
+  width: 300px; /* Increased size of the ball */
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #333, #000);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.6), /* Main shadow */
+    0 15px 25px rgba(0, 0, 0, 0.5), /* Additional shadow for depth */
+    0 5px 10px rgba(0, 0, 0, 0.4);  /* Soft shadow for outer glow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.5s ease-in-out; /* Smooth rotation */
+  cursor: pointer;
+}
+
+.triangle {
+  width: 180px; /* Increased size of the triangle */
+  height: 140px;
+  background-color: #3300ff;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+}
+
+.triangleText {
+  font-size: 18px; /* Adjusted font size to fit */
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  line-height: 1.2;
+  pointer-events: none; /* Prevent text from interfering with rotation interaction */
+  margin-top: 30px;
+  width: 100px;
+}
+
+.shaking {
+  animation: shake 1s ease-in-out;
+}
+
+/* Keyframes for shaking */
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-140deg);
+  }
+  50% {
+    transform: rotate(100deg);
+  }
+  75% {
+    transform: rotate(-50deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
