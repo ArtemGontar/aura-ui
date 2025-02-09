@@ -16,6 +16,7 @@ import { retrieveLaunchParams } from "@telegram-apps/sdk";
 const App: React.FC = () => {
   const { initDataRaw, initData } = retrieveLaunchParams();
 
+  
   console.log("Raw Init Data:", initDataRaw);
   console.log("Parsed Init Data:", initData);
   return (
