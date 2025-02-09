@@ -11,25 +11,14 @@ import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
-import { retrieveLaunchParams } from "@telegram-apps/sdk";
+import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 const App: React.FC = () => {
-  const [initData, setInitData] = useState<unknown>(null);
+  const initData = useInitData();
 
-  useEffect(() => {
-    const { initData } = retrieveLaunchParams();
-    setInitData(initData);
-  }, []);
-
-  if (!initData) return <div>Loading...</div>;
-
-  console.log("Parsed Init Data:", initData);
+  console.log("initData:", initData);
   return (
     <div className={styles.app}>
-      <div className={styles.telegramData}>
-        <h3>Telegram Data:</h3>
-        <pre>{JSON.stringify(initData, null, 2)}</pre>
-      </div>
       <Router>
         <div className={styles.content}>
           <Routes>
