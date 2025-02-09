@@ -14,24 +14,15 @@ import Affirmations from "./components/Affirmations/Affirmations";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 
 const App: React.FC = () => {
-  const [telegramData, setTelegramData] = useState<string>("");
+  const { initDataRaw, initData } = retrieveLaunchParams();
 
-  useEffect(() => {
-    // Extract initDataRaw
-    const { initDataRaw } = retrieveLaunchParams();
-
-    if (typeof initDataRaw === "string") {
-      setTelegramData(initDataRaw);
-    } else {
-      console.error("initDataRaw is not a string", initDataRaw);
-    }
-  }, []);
-
+  console.log("Raw Init Data:", initDataRaw);
+  console.log("Parsed Init Data:", initData);
   return (
     <div className={styles.app}>
       <div className={styles.telegramData}>
         <h3>Telegram Data:</h3>
-        <pre>{telegramData}</pre>
+        <pre>{JSON.stringify(initData, null, 2)}</pre>
       </div>
       <Router>
         <div className={styles.content}>
