@@ -14,10 +14,15 @@ import Affirmations from "./components/Affirmations/Affirmations";
 import { retrieveLaunchParams } from "@telegram-apps/sdk";
 
 const App: React.FC = () => {
-  const { initDataRaw, initData } = retrieveLaunchParams();
+  const [initData, setInitData] = useState<unknown>(null);
 
-  
-  console.log("Raw Init Data:", initDataRaw);
+  useEffect(() => {
+    const { initData } = retrieveLaunchParams();
+    setInitData(initData);
+  }, []);
+
+  if (!initData) return <div>Loading...</div>;
+
   console.log("Parsed Init Data:", initData);
   return (
     <div className={styles.app}>
