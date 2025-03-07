@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
-import { saveUserData } from "../../services/userMockService"; // Use this for mock service
 import { UserData } from "../../types/user";
-import { useLaunchParams } from "@tma.js/sdk-react";
 
 const Home: React.FC = () => {
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [userData] = useState<UserData | null>(null);
   const [streak, setStreak] = useState<number>(0);
   const [crystal, setCrystal] = useState<number>(0);
   const navigate = useNavigate();
-  const launchParams = useLaunchParams();
 
   useEffect(() => {
     // const userData = getUserDataFromTelegram();
@@ -30,23 +27,6 @@ const Home: React.FC = () => {
     // Mock function to return a streak value
     return 12; // Example streak value
   };
-
-  const user = launchParams.initData?.user;
-  if (!user) {
-    return <div>No user data available.</div>;
-  }
-  const { id, firstName, lastName, username, photoUrl, languageCode } = user;
-  const userDataTg: UserData = {
-    telegramId: id,
-    firstName,
-    lastName,
-    username,
-    photoUrl,
-    languageCode,
-  }
-
-  setUserData(userDataTg);
-  saveUserData(userDataTg);
 
   const getCrystal = (): number => {
     return 12131;
