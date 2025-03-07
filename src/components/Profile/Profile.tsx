@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Profile.module.css";
 import { ProfileProps } from "../../types";
-import { useProfileData } from "../../hooks/useProfileData";
+import { useTelegramUser } from "../../hooks/useTelegramUser";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
-  const { isLoading, error, profileData, handleSubscribe } = useProfileData();
+  const { isLoading, error, userData, handleSubscribe } = useTelegramUser();
 
   if (isLoading) {
     return (
@@ -22,37 +22,42 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
     );
   }
 
-  if (!profileData) {
+  if (!userData) {
     return (
       <div className={styles.error} role="alert">
-        No profile data found.
+        No user data found.
       </div>
     );
   }
+
+  const fullName = `${userData.firstName}${userData.lastName ? ` ${userData.lastName}` : ''}`;
+  const displayName = userData.username || fullName;
 
   return (
     <div className={`${styles.container} ${className || ''}`}>
       {/* Profile Info */}
       <section className={styles.profileInfo} aria-labelledby="profile-title">
         <img
-          src={profileData.avatar}
-          alt={`${profileData.name}'s avatar`}
+          src={userData.photoUrl || '/default-avatar.png'}
+          alt={`${displayName}'s avatar`}
           className={styles.avatar}
           loading="lazy"
         />
         <div className={styles.userInfo}>
-          <h2 id="profile-title" className={styles.name}>{profileData.name}</h2>
-          <p className={styles.email}>{profileData.email}</p>
+          <h2 id="profile-title" className={styles.name}>{displayName}</h2>
+          {userData.username && (
+            <p className={styles.email}>@{userData.username}</p>
+          )}
         </div>
       </section>
 
       {/* Subscription Section */}
       <section className={styles.subscription} aria-labelledby="subscription-title">
         <h3 id="subscription-title">Subscription</h3>
-        {profileData.subscribed ? (
+        {userData.isPremium ? (
           <div className={styles.subscribed}>
-            <p>Plan: {profileData.subscription?.plan}</p>
-            <p>Expires on: {profileData.subscription?.expiration}</p>
+            <p>Premium Member</p>
+            <p>Enjoying all features</p>
           </div>
         ) : (
           <button 
@@ -68,21 +73,11 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
       {/* Prediction History Section */}
       <section className={styles.history} aria-labelledby="history-title">
         <h3 id="history-title">Prediction History</h3>
-        {profileData.predictions.length > 0 ? (
-          <ul className={styles.predictionList}>
-            {profileData.predictions.map((prediction, index) => (
-              <li key={index} className={styles.predictionItem}>
-                <div className={styles.predictionHeader}>
-                  <span className={styles.predictionDate}>{prediction.date}</span>
-                  <span className={styles.predictionType}>{prediction.type}</span>
-                </div>
-                <p className={styles.predictionResult}>{prediction.result}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={styles.noPredictions}>No predictions found.</p>
-        )}
+        <ul className={styles.predictionList}>
+          <li className={styles.predictionItem}>
+            <p className={styles.noPredictions}>No predictions found.</p>
+          </li>
+        </ul>
       </section>
     </div>
   );

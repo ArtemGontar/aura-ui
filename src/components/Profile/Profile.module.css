@@ -1,37 +1,36 @@
 /* Container for all content */
 .container {
-  padding: 2rem;
-  font-family: Arial, sans-serif;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 800px;
-  width: 100%; /* Ensures responsiveness on smaller screens */
-  box-sizing: border-box;
+  gap: 1.5rem;
 }
 
 /* Profile Info Section */
 .profileInfo {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: white;
+  border-radius: 15px;
   padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .profileInfo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #fff;
@@ -39,33 +38,36 @@
 }
 
 .userInfo {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .name {
-  font-size: 2rem;
-  color: #2d3436;
-  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
   line-height: 1.2;
 }
 
 .email {
-  font-size: 1.1rem;
-  color: #636e72;
+  font-size: 1rem;
+  color: #666;
   margin: 0;
 }
 
 /* Subscription Section */
 .subscription {
-  background: linear-gradient(135deg, #6a0dad 0%, #8b30d9 100%);
+  background: white;
+  border-radius: 15px;
   padding: 1.5rem;
-  border-radius: 1rem;
-  margin-bottom: 2rem;
-  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
 }
 
 .subscription h3 {
   font-size: 1.5rem;
+  color: #333;
   margin: 0 0 1rem;
 }
 
@@ -73,49 +75,53 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  padding: 1rem;
+  border-radius: 10px;
+  color: #333;
 }
 
 .subscribed p {
   margin: 0;
-  font-size: 1.1rem;
-  opacity: 0.9;
+  font-size: 1rem;
 }
 
 .subscribeButton {
-  background: white;
-  color: #6a0dad;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  color: #333;
   border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
-  font-size: 1.1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
 }
 
 .subscribeButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .subscribeButton:focus {
-  outline: 2px solid white;
+  outline: 2px solid #007bff;
   outline-offset: 2px;
 }
 
 /* Prediction History Section */
 .history {
   background: white;
+  border-radius: 15px;
   padding: 1.5rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
 }
 
 .history h3 {
   font-size: 1.5rem;
-  color: #2d3436;
-  margin: 0 0 1.5rem;
+  color: #333;
+  margin: 0 0 1rem;
 }
 
 .predictionList {
@@ -130,7 +136,7 @@
 .predictionItem {
   background: #f8f9fa;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -141,33 +147,34 @@
 
 .predictionHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .predictionDate {
-  color: #6a0dad;
+  color: #333;
   font-weight: 600;
 }
 
 .predictionType {
-  background: #6a0dad;
-  color: white;
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  color: #333;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.9rem;
+  display: inline-block;
 }
 
 .predictionResult {
-  color: #2d3436;
+  color: #333;
   margin: 0;
   line-height: 1.5;
 }
 
 .noPredictions {
   text-align: center;
-  color: #636e72;
+  color: #666;
   font-style: italic;
 }
 
@@ -176,11 +183,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 300px;
+  min-height: 200px;
   font-size: 1.2rem;
-  color: #636e72;
+  color: #666;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .error {
@@ -188,56 +195,37 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .profileInfo {
-    flex-direction: column;
-    text-align: center;
-    padding: 1rem;
+    flex-direction: row;
+    text-align: left;
+    padding: 2rem;
   }
 
   .avatar {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .name {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   .email {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .subscription, .history {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .predictionHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0.5rem;
-  }
-
-  .profileInfo, .subscription, .history {
-    padding: 0.75rem;
-  }
-
-  .name {
-    font-size: 1.25rem;
-  }
-
-  .subscribeButton {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
