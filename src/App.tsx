@@ -13,18 +13,17 @@ import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
 import WebApp from '@twa-dev/sdk'
 import { UserData } from "./types/user.ts";
+import { MOCK_USER_DATA } from "./utils/debug.ts"
 
 const App: React.FC = () => {
-  const [userData, setUserData] = useState<UserData | null>(() => {
-    const savedUserData = localStorage.getItem("telegramUserData")
-    return savedUserData ? JSON.parse(savedUserData) : null
-  })
-  const [isLoading, setIsLoading] = useState(!userData)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (userData) {
-      return // Skip initialization if we already have user data
+    const savedUserData = localStorage.getItem("telegramUserData")
+    if (savedUserData) {
+      setIsLoading(false)
+      return
     }
 
     try {
@@ -32,33 +31,31 @@ const App: React.FC = () => {
       WebApp.ready()
 
       const initData = WebApp.initData
-
+      let newUserData: UserData;
       if (!initData) {
-        setError("No initialization data available")
-        setIsLoading(false)
-        return
+        console.log("No initialization data available, using mock data");
+        console.log("User data initialized:", MOCK_USER_DATA)
+        newUserData = MOCK_USER_DATA;
+      } else {
+        const user = WebApp.initDataUnsafe.user;
+      
+        if (!user) {
+          setError("User data not available");
+          setIsLoading(false);
+          return;
+        }
+      
+        newUserData = {
+          id: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name || "",
+          username: user.username || "",
+          languageCode: user.language_code || "en",
+          isPremium: user.is_premium || false,
+          photoUrl: user.photo_url || "",
+        };
       }
 
-      // Extract user data from initData
-      const user = WebApp.initDataUnsafe.user
-
-      if (!user) {
-        setError("User data not available")
-        setIsLoading(false)
-        return
-      }
-
-      const newUserData: UserData = {
-        id: user.id,
-        firstName: user.first_name,
-        lastName: user.last_name || "",
-        username: user.username || "",
-        languageCode: user.language_code || "en",
-        isPremium: user.is_premium || false,
-        photoUrl: user.photo_url || "",
-      }
-
-      setUserData(newUserData)
       localStorage.setItem("telegramUserData", JSON.stringify(newUserData))
 
       // Expand the Telegram Mini App to its maximum allowed height
@@ -72,7 +69,7 @@ const App: React.FC = () => {
       setError(`Failed to initialize: ${err instanceof Error ? err.message : String(err)}`)
       setIsLoading(false)
     }
-  }, [userData])
+  }, [])
 
   if (isLoading) {
     return <div className="loading">Loading user data...</div>

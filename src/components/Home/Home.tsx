@@ -15,6 +15,13 @@ const Home: React.FC = () => {
   }, [])
   const [streak, setStreak] = useState<number>(0);
   const [crystal, setCrystal] = useState<number>(0);
+  const getCrystal = (): number => {
+    return 12131;
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,14 +47,6 @@ const Home: React.FC = () => {
   if (!userData) {
     return <div className="loading">Loading user data...</div>
   }
-
-  const getCrystal = (): number => {
-    return 12131;
-  };
-
-  const handleNavigation = (path: string) => {
-    navigate(path);
-  };
 
   return (
     <div className={styles.home}>
