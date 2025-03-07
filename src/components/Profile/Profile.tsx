@@ -1,73 +1,89 @@
 import React from "react";
 import styles from "./Profile.module.css";
+import { ProfileProps } from "../../types";
+import { useProfileData } from "../../hooks/useProfileData";
 
-const Profile: React.FC = () => {
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    subscribed: false, // Change to true for testing the subscribed state
-    subscription: {
-      plan: "Premium",
-      expiration: "2025-01-31",
-    },
-    predictions: [
-      { date: "2025-01-05", type: "Daily Horoscope", result: "Positive vibes await you today!" },
-      { date: "2025-01-04", type: "Magic Ball", result: "Yes, the answer is clear!" },
-      { date: "2025-01-03", type: "Astrology", result: "Your rising sign brings harmony to your relationships." },
-    ],
-  };
+const Profile: React.FC<ProfileProps> = ({ className }) => {
+  const { isLoading, error, profileData, handleSubscribe } = useProfileData();
+
+  if (isLoading) {
+    return (
+      <div className={styles.loading} role="status" aria-label="Loading profile data">
+        Loading profile data...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.error} role="alert">
+        {error}
+      </div>
+    );
+  }
+
+  if (!profileData) {
+    return (
+      <div className={styles.error} role="alert">
+        No profile data found.
+      </div>
+    );
+  }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${className || ''}`}>
       {/* Profile Info */}
-      <div className={styles.profileInfo}>
+      <section className={styles.profileInfo} aria-labelledby="profile-title">
         <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetqGORHJAzupIKNuFDrFOkfl0K0ux_bOEHw&s"
-          alt={user.name}
+          src={profileData.avatar}
+          alt={`${profileData.name}'s avatar`}
           className={styles.avatar}
+          loading="lazy"
         />
         <div className={styles.userInfo}>
-          <h2 className={styles.name}>{user.name}</h2>
-          <p className={styles.email}>{user.email}</p>
+          <h2 id="profile-title" className={styles.name}>{profileData.name}</h2>
+          <p className={styles.email}>{profileData.email}</p>
         </div>
-      </div>
+      </section>
 
       {/* Subscription Section */}
-      <div className={styles.subscription}>
-        <h3>Subscription</h3>
-        {user.subscribed ? (
+      <section className={styles.subscription} aria-labelledby="subscription-title">
+        <h3 id="subscription-title">Subscription</h3>
+        {profileData.subscribed ? (
           <div className={styles.subscribed}>
-            <p>Plan: {user.subscription.plan}</p>
-            <p>Expires on: {user.subscription.expiration}</p>
+            <p>Plan: {profileData.subscription?.plan}</p>
+            <p>Expires on: {profileData.subscription?.expiration}</p>
           </div>
         ) : (
-          <button className={styles.subscribeButton}>Subscribe Now</button>
+          <button 
+            className={styles.subscribeButton}
+            onClick={handleSubscribe}
+            aria-label="Subscribe to premium plan"
+          >
+            Subscribe Now
+          </button>
         )}
-      </div>
+      </section>
 
       {/* Prediction History Section */}
-      <div className={styles.history}>
-        <h3>Prediction History</h3>
-        {user.predictions.length > 0 ? (
+      <section className={styles.history} aria-labelledby="history-title">
+        <h3 id="history-title">Prediction History</h3>
+        {profileData.predictions.length > 0 ? (
           <ul className={styles.predictionList}>
-            {user.predictions.map((prediction, index) => (
+            {profileData.predictions.map((prediction, index) => (
               <li key={index} className={styles.predictionItem}>
-                <p>
-                  <strong>Date:</strong> {prediction.date}
-                </p>
-                <p>
-                  <strong>Type:</strong> {prediction.type}
-                </p>
-                <p>
-                  <strong>Result:</strong> {prediction.result}
-                </p>
+                <div className={styles.predictionHeader}>
+                  <span className={styles.predictionDate}>{prediction.date}</span>
+                  <span className={styles.predictionType}>{prediction.type}</span>
+                </div>
+                <p className={styles.predictionResult}>{prediction.result}</p>
               </li>
             ))}
           </ul>
         ) : (
-          <p>No predictions found.</p>
+          <p className={styles.noPredictions}>No predictions found.</p>
         )}
-      </div>
+      </section>
     </div>
   );
 };

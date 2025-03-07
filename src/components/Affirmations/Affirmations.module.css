@@ -1,4 +1,46 @@
-.affirmations{
+.affirmations {
   max-width: 500px;
   margin: 0 auto;
+  padding: 20px;
+}
+
+.banner {
+  background: linear-gradient(135deg, #f6f8fc 0%, #f1f4f9 100%);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4a90e2, #67b26f);
+}
+
+.bannerText {
+  color: #2d3748;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 500;
+}
+
+.emoji {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.subText {
+  color: #718096;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  font-weight: 400;
 }
