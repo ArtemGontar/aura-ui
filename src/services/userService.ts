@@ -39,3 +39,23 @@ export const getUserBirthDate = async (): Promise<string | null> => {
     throw error;
   }
 };
+
+export const getUserDataFromStorage = (): UserData | null => {
+  try {
+    const savedUserData = localStorage.getItem("telegramUserData");
+    return savedUserData ? JSON.parse(savedUserData) : null;
+  } catch (error) {
+    console.error('Error reading user data from storage:', error);
+    return null;
+  }
+};
+
+export const getDailyPredictionStreak = (): number => {
+  // TODO: Replace with actual API call
+  return 12;
+};
+
+export const getCrystalBalance = (): number => {
+  // TODO: Replace with actual API call
+  return 12131;
+};

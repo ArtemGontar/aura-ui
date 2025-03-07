@@ -2,63 +2,72 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.css";
 import { UserData } from "../../types/user";
+import { getUserDataFromStorage, getDailyPredictionStreak, getCrystalBalance } from "../../services/userService";
 
-const Home: React.FC = () => {
-  const [userData, setUserData] = useState<UserData | null>(null)
+interface HomeProps {
+  className?: string;
+}
 
-  useEffect(() => {
-    const savedUserData = localStorage.getItem("telegramUserData")
-    console.log(savedUserData)
-    if (savedUserData) {
-      setUserData(JSON.parse(savedUserData))
-    }
-  }, [])
+const Home: React.FC<HomeProps> = ({ className }) => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [streak, setStreak] = useState<number>(0);
   const [crystal, setCrystal] = useState<number>(0);
-  const getCrystal = (): number => {
-    return 12131;
-  };
+
+  useEffect(() => {
+    const initializeData = async () => {
+      try {
+        setIsLoading(true);
+        const userData = getUserDataFromStorage();
+        setUserData(userData);
+
+        const [streakData, crystalData] = await Promise.all([
+          getDailyPredictionStreak(),
+          getCrystalBalance()
+        ]);
+
+        setStreak(streakData);
+        setCrystal(crystalData);
+      } catch (err) {
+        setError('Failed to load user data');
+        console.error('Error initializing data:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeData();
+  }, []);
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    // const userData = getUserDataFromTelegram();
-    // setUserData(userData);
-    // saveUserData(userData); // Save user data to the backend
+  if (isLoading) {
+    return <div className={styles.loading}>Loading user data...</div>;
+  }
 
-    // Mock function to get the daily prediction streak
-    const dailyStreak = getDailyPredictionStreak();
-    setStreak(dailyStreak);
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
 
-    // Mock function to get the daily prediction streak
-    const crystal = getCrystal();
-    setCrystal(crystal);
-  }, []);
-
-  const getDailyPredictionStreak = (): number => {
-    // Mock function to return a streak value
-    return 12; // Example streak value
-  };
-
-  console.log(userData);
   if (!userData) {
-    return <div className="loading">Loading user data...</div>
+    return <div className={styles.error}>No user data found. Please log in again.</div>;
   }
 
   return (
-    <div className={styles.home}>
+    <div className={`${styles.home} ${className || ''}`}>
       <div className={styles.welcomeContainer}>
-        <p className={styles.streak}>{streak} days streak {streak > 0 ? "🔥" : "" }</p>
-        <h2 className={styles.welcome}>
-          {userData ? userData.firstName : "[User's Telegram Name]"}
-        </h2>
+        <p className={styles.streak}>
+          {streak} days streak {streak > 0 ? "🔥" : ""}
+        </p>
+        <h2 className={styles.welcome}>{userData.firstName}</h2>
         <p className={styles.subtitle}>We hope you have a magical day!</p>
         <p className={styles.crystalContainer}>
           <span className={styles.crystal}>
-            <span className={styles.crystalEmoji}>💎</span> 
+            <span className={styles.crystalEmoji}>💎</span>
             <span className={styles.crystalAmount}>{crystal}</span>
           </span>
         </p>
