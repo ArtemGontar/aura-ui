@@ -8,6 +8,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const savedUserData = localStorage.getItem("telegramUserData")
+    console.log(savedUserData)
     if (savedUserData) {
       setUserData(JSON.parse(savedUserData))
     }
@@ -35,6 +36,7 @@ const Home: React.FC = () => {
     return 12; // Example streak value
   };
 
+  console.log(userData);
   if (!userData) {
     return <div className="loading">Loading user data...</div>
   }
