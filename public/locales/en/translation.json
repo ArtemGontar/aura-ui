@@ -1,0 +1,19 @@
+{
+  "loading": "Loading user data...",
+  "error": {
+    "retry": "Retry"
+  },
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "affirmations": "Affirmations"
+  },
+  "routes": {
+    "horoscope": "Daily Horoscope",
+    "psychological": "Psychological",
+    "astrology": "Astrology",
+    "magicball": "Magic Ball",
+    "tarot": "Tarot",
+    "runes": "Runes"
+  }
+} 

@@ -1,0 +1,19 @@
+{
+  "loading": "Загрузка данных пользователя...",
+  "error": {
+    "retry": "Повторить"
+  },
+  "navigation": {
+    "home": "Главная",
+    "profile": "Профиль",
+    "affirmations": "Аффирмации"
+  },
+  "routes": {
+    "horoscope": "Гороскоп",
+    "psychological": "Психология",
+    "astrology": "Астрология",
+    "magicball": "Магический шар",
+    "tarot": "Таро",
+    "runes": "Руны"
+  }
+} 

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
@@ -14,12 +15,13 @@ import Affirmations from "./components/Affirmations/Affirmations";
 import { useTelegramInit } from "./hooks/useTelegramInit";
 
 const App: React.FC = () => {
+  const { t } = useTranslation();
   const { isLoading, error } = useTelegramInit();
 
   if (isLoading) {
     return (
       <div className={styles.loadingContainer}>
-        <div className={styles.loading}>Loading user data...</div>
+        <div className={styles.loading}>{t('loading')}</div>
       </div>
     );
   }
@@ -32,7 +34,7 @@ const App: React.FC = () => {
           className={styles.retryButton}
           onClick={() => window.location.reload()}
         >
-          Retry
+          {t('error.retry')}
         </button>
       </div>
     );
