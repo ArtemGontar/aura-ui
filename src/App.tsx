@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -11,12 +11,9 @@ import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
-import { useInitData } from '@vkruglikov/react-telegram-web-app';
 
 const App: React.FC = () => {
-  const initData = useInitData();
 
-  console.log("initData:", initData);
   return (
     <div className={styles.app}>
       <Router>

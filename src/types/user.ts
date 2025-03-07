@@ -1,7 +1,9 @@
 export interface UserData {
-  telegramId: string;
+  telegramId: number;
   firstName: string;
-  lastName: string;
-  username: string;
+  lastName: string | undefined;
+  username: string | undefined;
   dateOfBirth?: string;
+  photoUrl: string | undefined;
+  languageCode: string | undefined;
 }
