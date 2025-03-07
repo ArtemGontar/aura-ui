@@ -1,15 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./Profile.module.css";
 import { ProfileProps } from "../../types";
 import { useTelegramUser } from "../../hooks/useTelegramUser";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
+  const { t } = useTranslation();
   const { isLoading, error, userData, handleSubscribe } = useTelegramUser();
 
   if (isLoading) {
     return (
-      <div className={styles.loading} role="status" aria-label="Loading profile data">
-        Loading profile data...
+      <div className={styles.loading} role="status" aria-label={t('profile.loading')}>
+        {t('profile.loading')}
       </div>
     );
   }
@@ -25,7 +27,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
   if (!userData) {
     return (
       <div className={styles.error} role="alert">
-        No user data found.
+        {t('profile.noData')}
       </div>
     );
   }
@@ -53,29 +55,29 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
 
       {/* Subscription Section */}
       <section className={styles.subscription} aria-labelledby="subscription-title">
-        <h3 id="subscription-title">Subscription</h3>
+        <h3 id="subscription-title">{t('profile.subscription.title')}</h3>
         {userData.isPremium ? (
           <div className={styles.subscribed}>
-            <p>Premium Member</p>
-            <p>Enjoying all features</p>
+            <p>{t('profile.subscription.premium.status')}</p>
+            <p>{t('profile.subscription.premium.benefits')}</p>
           </div>
         ) : (
           <button 
             className={styles.subscribeButton}
             onClick={handleSubscribe}
-            aria-label="Subscribe to premium plan"
+            aria-label={t('profile.subscription.subscribe')}
           >
-            Subscribe Now
+            {t('profile.subscription.subscribe')}
           </button>
         )}
       </section>
 
       {/* Prediction History Section */}
       <section className={styles.history} aria-labelledby="history-title">
-        <h3 id="history-title">Prediction History</h3>
+        <h3 id="history-title">{t('profile.history.title')}</h3>
         <ul className={styles.predictionList}>
           <li className={styles.predictionItem}>
-            <p className={styles.noPredictions}>No predictions found.</p>
+            <p className={styles.noPredictions}>{t('profile.history.noPredictions')}</p>
           </li>
         </ul>
       </section>

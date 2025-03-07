@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import styles from "./Home.module.css";
 import { HomeProps } from "../../types";
 import { HOME_CARDS } from "../../constants/cards";
@@ -7,6 +8,7 @@ import { useUserData } from "../../hooks/useUserData";
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { isLoading, error, userData, userStats } = useUserData();
 
   const handleNavigation = (path: string) => {
@@ -15,8 +17,8 @@ const Home: React.FC<HomeProps> = ({ className }) => {
 
   if (isLoading) {
     return (
-      <div className={styles.loading} role="status" aria-label="Loading user data">
-        Loading user data...
+      <div className={styles.loading} role="status" aria-label={t('loading')}>
+        {t('loading')}
       </div>
     );
   }
@@ -32,7 +34,7 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   if (!userData) {
     return (
       <div className={styles.error} role="alert">
-        No user data found. Please log in again.
+        {t('error.noUserData')}
       </div>
     );
   }
@@ -41,10 +43,10 @@ const Home: React.FC<HomeProps> = ({ className }) => {
     <div className={`${styles.home} ${className || ''}`}>
       <div className={styles.welcomeContainer}>
         <p className={styles.streak}>
-          {userStats.streak} days streak {userStats.streak > 0 ? "🔥" : ""}
+          {userStats.streak} {t('home.daysStreak')} {userStats.streak > 0 ? "🔥" : ""}
         </p>
         <h2 className={styles.welcome}>{userData.firstName}</h2>
-        <p className={styles.subtitle}>We hope you have a magical day!</p>
+        <p className={styles.subtitle}>{t('home.welcomeMessage')}</p>
         <p className={styles.crystalContainer}>
           <span className={styles.crystal}>
             <span className={styles.crystalEmoji}>💎</span>
@@ -68,9 +70,9 @@ const Home: React.FC<HomeProps> = ({ className }) => {
           >
             <h3 className={styles.cardTitle}>
               {card.icon && <span className={styles.cardIcon}>{card.icon}</span>}
-              {card.title}
+              {t(`home.cards.${card.id}.title`)}
             </h3>
-            <p className={styles.cardDescription}>{card.description}</p>
+            <p className={styles.cardDescription}>{t(`home.cards.${card.id}.description`)}</p>
           </div>
         ))}
       </div>

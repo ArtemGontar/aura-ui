@@ -7,8 +7,6 @@ export interface UserData {
 
 export interface CardData {
   id: string;
-  title: string;
-  description: string;
   path: string;
   icon?: string;
 }

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import OptionCard from '../../OptionCard/OptionCard';
 import styles from './Psychological.module.css';
 import commonStyles from '../Cards.module.css';
 
 const Psychological: React.FC = () => {
+  const { t } = useTranslation();
   const [step, setStep] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [otherOption, setOtherOption] = useState<string>('');
@@ -13,20 +15,20 @@ const Psychological: React.FC = () => {
   const [insight, setInsight] = useState<string>('');
 
   const focusAreaArray = [
-    { option: 'Career', imageUrl: '/images/area-of-life/career.png' },
-    { option: 'Family', imageUrl: '/images/area-of-life/family.png' },
-    { option: 'Health', imageUrl: '/images/area-of-life/health.png' },
-    { option: 'Sleep', imageUrl: '/images/area-of-life/sleep.png' },
-    { option: 'Sport', imageUrl: '/images/area-of-life/sport.png' },
-    { option: 'Other', imageUrl: '/images/area-of-life/other.png' },
+    { option: t('psychological.focusAreas.career'), imageUrl: '/images/area-of-life/career.png' },
+    { option: t('psychological.focusAreas.family'), imageUrl: '/images/area-of-life/family.png' },
+    { option: t('psychological.focusAreas.health'), imageUrl: '/images/area-of-life/health.png' },
+    { option: t('psychological.focusAreas.sleep'), imageUrl: '/images/area-of-life/sleep.png' },
+    { option: t('psychological.focusAreas.sport'), imageUrl: '/images/area-of-life/sport.png' },
+    { option: t('psychological.focusAreas.other'), imageUrl: '/images/area-of-life/other.png' },
   ];
   const emotionalStateArray = [
-    { option: 'Happy', imageUrl: '/images/emotions/happy.png' },
-    { option: 'Sad', imageUrl: '/images/emotions/sad.png' },
-    { option: 'Anxious', imageUrl: '/images/emotions/anxious.png' },
-    { option: 'Cry', imageUrl: '/images/emotions/cry.png' },
-    { option: 'Distruct', imageUrl: '/images/emotions/distruct.png' },
-    { option: 'Other', imageUrl: '/images/emotions/other.png' },
+    { option: t('psychological.emotions.happy'), imageUrl: '/images/emotions/happy.png' },
+    { option: t('psychological.emotions.sad'), imageUrl: '/images/emotions/sad.png' },
+    { option: t('psychological.emotions.anxious'), imageUrl: '/images/emotions/anxious.png' },
+    { option: t('psychological.emotions.cry'), imageUrl: '/images/emotions/cry.png' },
+    { option: t('psychological.emotions.distruct'), imageUrl: '/images/emotions/distruct.png' },
+    { option: t('psychological.emotions.other'), imageUrl: '/images/emotions/other.png' },
   ];
   const handleNextStep = () => {
     setStep(step + 1);
@@ -38,7 +40,7 @@ const Psychological: React.FC = () => {
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
-    if (option !== 'Other') {
+    if (option !== t('psychological.focusAreas.other') && option !== t('psychological.emotions.other')) {
       setOtherOption('');
     }
   };
@@ -51,17 +53,17 @@ const Psychological: React.FC = () => {
     // Mock insight generation
     setLoading(true);
     setTimeout(() => {
-      setInsight('Your psychological insight will be displayed here.');
+      setInsight(t('psychological.insight.defaultText'));
       setLoading(false);
     }, 2000);
   };
 
   return (
     <div className={commonStyles.card}>
-      <h2 className={commonStyles.title}>Psychological Insight</h2>
+      <h2 className={commonStyles.title}>{t('psychological.title')}</h2>
       {step === 0 && (
         <>
-          <p className={commonStyles.description}>Choose your focus area</p>
+          <p className={commonStyles.description}>{t('psychological.description')}</p>
           <div className={styles.step}>
             <div className={styles.optionsGrid}>
               {focusAreaArray.map((area) => (
@@ -74,19 +76,31 @@ const Psychological: React.FC = () => {
                 />
               ))}
             </div>
-            {selectedOption === 'Other' && (
+            {selectedOption === t('psychological.focusAreas.other') && (
               <label className={styles.label}>
-                Please specify
-                <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+                {t('psychological.form.specifyOther')}
+                <input 
+                  type="text" 
+                  value={otherOption} 
+                  onChange={handleOtherOptionChange} 
+                  className={styles.input} 
+                  placeholder={t('psychological.form.otherPlaceholder')} 
+                />
               </label>
             )}
-            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+            <button 
+              onClick={handleNextStep} 
+              className={`${commonStyles.button} ${styles.button}`} 
+              disabled={!selectedOption || (selectedOption === t('psychological.focusAreas.other') && !otherOption)}
+            >
+              {t('psychological.buttons.next')}
+            </button>
           </div>
         </>
       )}
       {step === 1 && (
         <>
-          <p className={commonStyles.description}>How are you feeling emotionally?</p>
+          <p className={commonStyles.description}>{t('psychological.emotionalState')}</p>
           <div className={styles.step}>
             <div className={styles.optionsGrid}>
               {emotionalStateArray.map((emotionalState) => (
@@ -99,15 +113,29 @@ const Psychological: React.FC = () => {
                 />
               ))}
             </div>
-            {selectedOption === 'Other' && (
+            {selectedOption === t('psychological.emotions.other') && (
               <label className={styles.label}>
-                Please specify
-                <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+                {t('psychological.form.specifyOther')}
+                <input 
+                  type="text" 
+                  value={otherOption} 
+                  onChange={handleOtherOptionChange} 
+                  className={styles.input} 
+                  placeholder={t('psychological.form.otherPlaceholder')} 
+                />
               </label>
             )}
             <div className={styles.buttonGroup}>
-              <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-              <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!selectedOption || (selectedOption === 'Other' && !otherOption)}>Next</button>
+              <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>
+                {t('psychological.buttons.back')}
+              </button>
+              <button 
+                onClick={handleNextStep} 
+                className={`${commonStyles.button} ${styles.button}`} 
+                disabled={!selectedOption || (selectedOption === t('psychological.emotions.other') && !otherOption)}
+              >
+                {t('psychological.buttons.next')}
+              </button>
             </div>
           </div>
         </>
@@ -115,53 +143,87 @@ const Psychological: React.FC = () => {
       {step === 2 && (
         <div className={styles.step}>
           <label className={styles.label}>
-            What is your goal or hope?
-            <input type="text" value={goal} onChange={(e) => setGoal(e.target.value)} className={styles.input} placeholder="What is your goal or hope?" />
+            {t('psychological.form.goalQuestion')}
+            <input 
+              type="text" 
+              value={goal} 
+              onChange={(e) => setGoal(e.target.value)} 
+              className={styles.input} 
+              placeholder={t('psychological.form.goalPlaceholder')} 
+            />
           </label>
           <div className={styles.buttonGroup}>
-            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!goal}>Next</button>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>
+              {t('psychological.buttons.back')}
+            </button>
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!goal}>
+              {t('psychological.buttons.next')}
+            </button>
           </div>
         </div>
       )}
       {step === 3 && (
         <div className={styles.step}>
           <label className={styles.label}>
-            Provide any background information
-            <input type="text" value={backgroundInfo} onChange={(e) => setBackgroundInfo(e.target.value)} className={styles.input} placeholder="Provide any background information" />
+            {t('psychological.form.backgroundQuestion')}
+            <input 
+              type="text" 
+              value={backgroundInfo} 
+              onChange={(e) => setBackgroundInfo(e.target.value)} 
+              className={styles.input} 
+              placeholder={t('psychological.form.backgroundPlaceholder')} 
+            />
           </label>
           <div className={styles.buttonGroup}>
-            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!backgroundInfo}>Next</button>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>
+              {t('psychological.buttons.back')}
+            </button>
+            <button onClick={handleNextStep} className={`${commonStyles.button} ${styles.button}`} disabled={!backgroundInfo}>
+              {t('psychological.buttons.next')}
+            </button>
           </div>
         </div>
       )}
       {step === 4 && (
         <div className={styles.step}>
           <label className={styles.label}>
-            Select an option
+            {t('psychological.form.selectOption')}
             <select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)} className={styles.select}>
-              <option value="">Select an option</option>
-              <option value="Option 1">Option 1</option>
-              <option value="Option 2">Option 2</option>
-              <option value="Other">Other</option>
+              <option value="">{t('psychological.form.selectOption')}</option>
+              <option value="Option 1">{t('psychological.form.option1')}</option>
+              <option value="Option 2">{t('psychological.form.option2')}</option>
+              <option value="Other">{t('psychological.focusAreas.other')}</option>
             </select>
           </label>
           {selectedOption === 'Other' && (
             <label className={styles.label}>
-              Please specify
-              <input type="text" value={otherOption} onChange={handleOtherOptionChange} className={styles.input} placeholder="Specify other option" />
+              {t('psychological.form.specifyOther')}
+              <input 
+                type="text" 
+                value={otherOption} 
+                onChange={handleOtherOptionChange} 
+                className={styles.input} 
+                placeholder={t('psychological.form.otherPlaceholder')} 
+              />
             </label>
           )}
           <div className={styles.buttonGroup}>
-            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>Back</button>
-            <button onClick={requestInsight} className={`${commonStyles.button} ${styles.button}`} disabled={loading || !selectedOption || (selectedOption === 'Other' && !otherOption)}>Get Insight</button>
+            <button onClick={handlePreviousStep} className={`${commonStyles.button} ${styles.button}`}>
+              {t('psychological.buttons.back')}
+            </button>
+            <button 
+              onClick={requestInsight} 
+              className={`${commonStyles.button} ${styles.button}`} 
+              disabled={loading || !selectedOption || (selectedOption === 'Other' && !otherOption)}
+            >
+              {t('psychological.buttons.getInsight')}
+            </button>
           </div>
         </div>
       )}
       {insight && (
         <div className={styles.insight}>
-          <h3>Your Psychological Insight</h3>
+          <h3>{t('psychological.insight.title')}</h3>
           <p>{insight}</p>
         </div>
       )}

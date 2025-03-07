@@ -7,6 +7,7 @@ const getUserLanguage = (): string => {
   const savedUserData = localStorage.getItem("telegramUserData");
   if (savedUserData) {
     const userData = JSON.parse(savedUserData);
+    console.log(userData);
     return userData.languageCode === 'ru' ? 'ru' : 'en';
   }
   return 'en';

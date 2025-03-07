@@ -1,7 +1,8 @@
 {
   "loading": "Loading user data...",
   "error": {
-    "retry": "Retry"
+    "retry": "Retry",
+    "noUserData": "No user data found. Please log in again."
   },
   "navigation": {
     "home": "Home",
@@ -15,5 +16,109 @@
     "magicball": "Magic Ball",
     "tarot": "Tarot",
     "runes": "Runes"
+  },
+  "home": {
+    "daysStreak": "days streak",
+    "welcomeMessage": "We hope you have a magical day!",
+    "cards": {
+      "horoscope": {
+        "title": "Horoscope",
+        "description": "Get your daily horoscope reading."
+      },
+      "psychological": {
+        "title": "Psychological",
+        "description": "Explore psychological insights."
+      },
+      "astrology": {
+        "title": "Astrology",
+        "description": "Discover astrological predictions."
+      },
+      "magicball": {
+        "title": "Magic Ball",
+        "description": "Ask the magic ball for answers."
+      },
+      "tarot": {
+        "title": "Tarot",
+        "description": "Get a tarot card reading."
+      }
+    }
+  },
+  "profile": {
+    "loading": "Loading profile data...",
+    "noData": "No user data found.",
+    "subscription": {
+      "title": "Subscription",
+      "premium": {
+        "status": "Premium Member",
+        "benefits": "Enjoying all features"
+      },
+      "subscribe": "Subscribe Now"
+    },
+    "history": {
+      "title": "Prediction History",
+      "noPredictions": "No predictions found."
+    }
+  },
+  "affirmations": {
+    "banner": {
+      "title": "Affirmations are getting a makeover!",
+      "subtitle": "We're crafting something special to help you stay positive and motivated. Check back soon!"
+    }
+  },
+  "dailyHoroscope": {
+    "title": "Daily Horoscope",
+    "description": "Discover what the stars have in store for you today.",
+    "buttons": {
+      "saveBirthDate": "Save Date of Birth",
+      "getHoroscope": "Get Horoscope"
+    },
+    "loading": "Loading...",
+    "error": "Failed to fetch horoscope. Please try again."
+  },
+  "psychological": {
+    "title": "Psychological Insight",
+    "description": "Choose your focus area",
+    "emotionalState": "How are you feeling emotionally?",
+    "focusAreas": {
+      "career": "Career",
+      "family": "Family",
+      "health": "Health",
+      "sleep": "Sleep",
+      "sport": "Sport",
+      "other": "Other"
+    },
+    "emotions": {
+      "happy": "Happy",
+      "sad": "Sad",
+      "anxious": "Anxious",
+      "cry": "Cry",
+      "distruct": "Distruct",
+      "other": "Other"
+    },
+    "form": {
+      "specifyOther": "Please specify",
+      "otherPlaceholder": "Specify other option",
+      "goalQuestion": "What is your goal or hope?",
+      "goalPlaceholder": "What is your goal or hope?",
+      "backgroundQuestion": "Provide any background information",
+      "backgroundPlaceholder": "Provide any background information",
+      "selectOption": "Select an option",
+      "option1": "Option 1",
+      "option2": "Option 2"
+    },
+    "buttons": {
+      "next": "Next",
+      "back": "Back",
+      "getInsight": "Get Insight"
+    },
+    "insight": {
+      "title": "Your Psychological Insight",
+      "defaultText": "Your psychological insight will be displayed here."
+    }
+  },
+  "magicBall": {
+    "title": "Magic Ball",
+    "description": "Ask the Magic Ball any question and get an answer.",
+    "initialText": "Ask the Magic Ball a question."
   }
 } 

@@ -5,7 +5,7 @@ export const MOCK_USER_DATA: UserData = {
   firstName: "John",
   lastName: "Doe",
   username: "johndoe",
-  languageCode: "en",
+  languageCode: "ru",
   isPremium: true,
-  photoUrl: "https://placekitten.com/200/200", // A placeholder image
+  photoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRetqGORHJAzupIKNuFDrFOkfl0K0ux_bOEHw&s", // A placeholder image
 }

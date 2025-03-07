@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./MagicBall.module.css";
 import { getMagicBallAnswer } from "../../../services/predictionMockService"; // or magicBallMockService
 import MagicBallModule from "../../MagicBallModel/MagicBallModel";
 
 const MagicBall: React.FC = () => {
-  const [magicText, setMagicText] = useState<string>("Ask the Magic Ball a question.");
+  const { t } = useTranslation();
+  const [magicText, setMagicText] = useState<string>(t('magicBall.initialText'));
   const [isShaking, setIsShaking] = useState(false); // Whether the ball is shaking
 
   const askMagicBall = async () => {
@@ -27,8 +29,8 @@ const MagicBall: React.FC = () => {
 
   return (
     <div className={commonStyles.card}>
-      <h2 className={commonStyles.title}>Magic Ball</h2>
-      <p className={commonStyles.description}>Ask the Magic Ball any question and get an answer.</p>
+      <h2 className={commonStyles.title}>{t('magicBall.title')}</h2>
+      <p className={commonStyles.description}>{t('magicBall.description')}</p>
       <MagicBallModule text={magicText} isShaking={isShaking} onBallClick={handleBallClick} />
     </div>
   );

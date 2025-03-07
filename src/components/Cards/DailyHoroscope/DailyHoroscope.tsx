@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import { saveUserBirthDate, getUserBirthDate } from "../../../services/userMockService"; // or userService
@@ -7,6 +8,7 @@ import DatePicker from "../../DatePicker/DatePicker";
 import { getHoroscopeSign } from "../../../utils/horoscopeFn";
 
 const DailyHoroscope: React.FC = () => {
+  const { t } = useTranslation();
   const [day, setDay] = useState<string>("");
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
@@ -60,12 +62,11 @@ const DailyHoroscope: React.FC = () => {
       const dateOfBirth = `${year}-${month}-${day}`;
       const horoscope = await getHoroscope(dateOfBirth);
       setHoroscope(horoscope);
-      console.log(horoscope);
       if (!birthDateExists) {
         await saveUserBirthDate(dateOfBirth);
       }
     } catch (err) {
-      setError("Failed to fetch horoscope. Please try again.");
+      setError(t('dailyHoroscope.error'));
     } finally {
       setLoading(false);
     }
@@ -90,8 +91,8 @@ const DailyHoroscope: React.FC = () => {
 
   return (
     <div className={commonStyles.card}>
-      <h2 className={commonStyles.title}>Daily Horoscope</h2>
-      <p className={commonStyles.description}>Discover what the stars have in store for you today.</p>  
+      <h2 className={commonStyles.title}>{t('dailyHoroscope.title')}</h2>
+      <p className={commonStyles.description}>{t('dailyHoroscope.description')}</p>  
       <div 
         className={styles.titleContainer}
         style={{
@@ -100,7 +101,7 @@ const DailyHoroscope: React.FC = () => {
       >
         {!isFetching && !birthDateExists && (
           <>
-          <DatePicker
+            <DatePicker
               day={day}
               month={month}
               year={year}
@@ -112,14 +113,20 @@ const DailyHoroscope: React.FC = () => {
               handleYearChange={handleYearChange}
             />
             <button onClick={saveBirthDate} className={styles.button}>
-              Save Date of Birth
+              {t('dailyHoroscope.buttons.saveBirthDate')}
             </button>
           </>
         )}
       </div>
-      { birthDateExists && <button onClick={requestHoroscope} className={`${commonStyles.button} ${styles.button}`} disabled={loading || isFetching}>
-        {loading || isFetching ? "Loading..." : "Get Horoscope"}
-      </button>}
+      {birthDateExists && (
+        <button 
+          onClick={requestHoroscope} 
+          className={`${commonStyles.button} ${styles.button}`} 
+          disabled={loading || isFetching}
+        >
+          {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}
+        </button>
+      )}
       {error && <p className={styles.error}>{error}</p>}
       {horoscope && 
        <div className={styles.citationWindow}>
