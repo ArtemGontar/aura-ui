@@ -12,77 +12,70 @@ import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
 import WebApp from '@twa-dev/sdk'
-import { LaunchParams } from './types/telegram.ts'
+import { UserData } from "./types/user.ts";
 
 const App: React.FC = () => {
-  const [, setUser] = useState<LaunchParams | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [userData, setUserData] = useState<UserData | null>(() => {
+    const savedUserData = localStorage.getItem("telegramUserData")
+    return savedUserData ? JSON.parse(savedUserData) : null
+  })
+  const [isLoading, setIsLoading] = useState(!userData)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    if (userData) {
+      return // Skip initialization if we already have user data
+    }
+
     try {
       // Initialize Telegram WebApp
       WebApp.ready()
-      
-      // Get user data from launch params
+
       const initData = WebApp.initData
-      
+
       if (!initData) {
-        setError('No init data available. Are you running this outside of Telegram?')
+        setError("No initialization data available")
         setIsLoading(false)
         return
       }
-      
-      // Parse the initData string
-      const searchParams = new URLSearchParams(initData)
-      const userStr = searchParams.get('user')
-      
-      if (!userStr) {
-        setError('No user data found in launch parameters')
+
+      // Extract user data from initData
+      const user = WebApp.initDataUnsafe.user
+
+      if (!user) {
+        setError("User data not available")
         setIsLoading(false)
         return
       }
-      
-      // Parse user data
-      const userData = JSON.parse(userStr)
-      
-      // Get other launch params
-      const startParam = searchParams.get('start_param')
-      const authDate = searchParams.get('auth_date')
-      const hash = searchParams.get('hash')
-      
-      // Combine all data
-      const launchParams: LaunchParams = {
-        user: userData,
-        startParam,
-        authDate,
-        hash,
-        // Add other params from WebApp
-        colorScheme: WebApp.colorScheme,
-        themeParams: WebApp.themeParams,
-        viewportHeight: WebApp.viewportHeight,
-        viewportStableHeight: WebApp.viewportStableHeight,
-        isExpanded: WebApp.isExpanded,
-        platform: WebApp.platform
+
+      const newUserData: UserData = {
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name || "",
+        username: user.username || "",
+        languageCode: user.language_code || "en",
+        isPremium: user.is_premium || false,
+        photoUrl: user.photo_url || "",
       }
-      
-      setUser(launchParams)
-      setIsLoading(false)
-      
-      // Set the header color to match Telegram theme
-      WebApp.setHeaderColor(WebApp.themeParams.bg_color)
-      
+
+      setUserData(newUserData)
+      localStorage.setItem("telegramUserData", JSON.stringify(newUserData))
+
+      // Expand the Telegram Mini App to its maximum allowed height
+      WebApp.expand()
+
       // Enable closing confirmation if needed
-      // WebApp.enableClosingConfirmation()
-      
+      WebApp.enableClosingConfirmation()
+
+      setIsLoading(false)
     } catch (err) {
-      setError(`Error initializing: ${err instanceof Error ? err.message : String(err)}`)
+      setError(`Failed to initialize: ${err instanceof Error ? err.message : String(err)}`)
       setIsLoading(false)
     }
-  }, [])
+  }, [userData])
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>
+    return <div className="loading">Loading user data...</div>
   }
 
   if (error) {

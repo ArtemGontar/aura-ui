@@ -4,7 +4,14 @@ import styles from "./Home.module.css";
 import { UserData } from "../../types/user";
 
 const Home: React.FC = () => {
-  const [userData] = useState<UserData | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null)
+
+  useEffect(() => {
+    const savedUserData = localStorage.getItem("telegramUserData")
+    if (savedUserData) {
+      setUserData(JSON.parse(savedUserData))
+    }
+  }, [])
   const [streak, setStreak] = useState<number>(0);
   const [crystal, setCrystal] = useState<number>(0);
   const navigate = useNavigate();
@@ -27,6 +34,10 @@ const Home: React.FC = () => {
     // Mock function to return a streak value
     return 12; // Example streak value
   };
+
+  if (!userData) {
+    return <div className="loading">Loading user data...</div>
+  }
 
   const getCrystal = (): number => {
     return 12131;
