@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -11,73 +11,33 @@ import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
-import WebApp from '@twa-dev/sdk'
-import { UserData } from "./types/user.ts";
-import { MOCK_USER_DATA } from "./utils/debug.ts"
+import { useTelegramInit } from "./hooks/useTelegramInit";
 
 const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const savedUserData = localStorage.getItem("telegramUserData")
-    if (savedUserData) {
-      setIsLoading(false)
-      return
-    }
-
-    try {
-      // Initialize Telegram WebApp
-      WebApp.ready()
-
-      const initData = WebApp.initData
-      let newUserData: UserData;
-      if (!initData) {
-        console.log("No initialization data available, using mock data");
-        console.log("User data initialized:", MOCK_USER_DATA)
-        newUserData = MOCK_USER_DATA;
-      } else {
-        const user = WebApp.initDataUnsafe.user;
-      
-        if (!user) {
-          setError("User data not available");
-          setIsLoading(false);
-          return;
-        }
-      
-        newUserData = {
-          id: user.id,
-          firstName: user.first_name,
-          lastName: user.last_name || "",
-          username: user.username || "",
-          languageCode: user.language_code || "en",
-          isPremium: user.is_premium || false,
-          photoUrl: user.photo_url || "",
-        };
-      }
-
-      localStorage.setItem("telegramUserData", JSON.stringify(newUserData))
-
-      // Expand the Telegram Mini App to its maximum allowed height
-      WebApp.expand()
-
-      // Enable closing confirmation if needed
-      WebApp.enableClosingConfirmation()
-
-      setIsLoading(false)
-    } catch (err) {
-      setError(`Failed to initialize: ${err instanceof Error ? err.message : String(err)}`)
-      setIsLoading(false)
-    }
-  }, [])
+  const { isLoading, error } = useTelegramInit();
 
   if (isLoading) {
-    return <div className="loading">Loading user data...</div>
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.loading}>Loading user data...</div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="error">{error}</div>
+    return (
+      <div className={styles.errorContainer}>
+        <div className={styles.error}>{error}</div>
+        <button 
+          className={styles.retryButton}
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+    );
   }
+
   return (
     <div className={styles.app}>
       <Router>
