@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: var(--tg-theme-secondary-bg-color);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
@@ -11,39 +11,42 @@
 
 .container :global(.MuiBottomNavigation-root) {
   height: 65px;
-  padding: 8px 0;
+  padding: var(--tg-theme-spacing-unit) 0;
+  background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .container :global(.MuiBottomNavigationAction-root) {
   padding: 6px 0;
   min-width: 80px;
-  transition: all 0.2s ease-in-out;
-  color: rgba(0, 0, 0, 0.6);
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+  color: var(--tg-theme-hint-color);
 }
 
 .container :global(.MuiBottomNavigationAction-root.Mui-selected) {
   padding-top: 2px;
-  color: var(--primary-color, #1976d2);
+  color: var(--tg-theme-button-color);
 }
 
 .container :global(.MuiBottomNavigationAction-label) {
-  font-size: 0.75rem;
-  font-family: var(--font-family, 'Inter', sans-serif);
-  transition: all 0.2s ease-in-out;
+  font-size: var(--tg-theme-font-size-small);
+  font-family: var(--tg-theme-font-family);
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   letter-spacing: 0.2px;
 }
 
 .container :global(.MuiBottomNavigationAction-label.Mui-selected) {
-  font-size: 0.8rem;
+  font-size: var(--tg-theme-font-size-base);
   font-weight: 600;
 }
 
 .container :global(.MuiSvgIcon-root) {
-  transition: transform 0.2s ease-in-out;
+  transition: transform var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   font-size: 1.5rem;
+  color: var(--tg-theme-text-color);
 }
 
 .container :global(.Mui-selected .MuiSvgIcon-root) {
   transform: scale(1.1);
   font-size: 1.6rem;
+  color: var(--tg-theme-button-color);
 }

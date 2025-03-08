@@ -13,10 +13,14 @@ import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
 import { useTelegramInit } from "./hooks/useTelegramInit";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { useApplyTheme } from "./hooks/useApplyTheme";
+import "./styles/theme.css";
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const { t } = useTranslation();
   const { isLoading, error } = useTelegramInit();
+  useApplyTheme();
 
   if (isLoading) {
     return (
@@ -60,6 +64,14 @@ const App: React.FC = () => {
         <Navigation />
       </Router>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 };
 

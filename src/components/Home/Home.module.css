@@ -1,8 +1,8 @@
 .home {
-  padding: 20px;
+  padding: calc(var(--tg-theme-spacing-unit) * 2.5);
   max-width: 1200px;
   margin: 0 auto;
-  background: #f8fafc;
+  background: var(--tg-theme-bg-color);
 }
 
 .welcomeContainer {
@@ -10,8 +10,8 @@
   margin: 2rem auto 3rem;
   padding: 3rem 2rem;
   max-width: 800px;
-  background: #fff;
-  border-radius: 30px;
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.08),
     0 30px 60px rgba(0, 0, 0, 0.05);
@@ -30,18 +30,18 @@
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 0% 0%, rgba(246, 211, 101, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(253, 160, 133, 0.1) 0%, transparent 50%);
+    radial-gradient(circle at 0% 0%, rgba(var(--tg-theme-button-color), 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(var(--tg-theme-link-color), 0.1) 0%, transparent 50%);
   pointer-events: none;
 }
 
 .streak {
   position: relative;
-  font-size: 1.2rem;
-  color: #1a202c;
+  font-size: var(--tg-theme-font-size-large);
+  color: var(--tg-theme-text-color);
   padding: 0.75rem 1.5rem;
-  background: #fff;
-  border-radius: 16px;
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -62,7 +62,7 @@
 .welcome {
   font-size: 3.5rem;
   font-weight: 800;
-  color: #1a202c;
+  color: var(--tg-theme-text-color);
   margin: 0;
   text-align: center;
   line-height: 1.1;
@@ -78,13 +78,13 @@
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #f6d365, #fda085);
+  background: var(--tg-theme-button-color);
   border-radius: 2px;
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  color: #4a5568;
+  font-size: var(--tg-theme-font-size-large);
+  color: var(--tg-theme-hint-color);
   margin: 0;
   text-align: center;
   max-width: 600px;
@@ -102,21 +102,21 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-  border-radius: 20px;
+  background: var(--tg-theme-button-color);
+  border-radius: var(--tg-theme-border-radius);
   box-shadow: 
-    0 10px 20px rgba(253, 160, 133, 0.2),
-    0 6px 6px rgba(253, 160, 133, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.1),
+    0 6px 6px rgba(0, 0, 0, 0.1),
     inset 0 2px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .crystal:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 
-    0 15px 30px rgba(253, 160, 133, 0.3),
-    0 10px 10px rgba(253, 160, 133, 0.2);
+    0 15px 30px rgba(0, 0, 0, 0.15),
+    0 10px 10px rgba(0, 0, 0, 0.1);
 }
 
 .crystalEmoji {
@@ -145,9 +145,9 @@
 }
 
 .crystalAmount {
-  font-size: 1.6rem;
+  font-size: var(--tg-theme-font-size-xlarge);
   font-weight: 800;
-  color: #fff;
+  color: var(--tg-theme-button-text-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   position: relative;
 }
@@ -167,18 +167,18 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+  gap: calc(var(--tg-theme-spacing-unit) * 2.5);
+  padding: var(--tg-theme-spacing-unit);
   position: relative;
 }
 
 .card {
   position: relative;
-  background: #fff;
-  border-radius: 24px;
-  padding: 2rem;
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
+  padding: calc(var(--tg-theme-spacing-unit) * 2.5);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   box-shadow: 
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.1);
@@ -215,10 +215,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-size: 1.8rem;
+  font-size: var(--tg-theme-font-size-xlarge);
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #1a202c;
+  color: var(--tg-theme-text-color);
 }
 
 .cardIcon {
@@ -226,8 +226,8 @@
 }
 
 .cardDescription {
-  color: #4a5568;
-  font-size: 1.1rem;
+  color: var(--tg-theme-hint-color);
+  font-size: var(--tg-theme-font-size-base);
   line-height: 1.6;
 }
 
@@ -255,13 +255,13 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .home {
-    padding: 15px;
+    padding: var(--tg-theme-spacing-unit);
   }
 
   .welcomeContainer {
     margin: 1.5rem auto;
-    padding: 2rem 1.5rem;
-    border-radius: 24px;
+    padding: calc(var(--tg-theme-spacing-unit) * 2);
+    border-radius: calc(var(--tg-theme-border-radius) * 2);
   }
 
   .welcome {
@@ -269,7 +269,7 @@
   }
 
   .subtitle {
-    font-size: 1.1rem;
+    font-size: var(--tg-theme-font-size-base);
   }
 
   .crystal {
@@ -281,20 +281,20 @@
   }
 
   .crystalAmount {
-    font-size: 1.3rem;
+    font-size: var(--tg-theme-font-size-large);
   }
 
   .cards {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: var(--tg-theme-spacing-unit);
   }
 
   .card {
-    padding: 1.5rem;
+    padding: calc(var(--tg-theme-spacing-unit) * 1.5);
   }
 
   .cardTitle {
-    font-size: 1.5rem;
+    font-size: var(--tg-theme-font-size-large);
   }
 
   .cardIcon {

@@ -10,14 +10,12 @@ export const useTelegramInit = () => {
   useEffect(() => {
     const initializeTelegram = async () => {
       try {
-        // Check for existing user data
         const savedUserData = localStorage.getItem("telegramUserData");
         if (savedUserData) {
           setIsLoading(false);
           return;
         }
 
-        // Initialize Telegram WebApp
         WebApp.ready();
         const initData = WebApp.initData;
         
