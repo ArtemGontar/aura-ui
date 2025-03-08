@@ -1,25 +1,28 @@
 .container {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   background-color: var(--tg-theme-secondary-bg-color);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
   z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 .container :global(.MuiBottomNavigation-root) {
-  height: 65px;
-  padding: var(--tg-theme-spacing-unit) 0;
+  height: var(--tg-theme-mobile-button-height);
+  padding: calc(var(--tg-theme-spacing-unit) * 0.5) 0;
   background-color: var(--tg-theme-secondary-bg-color);
 }
 
 .container :global(.MuiBottomNavigationAction-root) {
   padding: 6px 0;
-  min-width: 80px;
+  min-width: 64px;
   transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   color: var(--tg-theme-hint-color);
+  touch-action: manipulation;
 }
 
 .container :global(.MuiBottomNavigationAction-root.Mui-selected) {
@@ -32,6 +35,7 @@
   font-family: var(--tg-theme-font-family);
   transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   letter-spacing: 0.2px;
+  margin-top: 4px;
 }
 
 .container :global(.MuiBottomNavigationAction-label.Mui-selected) {
@@ -41,12 +45,18 @@
 
 .container :global(.MuiSvgIcon-root) {
   transition: transform var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-  font-size: 1.5rem;
+  font-size: 24px;
   color: var(--tg-theme-text-color);
 }
 
 .container :global(.Mui-selected .MuiSvgIcon-root) {
   transform: scale(1.1);
-  font-size: 1.6rem;
   color: var(--tg-theme-button-color);
+}
+
+/* Add safe area support for iOS devices */
+@supports (padding: max(0px)) {
+  .container {
+    padding-bottom: max(env(safe-area-inset-bottom, 0), 8px);
+  }
 }
