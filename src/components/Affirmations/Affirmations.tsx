@@ -18,6 +18,6 @@ const Affirmations: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Affirmations;

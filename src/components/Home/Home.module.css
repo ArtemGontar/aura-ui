@@ -202,17 +202,6 @@
   z-index: -1;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 
-    0 12px 20px rgba(0, 0, 0, 0.1),
-    0 16px 24px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover::before {
-  opacity: 0.8;
-}
-
 .cardTitle {
   display: flex;
   align-items: center;
