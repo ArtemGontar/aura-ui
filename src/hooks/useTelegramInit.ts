@@ -1,21 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import WebApp from '@twa-dev/sdk';
 import { UserData } from "../types/user";
 import { MOCK_USER_DATA } from "../utils/debug";
+import { setUserData, setError, setLoading, setUserStats } from '../store/slices/userSlice';
+import { RootState } from '../store';
 
 export const useTelegramInit = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch();
+  const { isLoading, error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const initializeTelegram = async () => {
       try {
-        const savedUserData = localStorage.getItem("telegramUserData");
-        if (savedUserData) {
-          setIsLoading(false);
-          return;
-        }
-
         WebApp.ready();
         const initData = WebApp.initData;
         
@@ -44,18 +41,25 @@ export const useTelegramInit = () => {
           };
         }
 
-        localStorage.setItem("telegramUserData", JSON.stringify(newUserData));
+        dispatch(setUserData(newUserData));
+        
+        // Initialize user stats (you might want to fetch these from an API in production)
+        dispatch(setUserStats({
+          streak: 0,
+          crystalBalance: 0
+        }));
+
         WebApp.expand();
         WebApp.enableClosingConfirmation();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp");
+        dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));
       } finally {
-        setIsLoading(false);
+        dispatch(setLoading(false));
       }
     };
 
     initializeTelegram();
-  }, []);
+  }, [dispatch]);
 
   return { isLoading, error };
 }; 
