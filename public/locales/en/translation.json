@@ -2,7 +2,8 @@
   "loading": "Loading user data...",
   "error": {
     "retry": "Retry",
-    "noUserData": "No user data found. Please log in again."
+    "noUserData": "No user data found. Please log in again.",
+    "somethingWentWrong": "Something went wrong. Please try again."
   },
   "navigation": {
     "home": "Home",

@@ -12,58 +12,43 @@ import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Tarot from "./components/Cards/Tarot/Tarot";
 import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
+import ErrorDisplay from "./components/ErrorDisplay/ErrorDisplay";
+import LoadingDisplay from "./components/LoadingDisplay/LoadingDisplay";
 import { useTelegramInit } from "./hooks/useTelegramInit";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
 import "./styles/theme.css";
 
 const AppContent: React.FC = () => {
-  const { t } = useTranslation();
   const { isLoading, error } = useTelegramInit();
   useApplyTheme();
 
   if (isLoading) {
-    return (
-      <div className={styles.loadingContainer}>
-        <div className={styles.loading}>{t('loading')}</div>
-      </div>
-    );
+    return <LoadingDisplay />;
   }
 
   if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <div className={styles.error}>{error}</div>
-        <button 
-          className={styles.retryButton}
-          onClick={() => window.location.reload()}
-        >
-          {t('error.retry')}
-        </button>
-      </div>
-    );
+    return <ErrorDisplay error={error} />;
   }
 
   return (
-    <div className={styles.app}>
-      <Router>
-        <div className={styles.content}>
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/affirmations" element={<Affirmations />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/horoscope" element={<DailyHoroscope />} />
-            <Route path="/psychological" element={<Psychological />} />
-            <Route path="/astrology" element={<Astrology />} />
-            <Route path="/magicball" element={<MagicBall />} />
-            <Route path="/tarot" element={<Tarot />} />
-            <Route path="/runes" element={<Runes />} />
-            <Route path="*" element={<Navigate to="/home" />} />
-          </Routes>
-        </div>
-        <Navigation />
-      </Router>
-    </div>
+    <Router>
+      <div className={styles.content}>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/affirmations" element={<Affirmations />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/horoscope" element={<DailyHoroscope />} />
+          <Route path="/psychological" element={<Psychological />} />
+          <Route path="/astrology" element={<Astrology />} />
+          <Route path="/magicball" element={<MagicBall />} />
+          <Route path="/tarot" element={<Tarot />} />
+          <Route path="/runes" element={<Runes />} />
+          <Route path="*" element={<Navigate to="/home" />} />
+        </Routes>
+      </div>
+      <Navigation />
+    </Router>
   );
 };
 
