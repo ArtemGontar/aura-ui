@@ -6,7 +6,7 @@
 }
 
 .welcomeContainer {
-  position: relative;
+  
   margin: 1rem auto 1.5rem;
   padding: 1.5rem var(--tg-theme-mobile-padding);
   max-width: 800px;
@@ -36,7 +36,7 @@
 }
 
 .streak {
-  position: relative;
+  
   font-size: var(--tg-theme-font-size-large);
   color: var(--tg-theme-text-color);
   padding: 0.75rem 1.5rem;
@@ -67,7 +67,7 @@
   text-align: center;
   line-height: 1.1;
   letter-spacing: -0.5px;
-  position: relative;
+  
 }
 
 .welcome::after {
@@ -94,11 +94,11 @@
 
 .crystalContainer {
   margin: 1rem 0 0;
-  position: relative;
+  
 }
 
 .crystal {
-  position: relative;
+  
   display: inline-flex;
   align-items: center;
   gap: 1rem;
@@ -122,7 +122,7 @@
 
 .crystalEmoji {
   font-size: 2rem;
-  position: relative;
+  
   animation: float 3s ease-in-out infinite;
 }
 
@@ -150,7 +150,7 @@
   font-weight: 800;
   color: var(--tg-theme-button-text-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
+  
 }
 
 .crystalAmount::before {
@@ -168,13 +168,12 @@
 .cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--tg-theme-spacing-unit);
-  padding: var(--tg-theme-mobile-padding);
-  position: relative;
+  gap: var(--tg-theme-spacing-unit-large);
+  
 }
 
 .card {
-  position: relative;
+  
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);

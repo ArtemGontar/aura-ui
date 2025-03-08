@@ -6,7 +6,7 @@
 }
 
 .banner {
-  position: relative;
+  
   margin: 1rem auto 1.5rem;
   padding: 1.5rem var(--tg-theme-mobile-padding);
   max-width: 800px;
@@ -39,7 +39,7 @@
 
 .emoji {
   font-size: 2.5rem;
-  position: relative;
+  
   display: inline-block;
   animation: float 3s ease-in-out infinite;
   margin-bottom: 0;
@@ -71,7 +71,7 @@
   margin: 0;
   line-height: 1.1;
   letter-spacing: -0.5px;
-  position: relative;
+  
 }
 
 .bannerText::after {
@@ -102,11 +102,11 @@
   grid-template-columns: 1fr;
   gap: var(--tg-theme-spacing-unit);
   padding: var(--tg-theme-mobile-padding);
-  position: relative;
+  
 }
 
 .card {
-  position: relative;
+  
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);

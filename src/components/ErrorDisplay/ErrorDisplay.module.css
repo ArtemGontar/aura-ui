@@ -55,7 +55,7 @@
   align-items: center;
   gap: calc(var(--tg-theme-spacing-unit));
   transition: all 0.2s ease;
-  position: relative;
+  
   overflow: hidden;
 }
 

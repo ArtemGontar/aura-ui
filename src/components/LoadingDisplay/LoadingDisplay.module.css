@@ -24,11 +24,11 @@
   display: flex;
   justify-content: center;
   margin-bottom: calc(var(--tg-theme-spacing-unit) * 2);
-  position: relative;
+  
 }
 
 .loadingIcon {
-  position: relative;
+  
   width: 80px;
   height: 80px;
   display: flex;
@@ -37,7 +37,7 @@
 }
 
 .spinner {
-  position: relative;
+  
   width: 100%;
   height: 100%;
 }
