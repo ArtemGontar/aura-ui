@@ -1,4 +1,5 @@
 .content {
+  background-color: var(--tg-theme-bg-color, #ffffff);
   padding: var(--tg-theme-mobile-padding);
 }
 
