@@ -10,10 +10,7 @@
 
 /* Profile Info Section */
 .profileInfo {
-  position: relative;
-  margin: 1rem auto;
   padding: 1.5rem var(--tg-theme-mobile-padding);
-  width: 100%;
   max-width: 800px;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
@@ -75,7 +72,6 @@
 
 /* Subscription Section */
 .subscription {
-  position: relative;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);
@@ -83,9 +79,7 @@
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
   max-width: 800px;
-  margin: 0 auto;
 }
 
 .subscription h3 {
@@ -134,7 +128,6 @@
 
 /* History Section */
 .history {
-  position: relative;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);
@@ -142,9 +135,7 @@
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
   max-width: 800px;
-  margin: 0 auto;
 }
 
 .history h3 {
