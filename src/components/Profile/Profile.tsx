@@ -2,11 +2,11 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Profile.module.css";
 import { ProfileProps } from "../../types";
-import { useTelegramUser } from "../../hooks/useTelegramUser";
+import { useUserData } from "../../hooks/useUserData";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
-  const { isLoading, error, userData, handleSubscribe } = useTelegramUser();
+  const { isLoading, error, userData } = useUserData();
 
   if (isLoading) {
     return (
@@ -64,7 +64,6 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
         ) : (
           <button 
             className={styles.subscribeButton}
-            onClick={handleSubscribe}
             aria-label={t('profile.subscription.subscribe')}
           >
             {t('profile.subscription.subscribe')}

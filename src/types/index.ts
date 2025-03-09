@@ -1,10 +1,3 @@
-export interface UserData {
-  firstName: string;
-  lastName?: string;
-  id: string;
-  username?: string;
-}
-
 export interface CardData {
   id: string;
   path: string;

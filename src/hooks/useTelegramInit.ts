@@ -33,11 +33,11 @@ export const useTelegramInit = () => {
           newUserData = {
             id: user.id,
             firstName: user.first_name,
-            lastName: user.last_name || "",
-            username: user.username || "",
-            languageCode: user.language_code || "en",
-            isPremium: user.is_premium || false,
-            photoUrl: user.photo_url || "",
+            lastName: user.last_name,
+            username: user.username,
+            languageCode: user.language_code,
+            isPremium: user.is_premium,
+            photoUrl: user.photo_url
           };
         }
 
