@@ -15,6 +15,10 @@
   --gradient-magicball: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
   --gradient-tarot: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
 
+  /* Card text colors - light theme */
+  --card-text-color: var(--tg-theme-text-color);
+  --card-description-color: var(--tg-theme-text-color);
+
   /* Additional custom theme variables */
   --tg-theme-error-color: #ff3b30;
   --tg-theme-success-color: #34c759;
@@ -56,11 +60,16 @@
 
 /* Dark mode theme variables */
 [data-theme="dark"] {
-  --gradient-horoscope: linear-gradient(135deg, #1a4747 0%, #2a3f47 100%);
-  --gradient-psychological: linear-gradient(135deg, #2a4d1e 0%, #1f3d20 100%);
-  --gradient-astrology: linear-gradient(135deg, #1e4d3a 0%, #1f3d47 100%);
-  --gradient-magicball: linear-gradient(135deg, #1e2d4d 0%, #2d1e4d 100%);
-  --gradient-tarot: linear-gradient(135deg, #4d3422 0%, #4d223d 100%);
+  /* Subtle dark gradients - almost black with minimal color differences */
+  --gradient-horoscope: linear-gradient(135deg, #121214 0%, #17171a 100%);
+  --gradient-psychological: linear-gradient(135deg, #131315 0%, #16161a 100%);
+  --gradient-astrology: linear-gradient(135deg, #141416 0%, #18181c 100%);
+  --gradient-magicball: linear-gradient(135deg, #151517 0%, #17171b 100%);
+  --gradient-tarot: linear-gradient(135deg, #161618 0%, #19191d 100%);
+
+  /* Card text colors - dark theme */
+  --card-text-color: rgba(255, 255, 255, 0.95);
+  --card-description-color: rgba(255, 255, 255, 0.7);
 }
 
 /* Dark mode overrides will be handled by JavaScript */ 

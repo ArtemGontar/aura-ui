@@ -24,4 +24,4 @@ export const useApplyTheme = () => {
     root.style.setProperty('--tg-theme-success-color', '#34c759');
     root.style.setProperty('--tg-theme-warning-color', '#ff9500');
   }, [themeParams, isDarkMode]);
-}; 
+};

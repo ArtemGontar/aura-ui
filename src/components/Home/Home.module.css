@@ -163,7 +163,7 @@
   font-size: var(--tg-theme-font-size-large);
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: var(--tg-theme-text-color);
+  color: var(--card-text-color);
 }
 
 .cardIcon {
@@ -171,7 +171,7 @@
 }
 
 .cardDescription {
-  color: var(--tg-theme-hint-color);
+  color: var(--card-description-color);
   font-size: var(--tg-theme-font-size-base);
   line-height: 1.4;
   mix-blend-mode: normal;
