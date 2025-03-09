@@ -3,6 +3,8 @@
   max-width: 100%;
   margin: 0 auto;
   background: var(--tg-theme-bg-color);
+  padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
+
 }
 
 .welcomeContainer {
