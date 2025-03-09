@@ -200,6 +200,7 @@
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .home {
+    min-width: 600px;
     padding: calc(var(--tg-theme-spacing-unit) * 2.5);
   }
 
