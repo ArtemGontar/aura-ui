@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
-import styles from "./MagicBall.module.css";
-import { getMagicBallAnswer } from "../../../services/predictionMockService"; // or magicBallMockService
 import MagicBallModule from "../../MagicBallModel/MagicBallModel";
+import { getMagicBallAnswer } from "../../../services/predictionService";
 
 const MagicBall: React.FC = () => {
   const { t } = useTranslation();

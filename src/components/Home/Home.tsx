@@ -5,6 +5,8 @@ import styles from "./Home.module.css";
 import { HomeProps } from "../../types";
 import { HOME_CARDS } from "../../constants/cards";
 import { useUserData } from "../../hooks/useUserData";
+import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
+import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
@@ -16,27 +18,15 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   };
 
   if (isLoading) {
-    return (
-      <div className={styles.loading} role="status" aria-label={t('loading')}>
-        {t('loading')}
-      </div>
-    );
+    return <LoadingDisplay />;
   }
 
   if (error) {
-    return (
-      <div className={styles.error} role="alert">
-        {error}
-      </div>
-    );
+    return <ErrorDisplay error={error}></ErrorDisplay>;
   }
 
   if (!userData) {
-    return (
-      <div className={styles.error} role="alert">
-        {t('error.noUserData')}
-      </div>
-    );
+    return <ErrorDisplay error={t('error.noUserData')}></ErrorDisplay>;
   }
 
   return (

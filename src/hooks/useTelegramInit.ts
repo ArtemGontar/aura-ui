@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import WebApp from '@twa-dev/sdk';
 import { UserData } from "../types/user";
 import { MOCK_USER_DATA } from "../utils/debug";
-import { setUserData, setError, setLoading, setUserStats } from '../store/slices/userSlice';
+import { setError, setLoading } from '../store/slices/userSlice';
 import { RootState } from '../store';
+import { saveUserData } from '../services/userService';
 
 export const useTelegramInit = () => {
   const dispatch = useDispatch();
@@ -41,13 +42,8 @@ export const useTelegramInit = () => {
           };
         }
 
-        dispatch(setUserData(newUserData));
-        
-        // Initialize user stats (you might want to fetch these from an API in production)
-        dispatch(setUserStats({
-          streak: 0,
-          crystalBalance: 0
-        }));
+        // Save user data using userService (this will also update Redux store)
+        await saveUserData(newUserData);
 
         WebApp.expand();
         WebApp.enableClosingConfirmation();

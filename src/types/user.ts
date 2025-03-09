@@ -6,6 +6,7 @@ export interface UserData {
   languageCode?: string;
   isPremium?: boolean;
   photoUrl?: string;
+  dateOfBirth?: string;
 }
 
 export interface UserStats {

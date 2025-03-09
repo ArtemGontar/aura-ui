@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
-import { saveUserBirthDate, getUserBirthDate } from "../../../services/userMockService"; // or userService
-import { getHoroscope } from "../../../services/predictionMockService"; // or predictionService
 import DatePicker from "../../DatePicker/DatePicker";
 import { getHoroscopeSign } from "../../../utils/horoscopeFn";
+import { getHoroscope } from "../../../services/predictionService";
+import { saveUserBirthDate } from "../../../services/userService";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();

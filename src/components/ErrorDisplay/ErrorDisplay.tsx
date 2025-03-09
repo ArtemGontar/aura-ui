@@ -19,7 +19,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
         <div className={styles.errorIcon}>⚠️</div>
         <div className={styles.errorContent}>
           <div className={styles.error}>
-            {error.includes("Error:") ? error : t('error.somethingWentWrong')}
+            {error ? error : t('error.somethingWentWrong')}
           </div>
           <button 
             className={styles.retryButton}

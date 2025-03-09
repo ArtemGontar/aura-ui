@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserStats } from '../../types';
 import { UserData } from '../../types/user';
 
-interface UserState {
+export interface UserState {
   userData: UserData | null;
   userStats: UserStats;
   birthDate: string | null;
@@ -10,7 +10,7 @@ interface UserState {
   error: string | null;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   userData: null,
   userStats: {
     streak: 0,
