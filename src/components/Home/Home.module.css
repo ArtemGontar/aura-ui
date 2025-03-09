@@ -4,19 +4,15 @@
   margin: 0 auto;
   background: var(--tg-theme-bg-color);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
-
 }
 
 .welcomeContainer {
-  
   margin: 1rem auto 1.5rem;
   padding: 1.5rem var(--tg-theme-mobile-padding);
   max-width: 800px;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.08),
-    0 30px 60px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -24,21 +20,7 @@
   gap: 1rem;
 }
 
-.welcomeContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 0% 0%, rgba(var(--tg-theme-button-color), 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(var(--tg-theme-link-color), 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 .streak {
-  
   font-size: var(--tg-theme-font-size-large);
   color: var(--tg-theme-text-color);
   padding: 0.75rem 1.5rem;
@@ -47,11 +29,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.05),
-    0 1px 3px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--tg-theme-hint-color);
   transform: translateY(-50%);
   margin-bottom: -1rem;
 }
@@ -69,7 +48,6 @@
   text-align: center;
   line-height: 1.1;
   letter-spacing: -0.5px;
-  
 }
 
 .welcome::after {
@@ -96,35 +74,27 @@
 
 .crystalContainer {
   margin: 1rem 0 0;
-  
 }
 
 .crystal {
-  
   display: inline-flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
   background: var(--tg-theme-button-color);
   border-radius: var(--tg-theme-border-radius);
-  box-shadow: 
-    0 10px 20px rgba(0, 0, 0, 0.1),
-    0 6px 6px rgba(0, 0, 0, 0.1),
-    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--tg-theme-button-text-color);
 }
 
 .crystal:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.15),
-    0 10px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .crystalEmoji {
   font-size: 2rem;
-  
   animation: float 3s ease-in-out infinite;
 }
 
@@ -152,7 +122,6 @@
   font-weight: 800;
   color: var(--tg-theme-button-text-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  
 }
 
 .crystalAmount::before {
@@ -166,40 +135,25 @@
   border-radius: 1px;
 }
 
-/* Cards Grid */
 .cards {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--tg-theme-spacing-unit-large);
-  
 }
 
 .card {
-  
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);
   cursor: pointer;
   transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.05),
-    0 10px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--tg-theme-hint-color);
   overflow: hidden;
 }
 
 .card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  filter: blur(10px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
+  display: none;
 }
 
 .cardTitle {
@@ -220,62 +174,32 @@
   color: var(--tg-theme-hint-color);
   font-size: var(--tg-theme-font-size-base);
   line-height: 1.4;
-  mix-blend-mode: difference;
-  color: rgba(255, 255, 255, 0.9);
+  mix-blend-mode: normal;
 }
 
-/* Card Gradients */
 .cardHoroscope {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  background: var(--gradient-horoscope);
 }
 
 .cardPsychological {
-  background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+  background: var(--gradient-psychological);
 }
 
 .cardAstrology {
-  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  background: var(--gradient-astrology);
 }
 
 .cardMagicball {
-  background: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
+  background: var(--gradient-magicball);
 }
 
 .cardTarot {
-  background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+  background: var(--gradient-tarot);
 }
 
 @media (prefers-color-scheme: dark) {
-  .cardHoroscope {
-    background: linear-gradient(135deg, #1a4747 0%, #4a2e3a 100%);
-  }
-
-  .cardPsychological {
-    background: linear-gradient(135deg, #2a4d1e 0%, #1e3322 100%);
-  }
-
-  .cardAstrology {
-    background: linear-gradient(135deg, #1e4d3a 0%, #1e3b4d 100%);
-  }
-
-  .cardMagicball {
-    background: linear-gradient(135deg, #1e2d4d 0%, #4d2224 100%);
-  }
-
-  .cardTarot {
-    background: linear-gradient(135deg, #4d3422 0%, #3d1e4d 100%);
-  }
-
   .card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-    z-index: 0;
+    display: none;
   }
 }
 
