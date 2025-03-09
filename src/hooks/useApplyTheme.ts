@@ -2,10 +2,13 @@ import { useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 
 export const useApplyTheme = () => {
-  const { themeParams } = useTheme();
+  const { themeParams, isDarkMode } = useTheme();
 
   useEffect(() => {
     const root = document.documentElement;
+
+    // Set theme mode
+    root.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
 
     // Apply theme variables
     root.style.setProperty('--tg-theme-bg-color', themeParams.bg_color);
@@ -20,5 +23,5 @@ export const useApplyTheme = () => {
     root.style.setProperty('--tg-theme-error-color', '#ff3b30');
     root.style.setProperty('--tg-theme-success-color', '#34c759');
     root.style.setProperty('--tg-theme-warning-color', '#ff9500');
-  }, [themeParams]);
+  }, [themeParams, isDarkMode]);
 }; 

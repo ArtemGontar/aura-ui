@@ -56,11 +56,11 @@
 
 /* Dark mode theme variables */
 [data-theme="dark"] {
-  --gradient-horoscope: #1a4747;
-  --gradient-psychological: #2a4d1e;
-  --gradient-astrology: #1e4d3a;
-  --gradient-magicball: #1e2d4d;
-  --gradient-tarot: #4d3422;
+  --gradient-horoscope: linear-gradient(135deg, #1a4747 0%, #2a3f47 100%);
+  --gradient-psychological: linear-gradient(135deg, #2a4d1e 0%, #1f3d20 100%);
+  --gradient-astrology: linear-gradient(135deg, #1e4d3a 0%, #1f3d47 100%);
+  --gradient-magicball: linear-gradient(135deg, #1e2d4d 0%, #2d1e4d 100%);
+  --gradient-tarot: linear-gradient(135deg, #4d3422 0%, #4d223d 100%);
 }
 
 /* Dark mode overrides will be handled by JavaScript */ 

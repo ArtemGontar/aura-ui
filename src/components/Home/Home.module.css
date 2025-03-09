@@ -197,12 +197,6 @@
   background: var(--gradient-tarot);
 }
 
-@media (prefers-color-scheme: dark) {
-  .card::after {
-    display: none;
-  }
-}
-
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .home {
