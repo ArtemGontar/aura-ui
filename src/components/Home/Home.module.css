@@ -218,6 +218,8 @@
   color: var(--tg-theme-hint-color);
   font-size: var(--tg-theme-font-size-base);
   line-height: 1.4;
+  mix-blend-mode: difference;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Card Gradients */
@@ -239,6 +241,40 @@
 
 .cardTarot {
   background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cardHoroscope {
+    background: linear-gradient(135deg, #1a4747 0%, #4a2e3a 100%);
+  }
+
+  .cardPsychological {
+    background: linear-gradient(135deg, #2a4d1e 0%, #1e3322 100%);
+  }
+
+  .cardAstrology {
+    background: linear-gradient(135deg, #1e4d3a 0%, #1e3b4d 100%);
+  }
+
+  .cardMagicball {
+    background: linear-gradient(135deg, #1e2d4d 0%, #4d2224 100%);
+  }
+
+  .cardTarot {
+    background: linear-gradient(135deg, #4d3422 0%, #3d1e4d 100%);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 /* Tablet and larger screens */
