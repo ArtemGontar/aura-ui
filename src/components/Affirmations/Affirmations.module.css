@@ -2,11 +2,9 @@
   padding: var(--tg-theme-mobile-padding);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
   margin: 0 auto;
-  background: var(--tg-theme-bg-color);
 }
 
 .banner {
-  
   margin: 1rem auto 1.5rem;
   padding: 1.5rem var(--tg-theme-mobile-padding);
   max-width: 800px;

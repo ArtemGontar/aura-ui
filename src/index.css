@@ -50,6 +50,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: var(--tg-theme-font-size-base);
+  background: var(--tg-theme-bg-color, #ffffff);
   line-height: 1.4;
 }
 
