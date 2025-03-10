@@ -1,11 +1,8 @@
 .affirmations {
   padding: var(--tg-theme-mobile-padding);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
-  max-width: 100%;
   margin: 0 auto;
   background: var(--tg-theme-bg-color);
-  height: 100%;
-  overflow: hidden;
 }
 
 .banner {
