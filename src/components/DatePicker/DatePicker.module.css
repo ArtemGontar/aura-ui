@@ -4,6 +4,7 @@
   margin: 0 auto;
   padding: 0 16px;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .datePicker {
@@ -34,7 +35,7 @@
 
 .dateInput {
   width: 100%;
-  padding: 12px;
+  padding: 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
@@ -44,6 +45,10 @@
   margin-bottom: 16px;
   margin-top: 10px;
   box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  min-height: 48px;
 }
 
 .dateInput:focus {
@@ -72,28 +77,43 @@
   cursor: pointer;
   padding: 4px;
   margin-right: 4px;
+  opacity: 0.6;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.dateInput::-webkit-inner-spin-button {
-  display: none;
-}
+/* iOS-specific styles */
+@supports (-webkit-touch-callout: none) {
+  .dateInput {
+    font-size: 16px;
+    padding: 16px;
+  }
 
-.dateInput::-webkit-clear-button {
-  display: none;
+  .dateInput::-webkit-calendar-picker-indicator {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 /* Mobile-specific styles */
 @media (max-width: 768px) {
   .select, .dateInput {
-    padding: 16px; /* Larger touch target */
-    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 16px;
+    font-size: 16px;
+    min-height: 48px;
   }
 
   .label {
     font-size: 16px;
+    margin-bottom: 12px;
   }
 
   .comment {
     font-size: 14px;
+    line-height: 1.4;
+    margin-top: 8px;
+    margin-bottom: 16px;
   }
 }

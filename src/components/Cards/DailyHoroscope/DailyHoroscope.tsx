@@ -7,9 +7,11 @@ import DatePicker from "../../DatePicker/DatePicker";
 import { getHoroscopeSign } from "../../../utils/horoscopeFn";
 import { getHoroscope } from "../../../services/predictionService";
 import { saveUserBirthDate } from "../../../services/userService";
+import { useUserData } from "../../../hooks/useUserData";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
+  const { userData } = useUserData();
   const [day, setDay] = useState<string>("");
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
@@ -22,27 +24,17 @@ const DailyHoroscope: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBirthDate = async () => {
-      try {
-        const birthDate = await getUserBirthDate();
-        if (birthDate) {
-          const [year, month, day] = birthDate.split("-");
-          setYear(year);
-          setMonth(month);
-          setDay(day);
-          setBirthDateExists(true);
-          const sign = getHoroscopeSign(parseInt(day), parseInt(month));
-          setHoroscopeSign(sign);
-        }
-      } catch (err) {
-        console.error("Failed to fetch birth date", err);
-      } finally {
-        setIsFetching(false);
-      }
-    };
-
-    fetchBirthDate();
-  }, []);
+    if (userData?.dateOfBirth) {
+      const [year, month, day] = userData.dateOfBirth.split("-");
+      setYear(year);
+      setMonth(month);
+      setDay(day);
+      setBirthDateExists(true);
+      const sign = getHoroscopeSign(parseInt(day), parseInt(month));
+      setHoroscopeSign(sign);
+    }
+    setIsFetching(false);
+  }, [userData]);
 
   const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setDay(e.target.value);
