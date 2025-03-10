@@ -1,8 +1,7 @@
 import axios from 'axios';
 import WebApp from '@twa-dev/sdk';
 import { API_CONFIG } from '../config/api';
-
-const MOCK_AUTH_TOKEN = 'mock_tma_token_for_development';
+import { MOCK_AUTH_TOKEN } from '../utils/debug';
 
 const api = axios.create({
   baseURL: API_CONFIG.BASE_URL,
