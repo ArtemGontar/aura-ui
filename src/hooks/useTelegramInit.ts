@@ -42,7 +42,7 @@ export const useTelegramInit = () => {
           };
         }
 
-        // Save user data using userService (this will also update Redux store)
+        // Save user data (will use backend if enabled, otherwise just store)
         await saveUserData(newUserData);
 
         WebApp.expand();

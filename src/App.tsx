@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
