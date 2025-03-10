@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import WebApp from '@twa-dev/sdk';
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import DatePicker from "../../DatePicker/DatePicker";
@@ -85,6 +86,20 @@ const DailyHoroscope: React.FC = () => {
     }
   }, [horoscopeSign]);
 
+  useEffect(() => {
+    if (!birthDateExists && day && month && year) {
+      WebApp.MainButton.setText(t('dailyHoroscope.buttons.saveBirthDate'));
+      WebApp.MainButton.show();
+      WebApp.MainButton.onClick(saveBirthDate);
+    } else {
+      WebApp.MainButton.hide();
+    }
+
+    return () => {
+      WebApp.MainButton.offClick(saveBirthDate);
+    };
+  }, [day, month, year, birthDateExists, t]);
+
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
   const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
@@ -100,22 +115,17 @@ const DailyHoroscope: React.FC = () => {
         }}
       >
         {!isFetching && !birthDateExists && (
-          <>
-            <DatePicker
-              day={day}
-              month={month}
-              year={year}
-              days={days}
-              months={months}
-              years={years}
-              handleDayChange={handleDayChange}
-              handleMonthChange={handleMonthChange}
-              handleYearChange={handleYearChange}
-            />
-            <button onClick={saveBirthDate} className={styles.button}>
-              {t('dailyHoroscope.buttons.saveBirthDate')}
-            </button>
-          </>
+          <DatePicker
+            day={day}
+            month={month}
+            year={year}
+            days={days}
+            months={months}
+            years={years}
+            handleDayChange={handleDayChange}
+            handleMonthChange={handleMonthChange}
+            handleYearChange={handleYearChange}
+          />
         )}
       </div>
       {birthDateExists && (
