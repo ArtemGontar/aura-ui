@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import WebApp from '@twa-dev/sdk';
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import DatePicker from "../../DatePicker/DatePicker";
@@ -65,11 +64,19 @@ const DailyHoroscope: React.FC = () => {
     }
   };
 
-  const saveBirthDate = () => {
-    // Save birth date logic here
-    setBirthDateExists(true);
-    const sign = getHoroscopeSign(parseInt(day), parseInt(month));
-    setHoroscopeSign(sign);
+  const saveBirthDate = async () => {
+    setLoading(true);
+    try {
+      const dateOfBirth = `${year}-${month}-${day}`;
+      await saveUserBirthDate(dateOfBirth);
+      setBirthDateExists(true);
+      const sign = getHoroscopeSign(parseInt(day), parseInt(month));
+      setHoroscopeSign(sign);
+    } catch (err) {
+      setError(t('dailyHoroscope.error'));
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -77,20 +84,6 @@ const DailyHoroscope: React.FC = () => {
       setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
     }
   }, [horoscopeSign]);
-
-  useEffect(() => {
-    if (!birthDateExists && day && month && year) {
-      WebApp.MainButton.setText(t('dailyHoroscope.buttons.saveBirthDate'));
-      WebApp.MainButton.show();
-      WebApp.MainButton.onClick(saveBirthDate);
-    } else {
-      WebApp.MainButton.hide();
-    }
-
-    return () => {
-      WebApp.MainButton.offClick(saveBirthDate);
-    };
-  }, [day, month, year, birthDateExists, t]);
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);
@@ -120,10 +113,19 @@ const DailyHoroscope: React.FC = () => {
           />
         )}
       </div>
+      {!birthDateExists && day && month && year && (
+        <button 
+          onClick={saveBirthDate}
+          className={styles.telegramButton}
+          disabled={loading || isFetching}
+        >
+          {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.saveBirthDate')}
+        </button>
+      )}
       {birthDateExists && (
         <button 
           onClick={requestHoroscope} 
-          className={`${commonStyles.button} ${styles.button}`} 
+          className={styles.telegramButton}
           disabled={loading || isFetching}
         >
           {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './DatePicker.module.css';
 
 interface DatePickerProps {
@@ -21,6 +22,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   handleMonthChange,
   handleYearChange,
 }) => {
+  const { t } = useTranslation();
   const [dateValue, setDateValue] = useState('');
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
   return (
     <div className={styles.datePickerContainer}>
       <label htmlFor="date-input" className={styles.label}>
-        Enter your date of birth:
+        {t('dailyHoroscope.datePicker.label')}
       </label>
       <input
         type="date"
@@ -58,10 +60,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onChange={handleDateChange}
         className={styles.dateInput}
         max={new Date().toISOString().split('T')[0]}
-        aria-label="Date of birth"
+        aria-label={t('dailyHoroscope.datePicker.label')}
       />
       <p className={styles.comment}>
-        This data will be saved to the server and you can change it later in your profile.
+        {t('dailyHoroscope.datePicker.comment')}
       </p>
     </div>
   );

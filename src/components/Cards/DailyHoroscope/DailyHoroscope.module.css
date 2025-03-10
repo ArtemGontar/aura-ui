@@ -43,6 +43,29 @@
   color: var(--text-primary);
 }
 
+.telegramButton {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 20px;
+}
+
+.telegramButton:hover {
+  background-color: var(--accent-hover);
+}
+
+.telegramButton:disabled {
+  background-color: var(--accent-disabled);
+  cursor: not-allowed;
+}
+
 /* Responsive adjustments */
 @media (min-width: 768px) {
 
@@ -54,7 +77,7 @@
     font-size: 18px;
   }
 
-  .button {
+  .telegramButton {
     font-size: 18px;
   }
 

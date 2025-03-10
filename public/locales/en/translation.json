@@ -74,7 +74,11 @@
       "getHoroscope": "Get Horoscope"
     },
     "loading": "Loading...",
-    "error": "Failed to fetch horoscope. Please try again."
+    "error": "Failed to fetch horoscope. Please try again.",
+    "datePicker": {
+      "label": "Enter your date of birth:",
+      "comment": "This data will be saved to the server and you can change it later in your profile."
+    }
   },
   "psychological": {
     "title": "Psychological Insight",
