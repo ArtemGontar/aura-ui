@@ -16,7 +16,6 @@ import LoadingDisplay from "./components/LoadingDisplay/LoadingDisplay";
 import { useTelegramInit } from "./hooks/useTelegramInit";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
-import "./styles/theme.css";
 import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
 

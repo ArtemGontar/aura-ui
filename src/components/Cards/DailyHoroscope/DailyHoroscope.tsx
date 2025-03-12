@@ -7,6 +7,7 @@ import { getHoroscopeSign } from "../../../utils/horoscopeFn";
 import { getHoroscope } from "../../../services/predictionService";
 import { saveUserBirthDate } from "../../../services/userService";
 import { useUserData } from "../../../hooks/useUserData";
+import { Button } from '@telegram-apps/telegram-ui';
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
@@ -114,22 +115,20 @@ const DailyHoroscope: React.FC = () => {
         )}
       </div>
       {!birthDateExists && day && month && year && (
-        <button 
+        <Button 
           onClick={saveBirthDate}
-          className={styles.telegramButton}
           disabled={loading || isFetching}
         >
           {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.saveBirthDate')}
-        </button>
+        </Button>
       )}
       {birthDateExists && (
-        <button 
-          onClick={requestHoroscope} 
-          className={styles.telegramButton}
+        <Button 
+          onClick={requestHoroscope}
           disabled={loading || isFetching}
         >
           {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}
-        </button>
+        </Button>
       )}
       {error && <p className={styles.error}>{error}</p>}
       {horoscope && 
