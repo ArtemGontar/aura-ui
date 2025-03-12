@@ -21,17 +21,6 @@ export const getUserStats = async (userId: string): Promise<UserStats> => {
   }
 };
 
-export const updateUserStats = async (userId: string, stats: Partial<UserStats>): Promise<UserStats> => {
-  try {
-    const response = await axios.put(`${API_BASE}/${userId}/stats`, stats);
-    store.dispatch(setUserStats(response.data));
-    return response.data;
-  } catch (error) {
-    console.error("Error updating user stats", error);
-    throw error;
-  }
-};
-
 export const incrementStreak = async (userId: string): Promise<UserStats> => {
   try {
     const response = await axios.post(`${API_BASE}/${userId}/stats/streak`);
@@ -39,28 +28,6 @@ export const incrementStreak = async (userId: string): Promise<UserStats> => {
     return response.data;
   } catch (error) {
     console.error("Error incrementing streak", error);
-    throw error;
-  }
-};
-
-export const addCrystals = async (userId: string, amount: number): Promise<UserStats> => {
-  try {
-    const response = await axios.post(`${API_BASE}/${userId}/stats/crystals/add`, { amount });
-    store.dispatch(setUserStats(response.data));
-    return response.data;
-  } catch (error) {
-    console.error("Error adding crystals", error);
-    throw error;
-  }
-};
-
-export const spendCrystals = async (userId: string, amount: number): Promise<UserStats> => {
-  try {
-    const response = await axios.post(`${API_BASE}/${userId}/stats/crystals/spend`, { amount });
-    store.dispatch(setUserStats(response.data));
-    return response.data;
-  } catch (error) {
-    console.error("Error spending crystals", error);
     throw error;
   }
 };

@@ -9,9 +9,9 @@ const Affirmations: React.FC = () => {
     <div className={styles.affirmations}>
       <div className={styles.banner}>
         <span className={styles.emoji}>✨</span>
-        <p className={styles.bannerText}>
+        <h2 className={styles.bannerText}>
           {t('affirmations.banner.title')}
-        </p>
+        </h2>
         <p className={styles.subText}>
           {t('affirmations.banner.subtitle')}
         </p>

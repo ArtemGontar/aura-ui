@@ -1,18 +1,20 @@
 /* Container for all content */
 .container {
   padding: var(--tg-theme-mobile-padding);
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--tg-theme-spacing-unit);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
+  align-items: center;
 }
 
 /* Profile Info Section */
 .profileInfo {
   padding: 1.5rem var(--tg-theme-mobile-padding);
-  max-width: 800px;
+  width: 100%;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   box-shadow: 
@@ -72,6 +74,7 @@
 
 /* Subscription Section */
 .subscription {
+  width: 100%;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);
@@ -79,7 +82,6 @@
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 800px;
 }
 
 .subscription h3 {
@@ -128,6 +130,7 @@
 
 /* History Section */
 .history {
+  width: 100%;
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   padding: var(--tg-theme-mobile-card-padding);
@@ -135,7 +138,6 @@
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  max-width: 800px;
 }
 
 .history h3 {
@@ -227,10 +229,9 @@
   }
 
   .profileInfo {
-    min-width: 600px;
     padding: 2rem;
-    flex-direction: row;
-    text-align: left;
+    flex-direction: column;
+    text-align: center;
   }
 
   .avatar {
@@ -255,12 +256,11 @@
   }
 
   .name {
-    font-size: var(--tg-theme-font-size-h1);
-    text-align: left;
+    text-align: center;
   }
 
   .name::after {
-    left: 0;
-    transform: none;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

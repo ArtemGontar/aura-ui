@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -17,10 +17,28 @@ import { useTelegramInit } from "./hooks/useTelegramInit";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
 import "./styles/theme.css";
+import { incrementStreak, getUserStats } from "./services/userStatsService";
+import { useUserData } from "./hooks/useUserData";
 
 const AppContent: React.FC = () => {
   const { isLoading, error } = useTelegramInit();
   useApplyTheme();
+  const { userData } = useUserData();
+
+  useEffect(() => {
+    const fetchUserStats = async (userId: string) => {
+      try {
+        await incrementStreak(userId);
+        await getUserStats(userId);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (userData?.id) {
+      fetchUserStats(userData.id.toString());
+    }
+  }, [userData]);
 
   if (isLoading) {
     return <LoadingDisplay />;
