@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 20px;
+  color: var(--tg-theme-text-color);
 }
 .label {
   font-size: 16px;
@@ -22,7 +23,7 @@
 .horoscope {
   margin-top: 24px;
   font-size: 20px;
-  color: var(--text-primary);
+  color: var(--tg-theme-text-color);
 }
 
 .citationWindow {
@@ -43,29 +44,6 @@
   color: var(--text-primary);
 }
 
-.telegramButton {
-  width: 100%;
-  padding: 12px 20px;
-  background-color: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin-top: 20px;
-}
-
-.telegramButton:hover {
-  background-color: var(--accent-hover);
-}
-
-.telegramButton:disabled {
-  background-color: var(--accent-disabled);
-  cursor: not-allowed;
-}
-
 /* Responsive adjustments */
 @media (min-width: 768px) {
 
@@ -74,10 +52,6 @@
   }
 
   .select {
-    font-size: 18px;
-  }
-
-  .telegramButton {
     font-size: 18px;
   }
 
