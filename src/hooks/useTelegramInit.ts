@@ -6,18 +6,6 @@ import { MOCK_USER_DATA } from "../utils/debug";
 import { setError, setLoading, saveUserDataAsync } from '../store/slices/userSlice';
 import { RootState, AppDispatch } from '../store';
 
-// Types
-interface TelegramInitState {
-  isInitialized: boolean;
-  initPromise: Promise<void> | null;
-}
-
-// Singleton to track initialization status
-const telegramInitState: TelegramInitState = {
-  isInitialized: false,
-  initPromise: null
-};
-
 // Helper functions
 const getTelegramUserData = (): UserData => {
   const initData = WebApp.initData;
@@ -66,44 +54,27 @@ export const useTelegramInit = () => {
 
   // Memoize the initialization function
   const initializeTelegram = useCallback(async () => {
-    // If already initialized, return immediately
-    if (telegramInitState.isInitialized) {
-      return;
+
+    try {
+      // Get user data and setup Telegram WebApp
+      const userData = getTelegramUserData();
+      setupTelegramWebApp();
+
+      // Save user data
+      await dispatch(saveUserDataAsync(userData));
+    } catch (err) {
+      dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));
+    } finally {
+      dispatch(setLoading(false));
     }
-
-    // If initialization is in progress, return the existing promise
-    if (telegramInitState.initPromise) {
-      return telegramInitState.initPromise;
-    }
-
-    // Create new initialization promise
-    telegramInitState.initPromise = (async () => {
-      try {
-        // Get user data and setup Telegram WebApp
-        const userData = getTelegramUserData();
-        setupTelegramWebApp();
-
-        // Save user data
-        await dispatch(saveUserDataAsync(userData));
-        
-        // Mark as initialized
-        telegramInitState.isInitialized = true;
-      } catch (err) {
-        dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));
-      } finally {
-        dispatch(setLoading(false));
-        telegramInitState.initPromise = null;
-      }
-    })();
-
-    return telegramInitState.initPromise;
   }, [dispatch]);
 
+  // Initialize Telegram WebApp on component mount
   useEffect(() => {
     initializeTelegram();
     return cleanupTelegramWebApp;
-  }, []);
+  }, [initializeTelegram]);
 
   // Memoize the return value
   return useMemo(() => ({ isLoading, error }), [isLoading, error]);
-}; 
+};

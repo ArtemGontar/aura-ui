@@ -23,7 +23,7 @@ export const getUserStats = async (userId: string): Promise<UserStats> => {
 
 export const incrementStreak = async (userId: string): Promise<UserStats> => {
   try {
-    const response = await axios.post(`${API_BASE}/${userId}/stats/streak`);
+    const response = await axios.put(`${API_BASE}/${userId}/stats/streak`);
     store.dispatch(setUserStats(response.data));
     return response.data;
   } catch (error) {
