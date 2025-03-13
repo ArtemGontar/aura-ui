@@ -70,6 +70,15 @@
   /* Card text colors - dark theme */
   --card-text-color: rgba(255, 255, 255, 0.95);
   --card-description-color: rgba(255, 255, 255, 0.7);
+
+  /* Dark theme variables */
+  --tg-theme-bg-color: #000000;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-hint-color: #999999;
+  --tg-theme-link-color: #2481cc;
+  --tg-theme-button-color: #2481cc;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-theme-secondary-bg-color: #1c1c1e;
 }
 
-/* Dark mode overrides will be handled by JavaScript */ 
+/* Dark mode overrides will be handled by JavaScript */

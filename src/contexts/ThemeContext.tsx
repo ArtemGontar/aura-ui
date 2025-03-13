@@ -5,38 +5,38 @@ import { ThemeParams } from '../types/telegram';
 interface ThemeContextType {
   isDarkMode: boolean;
   themeParams: ThemeParams;
+  setIsDarkMode: (isDarkMode: boolean) => void;
+  toggleTheme: () => void;
 }
 
 const defaultThemeParams: ThemeParams = {
-  bg_color: '#ffffff',
-  text_color: '#000000',
-  hint_color: '#999999',
-  link_color: '#2481cc',
-  button_color: '#2481cc',
-  button_text_color: '#ffffff',
-  secondary_bg_color: '#f4f4f5'
+  bg_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-bg-color').trim(),
+  text_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-text-color').trim(),
+  hint_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-hint-color').trim(),
+  link_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-link-color').trim(),
+  button_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-button-color').trim(),
+  button_text_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-button-text-color').trim(),
+  secondary_bg_color: getComputedStyle(document.documentElement).getPropertyValue('--tg-theme-secondary-bg-color').trim()
 };
 
 const ThemeContext = createContext<ThemeContextType>({
   isDarkMode: false,
-  themeParams: defaultThemeParams
+  themeParams: defaultThemeParams,
+  setIsDarkMode: () => {},
+  toggleTheme: () => {}
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(WebApp.colorScheme  === 'dark');
   const [themeParams, setThemeParams] = useState<ThemeParams>(defaultThemeParams);
 
   useEffect(() => {
     const initTheme = () => {
-      // Get color scheme from Telegram WebApp
-      const colorScheme = WebApp.colorScheme;
-      setIsDarkMode(colorScheme === 'dark');
-
       // Get theme params from Telegram WebApp
       const params = WebApp.themeParams;
-      if (params) {
+      if (params && Object.keys(params).length > 0) {
         setThemeParams({
           bg_color: params.bg_color,
           text_color: params.text_color,
@@ -46,6 +46,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           button_text_color: params.button_text_color,
           secondary_bg_color: params.secondary_bg_color
         });
+      } else {
+        setThemeParams(defaultThemeParams);
       }
     };
 
@@ -57,11 +59,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return () => {
       WebApp.offEvent('themeChanged', initTheme);
     };
-  }, []);
+  }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode(prevMode => {
+      const newMode = !prevMode;
+      return newMode;
+    });
+  };
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, themeParams }}>
+    <ThemeContext.Provider value={{ isDarkMode, themeParams, setIsDarkMode, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );
-}; 
+};

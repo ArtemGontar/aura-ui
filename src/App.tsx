@@ -18,9 +18,10 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
 import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
 
 const AppContent: React.FC = () => {
-  const { isLoading, error } = useTelegramInit();
+  const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
   useApplyTheme();
   const { userData } = useUserData();
 
@@ -64,6 +65,7 @@ const AppContent: React.FC = () => {
         </Routes>
       </div>
       <Navigation />
+      {!isTelegram && <ThemeSwitcher />} {/* Add ThemeSwitcher if not in Telegram context */}
     </Router>
   );
 };

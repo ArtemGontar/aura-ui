@@ -54,7 +54,6 @@ export const useTelegramInit = () => {
 
   // Memoize the initialization function
   const initializeTelegram = useCallback(async () => {
-
     try {
       // Get user data and setup Telegram WebApp
       const userData = getTelegramUserData();
@@ -75,6 +74,9 @@ export const useTelegramInit = () => {
     return cleanupTelegramWebApp;
   }, [initializeTelegram]);
 
+  // Determine if the app is running in a Telegram context
+  const isTelegram = !!WebApp.initData;
+
   // Memoize the return value
-  return useMemo(() => ({ isLoading, error }), [isLoading, error]);
+  return useMemo(() => ({ isLoading, error, isTelegram }), [isLoading, error, isTelegram]);
 };

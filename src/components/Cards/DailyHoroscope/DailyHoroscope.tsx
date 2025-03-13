@@ -123,7 +123,7 @@ const DailyHoroscope: React.FC = () => {
         </Button>
       )}
       {birthDateExists && (
-        <Button 
+        <Button
           onClick={requestHoroscope}
           disabled={loading || isFetching}
         >
