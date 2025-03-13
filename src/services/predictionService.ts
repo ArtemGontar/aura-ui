@@ -5,7 +5,7 @@ const API_BASE = `/api/fortunes`;
 
 export const getHoroscope = async (): Promise<string> => {
   try {
-    const response: { data: { horoscope: string } } = await api.post(`${API_BASE}/daily-horoscope`)
+    const response: { data: { horoscope: string } } = await api.get(`${API_BASE}/daily-horoscope`)
     return response.data.horoscope;
   } catch (error) {
     console.error("Error fetching horoscope", error);

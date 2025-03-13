@@ -20,16 +20,32 @@ export const saveUserDataAsync = createAsyncThunk(
         return userData;
       }
 
-      // Fire and forget - don't await the backend sync
-      api.put(`${API_BASE}/${userId}`, userData)
-        .then(response => {
-          // Optionally update store with server response if needed
-          dispatch(setUserData(response.data));
-        })
-        .catch(error => {
-          // Just log the error but don't affect the user experience
-          console.warn("Background sync failed:", error);
-        });
+      try {
+        // Get existing user data from backend
+        const existingUserResponse = await api.get(`${API_BASE}/${userId}`);
+        const existingUserData = existingUserResponse.data;
+
+        // Update only specific fields
+        existingUserData.firstName = userData.firstName;
+        if (userData.lastName !== undefined) existingUserData.lastName = userData.lastName;
+        if (userData.username !== undefined) existingUserData.username = userData.username;
+        if (userData.languageCode !== undefined) existingUserData.languageCode = userData.languageCode;
+        if (userData.isPremium !== undefined) existingUserData.isPremium = userData.isPremium;
+        if (userData.photoUrl !== undefined) existingUserData.photoUrl = userData.photoUrl;
+
+        // Fire and forget - don't await the backend sync
+        api.put(`${API_BASE}/${userId}`, existingUserData)
+          .then(response => {
+            // Optionally update store with server response if needed
+            dispatch(setUserData(response.data));
+          })
+          .catch(error => {
+            // Just log the error but don't affect the user experience
+            console.warn("Background sync failed:", error);
+          });
+      } catch (error) {
+        console.warn("Failed to fetch existing user data:", error);
+      }
     }
 
     return userData;
@@ -110,4 +126,4 @@ export const {
   clearUserData 
 } = userSlice.actions;
 
-export default userSlice.reducer; 
+export default userSlice.reducer;

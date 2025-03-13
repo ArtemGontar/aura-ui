@@ -24,6 +24,7 @@ const DailyHoroscope: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log(userData);
     if (userData?.dateOfBirth) {
       const [year, month, day] = userData.dateOfBirth.split("-");
       setYear(year);
