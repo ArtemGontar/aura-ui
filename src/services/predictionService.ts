@@ -1,8 +1,11 @@
 import axios from "axios";
+import api from "./api";
 
-export const getHoroscope = async (dateOfBirth: string): Promise<string> => {
+const API_BASE = `/api/fortunes`;
+
+export const getHoroscope = async (): Promise<string> => {
   try {
-    const response = await axios.post("/api/getHoroscope", { dateOfBirth });
+    const response: { data: { horoscope: string } } = await api.post(`${API_BASE}/daily-horoscope`)
     return response.data.horoscope;
   } catch (error) {
     console.error("Error fetching horoscope", error);

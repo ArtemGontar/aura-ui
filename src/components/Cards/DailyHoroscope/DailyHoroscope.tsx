@@ -50,14 +50,9 @@ const DailyHoroscope: React.FC = () => {
 
   const requestHoroscope = async () => {
     setLoading(true);
-    setError("");
     try {
-      const dateOfBirth = `${year}-${month}-${day}`;
-      const horoscope = await getHoroscope(dateOfBirth);
+      const horoscope = await getHoroscope();
       setHoroscope(horoscope);
-      if (!birthDateExists) {
-        await saveUserBirthDate(dateOfBirth);
-      }
     } catch (err) {
       setError(t('dailyHoroscope.error'));
     } finally {

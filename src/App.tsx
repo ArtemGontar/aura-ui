@@ -38,7 +38,7 @@ const AppContent: React.FC = () => {
     if (userData?.id) {
       fetchUserStats(userData.id.toString());
     }
-  }, [userData]);
+  }, [userData?.id]);
 
   if (isLoading) {
     return <LoadingDisplay />;

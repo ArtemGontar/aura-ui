@@ -75,10 +75,10 @@ export const updateUserData = async (userId: string, userData: Partial<UserData>
 
 export const saveUserBirthDate = async (dateOfBirth: string): Promise<void> => {
   try {
-    const userId = store.getState().user.userData?.id;
-    if (!userId) throw new Error("User ID not found");
-    
-    await updateUserData(userId.toString(), { dateOfBirth });
+    const userData = store.getState().user.userData;
+    if (!userData) throw new Error("User not found");
+    userData.dateOfBirth = dateOfBirth;
+    await updateUserData(userData.id.toString(), userData);
     store.dispatch(setBirthDate(dateOfBirth));
   } catch (error) {
     console.error("Error saving user birth date", error);
