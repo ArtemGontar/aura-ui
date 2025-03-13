@@ -15,7 +15,14 @@ const DailyHoroscope: React.FC = () => {
   const [day, setDay] = useState<string>("");
   const [month, setMonth] = useState<string>("");
   const [year, setYear] = useState<string>("");
-  const [horoscope, setHoroscope] = useState<string>("");
+  const [horoscope, setHoroscope] = useState<{
+    generalGuidance: string;
+    loveRelationshipsAdvice: string;
+    careerFinancialInsights: string;
+    luckyNumbers: number[];
+    luckyColor: string;
+    motivationalQuote: string;
+  } | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
@@ -24,7 +31,6 @@ const DailyHoroscope: React.FC = () => {
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(userData);
     if (userData?.dateOfBirth) {
       const [year, month, day] = userData.dateOfBirth.split("-");
       setYear(year);
@@ -129,7 +135,12 @@ const DailyHoroscope: React.FC = () => {
       {error && <p className={styles.error}>{error}</p>}
       {horoscope && 
        <div className={styles.citationWindow}>
-        <p className={styles.citationText}>{horoscope}</p>
+        <p className={styles.citationText}>{horoscope.generalGuidance}</p>
+        <p className={styles.citationText}>{horoscope.loveRelationshipsAdvice}</p>
+        <p className={styles.citationText}>{horoscope.careerFinancialInsights}</p>
+        <p className={styles.citationText}>{t('dailyHoroscope.luckyNumbers')}: {horoscope.luckyNumbers.join(', ')}</p>
+        <p className={styles.citationText}>{horoscope.luckyColor}</p>
+        <p className={styles.citationText}>{horoscope.motivationalQuote}</p>
        </div>}
     </div>
   );

@@ -23,7 +23,6 @@ api.interceptors.request.use((config) => {
   }
 
   // Add Authorization header
-  console.log('TMA token ', tmaToken);
   config.headers.Authorization = `tma ${tmaToken}`;
   return config;
 });
