@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
   <AppRoot>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
   </AppRoot>
 
 )
