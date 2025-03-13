@@ -1,7 +1,6 @@
 /* Container for all content */
 .container {
   padding: var(--tg-theme-mobile-padding);
-  width: 100%;
   max-width: 600px;
   margin: 0 auto;
   display: flex;
