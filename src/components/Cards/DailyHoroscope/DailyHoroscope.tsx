@@ -19,14 +19,10 @@ const DailyHoroscope: React.FC = () => {
     generalGuidance: string;
     loveRelationshipsAdvice: string;
     careerFinancialInsights: string;
-    luckyNumbers: number[];
-    luckyColor: string;
-    motivationalQuote: string;
   } | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
-  const [isFetching, setIsFetching] = useState<boolean>(true);
   const [horoscopeSign, setHoroscopeSign] = useState<string | null>(null);
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
@@ -40,7 +36,6 @@ const DailyHoroscope: React.FC = () => {
       const sign = getHoroscopeSign(parseInt(day), parseInt(month));
       setHoroscopeSign(sign);
     }
-    setIsFetching(false);
   }, [userData]);
 
   const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -102,7 +97,7 @@ const DailyHoroscope: React.FC = () => {
           backgroundImage: backgroundImage || 'none',
         }}
       >
-        {!isFetching && !birthDateExists && (
+        {!birthDateExists && (
           <DatePicker
             day={day}
             month={month}
@@ -119,28 +114,28 @@ const DailyHoroscope: React.FC = () => {
       {!birthDateExists && day && month && year && (
         <Button 
           onClick={saveBirthDate}
-          disabled={loading || isFetching}
+          disabled={loading}
         >
-          {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.saveBirthDate')}
+          {loading ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.saveBirthDate')}
         </Button>
       )}
       {birthDateExists && (
         <Button
           onClick={requestHoroscope}
-          disabled={loading || isFetching}
+          disabled={loading}
         >
-          {loading || isFetching ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}
+          {loading ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}
         </Button>
       )}
       {error && <p className={styles.error}>{error}</p>}
       {horoscope && 
        <div className={styles.citationWindow}>
+        <h3 className={styles.citationTitle}>{t('dailyHoroscope.generalGuidance')}</h3>
         <p className={styles.citationText}>{horoscope.generalGuidance}</p>
+        <h3 className={styles.citationTitle}>{t('dailyHoroscope.loveRelationshipsAdvice')}</h3>
         <p className={styles.citationText}>{horoscope.loveRelationshipsAdvice}</p>
+        <h3 className={styles.citationTitle}>{t('dailyHoroscope.careerFinancialInsights')}</h3>
         <p className={styles.citationText}>{horoscope.careerFinancialInsights}</p>
-        <p className={styles.citationText}>{t('dailyHoroscope.luckyNumbers')}: {horoscope.luckyNumbers.join(', ')}</p>
-        <p className={styles.citationText}>{horoscope.luckyColor}</p>
-        <p className={styles.citationText}>{horoscope.motivationalQuote}</p>
        </div>}
     </div>
   );

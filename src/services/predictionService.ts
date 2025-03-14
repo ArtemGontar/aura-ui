@@ -7,9 +7,6 @@ export const getHoroscope = async (): Promise<{
   generalGuidance: string;
   loveRelationshipsAdvice: string;
   careerFinancialInsights: string;
-  luckyNumbers: number[];
-  luckyColor: string;
-  motivationalQuote: string;
 }> => {
   try {
     const response = await api.get<{ content: string }>(`${API_BASE}/daily-horoscope`);
@@ -25,10 +22,7 @@ export const getHoroscope = async (): Promise<{
     return {
       generalGuidance: parsedData.general_guidance,
       loveRelationshipsAdvice: parsedData.love_relationships_advice,
-      careerFinancialInsights: parsedData.career_financial_insights,
-      luckyNumbers: parsedData.lucky_numbers,
-      luckyColor: parsedData.lucky_color,
-      motivationalQuote: parsedData.motivational_quote
+      careerFinancialInsights: parsedData.career_financial_insights
     };
   } catch (error) {
     console.error("Error parsing GPT horoscope response:", error);
