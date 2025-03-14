@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import DatePicker from "../../DatePicker/DatePicker";
-import { getHoroscopeSign } from "../../../utils/horoscopeFn";
 import { getHoroscope } from "../../../services/predictionService";
 import { saveUserBirthDate } from "../../../services/userService";
 import { useUserData } from "../../../hooks/useUserData";
@@ -23,7 +22,7 @@ const DailyHoroscope: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
-  const [horoscopeSign, setHoroscopeSign] = useState<string | null>(null);
+  const [horoscopeSign, setHoroscopeSign] = useState<string | null>(userData?.zodiacSign || null);
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -33,8 +32,7 @@ const DailyHoroscope: React.FC = () => {
       setMonth(month);
       setDay(day);
       setBirthDateExists(true);
-      const sign = getHoroscopeSign(parseInt(day), parseInt(month));
-      setHoroscopeSign(sign);
+      setHoroscopeSign(userData.zodiacSign || null);
     }
   }, [userData]);
 
@@ -66,10 +64,9 @@ const DailyHoroscope: React.FC = () => {
     setLoading(true);
     try {
       const dateOfBirth = `${year}-${month}-${day}`;
-      await saveUserBirthDate(dateOfBirth);
+      const updatedUserData = await saveUserBirthDate(dateOfBirth);
       setBirthDateExists(true);
-      const sign = getHoroscopeSign(parseInt(day), parseInt(month));
-      setHoroscopeSign(sign);
+      setHoroscopeSign(updatedUserData.zodiacSign);
     } catch (err) {
       setError(t('dailyHoroscope.error'));
     } finally {

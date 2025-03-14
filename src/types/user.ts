@@ -7,6 +7,7 @@ export interface UserData {
   isPremium?: boolean;
   photoUrl?: string;
   dateOfBirth?: string;
+  zodiacSign?: string;
 }
 
 export interface UserStats {
