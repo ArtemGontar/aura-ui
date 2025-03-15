@@ -49,7 +49,6 @@ export const saveUserDataAsync = createAsyncThunk(
 export interface UserState {
   userData: UserData | null;
   userStats: UserStats;
-  birthDate: string | null;
   isLoading: boolean;
   error: string | null;
 }
@@ -60,7 +59,6 @@ export const initialState: UserState = {
     streak: 0,
     crystalBalance: 0
   },
-  birthDate: null,
   isLoading: true,
   error: null,
 };
@@ -76,9 +74,6 @@ const userSlice = createSlice({
     setUserStats: (state, action: PayloadAction<UserStats>) => {
       state.userStats = action.payload;
     },
-    setBirthDate: (state, action: PayloadAction<string>) => {
-      state.birthDate = action.payload;
-    },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.isLoading = false;
@@ -89,7 +84,6 @@ const userSlice = createSlice({
     clearUserData: (state) => {
       state.userData = null;
       state.userStats = { streak: 0, crystalBalance: 0 };
-      state.birthDate = null;
       state.error = null;
       state.isLoading = false;
     },
@@ -113,8 +107,7 @@ const userSlice = createSlice({
 
 export const { 
   setUserData, 
-  setUserStats, 
-  setBirthDate,
+  setUserStats,
   setError, 
   setLoading, 
   clearUserData 

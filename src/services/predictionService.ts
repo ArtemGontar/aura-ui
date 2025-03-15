@@ -11,18 +11,14 @@ export const getHoroscope = async (): Promise<{
   try {
     const response = await api.get<{ content: string }>(`${API_BASE}/daily-horoscope`);
     
-    const match = response.data.content.match(/```json([\s\S]*?)```/);
-    if (!match) {
-      throw new Error("Invalid GPT response format");
-    }
-
+    console.log("response", response.data.content);
     // Parse the extracted JSON string
-    const parsedData = JSON.parse(match[1].trim());
+    const parsedData = JSON.parse(response.data.content);
 
     return {
-      generalGuidance: parsedData.general_guidance,
-      loveRelationshipsAdvice: parsedData.love_relationships_advice,
-      careerFinancialInsights: parsedData.career_financial_insights
+      generalGuidance: parsedData.generalGuidance,
+      loveRelationshipsAdvice: parsedData.loveRelationshipsAdvice,
+      careerFinancialInsights: parsedData.careerFinancialInsights
     };
   } catch (error) {
     console.error("Error parsing GPT horoscope response:", error);

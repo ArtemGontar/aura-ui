@@ -77,9 +77,9 @@ export const saveUserBirthDate = async (dateOfBirth: string): Promise<UserData> 
   try {
     const userData = store.getState().user.userData;
     if (!userData) throw new Error("User not found");
-    const updatedUserData = { ...userData, dateOfBirth };
-    await updateUserData(userData.id, updatedUserData);
-    store.dispatch(setBirthDate(dateOfBirth));
+    const userDataRequest = { ...userData, dateOfBirth };
+    var updatedUserData = await updateUserData(userData.id, userDataRequest);
+    store.dispatch(setUserData(updatedUserData));
     return updatedUserData;
   } catch (error) {
     console.error("Error saving user birth date", error);

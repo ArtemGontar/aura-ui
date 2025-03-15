@@ -69,6 +69,9 @@
   "dailyHoroscope": {
     "title": "Ежедневный гороскоп",
     "description": "Узнайте, что звезды приготовили для вас сегодня.",
+    "generalGuidance": "Общие рекомендации",
+    "loveRelationshipsAdvice": "Советы по любви и отношениям",
+    "careerFinancialInsights": "Советы по карьере и финансам",
     "buttons": {
       "saveBirthDate": "Сохранить дату рождения",
       "getHoroscope": "Получить гороскоп"
@@ -126,4 +129,4 @@
     "description": "Задайте вопрос Магическому шару и получите ответ.",
     "initialText": "Задайте вопрос Магическому шару."
   }
-} 
+}

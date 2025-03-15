@@ -125,5 +125,8 @@
     "title": "Magic Ball",
     "description": "Ask the Magic Ball any question and get an answer.",
     "initialText": "Ask the Magic Ball a question."
-  }
-} 
+  },
+  "generalGuidance": "General Guidance",
+  "loveRelationshipsAdvice": "Love & Relationships Advice",
+  "careerFinancialInsights": "Career & Financial Insights"
+}
