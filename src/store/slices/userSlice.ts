@@ -1,15 +1,12 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserStats } from '../../types';
 import { UserData } from '../../types/user';
-import api from '../../services/api';
 import { FEATURES } from '../../config/features';
-
-const API_BASE = `/api/users`;
+import { getUserData, updateUserData } from '../../services/userService';
 
 export const saveUserDataAsync = createAsyncThunk(
   'user/saveUserData',
   async (userData: UserData, { dispatch }) => {
-    // Always save to store first for immediate user feedback
     dispatch(setUserData(userData));
 
     // If backend is enabled, try to sync in background
@@ -20,34 +17,31 @@ export const saveUserDataAsync = createAsyncThunk(
         return userData;
       }
 
-      try {
-        // Get existing user data from backend
-        const existingUserResponse = await api.get(`${API_BASE}/${userId}`);
-        const existingUserData = existingUserResponse.data;
+      // Get existing user data from backend
+      const existingUserResponse = await getUserData(userId).catch(async (error) => {
+        if (error.response && error.response.status === 404) {
+          // If user does not exist, create new user data
+          const newUserResponse = await updateUserData(userId, userData);
+          return newUserResponse;
+        } else {
+          throw error;
+        }
+      });
+      const existingUserData = existingUserResponse;
 
-        // Update only specific fields
-        existingUserData.firstName = userData.firstName;
-        if (userData.lastName !== undefined) existingUserData.lastName = userData.lastName;
-        if (userData.username !== undefined) existingUserData.username = userData.username;
-        if (userData.languageCode !== undefined) existingUserData.languageCode = userData.languageCode;
-        if (userData.isPremium !== undefined) existingUserData.isPremium = userData.isPremium;
-        if (userData.photoUrl !== undefined) existingUserData.photoUrl = userData.photoUrl;
-
-        // Fire and forget - don't await the backend sync
-        api.put(`${API_BASE}/${userId}`, existingUserData)
-          .then(response => {
-            // Optionally update store with server response if needed
-            dispatch(setUserData(response.data));
-          })
-          .catch(error => {
-            // Just log the error but don't affect the user experience
-            console.warn("Background sync failed:", error);
-          });
-      } catch (error) {
-        console.warn("Failed to fetch existing user data:", error);
-      }
+      // Update only specific fields
+      const updatedUserData = {
+        ...existingUserData,
+        firstName: userData.firstName,
+        lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
+        username: userData.username !== undefined ? userData.username : existingUserData.username,
+        languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
+        isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
+        photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
+      };
+      dispatch(setUserData(updatedUserData));
+      return updatedUserData;
     }
-
     return userData;
   }
 );

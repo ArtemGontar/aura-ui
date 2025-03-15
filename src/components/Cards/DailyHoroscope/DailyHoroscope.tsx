@@ -63,10 +63,13 @@ const DailyHoroscope: React.FC = () => {
   const saveBirthDate = async () => {
     setLoading(true);
     try {
-      const dateOfBirth = `${year}-${month}-${day}`;
+      const formattedMonth = month.padStart(2, '0');
+      const formattedDay = day.padStart(2, '0');
+      const dateOfBirth = `${year}-${formattedMonth}-${formattedDay}`;
       const updatedUserData = await saveUserBirthDate(dateOfBirth);
       setBirthDateExists(true);
-      setHoroscopeSign(updatedUserData.zodiacSign);
+      console.log(updatedUserData);
+      setHoroscopeSign(updatedUserData.zodiacSign || null);
     } catch (err) {
       setError(t('dailyHoroscope.error'));
     } finally {
@@ -75,10 +78,11 @@ const DailyHoroscope: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log(horoscopeSign);
     if (horoscopeSign) {
       setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
     }
-  }, [horoscopeSign]);
+  }, [horoscopeSign, backgroundImage]);
 
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = Array.from({ length: 12 }, (_, i) => i + 1);

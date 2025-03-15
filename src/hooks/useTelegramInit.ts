@@ -60,6 +60,7 @@ export const useTelegramInit = () => {
       setupTelegramWebApp();
 
       // Save user data
+
       await dispatch(saveUserDataAsync(userData));
     } catch (err) {
       dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));

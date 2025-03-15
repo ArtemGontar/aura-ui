@@ -6,7 +6,26 @@ import { FEATURES } from '../config/features';
 
 const API_BASE = `/api/users`;
 
-export const saveUserData = async (userData: UserData) => {
+export const getUserData = async (userId: number): Promise<UserData> => {
+  try {
+    if (FEATURES.USE_BACKEND) {
+      const response = await api.get(`${API_BASE}/${userId}`);
+      store.dispatch(setUserData(response.data));
+      return response.data;
+    } else {
+      const userData = store.getState().user.userData;
+      if (!userData) {
+        throw new Error("User data not found in store");
+      }
+      return userData;
+    }
+  } catch (error) {
+    console.error("Error fetching user data", error);
+    throw error;
+  }
+};
+
+export const saveUserData = async (userData: UserData): Promise<UserData> => {
   // Always save to store first for immediate user feedback
   store.dispatch(setUserData(userData));
 
@@ -33,26 +52,7 @@ export const saveUserData = async (userData: UserData) => {
   return userData;
 };
 
-export const getUserData = async (userId: string) => {
-  try {
-    if (FEATURES.USE_BACKEND) {
-      const response = await api.get(`${API_BASE}/${userId}`);
-      store.dispatch(setUserData(response.data));
-      return response.data;
-    } else {
-      const userData = store.getState().user.userData;
-      if (!userData) {
-        throw new Error("User data not found in store");
-      }
-      return userData;
-    }
-  } catch (error) {
-    console.error("Error fetching user data", error);
-    throw error;
-  }
-};
-
-export const updateUserData = async (userId: string, userData: Partial<UserData>) => {
+export const updateUserData = async (userId: number, userData: Partial<UserData>): Promise<UserData> => {
   try {
     if (FEATURES.USE_BACKEND) {
       const response = await api.put(`${API_BASE}/${userId}`, userData);
@@ -73,37 +73,16 @@ export const updateUserData = async (userId: string, userData: Partial<UserData>
   }
 };
 
-export const saveUserBirthDate = async (dateOfBirth: string): Promise<void> => {
+export const saveUserBirthDate = async (dateOfBirth: string): Promise<UserData> => {
   try {
     const userData = store.getState().user.userData;
     if (!userData) throw new Error("User not found");
     const updatedUserData = { ...userData, dateOfBirth };
-    await updateUserData(userData.id.toString(), updatedUserData);
+    await updateUserData(userData.id, updatedUserData);
     store.dispatch(setBirthDate(dateOfBirth));
+    return updatedUserData;
   } catch (error) {
     console.error("Error saving user birth date", error);
     throw error;
   }
-};
-
-export const getUserBirthDate = async (): Promise<string | null> => {
-  try {
-    const userId = store.getState().user.userData?.id;
-    if (!userId) throw new Error("User ID not found");
-
-    const userData = await getUserData(userId.toString());
-    return userData.dateOfBirth || null;
-  } catch (error) {
-    console.error("Error fetching user birth date", error);
-    throw error;
-  }
-};
-
-export const getUserDataFromStore = (): UserData | null => {
-  return store.getState().user.userData;
-};
-
-export const updateUserDataInStore = (userData: UserData) => {
-  store.dispatch(setUserData(userData));
-  return userData;
 };
