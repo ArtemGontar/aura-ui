@@ -7,23 +7,7 @@
   text-align: left;
 }
 
-.select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.2s;
-}
-
-.select:focus {
-  border-color: #007acc;
-  outline: none;
-}
-
-.input {
+.select, .input {
   width: 100%;
   padding: 12px;
   margin-bottom: 16px;
@@ -32,9 +16,10 @@
   font-size: 16px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
-.input:focus {
+.select:focus, .input:focus {
   border-color: #007acc;
   outline: none;
 }
@@ -43,13 +28,18 @@
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
 .button {
   flex: 1;
-  margin-top: 20px;
   margin: 10px 8px 0 8px;
   background-color: #FE958F;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  width: 100%;
 }
 
 .insight {
@@ -61,32 +51,31 @@
 .optionsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.step {
-  margin-bottom: 16px;
+  gap: 12px;
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .label {
-    font-size: 18px;
+    font-size: 14px;
   }
 
-  .select {
-    font-size: 18px;
-  }
-
-  .input {
-    font-size: 18px;
+  .select, .input {
+    font-size: 14px;
+    padding: 10px;
   }
 
   .button {
-    font-size: 18px;
+    font-size: 14px;
+    padding: 10px;
   }
 
   .insight {
-    font-size: 22px;
+    font-size: 18px;
+  }
+
+  .optionsGrid {
+    grid-template-columns: repeat(2, 1fr); /* Two cards per row */
+    gap: 8px;
   }
 }

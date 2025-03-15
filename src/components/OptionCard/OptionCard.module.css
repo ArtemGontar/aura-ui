@@ -7,7 +7,6 @@
   cursor: pointer;
   transition: background-color 0.3s;
   background-color: #BFCDF0;
-  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 70px;
@@ -24,5 +23,4 @@
 .image {
   width: 50px;
   height: 50px;
-  margin-right: 16px;
 }

@@ -12,7 +12,7 @@ const OptionCard: React.FC<OptionCardProps> = ({ option, onClick, selected, imag
   return (
     <div className={`${styles.card} ${selected ? styles.selected : ''}`} onClick={onClick}>
       <img src={imageUrl} alt={option} className={styles.image} />
-      <h3>{option}</h3>
+      <h6>{option}</h6>
     </div>
   );
 };
