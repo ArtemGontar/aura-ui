@@ -7,6 +7,11 @@ export const HOME_CARDS: CardData[] = [
     icon: '⭐'
   },
   {
+    id: 'compatibility',
+    path: '/compatibility',
+    icon: '❤️'
+  },
+  {
     id: 'psychological',
     path: '/psychological',
     icon: '🧠'

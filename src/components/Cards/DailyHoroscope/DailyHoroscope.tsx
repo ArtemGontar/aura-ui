@@ -6,128 +6,100 @@ import DatePicker from "../../DatePicker/DatePicker";
 import { getHoroscope } from "../../../services/predictionService";
 import { saveUserBirthDate } from "../../../services/userService";
 import { useUserData } from "../../../hooks/useUserData";
-import { Button } from '@telegram-apps/telegram-ui';
+import { Button } from "@telegram-apps/telegram-ui";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const [day, setDay] = useState<string>("");
-  const [month, setMonth] = useState<string>("");
-  const [year, setYear] = useState<string>("");
+  
+  const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
   const [horoscope, setHoroscope] = useState<{
     generalGuidance: string;
     loveRelationshipsAdvice: string;
     careerFinancialInsights: string;
   } | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [birthDateExists, setBirthDateExists] = useState<boolean>(false);
-  const [horoscopeSign, setHoroscopeSign] = useState<string | null>(userData?.zodiacSign || null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || null);
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
   useEffect(() => {
     if (userData?.dateOfBirth) {
       const [year, month, day] = userData.dateOfBirth.split("-");
-      setYear(year);
-      setMonth(month);
-      setDay(day);
-      setBirthDateExists(true);
+      setBirthDate({ day, month, year });
       setHoroscopeSign(userData.zodiacSign || null);
     }
   }, [userData]);
 
-  const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDay(e.target.value);
-  };
-
-  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setMonth(e.target.value);
-  };
-
-  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setYear(e.target.value);
-  };
-
-  const requestHoroscope = async () => {
-    setLoading(true);
-    try {
-      const horoscope = await getHoroscope();
-      setHoroscope(horoscope);
-    } catch (err) {
-      setError(t('dailyHoroscope.error'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const saveBirthDate = async () => {
-    setLoading(true);
-    try {
-      const formattedMonth = month.padStart(2, '0');
-      const formattedDay = day.padStart(2, '0');
-      const dateOfBirth = `${year}-${formattedMonth}-${formattedDay}`;
-      const updatedUserData = await saveUserBirthDate(dateOfBirth);
-      setBirthDateExists(true);
-      setHoroscopeSign(updatedUserData.zodiacSign || null);
-    } catch (err) {
-      setError(t('dailyHoroscope.error'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    console.log(horoscopeSign);
     if (horoscopeSign) {
       setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
     }
   }, [horoscopeSign]);
 
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i);
+  const handleBirthDateChange = (field: string, value: string) => {
+    setBirthDate((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const saveBirthDate = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const formattedDate = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
+      const updatedUserData = await saveUserBirthDate(formattedDate);
+      setHoroscopeSign(updatedUserData.zodiacSign || null);
+    } catch {
+      setError(t("dailyHoroscope.error"));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const requestHoroscope = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      setHoroscope(await getHoroscope());
+    } catch {
+      setError(t("dailyHoroscope.error"));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={commonStyles.card}>
-      <h2 className={commonStyles.title}>{t('dailyHoroscope.title')}</h2>
-      <p className={commonStyles.description}>{t('dailyHoroscope.description')}</p>  
-      <div 
-        className={styles.titleContainer}
-        style={{
-          backgroundImage: backgroundImage || 'none',
-        }}
-      >
-        {!birthDateExists && (
-          <DatePicker
-            day={day}
-            month={month}
-            year={year}
-            days={days}
-            months={months}
-            years={years}
-            handleDayChange={handleDayChange}
-            handleMonthChange={handleMonthChange}
-            handleYearChange={handleYearChange}
+      <h2 className={commonStyles.title}>{t("dailyHoroscope.title")}</h2>
+      <p className={commonStyles.description}>{t("dailyHoroscope.description")}</p>
+      
+      <div className={styles.titleContainer} style={{ backgroundImage: backgroundImage || "none" }}>
+        {!userData?.dateOfBirth && (
+          <DatePicker 
+            {...birthDate} 
+            days={Array.from({ length: 31 }, (_, i) => i + 1)}
+            months={Array.from({ length: 12 }, (_, i) => i + 1)}
+            years={Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)}
+            handleDayChange={(e) => handleBirthDateChange("day", e.target.value)}
+            handleMonthChange={(e) => handleBirthDateChange("month", e.target.value)}
+            handleYearChange={(e) => handleBirthDateChange("year", e.target.value)}
           />
         )}
       </div>
-      {!birthDateExists && day && month && year && (
-        <Button 
-          onClick={saveBirthDate}
-          disabled={loading}
-        >
-          {loading ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.saveBirthDate')}
+      
+      {!userData?.dateOfBirth && birthDate.day && birthDate.month && birthDate.year && (
+        <Button onClick={saveBirthDate} disabled={loading}>
+          {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.saveBirthDate")}
         </Button>
       )}
-      {birthDateExists && (
-        <Button
-          onClick={requestHoroscope}
-          disabled={loading}
-        >
-          {loading ? t('dailyHoroscope.loading') : t('dailyHoroscope.buttons.getHoroscope')}
+      
+      {userData?.dateOfBirth && (
+        <Button onClick={requestHoroscope} disabled={loading}>
+          {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.getHoroscope")}
         </Button>
       )}
+
       {error && <p className={styles.error}>{error}</p>}
+      
       {horoscope && 
        <div className={styles.citationWindow}>
         <h3 className={styles.citationTitle}>{t('dailyHoroscope.generalGuidance')}</h3>

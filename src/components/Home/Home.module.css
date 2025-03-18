@@ -180,6 +180,10 @@
   background: var(--gradient-horoscope);
 }
 
+.cardCompatibility {
+  background: var(--gradient-compatibility);
+}
+
 .cardPsychological {
   background: var(--gradient-psychological);
 }
@@ -190,10 +194,6 @@
 
 .cardMagicball {
   background: var(--gradient-magicball);
-}
-
-.cardTarot {
-  background: var(--gradient-tarot);
 }
 
 /* Tablet and larger screens */

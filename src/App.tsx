@@ -19,6 +19,7 @@ import { useApplyTheme } from "./hooks/useApplyTheme";
 import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
+import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
@@ -56,6 +57,7 @@ const AppContent: React.FC = () => {
           <Route path="/affirmations" element={<Affirmations />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/horoscope" element={<DailyHoroscope />} />
+          <Route path="/compatibility" element={<Compatibility />} />
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />

@@ -13,7 +13,7 @@
   --gradient-psychological: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
   --gradient-astrology: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
   --gradient-magicball: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
-  --gradient-tarot: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+  --gradient-compatibility: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
 
   /* Card text colors - light theme */
   --card-text-color: var(--tg-theme-text-color);
@@ -65,7 +65,7 @@
   --gradient-psychological: linear-gradient(135deg, #131315 0%, #16161a 100%);
   --gradient-astrology: linear-gradient(135deg, #141416 0%, #18181c 100%);
   --gradient-magicball: linear-gradient(135deg, #151517 0%, #17171b 100%);
-  --gradient-tarot: linear-gradient(135deg, #161618 0%, #19191d 100%);
+  --gradient-compatibility: linear-gradient(135deg, #161618 0%, #19191d 100%);
 
   /* Card text colors - dark theme */
   --card-text-color: rgba(255, 255, 255, 0.95);

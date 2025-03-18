@@ -26,6 +26,16 @@ export const getHoroscope = async (): Promise<{
   }
 };
 
+export const getCompatibility = async (): Promise<string> => {
+  try {
+    const response = await api.get(`${API_BASE}/compatibility`);
+    console.log("response", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching compatibility", error);
+    throw error;
+  }
+}
 
 export const getMagicBallAnswer = async (): Promise<string> => {
   try {

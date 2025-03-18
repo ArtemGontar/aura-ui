@@ -26,6 +26,10 @@
         "title": "Horoscope",
         "description": "Get your daily horoscope reading."
       },
+      "compatibility": {
+        "title": "Compatibility",
+        "description": "Check your compatibility with others."
+      },
       "psychological": {
         "title": "Psychological",
         "description": "Explore psychological insights."
@@ -128,5 +132,19 @@
   },
   "generalGuidance": "General Guidance",
   "loveRelationshipsAdvice": "Love & Relationships Advice",
-  "careerFinancialInsights": "Career & Financial Insights"
+  "careerFinancialInsights": "Career & Financial Insights",
+  "compatibility": {
+    "title": "Compatibility",
+    "completeProfile": "Please complete your profile to check compatibility.",
+    "dateOfBirth": "Date of Birth",
+    "horoscopeSign": "Horoscope Sign",
+    "saveProfileButton": "Save Profile",
+    "loading": "Saving...",
+    "error": "Error saving profile data.",
+    "personBName": "Second Person's Name",
+    "personBDateOfBirth": "Second Person's Date of Birth",
+    "personBHoroscopeSign": "Second Person's Horoscope Sign",
+    "checkButton": "Check Compatibility",
+    "result": "Compatibility Result: {{result}}"
+  }
 }
