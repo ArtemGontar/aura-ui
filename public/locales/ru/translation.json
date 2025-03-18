@@ -140,7 +140,6 @@
     "checkButton": "Проверить совместимость",
     "result": "Результат совместимости: {{result}}",
     "strengthsTitle": "Сильные стороны",
-    "challengesTitle": "Вызовы",
-    "todayScenarioTitle": "Сценарий на сегодня"
+    "challengesTitle": "Вызовы"
   }
 }

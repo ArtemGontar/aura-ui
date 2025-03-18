@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
-import DatePicker from "../../DatePicker/DatePicker";
 import { getHoroscope } from "../../../services/predictionService";
-import { saveUserBirthDate } from "../../../services/userService";
 import { useUserData } from "../../../hooks/useUserData";
 import { Button } from "@telegram-apps/telegram-ui";
+import BirthDatePicker from "../../BirthDatePicker/BirthDatePicker";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   
-  const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
   const [horoscope, setHoroscope] = useState<{
     generalGuidance: string;
     loveRelationshipsAdvice: string;
@@ -25,8 +23,6 @@ const DailyHoroscope: React.FC = () => {
 
   useEffect(() => {
     if (userData?.dateOfBirth) {
-      const [year, month, day] = userData.dateOfBirth.split("-");
-      setBirthDate({ day, month, year });
       setHoroscopeSign(userData.zodiacSign || null);
     }
   }, [userData]);
@@ -36,24 +32,6 @@ const DailyHoroscope: React.FC = () => {
       setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
     }
   }, [horoscopeSign]);
-
-  const handleBirthDateChange = (field: string, value: string) => {
-    setBirthDate((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const saveBirthDate = async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const formattedDate = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
-      const updatedUserData = await saveUserBirthDate(formattedDate);
-      setHoroscopeSign(updatedUserData.zodiacSign || null);
-    } catch {
-      setError(t("dailyHoroscope.error"));
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const requestHoroscope = async () => {
     setLoading(true);
@@ -74,23 +52,9 @@ const DailyHoroscope: React.FC = () => {
       
       <div className={styles.titleContainer} style={{ backgroundImage: backgroundImage || "none" }}>
         {!userData?.dateOfBirth && (
-          <DatePicker 
-            {...birthDate} 
-            days={Array.from({ length: 31 }, (_, i) => i + 1)}
-            months={Array.from({ length: 12 }, (_, i) => i + 1)}
-            years={Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - i)}
-            handleDayChange={(e) => handleBirthDateChange("day", e.target.value)}
-            handleMonthChange={(e) => handleBirthDateChange("month", e.target.value)}
-            handleYearChange={(e) => handleBirthDateChange("year", e.target.value)}
-          />
+          <BirthDatePicker />
         )}
       </div>
-      
-      {!userData?.dateOfBirth && birthDate.day && birthDate.month && birthDate.year && (
-        <Button onClick={saveBirthDate} disabled={loading}>
-          {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.saveBirthDate")}
-        </Button>
-      )}
       
       {userData?.dateOfBirth && (
         <Button onClick={requestHoroscope} disabled={loading}>

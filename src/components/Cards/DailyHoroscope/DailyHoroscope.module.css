@@ -6,12 +6,6 @@
   background-position: center;
   margin-bottom: 20px;
 }
-.label {
-  font-size: 16px;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-  display: block;
-}
 
 .error {
   color: var(--error);
@@ -52,15 +46,6 @@
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
-
-  .label {
-    font-size: 18px;
-  }
-
-  .select {
-    font-size: 18px;
-  }
-
   .horoscope {
     font-size: 22px;
   }

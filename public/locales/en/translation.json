@@ -67,6 +67,9 @@
   "dailyHoroscope": {
     "title": "Daily Horoscope",
     "description": "Discover what the stars have in store for you today.",
+    "generalGuidance": "General Guidance",
+    "loveRelationshipsAdvice": "Love & Relationships Advice",
+    "careerFinancialInsights": "Career & Financial Insights",
     "buttons": {
       "saveBirthDate": "Save Date of Birth",
       "getHoroscope": "Get Horoscope"
@@ -124,9 +127,6 @@
     "description": "Ask the Magic Ball any question and get an answer.",
     "initialText": "Ask the Magic Ball a question."
   },
-  "generalGuidance": "General Guidance",
-  "loveRelationshipsAdvice": "Love & Relationships Advice",
-  "careerFinancialInsights": "Career & Financial Insights",
   "compatibility": {
     "title": "Compatibility",
     "completeProfile": "Please complete your profile to check compatibility.",
@@ -141,7 +141,6 @@
     "checkButton": "Check Compatibility",
     "result": "Compatibility Result: {{result}}",
     "strengthsTitle": "Strengths",
-    "challengesTitle": "Challenges",
-    "todayScenarioTitle": "Today's Scenario"
+    "challengesTitle": "Challenges"
   }
 }
