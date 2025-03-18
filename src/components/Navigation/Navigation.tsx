@@ -12,7 +12,7 @@ const Navigation: React.FC = () => {
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    if (newValue === 0) navigate("/home");
+    if (newValue === 0) navigate("/");
     if (newValue === 1) navigate("/affirmations");
     if (newValue === 2) navigate("/profile");
   };

@@ -50,7 +50,7 @@ const AppContent: React.FC = () => {
   }
 
   return (
-    <Router>
+    <>
       <div className={styles.content}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -61,20 +61,22 @@ const AppContent: React.FC = () => {
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
       <Navigation />
       {!isTelegram && <ThemeSwitcher />} {/* Add ThemeSwitcher if not in Telegram context */}
-    </Router>
+    </>
   );
 };
 
 const App: React.FC = () => {
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </Router>
   );
 };
 
