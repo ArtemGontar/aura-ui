@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
+import WebApp from '@twa-dev/sdk';
 import { getHoroscope } from "../../../services/predictionService";
 import { useUserData } from "../../../hooks/useUserData";
 import { Button } from "@telegram-apps/telegram-ui";
@@ -10,7 +11,7 @@ import BirthDatePicker from "../../BirthDatePicker/BirthDatePicker";
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  
+  WebApp.BackButton.show();
   const [horoscope, setHoroscope] = useState<{
     generalGuidance: string;
     loveRelationshipsAdvice: string;
