@@ -128,12 +128,8 @@
     "initialText": "Ask the Magic Ball a question."
   },
   "compatibility": {
-    "title": "Compatibility",
+    "title": "Partner Compatibility",
     "completeProfile": "Please complete your profile to check compatibility.",
-    "dateOfBirth": "Date of Birth",
-    "horoscopeSign": "Horoscope Sign",
-    "saveProfileButton": "Save Profile",
-    "loading": "Saving...",
     "error": "Error saving profile data.",
     "partnerInfoFirstName": "Partner's First Name",
     "partnerInfoLastName": "Partner's Second Name",
