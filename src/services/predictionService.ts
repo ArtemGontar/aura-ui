@@ -9,7 +9,7 @@ export const getHoroscope = async (): Promise<{
   careerFinancialInsights: string;
 }> => {
   try {
-    const response = await api.get<{ content: string }>(`${API_BASE}/daily-horoscope`);
+    const response = await api.post<{ content: string }>(`${API_BASE}/daily-horoscope`);
     
     console.log("response", response.data.content);
     // Parse the extracted JSON string
@@ -26,11 +26,26 @@ export const getHoroscope = async (): Promise<{
   }
 };
 
-export const getCompatibility = async (): Promise<string> => {
+export const getCompatibility = async (partnerData: {
+   firstName: string; lastName: string; dateOfBirth: string
+}): Promise<{
+  compatibilityScore: string;
+  strengths: string[];
+  challenges: string[];
+  todayScenario: string;
+}> => {
   try {
-    const response = await api.get(`${API_BASE}/compatibility`);
+    const response = await api.post<{ content: string }>(`${API_BASE}/compatibility`, partnerData);
     console.log("response", response.data);
-    return response.data;
+
+    const parsedData = JSON.parse(response.data.content);
+
+    return {
+      compatibilityScore: parsedData.compatibilityScore,
+      strengths: parsedData.strengths,
+      challenges: parsedData.challenges,
+      todayScenario: parsedData.todayScenario
+    };
   } catch (error) {
     console.error("Error fetching compatibility", error);
     throw error;

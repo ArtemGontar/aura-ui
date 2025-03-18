@@ -8,8 +8,6 @@ import DailyHoroscope from "./components/Cards/DailyHoroscope/DailyHoroscope";
 import Psychological from "./components/Cards/Psychological/Psychological";
 import Astrology from "./components/Cards/Astrology/Astrology";
 import MagicBall from "./components/Cards/MagicBall/MagicBall";
-import Tarot from "./components/Cards/Tarot/Tarot";
-import Runes from "./components/Cards/Runes/Runes";
 import Affirmations from "./components/Affirmations/Affirmations";
 import ErrorDisplay from "./components/ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "./components/LoadingDisplay/LoadingDisplay";
@@ -61,8 +59,6 @@ const AppContent: React.FC = () => {
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />
-          <Route path="/tarot" element={<Tarot />} />
-          <Route path="/runes" element={<Runes />} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </div>

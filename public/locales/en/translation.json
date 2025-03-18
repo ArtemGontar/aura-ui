@@ -14,9 +14,7 @@
     "horoscope": "Daily Horoscope",
     "psychological": "Psychological",
     "astrology": "Astrology",
-    "magicball": "Magic Ball",
-    "tarot": "Tarot",
-    "runes": "Runes"
+    "magicball": "Magic Ball"
   },
   "home": {
     "daysStreak": "days streak",
@@ -41,10 +39,6 @@
       "magicball": {
         "title": "Magic Ball",
         "description": "Ask the magic ball for answers."
-      },
-      "tarot": {
-        "title": "Tarot",
-        "description": "Get a tarot card reading."
       }
     }
   },
@@ -145,6 +139,9 @@
     "personBDateOfBirth": "Second Person's Date of Birth",
     "personBHoroscopeSign": "Second Person's Horoscope Sign",
     "checkButton": "Check Compatibility",
-    "result": "Compatibility Result: {{result}}"
+    "result": "Compatibility Result: {{result}}",
+    "strengthsTitle": "Strengths",
+    "challengesTitle": "Challenges",
+    "todayScenarioTitle": "Today's Scenario"
   }
 }

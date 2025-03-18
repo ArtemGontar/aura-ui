@@ -10,8 +10,13 @@ import { Button } from '@telegram-apps/telegram-ui';
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const [personB, setPersonB] = useState({ name: '', dateOfBirth: '' });
-  const [compatibilityResult, setCompatibilityResult] = useState<string | null>(null);
+  const [personB, setPersonB] = useState({ firstName: '', lastName: '', dateOfBirth: '' });
+  const [compatibilityResult, setCompatibilityResult] = useState<{
+    compatibilityScore: string;
+    strengths: string[];
+    challenges: string[];
+    todayScenario: string;
+  } | null>(null);
   const [profileData, setProfileData] = useState({ dateOfBirth: '' });
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -27,8 +32,12 @@ const Compatibility: React.FC = () => {
   };
 
   const checkCompatibility = async () => {
-    const response = await getCompatibility();
-    setCompatibilityResult(response);
+    try {
+      const response = await getCompatibility(personB);
+      setCompatibilityResult(response);
+    } catch (err) {
+      setError(t('compatibility.error'));
+    }
   };
 
   const saveProfileData = async () => {
@@ -52,9 +61,9 @@ const Compatibility: React.FC = () => {
             {t('compatibility.dateOfBirth')}
             <input type="date" name="dateOfBirth" value={profileData.dateOfBirth} onChange={handleProfileChange} />
           </label>
-          <button onClick={saveProfileData} disabled={loading}>
+          <Button onClick={saveProfileData} disabled={loading}>
             {loading ? t('compatibility.loading') : t('compatibility.saveProfileButton')}
-          </button>
+          </Button>
           {error && <p className={styles.error}>{error}</p>}
         </div>
       </div>
@@ -68,7 +77,11 @@ const Compatibility: React.FC = () => {
         <div>
           <label>
             {t('compatibility.personBName')}
-            <input type="text" name="name" value={personB.name} onChange={handleInputChange} />
+            <input type="text" name="firstName" value={personB.firstName} onChange={handleInputChange} />
+          </label>
+          <label>
+            {t('compatibility.personBName')}
+            <input type="text" name="lastName" value={personB.lastName} onChange={handleInputChange} />
           </label>
           <label>
             {t('compatibility.personBDateOfBirth')}
@@ -76,7 +89,25 @@ const Compatibility: React.FC = () => {
           </label>
           <Button onClick={checkCompatibility}>{t('compatibility.checkButton')}</Button>
         </div>
-        {compatibilityResult && <p>{t('compatibility.result', { result: compatibilityResult })}</p>}
+        {compatibilityResult && (
+          <div>
+            <p>{t('compatibility.result', { result: compatibilityResult.compatibilityScore })}</p>
+            <h5>{t('compatibility.strengthsTitle')}</h5>
+            <ul>
+              {compatibilityResult.strengths.map((strength, index) => (
+                <li key={index}>{strength}</li>
+              ))}
+            </ul>
+            <h5>{t('compatibility.challengesTitle')}</h5>
+            <ul>
+              {compatibilityResult.challenges.map((challenge, index) => (
+                <li key={index}>{challenge}</li>
+              ))}
+            </ul>
+            <h5>{t('compatibility.todayScenarioTitle')}</h5>
+            <p>{compatibilityResult.todayScenario}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -14,9 +14,7 @@
     "horoscope": "Гороскоп",
     "psychological": "Психология",
     "astrology": "Астрология",
-    "magicball": "Магический шар",
-    "tarot": "Таро",
-    "runes": "Руны"
+    "magicball": "Магический шар"
   },
   "home": {
     "daysStreak": "дней подряд",
@@ -41,10 +39,6 @@
       "magicball": {
         "title": "Магический шар",
         "description": "Спросите магический шар о будущем."
-      },
-      "tarot": {
-        "title": "Таро",
-        "description": "Получите предсказание на картах Таро."
       }
     }
   },
@@ -143,6 +137,9 @@
     "personBName": "Имя партнера",
     "personBDateOfBirth": "Дата рождения партнера",
     "checkButton": "Проверить совместимость",
-    "result": "Результат совместимости: {{result}}"
+    "result": "Результат совместимости: {{result}}",
+    "strengthsTitle": "Сильные стороны",
+    "challengesTitle": "Вызовы",
+    "todayScenarioTitle": "Сценарий на сегодня"
   }
 }
