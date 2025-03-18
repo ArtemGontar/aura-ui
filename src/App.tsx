@@ -18,10 +18,12 @@ import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
 import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
+import useTelegramBackButton from "./hooks/useTelegramBackButton";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
   useApplyTheme();
+  useTelegramBackButton();
   const { userData } = useUserData();
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const AppContent: React.FC = () => {
     <Router>
       <div className={styles.content}>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/affirmations" element={<Affirmations />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/horoscope" element={<DailyHoroscope />} />
