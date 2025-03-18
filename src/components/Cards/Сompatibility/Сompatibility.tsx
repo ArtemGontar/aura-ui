@@ -18,6 +18,7 @@ const Compatibility: React.FC = () => {
     todayScenario: string;
   } | null>(null);
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,15 +26,18 @@ const Compatibility: React.FC = () => {
   };
 
   const checkCompatibility = async () => {
+    setLoading(true);
     try {
       const response = await getCompatibility(partnerInfo);
       setCompatibilityResult(response);
     } catch (err) {
       setError(t('compatibility.error'));
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!userData || !userData.dateOfBirth || !userData.zodiacSign) {
+  if (!userData || !userData.dateOfBirth) {
     return (
       <div className={commonStyles.card}>
         <div className={styles.compatibility}>
@@ -62,10 +66,12 @@ const Compatibility: React.FC = () => {
             {t('compatibility.partnerInfoDateOfBirth')}
             <input type="date" name="dateOfBirth" value={partnerInfo.dateOfBirth} onChange={handleInputChange} />
           </label>
-          <Button onClick={checkCompatibility}>{t('compatibility.checkButton')}</Button>
+          <Button onClick={checkCompatibility} disabled={loading}>
+            {loading ? t("compatibility.loading") : t("dailyHoroscope.checkButton")}
+          </Button>
         </div>
         {compatibilityResult && (
-          <div>
+          <div className='compatibility.resultContainer'>
             <p>{t('compatibility.result', { result: compatibilityResult.compatibilityScore })}</p>
             <h5>{t('compatibility.strengthsTitle')}</h5>
             <ul>

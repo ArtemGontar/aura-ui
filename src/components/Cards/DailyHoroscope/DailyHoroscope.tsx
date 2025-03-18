@@ -30,7 +30,7 @@ const DailyHoroscope: React.FC = () => {
 
   useEffect(() => {
     if (horoscopeSign) {
-      setBackgroundImage(`url(/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png)`);
+      setBackgroundImage(`/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png`);
     }
   }, [horoscopeSign]);
 
@@ -51,28 +51,29 @@ const DailyHoroscope: React.FC = () => {
       <h2 className={commonStyles.title}>{t("dailyHoroscope.title")}</h2>
       <p className={commonStyles.description}>{t("dailyHoroscope.description")}</p>
       
-      <div className={styles.titleContainer} style={{ backgroundImage: backgroundImage || "none" }}>
-        {!userData?.dateOfBirth && (
+      <div className={styles.titleContainer}>
+        {!userData?.dateOfBirth ? (
           <BirthDatePicker />
+        ) : (
+          <>
+            {backgroundImage && <img src={backgroundImage} alt={horoscopeSign || "Horoscope Sign"} className={styles.horoscopeImage} />}
+            <Button onClick={requestHoroscope} disabled={loading}>
+              {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.getHoroscope")}
+            </Button>
+          </>
         )}
       </div>
-      
-      {userData?.dateOfBirth && (
-        <Button onClick={requestHoroscope} disabled={loading}>
-          {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.getHoroscope")}
-        </Button>
-      )}
 
       {error && <p className={styles.error}>{error}</p>}
       
       {horoscope && 
-       <div className={styles.citationWindow}>
-        <h3 className={styles.citationTitle}>{t('dailyHoroscope.generalGuidance')}</h3>
-        <p className={styles.citationText}>{horoscope.generalGuidance}</p>
-        <h3 className={styles.citationTitle}>{t('dailyHoroscope.loveRelationshipsAdvice')}</h3>
-        <p className={styles.citationText}>{horoscope.loveRelationshipsAdvice}</p>
-        <h3 className={styles.citationTitle}>{t('dailyHoroscope.careerFinancialInsights')}</h3>
-        <p className={styles.citationText}>{horoscope.careerFinancialInsights}</p>
+       <div className={styles.resultContainer}>
+        <h3 className={styles.resultTitle}>{t('dailyHoroscope.generalGuidance')}</h3>
+        <p className={styles.resultText}>{horoscope.generalGuidance}</p>
+        <h3 className={styles.resultTitle}>{t('dailyHoroscope.loveRelationshipsAdvice')}</h3>
+        <p className={styles.resultText}>{horoscope.loveRelationshipsAdvice}</p>
+        <h3 className={styles.resultTitle}>{t('dailyHoroscope.careerFinancialInsights')}</h3>
+        <p className={styles.resultText}>{horoscope.careerFinancialInsights}</p>
        </div>}
     </div>
   );

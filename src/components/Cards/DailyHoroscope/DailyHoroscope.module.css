@@ -1,9 +1,14 @@
 .titleContainer {
   width: 100%;
-  height: 200px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  height: auto;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.horoscopeImage {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   margin-bottom: 20px;
 }
 
@@ -19,25 +24,21 @@
   color: var(--tg-theme-text-color);
 }
 
-.citationWindow {
+.resultContainer {
   margin: 30px auto;
   max-width: 400px;
   padding: 20px;
-  background: var(--background-secondary);
-  border-left: 4px solid var(--accent);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
   font-size: 16px;
   color: var(--text-secondary);
 }
 
-.citationText {
+.resultText {
   font-style: italic;
   margin-bottom: 15px;
   color: var(--text-primary);
 }
 
-.citationTitle {
+.resultTitle {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
