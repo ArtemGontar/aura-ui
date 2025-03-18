@@ -10,7 +10,7 @@ import { Button } from '@telegram-apps/telegram-ui';
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const [personB, setPersonB] = useState({ firstName: '', lastName: '', dateOfBirth: '' });
+  const [partnerInfo, setPartnerInfo] = useState({ firstName: '', lastName: '', dateOfBirth: '' });
   const [compatibilityResult, setCompatibilityResult] = useState<{
     compatibilityScore: string;
     strengths: string[];
@@ -23,7 +23,7 @@ const Compatibility: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setPersonB({ ...personB, [name]: value });
+    setPartnerInfo({ ...partnerInfo, [name]: value });
   };
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ const Compatibility: React.FC = () => {
 
   const checkCompatibility = async () => {
     try {
-      const response = await getCompatibility(personB);
+      const response = await getCompatibility(partnerInfo);
       setCompatibilityResult(response);
     } catch (err) {
       setError(t('compatibility.error'));
@@ -76,16 +76,16 @@ const Compatibility: React.FC = () => {
         <h4>{t('compatibility.title')}</h4>
         <div>
           <label>
-            {t('compatibility.personBName')}
-            <input type="text" name="firstName" value={personB.firstName} onChange={handleInputChange} />
+            {t('compatibility.partnerInfoFirstName')}
+            <input type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
           </label>
           <label>
-            {t('compatibility.personBName')}
-            <input type="text" name="lastName" value={personB.lastName} onChange={handleInputChange} />
+            {t('compatibility.partnerInfoLastName')}
+            <input type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
           </label>
           <label>
-            {t('compatibility.personBDateOfBirth')}
-            <input type="date" name="dateOfBirth" value={personB.dateOfBirth} onChange={handleInputChange} />
+            {t('compatibility.partnerInfoDateOfBirth')}
+            <input type="date" name="dateOfBirth" value={partnerInfo.dateOfBirth} onChange={handleInputChange} />
           </label>
           <Button onClick={checkCompatibility}>{t('compatibility.checkButton')}</Button>
         </div>
