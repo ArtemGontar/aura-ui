@@ -1,6 +1,6 @@
 import { UserData } from "../types/user";
 import { store } from "../store";
-import { setUserData, setBirthDate } from "../store/slices/userSlice";
+import { setUserData } from "../store/slices/userSlice";
 import api from './api';
 import { FEATURES } from '../config/features';
 

@@ -62,6 +62,13 @@
     "banner": {
       "title": "Affirmations are getting a makeover!",
       "subtitle": "We're crafting something special to help you stay positive and motivated. Check back soon!"
+    },
+    "list": {
+      "1": "You are capable of achieving great things.",
+      "2": "Believe in yourself and all that you are.",
+      "3": "Every day is a new opportunity to grow.",
+      "4": "You are stronger than you think.",
+      "5": "Positivity is a choice that you can make."
     }
   },
   "dailyHoroscope": {
