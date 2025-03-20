@@ -177,23 +177,23 @@
 }
 
 .cardHoroscope {
-  background: var(--gradient-horoscope);
+  background: var(--gradient-one);
 }
 
 .cardCompatibility {
-  background: var(--gradient-compatibility);
+  background: var(--gradient-five);
 }
 
 .cardPsychological {
-  background: var(--gradient-psychological);
+  background: var(--gradient-two);
 }
 
 .cardAstrology {
-  background: var(--gradient-astrology);
+  background: var(--gradient-three);
 }
 
 .cardMagicball {
-  background: var(--gradient-magicball);
+  background: var(--gradient-four);
 }
 
 /* Tablet and larger screens */

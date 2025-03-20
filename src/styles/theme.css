@@ -9,11 +9,11 @@
   --tg-theme-secondary-bg-color: #f4f4f5;
 
   /* Gradient backgrounds for cards - light theme */
-  --gradient-horoscope: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  --gradient-psychological: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
-  --gradient-astrology: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
-  --gradient-magicball: linear-gradient(135deg, #a6c0fe 0%, #f68084 100%);
-  --gradient-compatibility: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+  --gradient-one: linear-gradient(135deg, #eaf3ff 0%, #fdeef2 100%);
+  --gradient-two: linear-gradient(135deg, #f3efff 0%, #ffece6 100%);
+  --gradient-three: linear-gradient(135deg, #e9f8f4 0%, #ffeef0 100%);
+  --gradient-four: linear-gradient(135deg, #e8f4fd 0%, #fff8e7 100%);
+  --gradient-five: linear-gradient(135deg, #f2f0ff 0%, #fffaf1 100%);
 
   /* Card text colors - light theme */
   --card-text-color: var(--tg-theme-text-color);
@@ -61,11 +61,11 @@
 /* Dark mode theme variables */
 [data-theme="dark"] {
   /* Subtle dark gradients - almost black with minimal color differences */
-  --gradient-horoscope: linear-gradient(135deg, #121214 0%, #17171a 100%);
-  --gradient-psychological: linear-gradient(135deg, #131315 0%, #16161a 100%);
-  --gradient-astrology: linear-gradient(135deg, #141416 0%, #18181c 100%);
-  --gradient-magicball: linear-gradient(135deg, #151517 0%, #17171b 100%);
-  --gradient-compatibility: linear-gradient(135deg, #161618 0%, #19191d 100%);
+  --gradient-one: linear-gradient(135deg, #121214 0%, #17171a 100%);
+  --gradient-two: linear-gradient(135deg, #131315 0%, #16161a 100%);
+  --gradient-three: linear-gradient(135deg, #141416 0%, #18181c 100%);
+  --gradient-four: linear-gradient(135deg, #151517 0%, #17171b 100%);
+  --gradient-five: linear-gradient(135deg, #161618 0%, #19191d 100%);
 
   /* Card text colors - dark theme */
   --card-text-color: rgba(255, 255, 255, 0.95);
