@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./PredictionHistory.module.css";
-import { getPredictionHistory } from "../../services/predictionService";
+import { getPredictions } from "../../services/predictionService";
+import { Prediction } from "../../types/prediction";
 
 const PredictionHistory: React.FC = () => {
   const { t } = useTranslation();
-  const [predictions, setPredictions] = useState([]);
+  const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ const PredictionHistory: React.FC = () => {
     const fetchPredictions = async () => {
       setIsLoading(true);
       try {
-        const data = await getPredictionHistory(page, 5);
+        const data = await getPredictions(page, 5);
         setPredictions(data);
       } catch (err) {
         setError(err.message);
@@ -44,7 +45,8 @@ const PredictionHistory: React.FC = () => {
       <ul className={styles.predictionList}>
         {predictions.map((prediction, index) => (
           <li key={index} className={styles.predictionItem}>
-            {prediction}
+            <div>{prediction.type}</div>
+            <div>{prediction.createdAt}</div>
           </li>
         ))}
       </ul>

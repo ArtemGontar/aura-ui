@@ -1,13 +1,21 @@
-import axios from "axios";
+import { Compatibility, Horoscope, Prediction } from "../types/prediction";
 import api from "./api";
 
 const API_BASE = `/api/fortunes`;
 
-export const getHoroscope = async (): Promise<{
-  generalGuidance: string;
-  loveRelationshipsAdvice: string;
-  careerFinancialInsights: string;
-}> => {
+export const getPredictions = async (page: number, limit: number): Promise<Prediction[]> => {
+  try {
+    const response = await api.get(`${API_BASE}`, {
+      params: { page, limit }
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching prediction history", error);
+    throw error;
+  }
+};
+
+export const getHoroscope = async (): Promise<Horoscope> => {
   try {
     const response = await api.post<{ content: string }>(`${API_BASE}/daily-horoscope`);
     
@@ -28,12 +36,7 @@ export const getHoroscope = async (): Promise<{
 
 export const getCompatibility = async (partnerData: {
    firstName: string; lastName: string; dateOfBirth: string
-}): Promise<{
-  compatibilityScore: string;
-  strengths: string[];
-  challenges: string[];
-  todayScenario: string;
-}> => {
+}): Promise<Compatibility> => {
   try {
     const response = await api.post<{ content: string }>(`${API_BASE}/compatibility`, partnerData);
     console.log("response", response.data);
@@ -53,39 +56,5 @@ export const getCompatibility = async (partnerData: {
 }
 
 export const getMagicBallAnswer = async (): Promise<string> => {
-  try {
-    const response = await axios.get("/api/getMagicBallAnswer");
-    return response.data.answer;
-  } catch (error) {
-    console.error("Error fetching Magic Ball answer", error);
-    throw error;
-  }
-};
-
-export const getPsychologicalInsight = async (data: {
-  focusArea: string;
-  concern: string;
-  emotionalState: string;
-  goal: string;
-  backgroundInfo: string;
-}): Promise<string> => {
-  try {
-    const response = await axios.post("/api/getPsychologicalInsight", data);
-    return response.data.insight;
-  } catch (error) {
-    console.error("Error fetching psychological insight", error);
-    throw error;
-  }
-};
-
-export const getPredictionHistory = async (page: number, limit: number): Promise<string[]> => {
-  try {
-    const response = await api.get<{ predictions: string[] }>(`${API_BASE}/history`, {
-      params: { page, limit }
-    });
-    return response.data.predictions;
-  } catch (error) {
-    console.error("Error fetching prediction history", error);
-    throw error;
-  }
-};
+ return new Promise(() => {});
+}

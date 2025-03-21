@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Profile.module.css";
-import { ProfileProps } from "../../types";
 import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
+import { ProfileProps } from "../../types/profile";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();

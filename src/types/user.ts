@@ -14,3 +14,8 @@ export interface UserStats {
   streak: number;
   crystalBalance: number;
 }
+
+export interface Subscription {
+  plan: string;
+  expiration: string;
+}

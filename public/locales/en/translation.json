@@ -55,7 +55,11 @@
     },
     "history": {
       "title": "Prediction History",
-      "noPredictions": "No predictions found."
+      "noPredictions": "No predictions found.",
+      "loading": "Loading predictions...",
+      "error": "Error loading predictions.",
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "affirmations": {
