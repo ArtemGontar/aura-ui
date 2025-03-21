@@ -71,6 +71,10 @@
       "5": "Positivity is a choice that you can make."
     }
   },
+  "cards": {
+    "loading": "Loading...",
+    "error": "Failed to fetch data. Please try again."
+  },
   "dailyHoroscope": {
     "title": "Daily Horoscope",
     "description": "Discover what the stars have in store for you today.",

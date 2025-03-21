@@ -196,6 +196,11 @@
   background: var(--gradient-four);
 }
 
+.cardDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .home {

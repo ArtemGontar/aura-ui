@@ -58,7 +58,7 @@ const DailyHoroscope: React.FC = () => {
           <>
             {backgroundImage && <img src={backgroundImage} alt={horoscopeSign || "Horoscope Sign"} className={styles.horoscopeImage} />}
             <Button onClick={requestHoroscope} disabled={loading}>
-              {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.getHoroscope")}
+              {loading ? t("cards.loading") : t("dailyHoroscope.buttons.getHoroscope")}
             </Button>
           </>
         )}

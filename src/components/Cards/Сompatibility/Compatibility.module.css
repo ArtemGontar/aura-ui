@@ -29,6 +29,6 @@
   box-sizing: border-box;
 }
 
-.resultContainer {
-  text-align: left;
+.resultContainer > .list {
+  text-align: justify;
 }

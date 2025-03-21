@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUserData } from '../../../hooks/useUserData';
 import commonStyles from "../Cards.module.css";
-import styles from './Сompatibility.module.css';
+import styles from './Compatibility.module.css';
 import { getCompatibility } from '../../../services/predictionService';
 import { Button } from '@telegram-apps/telegram-ui';
 import BirthDatePicker from '../../BirthDatePicker/BirthDatePicker';
@@ -67,20 +67,20 @@ const Compatibility: React.FC = () => {
             <input type="date" name="dateOfBirth" value={partnerInfo.dateOfBirth} onChange={handleInputChange} />
           </label>
           <Button onClick={checkCompatibility} disabled={loading}>
-            {loading ? t("compatibility.loading") : t("dailyHoroscope.checkButton")}
+            {loading ? t("cards.loading") : t("compatibility.checkButton")}
           </Button>
         </div>
         {compatibilityResult && (
-          <div className='compatibility.resultContainer'>
+          <div className={styles.resultContainer}>
             <p>{t('compatibility.result', { result: compatibilityResult.compatibilityScore })}</p>
             <h5>{t('compatibility.strengthsTitle')}</h5>
-            <ul>
+            <ul className={styles.list}>
               {compatibilityResult.strengths.map((strength, index) => (
                 <li key={index}>{strength}</li>
               ))}
             </ul>
             <h5>{t('compatibility.challengesTitle')}</h5>
-            <ul>
+            <ul className={styles.list}>
               {compatibilityResult.challenges.map((challenge, index) => (
                 <li key={index}>{challenge}</li>
               ))}

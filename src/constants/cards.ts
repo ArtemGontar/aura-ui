@@ -4,26 +4,31 @@ export const HOME_CARDS: CardData[] = [
   {
     id: 'horoscope',
     path: '/horoscope',
-    icon: '⭐'
+    icon: '⭐',
+    disabled: false
   },
   {
     id: 'compatibility',
     path: '/compatibility',
-    icon: '❤️'
+    icon: '❤️',
+    disabled: false
   },
   {
     id: 'psychological',
     path: '/psychological',
-    icon: '🧠'
+    icon: '🧠',
+    disabled: true
   },
   {
     id: 'astrology',
     path: '/astrology',
-    icon: '🌠'
+    icon: '🌠',
+    disabled: true
   },
   {
     id: 'magicball',
     path: '/magicball',
-    icon: '🔮'
+    icon: '🔮',
+    disabled: true
   }
-]; 
+];

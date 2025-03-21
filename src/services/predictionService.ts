@@ -77,3 +77,15 @@ export const getPsychologicalInsight = async (data: {
     throw error;
   }
 };
+
+export const getPredictionHistory = async (page: number, limit: number): Promise<string[]> => {
+  try {
+    const response = await api.get<{ predictions: string[] }>(`${API_BASE}/history`, {
+      params: { page, limit }
+    });
+    return response.data.predictions;
+  } catch (error) {
+    console.error("Error fetching prediction history", error);
+    throw error;
+  }
+};

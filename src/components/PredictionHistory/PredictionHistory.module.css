@@ -1,0 +1,22 @@
+.history {
+  /* Add your styles here */
+}
+
+.predictionList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.predictionItem {
+  margin-bottom: 10px;
+}
+
+.noPredictions {
+  color: gray;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}

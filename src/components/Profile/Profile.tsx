@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./Profile.module.css";
 import { ProfileProps } from "../../types";
 import { useUserData } from "../../hooks/useUserData";
+import PredictionHistory from "../PredictionHistory/PredictionHistory";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
@@ -32,8 +33,8 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
     );
   }
 
-  const fullName = `${userData.firstName}${userData.lastName ? ` ${userData.lastName}` : ''}`;
-  const displayName = userData.username || fullName;
+  const fullName = `${userData.firstName} ${userData.lastName ? ` ${userData.lastName}` : ''}`;
+  const displayName = fullName || userData.username;
 
   return (
     <div className={`${styles.container} ${className || ''}`}>
@@ -71,15 +72,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
         )}
       </section>
 
-      {/* Prediction History Section */}
-      <section className={styles.history} aria-labelledby="history-title">
-        <h3 id="history-title">{t('profile.history.title')}</h3>
-        <ul className={styles.predictionList}>
-          <li className={styles.predictionItem}>
-            <p className={styles.noPredictions}>{t('profile.history.noPredictions')}</p>
-          </li>
-        </ul>
-      </section>
+      <PredictionHistory />
     </div>
   );
 };

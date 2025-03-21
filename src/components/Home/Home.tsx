@@ -13,8 +13,10 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   const { t } = useTranslation();
   const { isLoading, error, userData, userStats } = useUserData();
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
+  const handleNavigation = (path: string, disabled: boolean) => {
+    if (!disabled) {
+      navigate(path);
+    }
   };
 
   if (isLoading) {
@@ -48,13 +50,13 @@ const Home: React.FC<HomeProps> = ({ className }) => {
         {HOME_CARDS.map((card) => (
           <div
             key={card.id}
-            onClick={() => handleNavigation(card.path)}
-            className={`${styles.card} ${styles[`card${card.id.charAt(0).toUpperCase() + card.id.slice(1)}`]}`}
+            onClick={() => handleNavigation(card.path, card.disabled)}
+            className={`${styles.card} ${card.disabled ? styles.cardDisabled : ''} ${styles[`card${card.id.charAt(0).toUpperCase() + card.id.slice(1)}`]}`}
             role="gridcell"
             tabIndex={0}
             onKeyPress={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleNavigation(card.path);
+              if (!card.disabled && (e.key === 'Enter' || e.key === ' ')) {
+                handleNavigation(card.path, card.disabled);
               }
             }}
           >
