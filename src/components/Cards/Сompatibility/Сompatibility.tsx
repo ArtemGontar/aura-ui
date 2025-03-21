@@ -12,7 +12,9 @@ const Compatibility: React.FC = () => {
   const { userData } = useUserData();
   const [partnerInfo, setPartnerInfo] = useState({ firstName: '', lastName: '', dateOfBirth: '' });
   const [compatibilityResult, setCompatibilityResult] = useState<{
-    compatibilityScore: string;
+    emotionalScore: string;
+    communicationScore: string;
+    passionScore: string;
     strengths: string[];
     challenges: string[];
     todayScenario: string;
@@ -29,6 +31,7 @@ const Compatibility: React.FC = () => {
     setLoading(true);
     try {
       const response = await getCompatibility(partnerInfo);
+      console.log("response", response);
       setCompatibilityResult(response);
     } catch (err) {
       setError(t('compatibility.error'));
@@ -72,7 +75,20 @@ const Compatibility: React.FC = () => {
         </div>
         {compatibilityResult && (
           <div className={styles.resultContainer}>
-            <p>{t('compatibility.result', { result: compatibilityResult.compatibilityScore })}</p>
+            <div className={styles.scores}>
+              <div>
+                <p>{t('compatibility.emotional')}</p>
+                <p>{compatibilityResult.emotionalScore}</p>
+              </div>
+              <div>
+                <p>{t('compatibility.intellectual')}</p>
+                <p>{compatibilityResult.communicationScore}</p>
+              </div>
+              <div>
+                <p>{t('compatibility.physical')}</p>
+                <p>{compatibilityResult.passionScore}</p>
+              </div>
+            </div>
             <h5>{t('compatibility.strengthsTitle')}</h5>
             <ul className={styles.list}>
               {compatibilityResult.strengths.map((strength, index) => (

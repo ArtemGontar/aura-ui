@@ -1,5 +1,5 @@
 {
-  "loading": "Loading user data...",
+  "loading": "Loading...",
   "error": {
     "retry": "Retry",
     "noUserData": "No user data found. Please log in again.",
@@ -76,25 +76,39 @@
     }
   },
   "cards": {
-    "loading": "Loading...",
-    "error": "Failed to fetch data. Please try again."
+    "loading": "Consulting the stars...",
+    "error": "Something went wrong... Please try again or check back later 😉"
   },
   "dailyHoroscope": {
     "title": "Daily Horoscope",
-    "description": "Discover what the stars have in store for you today.",
-    "generalGuidance": "General Guidance",
-    "loveRelationshipsAdvice": "Love & Relationships Advice",
-    "careerFinancialInsights": "Career & Financial Insights",
+    "description": "Unveil what the stars have aligned for you today.",
+    "generalGuidance": "🌟 General Guidance",
+    "loveRelationshipsAdvice": "❤️ Love & Relationships",
+    "careerFinancialInsights": "💼 Career & Financial Insights",
+    "focus": "Today's Tip",
     "buttons": {
       "saveBirthDate": "Save Date of Birth",
-      "getHoroscope": "Get Horoscope"
+      "getHoroscope": "Reveal My Horoscope"
     },
-    "loading": "Loading...",
-    "error": "Failed to fetch horoscope. Please try again.",
     "datePicker": {
       "label": "Enter your date of birth:",
-      "comment": "This data will be saved to the server and you can change it later in your profile."
+      "comment": "This data will be saved and you can change it later in your profile."
     }
+  },
+  "compatibility": {
+    "title": "Partner Compatibility",
+    "completeProfile": "Complete your profile to see how well you match.",
+    "error": "Failed to save your profile. Please try again 😉",
+    "partnerInfoFirstName": "Partner's First Name",
+    "partnerInfoLastName": "Partner's Last Name",
+    "partnerInfoDateOfBirth": "Partner's Date of Birth",
+    "checkButton": "Check Compatibility",
+    "result": "Compatibility Score: {{result}}",
+    "strengthsTitle": "Key Strengths",
+    "challengesTitle": "Potential Challenges",
+    "emotional": "Emotional Compatibility",
+    "intellectual": "Intellectual Compatibility",
+    "physical": "Physical Compatibility"
   },
   "psychological": {
     "title": "Psychological Insight",
@@ -136,22 +150,5 @@
       "title": "Your Psychological Insight",
       "defaultText": "Your psychological insight will be displayed here."
     }
-  },
-  "magicBall": {
-    "title": "Magic Ball",
-    "description": "Ask the Magic Ball any question and get an answer.",
-    "initialText": "Ask the Magic Ball a question."
-  },
-  "compatibility": {
-    "title": "Partner Compatibility",
-    "completeProfile": "Please complete your profile to check compatibility.",
-    "error": "Error saving profile data.",
-    "partnerInfoFirstName": "Partner's First Name",
-    "partnerInfoLastName": "Partner's Second Name",
-    "partnerInfoDateOfBirth": "Partner's Date of Birth",
-    "checkButton": "Check Compatibility",
-    "result": "Compatibility Result: {{result}}",
-    "strengthsTitle": "Strengths",
-    "challengesTitle": "Challenges"
   }
 }

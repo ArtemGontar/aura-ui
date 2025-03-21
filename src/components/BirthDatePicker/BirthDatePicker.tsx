@@ -22,7 +22,7 @@ const BirthDatePicker: React.FC = () => {
       const formattedDate = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
       await saveUserBirthDate(formattedDate);
     } catch {
-      setError(t("dailyHoroscope.error"));
+      setError(t("cards.error"));
     } finally {
       setLoading(false);
     }
@@ -41,7 +41,7 @@ const BirthDatePicker: React.FC = () => {
       />
       {birthDate.day && birthDate.month && birthDate.year && (
         <Button onClick={saveBirthDate} disabled={loading}>
-          {loading ? t("dailyHoroscope.loading") : t("dailyHoroscope.buttons.saveBirthDate")}
+          {loading ? t("loading") : t("dailyHoroscope.buttons.saveBirthDate")}
         </Button>
       )}
       {error && <p className={styles.error}>{error}</p>}

@@ -32,3 +32,18 @@
 .resultContainer > .list {
   text-align: justify;
 }
+
+.scores {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.scores > div {
+  flex: 1;
+  text-align: center;
+}
+
+.scores > div:not(:last-child) {
+  margin-right: 1rem;
+}

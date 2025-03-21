@@ -10,11 +10,13 @@ export interface Horoscope {
   generalGuidance: string;
   loveRelationshipsAdvice: string;
   careerFinancialInsights: string;
+  focus: string;
 }
 
 export interface Compatibility {
-  compatibilityScore: string;
+  emotionalScore: string;
+  communicationScore: string;
+  passionScore: string;
   strengths: string[];
   challenges: string[];
-  todayScenario: string;
 }

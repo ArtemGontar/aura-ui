@@ -16,6 +16,7 @@ const DailyHoroscope: React.FC = () => {
     generalGuidance: string;
     loveRelationshipsAdvice: string;
     careerFinancialInsights: string;
+    focus: string; // Added focus field
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -40,7 +41,7 @@ const DailyHoroscope: React.FC = () => {
     try {
       setHoroscope(await getHoroscope());
     } catch {
-      setError(t("dailyHoroscope.error"));
+      setError(t("cards.error"));
     } finally {
       setLoading(false);
     }
@@ -74,6 +75,8 @@ const DailyHoroscope: React.FC = () => {
         <p className={styles.resultText}>{horoscope.loveRelationshipsAdvice}</p>
         <h3 className={styles.resultTitle}>{t('dailyHoroscope.careerFinancialInsights')}</h3>
         <p className={styles.resultText}>{horoscope.careerFinancialInsights}</p>
+        <h3 className={styles.resultTitle}>{t('dailyHoroscope.focus')}</h3> {/* Added focus section */}
+        <p className={styles.resultText}>{horoscope.focus}</p>
        </div>}
     </div>
   );

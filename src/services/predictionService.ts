@@ -26,7 +26,8 @@ export const getHoroscope = async (): Promise<Horoscope> => {
     return {
       generalGuidance: parsedData.generalGuidance,
       loveRelationshipsAdvice: parsedData.loveRelationshipsAdvice,
-      careerFinancialInsights: parsedData.careerFinancialInsights
+      careerFinancialInsights: parsedData.careerFinancialInsights,
+      focus: parsedData.focus
     };
   } catch (error) {
     console.error("Error parsing GPT horoscope response:", error);
@@ -44,10 +45,11 @@ export const getCompatibility = async (partnerData: {
     const parsedData = JSON.parse(response.data.content);
 
     return {
-      compatibilityScore: parsedData.compatibilityScore,
+      emotionalScore: parsedData.emotionalScore,
+      communicationScore: parsedData.communicationScore,
+      passionScore: parsedData.passionScore,
       strengths: parsedData.strengths,
-      challenges: parsedData.challenges,
-      todayScenario: parsedData.todayScenario
+      challenges: parsedData.challenges
     };
   } catch (error) {
     console.error("Error fetching compatibility", error);
