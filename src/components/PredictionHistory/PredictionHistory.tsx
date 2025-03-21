@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./PredictionHistory.module.css";
 import { getPredictions } from "../../services/predictionService";
 import { Prediction } from "../../types/prediction";
+import { Pagination } from "@telegram-apps/telegram-ui";
 
 const PredictionHistory: React.FC = () => {
   const { t } = useTranslation();
@@ -10,13 +11,17 @@ const PredictionHistory: React.FC = () => {
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const fetchPredictions = async () => {
       setIsLoading(true);
       try {
-        const data = await getPredictions(page, 5);
+        const { data, total } = await getPredictions(page, 5);
+        console.log("data", data);
+        console.log("total", total);
         setPredictions(data);
+        setTotalItems(total);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -42,21 +47,27 @@ const PredictionHistory: React.FC = () => {
   return (
     <section className={styles.history} aria-labelledby="history-title">
       <h3 id="history-title">{t('profile.history.title')}</h3>
-      <ul className={styles.predictionList}>
+      <div className={styles.predictionList}>
         {predictions.map((prediction, index) => (
-          <li key={index} className={styles.predictionItem}>
-            <div>{prediction.type}</div>
-            <div>{prediction.createdAt}</div>
-          </li>
+          <div key={index} className={styles.predictionItem}>
+            <div className={styles.predictionHeader}>
+              <div className={styles.predictionType}>{prediction.type}</div>
+            </div>
+            <p className={styles.predictionContent}>
+              {prediction.content.length > 100 ? `${prediction.content.substring(0, 100)}...` : prediction.content}
+            </p>
+            <div className={styles.predictionDate}>{prediction.createdAt}</div>
+          </div>
         ))}
-      </ul>
+      </div>
       <div className={styles.pagination}>
-        <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-          {t('profile.history.previous')}
-        </button>
-        <button onClick={() => setPage(page + 1)}>
-          {t('profile.history.next')}
-        </button>
+        <Pagination 
+          page={page}
+          onChange={(_event, newPage) => setPage(newPage - 1)}
+          count={Math.ceil(totalItems / 5)}
+          hideNextButton={totalItems <= 5 || page >= Math.ceil(totalItems / 5) - 1}
+          hidePrevButton={page === 0}
+        />
       </div>
     </section>
   );

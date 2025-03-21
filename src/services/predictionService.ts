@@ -3,12 +3,12 @@ import api from "./api";
 
 const API_BASE = `/api/fortunes`;
 
-export const getPredictions = async (page: number, limit: number): Promise<Prediction[]> => {
+export const getPredictions = async (page: number, limit: number): Promise<{ data: Prediction[], total: number }> => {
   try {
     const response = await api.get(`${API_BASE}`, {
       params: { page, limit }
     });
-    return response.data;
+    return { data: response.data.items, total: response.data.totalItems };
   } catch (error) {
     console.error("Error fetching prediction history", error);
     throw error;

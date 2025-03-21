@@ -157,10 +157,6 @@
     padding: calc(var(--tg-theme-spacing-unit) * 2.5);
   }
 
-  .subscription h3 {
-    font-size: var(--tg-theme-font-size-xlarge);
-  }
-
   .name {
     text-align: center;
   }
