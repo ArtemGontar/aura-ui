@@ -29,6 +29,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
     if (day && month && year) {
       const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
       setDateValue(formattedDate);
+    } else {
+      const today = new Date();
+      const defaultDate = today.toISOString().split('T')[0];
+      setDateValue(defaultDate);
     }
   }, [day, month, year]);
 

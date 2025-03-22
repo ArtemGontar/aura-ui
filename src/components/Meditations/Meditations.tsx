@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom"; // Update this import
 import styles from "./Meditations.module.css";
 import { getMeditations } from "../../services/meditationService";
 import { Meditation } from "../../types/meditation";
@@ -8,6 +9,7 @@ import { PlayArrow, Pause } from "@mui/icons-material";
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate(); // Update this line
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
   const [currentMeditation, setCurrentMeditation] = useState<string | null>(null);
@@ -61,6 +63,10 @@ const Meditations: React.FC = () => {
     }
   }, [currentMeditation]);
 
+  const handleCreatePersonalMeditation = () => {
+    navigate("/create-personal-meditation"); // Update this line
+  };
+
   return (
     <div className={styles.meditations}>
       <div className={styles.banner}>
@@ -107,7 +113,10 @@ const Meditations: React.FC = () => {
             </div>
           ))
         ) : (
-          <div className={`${styles.card} ${styles.createCard}`}>
+          <div 
+            className={`${styles.card} ${styles.createCard}`} 
+            onClick={handleCreatePersonalMeditation} // Update this line
+          >
             <h4 className={styles.createText}>{t('meditations.personal.create')}</h4>
             <div className={styles.createIcon}>+</div>
           </div>

@@ -150,5 +150,11 @@
       "title": "Your Psychological Insight",
       "defaultText": "Your psychological insight will be displayed here."
     }
+  },
+  "createPersonalMeditation": {
+    "title": "Create Personal Meditation",
+    "topic": "Topic",
+    "voicePreference": "Voice Preference",
+    "createButton": "Create"
   }
 }

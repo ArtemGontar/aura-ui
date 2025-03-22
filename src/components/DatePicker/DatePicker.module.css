@@ -46,7 +46,7 @@
   transition: border-color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
-  margin-bottom: var(--tg-theme-spacing-unit-large);
+  margin-bottom: 0;
   margin-top: var(--tg-theme-spacing-unit);
   box-sizing: border-box;
   -webkit-appearance: none;

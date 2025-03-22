@@ -18,8 +18,6 @@ const PredictionHistory: React.FC = () => {
       setIsLoading(true);
       try {
         const { data, total } = await getPredictions(page, 5);
-        console.log("data", data);
-        console.log("total", total);
         setPredictions(data);
         setTotalItems(total);
       } catch (err) {

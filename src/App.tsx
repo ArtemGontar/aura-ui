@@ -19,6 +19,7 @@ import { useUserData } from "./hooks/useUserData";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
 import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
 import useTelegramBackButton from "./hooks/useTelegramBackButton";
+import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; // Add this import
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
@@ -61,6 +62,7 @@ const AppContent: React.FC = () => {
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />
+          <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} /> {/* Add this route */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
