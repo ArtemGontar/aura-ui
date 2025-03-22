@@ -4,14 +4,17 @@ import { Home, Person, SelfImprovement } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import styles from "./Navigation.module.css";
+import useTelegramHaptics from "../../hooks/useTelegramHaptic"; // Import the hook
 
 const Navigation: React.FC = () => {
   const [value, setValue] = React.useState(0);
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const haptics = useTelegramHaptics(); // Initialize the haptics
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    haptics.selectionChanged(); // Trigger haptic feedback
     if (newValue === 0) navigate("/");
     if (newValue === 1) navigate("/meditations");
     if (newValue === 2) navigate("/profile");
