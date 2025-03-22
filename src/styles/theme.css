@@ -79,6 +79,8 @@
   --tg-theme-button-color: #2481cc;
   --tg-theme-button-text-color: #ffffff;
   --tg-theme-secondary-bg-color: #1c1c1e;
+  --tg-theme-input-bg-color: #1c1c1e;
+  --tg-theme-input-text-color: #ffffff;
 }
 
 /* Dark mode overrides will be handled by JavaScript */
