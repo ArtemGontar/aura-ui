@@ -140,6 +140,7 @@
   font-weight: var(--tg-theme-font-weight-bold);
   color: var(--tg-theme-text-color);
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .createIcon {
