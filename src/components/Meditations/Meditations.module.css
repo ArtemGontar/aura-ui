@@ -127,6 +127,7 @@
 }
 
 .createCard {
+  background: inherit;
   border: 1px solid var(--tg-theme-secondary-bg-color);
   display: flex;
   flex-direction: column;
