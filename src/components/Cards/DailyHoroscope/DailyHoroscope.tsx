@@ -7,11 +7,13 @@ import { getHoroscope } from "../../../services/predictionService";
 import { useUserData } from "../../../hooks/useUserData";
 import { Button } from "@telegram-apps/telegram-ui";
 import BirthDatePicker from "../../BirthDatePicker/BirthDatePicker";
+import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   WebApp.BackButton.show();
+  const haptics = useTelegramHaptics();
   const [horoscope, setHoroscope] = useState<{
     generalGuidance: string;
     loveRelationshipsAdvice: string;
@@ -38,6 +40,7 @@ const DailyHoroscope: React.FC = () => {
   const requestHoroscope = async () => {
     setLoading(true);
     setError("");
+    haptics.impactOccurred("medium");
     try {
       setHoroscope(await getHoroscope());
     } catch {
