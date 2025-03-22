@@ -6,6 +6,7 @@ import styles from './Compatibility.module.css';
 import { getCompatibility } from '../../../services/predictionService';
 import { Button } from '@telegram-apps/telegram-ui';
 import BirthDatePicker from '../../BirthDatePicker/BirthDatePicker';
+import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -21,6 +22,7 @@ const Compatibility: React.FC = () => {
   } | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const haptics = useTelegramHaptics();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,8 +35,10 @@ const Compatibility: React.FC = () => {
       const response = await getCompatibility(partnerInfo);
       console.log("response", response);
       setCompatibilityResult(response);
+      haptics.notificationOccurred("success");
     } catch (err) {
       setError(t('compatibility.error'));
+      haptics.notificationOccurred("error");
     } finally {
       setLoading(false);
     }
@@ -69,7 +73,7 @@ const Compatibility: React.FC = () => {
             {t('compatibility.partnerInfoDateOfBirth')}
             <input type="date" name="dateOfBirth" value={partnerInfo.dateOfBirth} onChange={handleInputChange} />
           </label>
-          <Button onClick={checkCompatibility} disabled={loading}>
+          <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading}>
             {loading ? t("cards.loading") : t("compatibility.checkButton")}
           </Button>
         </div>

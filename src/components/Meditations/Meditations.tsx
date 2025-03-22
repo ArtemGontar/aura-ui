@@ -1,15 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom"; // Update this import
+import { useNavigate } from "react-router-dom";
 import styles from "./Meditations.module.css";
 import { getMeditations } from "../../services/meditationService";
 import { Meditation } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import { PlayArrow, Pause } from "@mui/icons-material";
+import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate(); // Update this line
+  const navigate = useNavigate();
+  const { impactOccurred } = useTelegramHaptics();
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
   const [currentMeditation, setCurrentMeditation] = useState<string | null>(null);
@@ -64,7 +66,8 @@ const Meditations: React.FC = () => {
   }, [currentMeditation]);
 
   const handleCreatePersonalMeditation = () => {
-    navigate("/create-personal-meditation"); // Update this line
+    impactOccurred("light");
+    navigate("/create-personal-meditation");
   };
 
   return (

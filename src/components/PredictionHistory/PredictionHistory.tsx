@@ -4,6 +4,7 @@ import styles from "./PredictionHistory.module.css";
 import { getPredictions } from "../../services/predictionService";
 import { Prediction } from "../../types/prediction";
 import { Pagination } from "@telegram-apps/telegram-ui";
+import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 const PredictionHistory: React.FC = () => {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ const PredictionHistory: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalItems, setTotalItems] = useState(0);
+  const haptics = useTelegramHaptics();
 
   useEffect(() => {
     const fetchPredictions = async () => {
@@ -61,7 +63,10 @@ const PredictionHistory: React.FC = () => {
       <div className={styles.pagination}>
         <Pagination 
           page={page}
-          onChange={(_event, newPage) => setPage(newPage - 1)}
+          onChange={(_event, newPage) => {
+            setPage(newPage - 1);
+            haptics.selectionChanged();
+          }}
           count={Math.ceil(totalItems / 5)}
           hideNextButton={totalItems <= 5 || page >= Math.ceil(totalItems / 5) - 1}
           hidePrevButton={page === 0}

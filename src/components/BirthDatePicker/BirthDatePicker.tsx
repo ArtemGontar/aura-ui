@@ -4,12 +4,14 @@ import DatePicker from "../DatePicker/DatePicker";
 import { saveUserBirthDate } from "../../services/userService";
 import { Button } from "@telegram-apps/telegram-ui";
 import styles from "./BirthDatePicker.module.css";
+import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 const BirthDatePicker: React.FC = () => {
   const { t } = useTranslation();
   const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const haptics = useTelegramHaptics();
 
   const handleBirthDateChange = (field: string, value: string) => {
     setBirthDate((prev) => ({ ...prev, [field]: value }));
@@ -21,8 +23,10 @@ const BirthDatePicker: React.FC = () => {
     try {
       const formattedDate = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
       await saveUserBirthDate(formattedDate);
+      haptics.notificationOccurred("success");
     } catch {
       setError(t("cards.error"));
+      haptics.notificationOccurred("error");
     } finally {
       setLoading(false);
     }
@@ -40,7 +44,7 @@ const BirthDatePicker: React.FC = () => {
         handleYearChange={(e) => handleBirthDateChange("year", e.target.value)}
       />
       {birthDate.day && birthDate.month && birthDate.year && (
-        <Button onClick={saveBirthDate} disabled={loading}>
+        <Button onClick={() => { saveBirthDate(); haptics.impactOccurred("medium"); }} disabled={loading}>
           {loading ? t("loading") : t("dailyHoroscope.buttons.saveBirthDate")}
         </Button>
       )}
