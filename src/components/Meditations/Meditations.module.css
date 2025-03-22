@@ -127,8 +127,7 @@
 }
 
 .createCard {
-  background: none;
-  border: none;
+  border: 1px solid var(--tg-theme-secondary-bg-color);
   display: flex;
   flex-direction: column;
   align-items: center;

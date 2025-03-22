@@ -8,7 +8,7 @@
   "navigation": {
     "home": "Главная",
     "profile": "Профиль",
-    "meditations": "Аффирмации"
+    "meditations": "Медитации"
   },
   "routes": {
     "horoscope": "Гороскоп",
