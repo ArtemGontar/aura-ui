@@ -2,12 +2,13 @@
   padding: var(--tg-theme-mobile-padding);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
   margin: 0 auto;
+  max-width: 800px;
 }
 
 .banner {
   margin: 1rem auto 1.5rem;
   padding: 1.5rem var(--tg-theme-mobile-padding);
-  max-width: 800px;
+
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   box-shadow: 
@@ -96,7 +97,8 @@
 
 /* Daily meditation cards */
 .cards {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-columns: 1fr;
   gap: calc(var(--tg-theme-spacing-unit) * 2.5);
   padding: var(--tg-theme-mobile-padding);
@@ -114,6 +116,35 @@
   overflow: hidden;
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
   cursor: pointer;
+}
+
+.generalCard {
+  background: var(--gradient-one);
+}
+
+.personalCard {
+  background: var(--gradient-two);
+}
+
+.createCard {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.createText {
+  font-weight: var(--tg-theme-font-weight-bold);
+  color: var(--tg-theme-text-color);
+  margin-bottom: 0.5rem;
+}
+
+.createIcon {
+  font-size: 2rem;
+  color: var(--tg-theme-button-color);
 }
 
 .cardTitle {

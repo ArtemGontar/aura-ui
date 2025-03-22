@@ -10,6 +10,10 @@ export const getPredictions = async (page: number, limit: number): Promise<{ dat
     });
     return { data: response.data.items, total: response.data.totalItems };
   } catch (error) {
+    if (error.response && error.response.status === 404) {
+      console.warn("No predictions found, returning empty array");
+      return { data: [], total: 0 };
+    }
     console.error("Error fetching prediction history", error);
     throw error;
   }

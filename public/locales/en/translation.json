@@ -67,12 +67,12 @@
       "title": "Daily Meditations",
       "subtitle": "Listen to these positive meditations to start your day with intention and mindfulness"
     },
-    "list": {
-      "1": "You are capable of achieving great things.",
-      "2": "Believe in yourself and all that you are.",
-      "3": "Every day is a new opportunity to grow.",
-      "4": "You are stronger than you think.",
-      "5": "Positivity is a choice that you can make."
+    "general": {
+      "title": "Daily Meditations"
+    },
+    "personal": {
+      "title": "Personal Meditations",
+      "create": "Create a new meditation"
     }
   },
   "cards": {

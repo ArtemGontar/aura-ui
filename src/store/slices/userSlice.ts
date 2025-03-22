@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserStats } from '../../types';
-import { UserData } from '../../types/user';
+import { UserData, UserStats } from '../../types/user';
 import { FEATURES } from '../../config/features';
 import { getUserData, updateUserData } from '../../services/userService';
 

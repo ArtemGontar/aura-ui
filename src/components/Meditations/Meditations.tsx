@@ -6,13 +6,10 @@ import { Meditation } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import { PlayArrow, Pause } from "@mui/icons-material";
 
-const backgrounds = [
-  "var(--gradient-one)", "var(--gradient-two)", "var(--gradient-three)", "var(--gradient-four)", "var(--gradient-five)"
-];
-
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
-  const [meditations, setMeditations] = useState<Meditation[]>([]);
+  const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
+  const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
   const [currentMeditation, setCurrentMeditation] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [playingId, setPlayingId] = useState<number | null>(null);
@@ -21,8 +18,12 @@ const Meditations: React.FC = () => {
   useEffect(() => {
     const fetchMeditations = async () => {
       try {
-        const data = await getMeditations();
-        setMeditations(data);
+        const [generalData, personalData] = await Promise.all([
+          getMeditations("general"),
+          getMeditations("personal")
+        ]);
+        setGeneralMeditations(generalData);
+        setPersonalMeditations(personalData);
       } catch (error) {
         console.error("Failed to fetch meditations", error);
       }
@@ -72,12 +73,12 @@ const Meditations: React.FC = () => {
         </p>
       </div>
       <div className={styles.cards}>
-        {meditations.map((meditation, index) => (
+        <h3>{t('meditations.general.title')}</h3>
+        {generalMeditations.map((meditation, index) => (
           <div 
             key={meditation.id} 
-            className={styles.card} 
-            onClick={() => playMeditation(meditation.audioUrl, meditation.id)} 
-            style={{ background: backgrounds[index % backgrounds.length] }}
+            className={`${styles.card} ${styles.generalCard}`} 
+            onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
           >
             <h4 className={styles.cardTitle}>{meditation.text}</h4>
             <button 
@@ -87,6 +88,30 @@ const Meditations: React.FC = () => {
             </button>
           </div>
         ))}
+      </div>
+      <div className={styles.cards}>
+        <h3>{t('meditations.personal.title')}</h3>
+        {personalMeditations.length > 0 ? (
+          personalMeditations.map((meditation, index) => (
+            <div 
+              key={meditation.id} 
+              className={`${styles.card} ${styles.personalCard}`} 
+              onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
+            >
+              <h4 className={styles.cardTitle}>{meditation.text}</h4>
+              <button 
+                className={styles.playButton}
+              >
+                {isPlaying && playingId === meditation.id ? <Pause /> : <PlayArrow />}
+              </button>
+            </div>
+          ))
+        ) : (
+          <div className={`${styles.card} ${styles.createCard}`}>
+            <h4 className={styles.createText}>{t('meditations.personal.create')}</h4>
+            <div className={styles.createIcon}>+</div>
+          </div>
+        )}
       </div>
       {currentMeditation && (
         <div className={styles.player}>
