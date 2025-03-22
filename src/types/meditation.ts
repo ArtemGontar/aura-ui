@@ -1,4 +1,4 @@
-export interface Affirmation {
+export interface Meditation {
   id: number;
   text: string;
   audioUrl: string;

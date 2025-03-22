@@ -8,7 +8,7 @@ import DailyHoroscope from "./components/Cards/DailyHoroscope/DailyHoroscope";
 import Psychological from "./components/Cards/Psychological/Psychological";
 import Astrology from "./components/Cards/Astrology/Astrology";
 import MagicBall from "./components/Cards/MagicBall/MagicBall";
-import Affirmations from "./components/Affirmations/Affirmations";
+import Meditations from "./components/Meditations/Meditations";
 import ErrorDisplay from "./components/ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "./components/LoadingDisplay/LoadingDisplay";
 import { useTelegramInit } from "./hooks/useTelegramInit";
@@ -54,7 +54,7 @@ const AppContent: React.FC = () => {
       <div className={styles.content}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/affirmations" element={<Affirmations />} />
+          <Route path="/meditations" element={<Meditations />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/horoscope" element={<DailyHoroscope />} />
           <Route path="/compatibility" element={<Compatibility />} />

@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./Affirmations.module.css";
-import { getAffirmations } from "../../services/affirmationService";
-import { Affirmation } from "../../types/Affirmation";
+import styles from "./Meditations.module.css";
+import { getMeditations } from "../../services/meditationService";
+import { Meditation } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import { PlayArrow, Pause } from "@mui/icons-material";
 
@@ -10,30 +10,30 @@ const backgrounds = [
   "var(--gradient-one)", "var(--gradient-two)", "var(--gradient-three)", "var(--gradient-four)", "var(--gradient-five)"
 ];
 
-const Affirmations: React.FC = () => {
+const Meditations: React.FC = () => {
   const { t } = useTranslation();
-  const [affirmations, setAffirmations] = useState<Affirmation[]>([]);
-  const [currentAffirmation, setCurrentAffirmation] = useState<string | null>(null);
+  const [meditations, setMeditations] = useState<Meditation[]>([]);
+  const [currentMeditation, setCurrentMeditation] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [playingId, setPlayingId] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    const fetchAffirmations = async () => {
+    const fetchMeditations = async () => {
       try {
-        const data = await getAffirmations();
-        setAffirmations(data);
+        const data = await getMeditations();
+        setMeditations(data);
       } catch (error) {
-        console.error("Failed to fetch affirmations", error);
+        console.error("Failed to fetch meditations", error);
       }
     };
 
-    fetchAffirmations();
+    fetchMeditations();
   }, []);
 
-  const playAffirmation = (audioUrl: string, id: number) => {
-    console.log("Playing affirmation", API_CONFIG.BASE_URL + '/' + audioUrl);
-    setCurrentAffirmation(API_CONFIG.BASE_URL + '/' + audioUrl);
+  const playMeditation = (audioUrl: string, id: number) => {
+    console.log("Playing meditation", API_CONFIG.BASE_URL + '/' + audioUrl);
+    setCurrentMeditation(API_CONFIG.BASE_URL + '/' + audioUrl);
     setPlayingId(id);
     togglePlayPause(id);
     setIsPlaying(true);
@@ -53,42 +53,42 @@ const Affirmations: React.FC = () => {
   };
 
   useEffect(() => {
-    if (audioRef.current && currentAffirmation) {
-      audioRef.current.src = currentAffirmation;
+    if (audioRef.current && currentMeditation) {
+      audioRef.current.src = currentMeditation;
       audioRef.current.play();
       setIsPlaying(true);
     }
-  }, [currentAffirmation]);
+  }, [currentMeditation]);
 
   return (
-    <div className={styles.affirmations}>
+    <div className={styles.meditations}>
       <div className={styles.banner}>
         <span className={styles.emoji}>✨</span>
         <h2 className={styles.bannerText}>
-          {t('affirmations.banner.title')}
+          {t('meditations.banner.title')}
         </h2>
         <p className={styles.subText}>
-          {t('affirmations.banner.subtitle')}
+          {t('meditations.banner.subtitle')}
         </p>
       </div>
       <div className={styles.cards}>
-        {affirmations.map((affirmation, index) => (
+        {meditations.map((meditation, index) => (
           <div 
-            key={affirmation.id} 
+            key={meditation.id} 
             className={styles.card} 
-            onClick={() => playAffirmation(affirmation.audioUrl, affirmation.id)} 
+            onClick={() => playMeditation(meditation.audioUrl, meditation.id)} 
             style={{ background: backgrounds[index % backgrounds.length] }}
           >
-            <h4 className={styles.cardTitle}>{affirmation.text}</h4>
+            <h4 className={styles.cardTitle}>{meditation.text}</h4>
             <button 
               className={styles.playButton}
             >
-              {isPlaying && playingId === affirmation.id ? <Pause /> : <PlayArrow />}
+              {isPlaying && playingId === meditation.id ? <Pause /> : <PlayArrow />}
             </button>
           </div>
         ))}
       </div>
-      {currentAffirmation && (
+      {currentMeditation && (
         <div className={styles.player}>
           <audio ref={audioRef} controls />
         </div>
@@ -97,4 +97,4 @@ const Affirmations: React.FC = () => {
   );
 };
 
-export default Affirmations;
+export default Meditations;

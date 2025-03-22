@@ -8,7 +8,7 @@
   "navigation": {
     "home": "Home",
     "profile": "Profile",
-    "affirmations": "Affirmations"
+    "meditations": "Meditations"
   },
   "routes": {
     "horoscope": "Daily Horoscope",
@@ -62,10 +62,10 @@
       "next": "Next"
     }
   },
-  "affirmations": {
+  "meditations": {
     "banner": {
-      "title": "Daily Affirmations",
-      "subtitle": "Listen to these positive affirmations to start your day with intention and mindfulness"
+      "title": "Daily Meditations",
+      "subtitle": "Listen to these positive meditations to start your day with intention and mindfulness"
     },
     "list": {
       "1": "You are capable of achieving great things.",

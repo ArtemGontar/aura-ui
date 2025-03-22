@@ -8,7 +8,7 @@
   "navigation": {
     "home": "Главная",
     "profile": "Профиль",
-    "affirmations": "Аффирмации"
+    "meditations": "Аффирмации"
   },
   "routes": {
     "horoscope": "Гороскоп",
@@ -62,7 +62,7 @@
       "next": "Следующая"
     }
   },
-  "affirmations": {
+  "meditations": {
     "banner": {
       "title": "Ежедневные аффирмации",
       "subtitle": "Слушай эти позитивные аффирмации, чтобы начать день с намерением и осознанностью"

@@ -1,4 +1,4 @@
-.affirmations {
+.meditations {
   padding: var(--tg-theme-mobile-padding);
   padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
   margin: 0 auto;
@@ -94,7 +94,7 @@
   padding: 0 var(--tg-theme-mobile-padding);
 }
 
-/* Daily affirmation cards */
+/* Daily meditation cards */
 .cards {
   display: grid;
   grid-template-columns: 1fr;
@@ -167,7 +167,7 @@
 
 /* Tablet and larger screens */
 @media (min-width: 768px) {
-  .affirmations {
+  .meditations {
     padding: calc(var(--tg-theme-spacing-unit) * 2.5);
     padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2.5);
   }
