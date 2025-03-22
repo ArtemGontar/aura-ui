@@ -14,7 +14,7 @@ const Navigation: React.FC = () => {
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    haptics.selectionChanged(); // Trigger haptic feedback
+    haptics.notificationOccurred("success"); // Trigger haptic feedback
     if (newValue === 0) navigate("/");
     if (newValue === 1) navigate("/meditations");
     if (newValue === 2) navigate("/profile");
