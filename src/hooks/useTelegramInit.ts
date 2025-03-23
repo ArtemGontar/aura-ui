@@ -9,7 +9,7 @@ import { RootState, AppDispatch } from '../store';
 // Helper functions
 const getTelegramUserData = (): UserData => {
   const initData = WebApp.initData;
-  console.log(window.Telegram);
+
   if (!initData) {
     if (process.env.NODE_ENV === 'development') {
       console.log("No initialization data available, using mock data");

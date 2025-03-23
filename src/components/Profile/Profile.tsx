@@ -4,6 +4,7 @@ import styles from "./Profile.module.css";
 import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
 import { ProfileProps } from "../../types/profile";
+import Subscription from "../Subscription/Subscription";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
@@ -54,23 +55,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
         </div>
       </section>
 
-      {/* Subscription Section */}
-      <section className={styles.subscription} aria-labelledby="subscription-title">
-        <h3 id="subscription-title">{t('profile.subscription.title')}</h3>
-        {userData.isPremium ? (
-          <div className={styles.subscribed}>
-            <p>{t('profile.subscription.premium.status')}</p>
-            <p>{t('profile.subscription.premium.benefits')}</p>
-          </div>
-        ) : (
-          <button 
-            className={styles.subscribeButton}
-            aria-label={t('profile.subscription.subscribe')}
-          >
-            {t('profile.subscription.subscribe')}
-          </button>
-        )}
-      </section>
+      <Subscription isSubscribed={false} />
 
       <PredictionHistory />
     </div>
