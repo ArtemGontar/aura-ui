@@ -15,7 +15,6 @@
   align-items: center;
   padding: var(--tg-theme-mobile-card-padding);
   border-radius: var(--tg-theme-border-radius);
-  background: var(--gradient-one);
 }
 
 .plan h4 {
@@ -29,19 +28,4 @@
   color: var(--card-description-color);
   text-align: center;
   margin-bottom: var(--tg-theme-spacing-unit-large);
-}
-
-.plan button {
-  padding: var(--tg-theme-spacing-unit) var(--tg-theme-spacing-unit-large);
-  font-size: var(--tg-theme-font-size-base);
-  color: var(--tg-theme-button-text-color);
-  background-color: var(--tg-theme-button-color);
-  border: none;
-  border-radius: var(--tg-theme-border-radius);
-  cursor: pointer;
-  transition: background-color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-}
-
-.plan button:hover {
-  background-color: var(--tg-theme-link-color);
 }

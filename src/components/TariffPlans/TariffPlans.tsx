@@ -4,6 +4,7 @@ import styles from "./TariffPlans.module.css";
 import { createInvoiceLink } from "../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
+import { Button } from "@telegram-apps/telegram-ui";
 
 const TariffPlans: React.FC = () => {
   const { t } = useTranslation();
@@ -64,7 +65,7 @@ const TariffPlans: React.FC = () => {
           {plan.bonuses.map((desc, idx) => (
             <p key={idx}>{desc}</p>
           ))}
-          <button onClick={() => handleSubscribe(plan.id, plan.title, plan.description)}>{t('profile.subscription.subscribe')}</button>
+          <Button onClick={() => handleSubscribe(plan.id, plan.title, plan.description)}>{t('profile.subscription.subscribe')}</Button>
         </div>
       ))}
     </div>

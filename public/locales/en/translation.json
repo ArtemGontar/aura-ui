@@ -49,7 +49,8 @@
       "title": "Subscription",
       "basic": {
         "title": "Basic Plan",
-        "description": {
+        "description": "Basic plan description",
+        "bonuses": {
           "part1": "Description of the basic plan part 1",
           "part2": "Description of the basic plan part 2",
           "part3": "Description of the basic plan part 3"
@@ -57,7 +58,8 @@
       },
       "premium": {
         "title": "Premium Plan",
-        "description": {
+        "description": "Premium plan description",
+        "bonuses": {
           "part1": "Description of the premium plan part 1",
           "part2": "Description of the premium plan part 2",
           "part3": "Description of the premium plan part 3"
@@ -65,7 +67,8 @@
       },
       "ultimate": {
         "title": "Ultimate Plan",
-        "description": {
+        "description": "Ultimate plan description",
+        "bonuses": {
           "part1": "Description of the ultimate plan part 1",
           "part2": "Description of the ultimate plan part 2",
           "part3": "Description of the ultimate plan part 3"
