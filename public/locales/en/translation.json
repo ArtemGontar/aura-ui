@@ -47,10 +47,31 @@
     "noData": "No user data found.",
     "subscription": {
       "title": "Subscription",
-      "premium": {
-        "status": "Premium Member",
-        "benefits": "Enjoying all features"
+      "basic": {
+        "title": "Basic Plan",
+        "description": {
+          "part1": "Description of the basic plan part 1",
+          "part2": "Description of the basic plan part 2",
+          "part3": "Description of the basic plan part 3"
+        }
       },
+      "premium": {
+        "title": "Premium Plan",
+        "description": {
+          "part1": "Description of the premium plan part 1",
+          "part2": "Description of the premium plan part 2",
+          "part3": "Description of the premium plan part 3"
+        }
+      },
+      "ultimate": {
+        "title": "Ultimate Plan",
+        "description": {
+          "part1": "Description of the ultimate plan part 1",
+          "part2": "Description of the ultimate plan part 2",
+          "part3": "Description of the ultimate plan part 3"
+        }
+      },
+      "choosePlan": "Choose a plan",
       "subscribe": "Subscribe Now"
     },
     "history": {

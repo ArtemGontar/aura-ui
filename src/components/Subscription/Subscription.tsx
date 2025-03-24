@@ -1,9 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import styles from "./Subscription.module.css";
-import { createInvoiceLink } from "../../services/paymentService";
-import WebApp from "@twa-dev/sdk";
-import useTelegramHaptics from "../../hooks/useTelegramHaptic";
+import TariffPlans from "../TariffPlans/TariffPlans";
 
 interface SubscriptionProps {
   isSubscribed: boolean;
@@ -11,19 +10,10 @@ interface SubscriptionProps {
 
 const Subscription: React.FC<SubscriptionProps> = ({ isSubscribed }) => {
   const { t } = useTranslation();
-  const { notificationOccurred } = useTelegramHaptics();
+  const navigate = useNavigate();
 
-  const handleSubscribe = async () => {
-    // Replace 'invoice_payload' with the actual payload for the invoice
-    var invoiceLink = await createInvoiceLink();
-    WebApp.openInvoice(invoiceLink, function(status) {
-      if (status == 'paid') {
-        notificationOccurred('success');
-      } else if (status == 'failed') {
-        notificationOccurred('error');
-      } else {
-        notificationOccurred('warning');      }
-    });
+  const handleSubscribeClick = () => {
+    navigate('/tariff-plans');
   };
 
   return (
@@ -38,7 +28,7 @@ const Subscription: React.FC<SubscriptionProps> = ({ isSubscribed }) => {
         <button 
           className={styles.subscribeButton}
           aria-label={t('profile.subscription.subscribe')}
-          onClick={handleSubscribe}
+          onClick={handleSubscribeClick}
         >
           {t('profile.subscription.subscribe')}
         </button>

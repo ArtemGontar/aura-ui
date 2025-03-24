@@ -1,0 +1,47 @@
+.tariffPlans {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: var(--tg-theme-spacing-unit-large);
+  padding: var(--tg-theme-mobile-padding);
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--tg-theme-mobile-card-padding);
+  border-radius: var(--tg-theme-border-radius);
+  background: var(--gradient-one);
+}
+
+.plan h4 {
+  font-family: var(--tg-theme-font-family-heading);
+  font-size: var(--tg-theme-font-size-large);
+  margin-bottom: var(--tg-theme-spacing-unit);
+}
+
+.plan p {
+  font-size: var(--tg-theme-font-size-base);
+  color: var(--card-description-color);
+  text-align: center;
+  margin-bottom: var(--tg-theme-spacing-unit-large);
+}
+
+.plan button {
+  padding: var(--tg-theme-spacing-unit) var(--tg-theme-spacing-unit-large);
+  font-size: var(--tg-theme-font-size-base);
+  color: var(--tg-theme-button-text-color);
+  background-color: var(--tg-theme-button-color);
+  border: none;
+  border-radius: var(--tg-theme-border-radius);
+  cursor: pointer;
+  transition: background-color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+.plan button:hover {
+  background-color: var(--tg-theme-link-color);
+}
