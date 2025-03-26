@@ -51,7 +51,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
             <div className={styles.onboardingContent}>
               {step === 1 && (
                 <>
-                  <h2>{t("onboarding.enterBirthDate")}</h2>
+                  <h4>{t("onboarding.enterBirthDate")}</h4>
                   <DatePicker
                     onChange={(date) => setBirthDate(date)}
                   />
@@ -65,7 +65,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
               )}
               {step === 2 && (
                 <>
-                  <h2>{t("onboarding.enterSex")}</h2>
+                  <h4>{t("onboarding.enterSex")}</h4>
                   <select
                     className={styles.select}
                     value={sex}
@@ -90,7 +90,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
               )}
               {step === 3 && (
                 <div>
-                  <h2>{t("onboarding.enterMaritalStatus")}</h2>
+                  <h4>{t("onboarding.enterMaritalStatus")}</h4>
                   <select
                     className={styles.select}
                     value={maritalStatus}

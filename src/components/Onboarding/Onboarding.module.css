@@ -5,8 +5,9 @@
   padding: 20px;
 }
 
-.onboarding h2 {
+h4 {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .onboardingContent {
