@@ -16,18 +16,17 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
 import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
-import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
+import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; 
 import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
-import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; // Add this import
-import TariffPlans from "./components/TariffPlans/TariffPlans"; // Add this import
-import Onboarding from "./components/Onboarding/Onboarding"; // Add this import
-import useTelegramBackButton from "./hooks/useTelegramBackButton"; // Re-add this import
+import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; 
+import TariffPlans from "./components/TariffPlans/TariffPlans"; 
+import useTelegramBackButton from "./hooks/useTelegramBackButton";
 
 const AppContent: React.FC = () => {
-  const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
+  const { isLoading, error, isTelegram } = useTelegramInit();
   useApplyTheme();
   const { userData } = useUserData();
-  useTelegramBackButton(); // Re-add this line
+  useTelegramBackButton();
 
   useEffect(() => {
     const fetchUserStats = async (userId: string) => {
@@ -64,14 +63,13 @@ const AppContent: React.FC = () => {
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />
-          <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} /> {/* Add this route */}
-          <Route path="/tariff-plans" element={<TariffPlans />} /> {/* Add this route */}
-          <Route path="/onboarding" element={<Onboarding />} /> {/* Add this route */}
+          <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} />
+          <Route path="/tariff-plans" element={<TariffPlans />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
       <Navigation />
-      {!isTelegram && <ThemeSwitcher />} {/* Add ThemeSwitcher if not in Telegram context */}
+      {!isTelegram && <ThemeSwitcher />}
     </>
   );
 };

@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 
-// Get user's language from Telegram data
 const getUserLanguage = (): string => {
   const savedUserData = localStorage.getItem("telegramUserData");
   if (savedUserData) {
