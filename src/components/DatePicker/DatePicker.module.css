@@ -1,6 +1,5 @@
 .datePickerContainer {
   width: 100%;
-  max-width: 600px;
   margin: 0 auto;
   padding: 0 var(--tg-theme-spacing-unit-large);
   box-sizing: border-box;
@@ -73,9 +72,10 @@
 .comment {
   font-size: var(--tg-theme-font-size-small);
   color: var(--tg-theme-hint-color);
-  margin-top: calc(-1 * var(--tg-theme-spacing-unit));
+  margin-top: var(--tg-theme-spacing-unit);
   margin-bottom: var(--tg-theme-spacing-unit-large);
   font-family: var(--tg-theme-font-family);
+  text-align: justify;
 }
 
 /* Custom styling for the date input */
@@ -101,26 +101,5 @@
   .dateInput::-webkit-calendar-picker-indicator {
     width: 24px;
     height: 24px;
-  }
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  .select, .dateInput {
-    padding: var(--tg-theme-spacing-unit-large);
-    font-size: var(--tg-theme-font-size-base);
-    min-height: var(--tg-theme-mobile-button-height);
-  }
-
-  .label {
-    font-size: var(--tg-theme-font-size-base);
-    margin-bottom: var(--tg-theme-spacing-unit-large);
-  }
-
-  .comment {
-    font-size: var(--tg-theme-font-size-small);
-    line-height: 1.4;
-    margin-top: var(--tg-theme-spacing-unit);
-    margin-bottom: var(--tg-theme-spacing-unit-large);
   }
 }

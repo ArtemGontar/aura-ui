@@ -1,62 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './DatePicker.module.css';
+import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 interface DatePickerProps {
-  day: string;
-  month: string;
-  year: string;
-  days: number[];
-  months: number[];
-  years: number[];
-  handleDayChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleMonthChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleYearChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange?: (date: { day: string; month: string; year: string }) => void;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({
-  day,
-  month,
-  year,
-  handleDayChange,
-  handleMonthChange,
-  handleYearChange,
-}) => {
+const DatePicker: React.FC<DatePickerProps> = ({ onChange }) => {
   const { t } = useTranslation();
+  const haptics = useTelegramHaptics();
   const [dateValue, setDateValue] = useState('');
 
   useEffect(() => {
-    if (day && month && year) {
-      const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-      setDateValue(formattedDate);
-    } else {
-      const today = new Date();
-      const defaultDate = today.toISOString().split('T')[0];
-      setDateValue(defaultDate);
-    }
-  }, [day, month, year]);
+    const today = new Date();
+    const defaultDate = today.toISOString().split('T')[0];
+    setDateValue(defaultDate);
+  }, []);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const date = new Date(e.target.value);
     const newDay = date.getDate().toString();
     const newMonth = (date.getMonth() + 1).toString();
     const newYear = date.getFullYear().toString();
-
-    // Create synthetic events to match the existing handlers
-    const dayEvent = { target: { value: newDay } } as React.ChangeEvent<HTMLSelectElement>;
-    const monthEvent = { target: { value: newMonth } } as React.ChangeEvent<HTMLSelectElement>;
-    const yearEvent = { target: { value: newYear } } as React.ChangeEvent<HTMLSelectElement>;
-
-    handleDayChange(dayEvent);
-    handleMonthChange(monthEvent);
-    handleYearChange(yearEvent);
+    haptics.impactOccurred("light");
+    if (onChange) {
+      onChange({ day: newDay, month: newMonth, year: newYear });
+    }
+    setDateValue(e.target.value);
   };
 
   return (
     <div className={styles.datePickerContainer}>
-      <label htmlFor="date-input" className={styles.label}>
-        {t('dailyHoroscope.datePicker.label')}
-      </label>
       <input
         type="date"
         id="date-input"

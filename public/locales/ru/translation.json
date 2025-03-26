@@ -182,5 +182,22 @@
     "topic": "Тема",
     "voicePreference": "Предпочтение голоса",
     "createButton": "Создать"
+  },
+  "onboarding": {
+    "openDrawer": "Заполни свои данные",
+    "enterBirthDate": "Введите дату рождения",
+    "next": "Далее",
+    "enterSex": "Введите ваш пол",
+    "selectSex": "Выберите ваш пол",
+    "male": "Мужской",
+    "female": "Женский",
+    "other": "Другой",
+    "enterMaritalStatus": "Введите ваше семейное положение",
+    "selectMaritalStatus": "Выберите ваше семейное положение",
+    "single": "Холост",
+    "married": "Женат",
+    "divorced": "Разведен",
+    "widowed": "Вдовец",
+    "finish": "Завершить"
   }
 }

@@ -8,6 +8,10 @@ export interface UserData {
   photoUrl?: string;
   dateOfBirth?: string;
   zodiacSign?: string;
+  sex?: string;
+  maritalStatus?: string;
+  subscription?: Subscription;
+  stats?: UserStats;
 }
 
 export interface UserStats {

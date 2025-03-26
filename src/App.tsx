@@ -18,15 +18,16 @@ import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; // Add this import
 import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
-import useTelegramBackButton from "./hooks/useTelegramBackButton";
 import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; // Add this import
 import TariffPlans from "./components/TariffPlans/TariffPlans"; // Add this import
+import Onboarding from "./components/Onboarding/Onboarding"; // Add this import
+import useTelegramBackButton from "./hooks/useTelegramBackButton"; // Re-add this import
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit(); // Destructure isTelegram
   useApplyTheme();
-  useTelegramBackButton();
   const { userData } = useUserData();
+  useTelegramBackButton(); // Re-add this line
 
   useEffect(() => {
     const fetchUserStats = async (userId: string) => {
@@ -65,6 +66,7 @@ const AppContent: React.FC = () => {
           <Route path="/magicball" element={<MagicBall />} />
           <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} /> {/* Add this route */}
           <Route path="/tariff-plans" element={<TariffPlans />} /> {/* Add this route */}
+          <Route path="/onboarding" element={<Onboarding />} /> {/* Add this route */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

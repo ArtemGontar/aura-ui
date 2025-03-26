@@ -5,8 +5,9 @@ import commonStyles from "../Cards.module.css";
 import styles from './Compatibility.module.css';
 import { getCompatibility } from '../../../services/predictionService';
 import { Button } from '@telegram-apps/telegram-ui';
-import BirthDatePicker from '../../BirthDatePicker/BirthDatePicker';
 import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
+import { useNavigate } from "react-router-dom";
+import Onboarding from "../../Onboarding/Onboarding";
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -18,11 +19,17 @@ const Compatibility: React.FC = () => {
     passionScore: string;
     strengths: string[];
     challenges: string[];
-    todayScenario: string;
   } | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const haptics = useTelegramHaptics();
+  const navigate = useNavigate();
+  const [showOnboarding, setShowOnboarding] = useState(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+    navigate("/compatibility");
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,16 +51,8 @@ const Compatibility: React.FC = () => {
     }
   };
 
-  if (!userData || !userData.dateOfBirth) {
-    return (
-      <div className={commonStyles.card}>
-        <div className={styles.compatibility}>
-          <h4>{t('compatibility.completeProfile')}</h4>
-          <BirthDatePicker />
-          {error && <p className={styles.error}>{error}</p>}
-        </div>
-      </div>
-    );
+  if (showOnboarding) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
   }
 
   return (

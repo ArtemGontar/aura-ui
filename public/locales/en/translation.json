@@ -180,5 +180,22 @@
     "topic": "Topic",
     "voicePreference": "Voice Preference",
     "createButton": "Create"
+  },
+  "onboarding": {
+    "openDrawer": "Fill the personal data",
+    "enterBirthDate": "Enter your birth date",
+    "next": "Next",
+    "enterSex": "Enter your sex",
+    "selectSex": "Select your sex",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "enterMaritalStatus": "Enter your marital status",
+    "selectMaritalStatus": "Select your marital status",
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed",
+    "finish": "Finish"
   }
 }

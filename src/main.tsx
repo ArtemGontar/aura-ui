@@ -9,7 +9,7 @@ import '@telegram-apps/telegram-ui/dist/styles.css';
 import "./styles/theme.css";
 
 createRoot(document.getElementById('root')!).render(
-  <AppRoot>
+  <AppRoot id="telegram-root">
     <Provider store={store}>
       <App />
     </Provider>
