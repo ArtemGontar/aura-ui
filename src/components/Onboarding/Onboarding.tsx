@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import BirthDatePicker from "../BirthDatePicker/BirthDatePicker";
 import { Button } from "@telegram-apps/telegram-ui";
 import styles from "./Onboarding.module.css";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
@@ -42,13 +41,13 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
     <div className={styles.onboarding}>
       <Drawer.Root>
         <Drawer.Trigger>                  
-          <Button>{t("onboarding.openDrawer")}</Button>
+          <span>{t("onboarding.openDrawer")}</span>
         </Drawer.Trigger>
         <Drawer.Portal container={document.getElementById('telegram-root')!}>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-          <Drawer.Content className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4">
+          <Drawer.Content className={`${styles.onboardingContent} fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4`}>
             <Drawer.Handle />
-            <div className={styles.onboardingContent}>
+            <div className={styles.onboardingContentWrapper}>
               {step === 1 && (
                 <>
                   <h4>{t("onboarding.enterBirthDate")}</h4>

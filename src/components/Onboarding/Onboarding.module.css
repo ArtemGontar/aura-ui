@@ -11,6 +11,10 @@ h4 {
 }
 
 .onboardingContent {
+  background-color: var(--tg-theme-bg-color);
+}
+
+.onboardingContentWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
