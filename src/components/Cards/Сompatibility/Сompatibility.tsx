@@ -8,6 +8,7 @@ import { Button } from '@telegram-apps/telegram-ui';
 import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
 import { useNavigate } from "react-router-dom";
 import Onboarding from "../../Onboarding/Onboarding";
+import DatePicker from '../../DatePicker/DatePicker';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -33,6 +34,11 @@ const Compatibility: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPartnerInfo({ ...partnerInfo, [name]: value });
+  };
+
+  const handleDateChange = (date: { day: string; month: string; year: string }) => {
+    const formattedDate = `${date.year}-${date.month.padStart(2, '0')}-${date.day.padStart(2, '0')}`;
+    setPartnerInfo({ ...partnerInfo, dateOfBirth: formattedDate });
   };
 
   const checkCompatibility = async () => {
@@ -76,7 +82,7 @@ const Compatibility: React.FC = () => {
           </label>
           <label>
             {t('compatibility.partnerInfoDateOfBirth')}
-            <input type="date" name="dateOfBirth" value={partnerInfo.dateOfBirth} onChange={handleInputChange} />
+            <DatePicker onChange={handleDateChange} />
           </label>
           <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading}>
             {loading ? t("cards.loading") : t("compatibility.checkButton")}

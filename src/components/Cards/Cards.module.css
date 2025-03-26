@@ -6,6 +6,7 @@
   box-sizing: border-box;
   padding-top: 20px;
   text-align: center;
+  padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
 }
 
 .title {
