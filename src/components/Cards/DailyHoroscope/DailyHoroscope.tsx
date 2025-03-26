@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
-import WebApp from '@twa-dev/sdk';
 import { getHoroscope } from "../../../services/predictionService";
 import { useUserData } from "../../../hooks/useUserData";
 import { Button } from "@telegram-apps/telegram-ui";
@@ -17,11 +16,11 @@ const DailyHoroscope: React.FC = () => {
     generalGuidance: string;
     loveRelationshipsAdvice: string;
     careerFinancialInsights: string;
-    focus: string; // Added focus field
+    focus: string;
   } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || null);
+  const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || "aries");
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
 
@@ -31,7 +30,7 @@ const DailyHoroscope: React.FC = () => {
 
   useEffect(() => {
     if (userData?.dateOfBirth) {
-      setHoroscopeSign(userData.zodiacSign || null);
+      setHoroscopeSign(userData.zodiacSign || "aries");
     }
   }, [userData]);
 

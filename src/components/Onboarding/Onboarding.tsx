@@ -6,16 +6,18 @@ import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { Drawer } from 'vaul';
 import { updateUserData } from "../../services/userService";
 import DatePicker from "../DatePicker/DatePicker";
+import { useUserData } from "../../hooks/useUserData";
 
 const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
-  const [sex, setSex] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
+  const [sex, setSex] = useState("female");
+  const [maritalStatus, setMaritalStatus] = useState("single");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const haptics = useTelegramHaptics();
+  const { userData } = useUserData();
 
   const handleNextStep = () => {
     haptics.selectionChanged();
@@ -28,10 +30,14 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
     setError("");
     try {
       const dateOfBirth = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
-      await updateUserData(1, { dateOfBirth, sex, maritalStatus });
+      if (userData) {
+        await updateUserData(userData.id, { dateOfBirth, sex, maritalStatus });
+      } else {
+        haptics.notificationOccurred("error");
+      }
       onComplete();
     } catch (err) {
-      setError(t("onboarding.errorSavingData"));
+      haptics.notificationOccurred("error");
     } finally {
       setLoading(false);
     }
@@ -41,7 +47,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
     <div className={styles.onboarding}>
       <Drawer.Root>
         <Drawer.Trigger>                  
-          <span>{t("onboarding.openDrawer")}</span>
+          <span className={styles.triggerButton}>{t("onboarding.openDrawer")}</span>
         </Drawer.Trigger>
         <Drawer.Portal container={document.getElementById('telegram-root')!}>
           <Drawer.Overlay className="fixed inset-0 bg-black/40" />
@@ -73,9 +79,8 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
                       setSex(e.target.value);
                     }}
                   >
-                    <option value="">{t("onboarding.selectSex")}</option>
-                    <option value="male">{t("onboarding.male")}</option>
                     <option value="female">{t("onboarding.female")}</option>
+                    <option value="male">{t("onboarding.male")}</option>
                     <option value="other">{t("onboarding.other")}</option>
                   </select>
                   <Button
@@ -88,7 +93,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
                 </>
               )}
               {step === 3 && (
-                <div>
+                <>
                   <h4>{t("onboarding.enterMaritalStatus")}</h4>
                   <select
                     className={styles.select}
@@ -98,7 +103,6 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
                       setMaritalStatus(e.target.value);
                     }}
                   >
-                    <option value="">{t("onboarding.selectMaritalStatus")}</option>
                     <option value="single">{t("onboarding.single")}</option>
                     <option value="married">{t("onboarding.married")}</option>
                     <option value="divorced">{t("onboarding.divorced")}</option>
@@ -112,7 +116,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
                     {loading ? t("loading") : t("onboarding.finish")}
                   </Button>
                   {error && <p className={styles.error}>{error}</p>}
-                </div>
+                </>
               )}
             </div>
           </Drawer.Content>
