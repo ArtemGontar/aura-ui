@@ -7,6 +7,7 @@ import { useUserData } from "../../../hooks/useUserData";
 import { Button } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 import Onboarding from "../../Onboarding/Onboarding";
+import { Drawer } from "vaul";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
@@ -60,7 +61,18 @@ const DailyHoroscope: React.FC = () => {
       <div className={styles.titleContainer}>
         {backgroundImage && <img src={backgroundImage} alt={horoscopeSign || "Horoscope Sign"} className={styles.horoscopeImage} />}
         {showOnboarding ? (
-          <Onboarding onComplete={handleOnboardingComplete} />
+          <Drawer.Root>
+            <Drawer.Trigger>                  
+              <span className={styles.triggerButton}>{t("onboarding.openDrawer")}</span>
+            </Drawer.Trigger>
+            <Drawer.Portal container={document.getElementById('telegram-root')!}>
+              <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+              <Drawer.Content className={`${styles.onboardingContent} fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4`}>
+                <Drawer.Handle />
+              <Onboarding onComplete={handleOnboardingComplete} />
+              </Drawer.Content>
+            </Drawer.Portal>
+          </Drawer.Root>
         ) : (
           <Button onClick={requestHoroscope} disabled={loading}>
             {loading ? t("cards.loading") : t("dailyHoroscope.buttons.getHoroscope")}

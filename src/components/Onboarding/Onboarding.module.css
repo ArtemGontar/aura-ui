@@ -1,18 +1,6 @@
-.onboarding {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  width: 100%;
-}
-
 h4 {
   margin-bottom: 20px;
   text-align: center;
-}
-
-.onboardingContent {
-  background-color: var(--tg-theme-bg-color);
 }
 
 .onboardingContentWrapper {
@@ -20,7 +8,7 @@ h4 {
   flex-direction: column;
   align-items: center;
   margin: 20px 0;
-  gap: 40px;
+  gap: 20px;
 }
 
 .select {
@@ -36,26 +24,4 @@ h4 {
 
 .button {
   margin: 5px;
-}
-
-.triggerButton {
-  display: inline-flex;
-  background-color: var(--tgui--button_color);
-  color: var(--tgui--button_text_color);
-  width: 90%;
-  gap: 8px;
-  height: 42px;
-  min-width: 42px;
-  padding: 8px 14px;
-  align-items: center;
-  border: none;
-  border-radius: 8px;
-  box-sizing: border-box;
-  justify-content: center;
-  --tgui--button--hovered-opacity: .15;
-  --tgui--button--spinner-color: var(--tgui--button_text_color);
-}
-
-.btn:hover {
-  background-color: #0056b3;
 }

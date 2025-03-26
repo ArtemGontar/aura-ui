@@ -20,7 +20,6 @@ const Compatibility: React.FC = () => {
     strengths: string[];
     challenges: string[];
   } | null>(null);
-  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const haptics = useTelegramHaptics();
   const navigate = useNavigate();
@@ -44,20 +43,27 @@ const Compatibility: React.FC = () => {
       setCompatibilityResult(response);
       haptics.notificationOccurred("success");
     } catch (err) {
-      setError(t('compatibility.error'));
       haptics.notificationOccurred("error");
     } finally {
       setLoading(false);
     }
   };
 
-  if (showOnboarding) {
-    return <Onboarding onComplete={handleOnboardingComplete} />;
-  }
-
   return (
     <div className={commonStyles.card}>
-      <div className={styles.compatibility}>
+      <div className={styles.banner}>
+        <span className={styles.emoji}>💞</span>
+        <h2 className={styles.bannerText}>
+          {t('compatibility.banner.title')}
+        </h2>
+        <p className={styles.subText}>
+          {t('compatibility.banner.subtitle')}
+        </p>
+      </div>
+      {showOnboarding ? (
+        <Onboarding onComplete={handleOnboardingComplete} />
+      ) : (
+        <div className={styles.compatibility}>
         <h4>{t('compatibility.title')}</h4>
         <div>
           <label>
@@ -107,6 +113,7 @@ const Compatibility: React.FC = () => {
           </div>
         )}
       </div>
+      )}
     </div>
   );
 };

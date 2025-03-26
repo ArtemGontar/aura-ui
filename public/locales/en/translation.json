@@ -132,7 +132,11 @@
     "challengesTitle": "Potential Challenges",
     "emotional": "Emotional Compatibility",
     "intellectual": "Intellectual Compatibility",
-    "physical": "Physical Compatibility"
+    "physical": "Physical Compatibility",
+    "banner": {
+      "title": "Discover Your Compatibility",
+      "subtitle": "Check how well you align emotionally, intellectually, and physically."
+    }
   },
   "psychological": {
     "title": "Psychological Insight",

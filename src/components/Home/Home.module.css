@@ -12,7 +12,7 @@
   background: var(--tg-theme-secondary-bg-color);
   border-radius: var(--tg-theme-border-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  overflow: visible; /* Allow overflow */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,8 +30,6 @@
   gap: 0.75rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--tg-theme-hint-color);
-  transform: translateY(-50%);
-  margin-bottom: -1rem;
 }
 
 @keyframes flame {

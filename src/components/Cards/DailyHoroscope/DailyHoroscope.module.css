@@ -46,6 +46,29 @@
   color: var(--text-primary);
 }
 
+.onboardingContent {
+  background-color: var(--tg-theme-bg-color);
+}
+
+.triggerButton {
+  display: inline-flex;
+  background-color: var(--tgui--button_color);
+  color: var(--tgui--button_text_color);
+  width: 90%;
+  gap: 8px;
+  height: 42px;
+  min-width: 42px;
+  padding: 8px 14px;
+  align-items: center;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  justify-content: center;
+  --tgui--button--hovered-opacity: .15;
+  --tgui--button--spinner-color: var(--tgui--button_text_color);
+}
+
+
 /* Responsive adjustments */
 @media (min-width: 768px) {
   .horoscope {
