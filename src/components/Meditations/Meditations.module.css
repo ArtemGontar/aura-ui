@@ -176,7 +176,6 @@
   color: var(--tg-theme-button-text-color);
   font-size: var(--tg-theme-font-size-base);
   cursor: pointer;
-  transition: background 0.3s;
 }
 
 .player button:hover {
@@ -184,17 +183,44 @@
 }
 
 .playButton {
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  margin-top: var(--tg-theme-mobile-padding);
-  background-color: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playButton svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--tg-theme-text-color);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controlButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controlButton svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--tg-theme-text-color);
 }
 
 /* Tablet and larger screens */

@@ -5,8 +5,11 @@ import styles from "./Meditations.module.css";
 import { getMeditations } from "../../services/meditationService";
 import { Meditation } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
-import { PlayArrow, Pause } from "@mui/icons-material";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
+import playIcon from "../../assets/player/play.png";
+import pauseIcon from "../../assets/player/pause.png";
+import forwardIcon from "../../assets/player/forward.png";
+import backwardIcon from "../../assets/player/backward.png";
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
@@ -45,25 +48,49 @@ const Meditations: React.FC = () => {
   };
 
   const togglePlayPause = (id: number) => {
-    if (audioRef.current) {
-      if (isPlaying && playingId === id) {
+    if (!audioRef.current) return;
+  
+    if (isPlaying && playingId === id) {
+      audioRef.current.pause();
+      setPlayingId(null);
+      setIsPlaying(false);
+    } else {
+      if (playingId !== null) {
+        // Stop any currently playing audio
         audioRef.current.pause();
-        setPlayingId(null);
-      } else {
-        audioRef.current.play();
-        setPlayingId(id);
       }
-      setIsPlaying(!isPlaying);
+      audioRef.current
+        .play()
+        .then(() => {
+          setPlayingId(id);
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Error playing audio:", error);
+          setIsPlaying(false);
+        });
+    }
+  };
+  
+  const moveForward = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Math.min(audioRef.current.duration, audioRef.current.currentTime + 10);
     }
   };
 
+  const moveBackward = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+    }
+  };
+  
   useEffect(() => {
     if (audioRef.current && currentMeditation) {
       audioRef.current.src = currentMeditation;
-      audioRef.current.play();
-      setIsPlaying(true);
+      setIsPlaying(false);
     }
   }, [currentMeditation]);
+  
 
   const handleCreatePersonalMeditation = () => {
     impactOccurred("light");
@@ -90,11 +117,32 @@ const Meditations: React.FC = () => {
             onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
           >
             <h4 className={styles.cardTitle}>{meditation.text}</h4>
-            <button 
-              className={styles.playButton}
-            >
-              {isPlaying && playingId === meditation.id ? <Pause /> : <PlayArrow />}
-            </button>
+            <div className={styles.controls}>
+              <button 
+                className={styles.controlButton} 
+                onClick={(e) => { e.stopPropagation(); moveBackward(); }}
+                style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
+              >
+                <img src={backwardIcon} alt="Backward" />
+              </button>
+              <button 
+                className={styles.playButton} 
+                onClick={(e) => { e.stopPropagation(); togglePlayPause(meditation.id); }}
+              >
+                {isPlaying && playingId === meditation.id ? (
+                  <img src={pauseIcon} alt="Pause" />
+                ) : (
+                  <img src={playIcon} alt="Play" />
+                )}
+              </button>
+              <button 
+                className={styles.controlButton} 
+                onClick={(e) => { e.stopPropagation(); moveForward(); }}
+                style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
+              >
+                <img src={forwardIcon} alt="Forward" />
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -108,11 +156,32 @@ const Meditations: React.FC = () => {
               onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
             >
               <h4 className={styles.cardTitle}>{meditation.text}</h4>
-              <button 
-                className={styles.playButton}
-              >
-                {isPlaying && playingId === meditation.id ? <Pause /> : <PlayArrow />}
-              </button>
+              <div className={styles.controls}>
+                <button 
+                  className={styles.controlButton} 
+                  onClick={(e) => { e.stopPropagation(); moveBackward(); }}
+                  style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
+                >
+                  <img src={backwardIcon} alt="Backward" />
+                </button>
+                <button 
+                  className={styles.playButton} 
+                  onClick={(e) => { e.stopPropagation(); togglePlayPause(meditation.id); }}
+                >
+                  {isPlaying && playingId === meditation.id ? (
+                    <img src={pauseIcon} alt="Pause" />
+                  ) : (
+                    <img src={playIcon} alt="Play" />
+                  )}
+                </button>
+                <button 
+                  className={styles.controlButton} 
+                  onClick={(e) => { e.stopPropagation(); moveForward(); }}
+                  style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
+                >
+                  <img src={forwardIcon} alt="Forward" />
+                </button>
+              </div>
             </div>
           ))
         ) : (
