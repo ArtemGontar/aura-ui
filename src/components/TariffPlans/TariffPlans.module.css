@@ -22,11 +22,6 @@
   border: 2px solid var(--tg-theme-hint-color);
 }
 
-.plan:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 .plan.selected {
   border: 2px solid var(--tg-theme-button-color);
   background-color: var(--tg-theme-button-bg-color);

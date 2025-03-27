@@ -4,7 +4,7 @@ import WebApp from '@twa-dev/sdk';
 const setupTelegramWebApp = () => {
   WebApp.ready();
   WebApp.expand();
-  WebApp.requestFullscreen();
+  // WebApp.requestFullscreen();
   WebApp.enableClosingConfirmation();
 };
 
