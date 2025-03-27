@@ -135,6 +135,32 @@
   color: var(--tg-theme-error-color);
 }
 
+.editButton {
+  color: var(--tg-theme-button-color);
+  border: none;
+  font-size: var(--tg-theme-font-size-base);
+  cursor: pointer;
+  transition: all var(--tg-theme-transition-duration) var (--tg-theme-transition-timing);
+}
+
+.editButton:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.deleteButton {
+  color: var(--tg-theme-error-color);
+  border: none;
+  font-size: var(--tg-theme-font-size-base);
+  cursor: pointer;
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+.deleteButton:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .container {

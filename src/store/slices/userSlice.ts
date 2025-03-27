@@ -16,30 +16,35 @@ export const saveUserDataAsync = createAsyncThunk(
         return userData;
       }
 
-      // Get existing user data from backend
-      const existingUserResponse = await getUserData(userId).catch(async (error) => {
+      try {
+        // Get existing user data from backend
+        const existingUserResponse = await getUserData(userId);
+        const existingUserData = existingUserResponse;
+
+        // Update only specific fields
+        const updatedUserData = {
+          ...existingUserData,
+          firstName: userData.firstName,
+          lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
+          username: userData.username !== undefined ? userData.username : existingUserData.username,
+          languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
+          isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
+          photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
+        };
+
+        const updatedResponse = await updateUserData(updatedUserData);
+        dispatch(setUserData(updatedResponse));
+        return updatedResponse;
+      } catch (error) {
         if (error.response && error.response.status === 404) {
           // If user does not exist, create new user data
-          const newUserResponse = await updateUserData(userId, userData);
+          const newUserResponse = await updateUserData(userData);
+          dispatch(setUserData(newUserResponse));
           return newUserResponse;
         } else {
           throw error;
         }
-      });
-      const existingUserData = existingUserResponse;
-
-      // Update only specific fields
-      const updatedUserData = {
-        ...existingUserData,
-        firstName: userData.firstName,
-        lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
-        username: userData.username !== undefined ? userData.username : existingUserData.username,
-        languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
-        isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
-        photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
-      };
-      dispatch(setUserData(updatedUserData));
-      return updatedUserData;
+      }
     }
     return userData;
   }

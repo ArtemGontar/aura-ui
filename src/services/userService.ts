@@ -1,6 +1,6 @@
 import { UserData } from "../types/user";
 import { store } from "../store";
-import { setUserData } from "../store/slices/userSlice";
+import { setUserData, clearUserData } from "../store/slices/userSlice";
 import api from './api';
 import { FEATURES } from '../config/features';
 
@@ -42,6 +42,20 @@ export const updateUserData = async (userData: UserData): Promise<UserData> => {
     }
   } catch (error) {
     console.error("Error updating user data", error);
+    throw error;
+  }
+};
+
+export const deleteUser = async (userId: number): Promise<void> => {
+  try {
+    if (FEATURES.USE_BACKEND) {
+      await api.delete(`${API_BASE}/${userId}`);
+      store.dispatch(clearUserData());
+    } else {
+      store.dispatch(clearUserData());
+    }
+  } catch (error) {
+    console.error("Error deleting user", error);
     throw error;
   }
 };

@@ -84,7 +84,12 @@
       "error": "Error loading predictions.",
       "previous": "Previous",
       "next": "Next"
-    }
+    },
+    "edit": "Edit",
+    "deleteAccount": "Delete Account",
+    "editUser": "Edit User",
+    "confirmDelete": "Are you sure you want to delete your account?",
+    "deleteError": "Error deleting account."
   },
   "meditations": {
     "banner": {
@@ -199,5 +204,21 @@
     "divorced": "Divorced",
     "widowed": "Widowed",
     "finish": "Finish"
+  },
+  "editUser": {
+    "title": "Edit User",
+    "birthDate": "Date of Birth",
+    "sex": "Sex",
+    "maritalStatus": "Marital Status",
+    "default": "Not specified",
+    "female": "Female",
+    "male": "Male",
+    "other": "Other",
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed",
+    "save": "Save",
+    "saveError": "Error saving data."
   }
 }

@@ -1,14 +1,32 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import styles from "./Profile.module.css";
 import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
 import { ProfileProps } from "../../types/profile";
 import Subscription from "../Subscription/Subscription";
+import { deleteUser } from "../../services/userService";
+import WebApp from "@twa-dev/sdk";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
   const { isLoading, error, userData } = useUserData();
+  const navigate = useNavigate();
+
+  const handleDeleteAccount = async () => {
+    WebApp.showConfirm(t('profile.confirmDelete'), async (result) => {
+      if (result && userData) {
+        try {
+          await deleteUser(userData.id);
+          WebApp.close();
+        } catch (error) {
+          console.error("Error deleting account", error);
+          alert(t('profile.deleteError'));
+        }
+      }
+    });
+  };
 
   if (isLoading) {
     return (
@@ -50,7 +68,15 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
         <div className={styles.userInfo}>
           <h2 id="profile-title" className={styles.name}>{displayName}</h2>
           {userData.username && (
-            <p className={styles.email}>@{userData.username}</p>
+            <div className={styles.userActions}>
+              <p className={styles.email}>@{userData.username}</p>
+              <button
+                className={styles.editButton}
+                onClick={() => navigate('/edit-user')}
+              >
+                {t('profile.edit')}
+              </button>
+            </div>
           )}
         </div>
       </section>
@@ -58,6 +84,13 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
       <Subscription isSubscribed={false} />
 
       <PredictionHistory />
+
+      <button
+        className={styles.deleteButton}
+        onClick={handleDeleteAccount}
+      >
+        {t('profile.deleteAccount')}
+      </button>
     </div>
   );
 };

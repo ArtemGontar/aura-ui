@@ -21,6 +21,7 @@ import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
 import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; 
 import TariffPlans from "./components/TariffPlans/TariffPlans"; 
 import useTelegramBackButton from "./hooks/useTelegramBackButton";
+import EditUser from "./components/EditUser/EditUser";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit();
@@ -65,6 +66,7 @@ const AppContent: React.FC = () => {
           <Route path="/magicball" element={<MagicBall />} />
           <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} />
           <Route path="/tariff-plans" element={<TariffPlans />} />
+          <Route path="/edit-user" element={<EditUser onSave={() => window.history.back()} />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

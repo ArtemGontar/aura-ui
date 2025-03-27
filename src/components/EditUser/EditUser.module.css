@@ -1,0 +1,61 @@
+.editUserWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
+.select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-background-color);
+  color: var(--text-primary-color);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--focus-border-color);
+}
+
+.error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+}
+
+.saveButton {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.saveButton:disabled {
+  background-color: var(--button-disabled-background-color);
+  cursor: not-allowed;
+}
+
+.saveButton:hover:not(:disabled) {
+  background-color: var(--button-hover-background-color);
+}
