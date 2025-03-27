@@ -22,12 +22,14 @@ import CreatePersonalMeditation from "./components/CreatePersonalMeditation/Crea
 import TariffPlans from "./components/TariffPlans/TariffPlans"; 
 import useTelegramBackButton from "./hooks/useTelegramBackButton";
 import EditUser from "./components/EditUser/EditUser";
+import useTelegramWebApp from "./hooks/useTelegramWebApp";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit();
   useApplyTheme();
   const { userData } = useUserData();
   useTelegramBackButton();
+  useTelegramWebApp(); // Call the new hook here
 
   useEffect(() => {
     const fetchUserStats = async (userId: string) => {

@@ -17,8 +17,6 @@ const Meditations: React.FC = () => {
   const { impactOccurred } = useTelegramHaptics();
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
-  const [currentMeditation, setCurrentMeditation] = useState<string | null>(null);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [playingId, setPlayingId] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -27,7 +25,7 @@ const Meditations: React.FC = () => {
       try {
         const [generalData, personalData] = await Promise.all([
           getMeditations("general"),
-          getMeditations("personal")
+          getMeditations("personal"),
         ]);
         setGeneralMeditations(generalData);
         setPersonalMeditations(personalData);
@@ -39,58 +37,78 @@ const Meditations: React.FC = () => {
     fetchMeditations();
   }, []);
 
-  const playMeditation = (audioUrl: string, id: number) => {
-    console.log("Playing meditation", API_CONFIG.BASE_URL + '/' + audioUrl);
-    setCurrentMeditation(API_CONFIG.BASE_URL + '/' + audioUrl);
-    setPlayingId(id);
-    togglePlayPause(id);
-    setIsPlaying(true);
-  };
-
-  const togglePlayPause = (id: number) => {
+  const togglePlayPause = (audioUrl: string, id: number) => {
     if (!audioRef.current) return;
-  
-    if (isPlaying && playingId === id) {
+
+    if (playingId === id) {
       audioRef.current.pause();
       setPlayingId(null);
-      setIsPlaying(false);
     } else {
-      if (playingId !== null) {
-        // Stop any currently playing audio
-        audioRef.current.pause();
-      }
+      audioRef.current.src = API_CONFIG.BASE_URL + "/" + audioUrl;
       audioRef.current
         .play()
-        .then(() => {
-          setPlayingId(id);
-          setIsPlaying(true);
-        })
-        .catch((error) => {
-          console.error("Error playing audio:", error);
-          setIsPlaying(false);
-        });
-    }
-  };
-  
-  const moveForward = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = Math.min(audioRef.current.duration, audioRef.current.currentTime + 10);
+        .then(() => setPlayingId(id))
+        .catch((error) => console.error("Error playing audio:", error));
     }
   };
 
-  const moveBackward = () => {
+  const moveAudio = (direction: "forward" | "backward") => {
     if (audioRef.current) {
-      audioRef.current.currentTime = Math.max(0, audioRef.current.currentTime - 10);
+      const offset = direction === "forward" ? 10 : -10;
+      audioRef.current.currentTime = Math.max(
+        0,
+        Math.min(audioRef.current.duration, audioRef.current.currentTime + offset)
+      );
     }
   };
-  
-  useEffect(() => {
-    if (audioRef.current && currentMeditation) {
-      audioRef.current.src = currentMeditation;
-      setIsPlaying(false);
-    }
-  }, [currentMeditation]);
-  
+
+  const MeditationCard = ({
+    meditation,
+    isPlaying,
+    onPlayPause,
+  }: {
+    meditation: Meditation;
+    isPlaying: boolean;
+    onPlayPause: () => void;
+  }) => (
+    <div
+      className={`${styles.card} ${styles.generalCard}`}
+      onClick={onPlayPause}
+    >
+      <h4 className={styles.cardTitle}>{meditation.text}</h4>
+      <div className={styles.controls}>
+        <button
+          className={styles.controlButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            moveAudio("backward");
+          }}
+          style={{ display: isPlaying ? "inline-block" : "none" }}
+        >
+          <img src={backwardIcon} alt="Backward" />
+        </button>
+        <button
+          className={styles.playButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            onPlayPause();
+          }}
+        >
+          <img src={isPlaying ? pauseIcon : playIcon} alt="Play/Pause" />
+        </button>
+        <button
+          className={styles.controlButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            moveAudio("forward");
+          }}
+          style={{ display: isPlaying ? "inline-block" : "none" }}
+        >
+          <img src={forwardIcon} alt="Forward" />
+        </button>
+      </div>
+    </div>
+  );
 
   const handleCreatePersonalMeditation = () => {
     impactOccurred("light");
@@ -101,104 +119,48 @@ const Meditations: React.FC = () => {
     <div className={styles.meditations}>
       <div className={styles.banner}>
         <span className={styles.emoji}>✨</span>
-        <h2 className={styles.bannerText}>
-          {t('meditations.banner.title')}
-        </h2>
-        <p className={styles.subText}>
-          {t('meditations.banner.subtitle')}
-        </p>
+        <h2 className={styles.bannerText}>{t("meditations.banner.title")}</h2>
+        <p className={styles.subText}>{t("meditations.banner.subtitle")}</p>
       </div>
       <div className={styles.cards}>
-        <h3>{t('meditations.general.title')}</h3>
-        {generalMeditations.map((meditation, index) => (
-          <div 
-            key={meditation.id} 
-            className={`${styles.card} ${styles.generalCard}`} 
-            onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
-          >
-            <h4 className={styles.cardTitle}>{meditation.text}</h4>
-            <div className={styles.controls}>
-              <button 
-                className={styles.controlButton} 
-                onClick={(e) => { e.stopPropagation(); moveBackward(); }}
-                style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
-              >
-                <img src={backwardIcon} alt="Backward" />
-              </button>
-              <button 
-                className={styles.playButton} 
-                onClick={(e) => { e.stopPropagation(); togglePlayPause(meditation.id); }}
-              >
-                {isPlaying && playingId === meditation.id ? (
-                  <img src={pauseIcon} alt="Pause" />
-                ) : (
-                  <img src={playIcon} alt="Play" />
-                )}
-              </button>
-              <button 
-                className={styles.controlButton} 
-                onClick={(e) => { e.stopPropagation(); moveForward(); }}
-                style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
-              >
-                <img src={forwardIcon} alt="Forward" />
-              </button>
-            </div>
-          </div>
+        <h3>{t("meditations.general.title")}</h3>
+        {generalMeditations.map((meditation) => (
+          <MeditationCard
+            key={meditation.id}
+            meditation={meditation}
+            isPlaying={playingId === meditation.id}
+            onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
+          />
         ))}
       </div>
       <div className={styles.cards}>
-        <h3>{t('meditations.personal.title')}</h3>
+        <h3>{t("meditations.personal.title")}</h3>
         {personalMeditations.length > 0 ? (
-          personalMeditations.map((meditation, index) => (
-            <div 
-              key={meditation.id} 
-              className={`${styles.card} ${styles.personalCard}`} 
-              onClick={() => playMeditation(meditation.audioUrl, meditation.id)}
-            >
-              <h4 className={styles.cardTitle}>{meditation.text}</h4>
-              <div className={styles.controls}>
-                <button 
-                  className={styles.controlButton} 
-                  onClick={(e) => { e.stopPropagation(); moveBackward(); }}
-                  style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
-                >
-                  <img src={backwardIcon} alt="Backward" />
-                </button>
-                <button 
-                  className={styles.playButton} 
-                  onClick={(e) => { e.stopPropagation(); togglePlayPause(meditation.id); }}
-                >
-                  {isPlaying && playingId === meditation.id ? (
-                    <img src={pauseIcon} alt="Pause" />
-                  ) : (
-                    <img src={playIcon} alt="Play" />
-                  )}
-                </button>
-                <button 
-                  className={styles.controlButton} 
-                  onClick={(e) => { e.stopPropagation(); moveForward(); }}
-                  style={{ display: isPlaying && playingId === meditation.id ? "inline-block" : "none" }}
-                >
-                  <img src={forwardIcon} alt="Forward" />
-                </button>
-              </div>
-            </div>
+          personalMeditations.map((meditation) => (
+            <MeditationCard
+              key={meditation.id}
+              meditation={meditation}
+              isPlaying={playingId === meditation.id}
+              onPlayPause={() =>
+                togglePlayPause(meditation.audioUrl, meditation.id)
+              }
+            />
           ))
         ) : (
-          <div 
-            className={`${styles.card} ${styles.createCard}`} 
-            onClick={handleCreatePersonalMeditation} // Update this line
+          <div
+            className={`${styles.card} ${styles.createCard}`}
+            onClick={handleCreatePersonalMeditation}
           >
-            <h4 className={styles.createText}>{t('meditations.personal.create')}</h4>
+            <h4 className={styles.createText}>
+              {t("meditations.personal.create")}
+            </h4>
             <div className={styles.createIcon}>+</div>
           </div>
         )}
       </div>
-      {currentMeditation && (
-        <div className={styles.player}>
-          <audio ref={audioRef} controls />
-        </div>
-      )}
+      <div className={styles.player}>
+        <audio ref={audioRef} controls style={{ display: "none" }} />
+      </div>
     </div>
   );
 };

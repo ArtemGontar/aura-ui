@@ -34,16 +34,6 @@ const getTelegramUserData = (): UserData => {
   };
 };
 
-const setupTelegramWebApp = () => {
-  WebApp.ready();
-  WebApp.expand();
-  WebApp.enableClosingConfirmation();
-};
-
-const cleanupTelegramWebApp = () => {
-  WebApp.disableClosingConfirmation();
-};
-
 export const useTelegramInit = () => {
   const dispatch = useDispatch<AppDispatch>();
   
@@ -55,12 +45,10 @@ export const useTelegramInit = () => {
   // Memoize the initialization function
   const initializeTelegram = useCallback(async () => {
     try {
-      // Get user data and setup Telegram WebApp
+      // Get user data
       const userData = getTelegramUserData();
-      setupTelegramWebApp();
 
       // Save user data
-
       await dispatch(saveUserDataAsync(userData));
     } catch (err) {
       dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));
@@ -72,7 +60,6 @@ export const useTelegramInit = () => {
   // Initialize Telegram WebApp on component mount
   useEffect(() => {
     initializeTelegram();
-    return cleanupTelegramWebApp;
   }, [initializeTelegram]);
 
   // Determine if the app is running in a Telegram context

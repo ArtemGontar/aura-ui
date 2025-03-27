@@ -48,34 +48,32 @@
     "subscription": {
       "title": "Subscription",
       "basic": {
-        "title": "Basic Plan",
-        "description": "Basic plan description",
+        "title": "Basic",
         "bonuses": {
-          "part1": "Description of the basic plan part 1",
-          "part2": "Description of the basic plan part 2",
-          "part3": "Description of the basic plan part 3"
+          "part1": "📢 Ads remain",
+          "part2": "🔮 5 predictions per day",
+          "part3": "🧘 1 personal meditation per day"
         }
       },
       "premium": {
-        "title": "Premium Plan",
-        "description": "Premium plan description",
+        "title": "Premium",
         "bonuses": {
-          "part1": "Description of the premium plan part 1",
-          "part2": "Description of the premium plan part 2",
-          "part3": "Description of the premium plan part 3"
+          "part1": "🚫 No ads",
+          "part2": "🔮 10 predictions per day",
+          "part3": "🧘 2 personal meditations per day"
         }
       },
       "ultimate": {
-        "title": "Ultimate Plan",
-        "description": "Ultimate plan description",
+        "title": "Ultimate",
         "bonuses": {
-          "part1": "Description of the ultimate plan part 1",
-          "part2": "Description of the ultimate plan part 2",
-          "part3": "Description of the ultimate plan part 3"
+          "part1": "🚫 No ads",
+          "part2": "🔮 20 predictions per day",
+          "part3": "🧘 4 personal meditations per day"
         }
       },
       "choosePlan": "Choose a plan",
-      "subscribe": "Subscribe Now"
+      "subscribe": "Subscribe Now",
+      "recommended": "Popular"
     },
     "history": {
       "title": "Prediction History",

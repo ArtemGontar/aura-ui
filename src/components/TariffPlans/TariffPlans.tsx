@@ -16,7 +16,7 @@ const TariffPlans: React.FC = () => {
       id: 1,
       title: t('profile.subscription.basic.title'),
       description: t('profile.subscription.basic.description'),
-      cost: 10,
+      cost: 200,
       bonuses: [
         t('profile.subscription.basic.bonuses.part1'),
         t('profile.subscription.basic.bonuses.part2'),
@@ -27,7 +27,7 @@ const TariffPlans: React.FC = () => {
       id: 2,
       title: t('profile.subscription.premium.title'),
       description: t('profile.subscription.premium.description'),
-      cost: 20,
+      cost: 400,
       bonuses: [
         t('profile.subscription.premium.bonuses.part1'),
         t('profile.subscription.premium.bonuses.part2'),
@@ -38,7 +38,7 @@ const TariffPlans: React.FC = () => {
       id: 3,
       title: t('profile.subscription.ultimate.title'),
       description: t('profile.subscription.ultimate.description'),
-      cost: 30,
+      cost: 600,
       bonuses: [
         t('profile.subscription.ultimate.bonuses.part1'),
         t('profile.subscription.ultimate.bonuses.part2'),
@@ -52,11 +52,11 @@ const TariffPlans: React.FC = () => {
     const plan = tariffPlans.find(plan => plan.id === selectedPlan);
     if (!plan) return;
 
-    var invoiceLink = await createInvoiceLink(plan.id, plan.title, plan.description, "XTR");
-    WebApp.openInvoice(invoiceLink, function(status) {
-      if (status == 'paid') {
+    const invoiceLink = await createInvoiceLink(plan.id, plan.title, plan.description, "XTR");
+    WebApp.openInvoice(invoiceLink, (status) => {
+      if (status === 'paid') {
         notificationOccurred('success');
-      } else if (status == 'failed') {
+      } else if (status === 'failed') {
         notificationOccurred('error');
       } else {
         notificationOccurred('warning');
@@ -73,6 +73,11 @@ const TariffPlans: React.FC = () => {
           className={`${styles.plan} ${selectedPlan === plan.id ? styles.selected : ''}`}
           onClick={() => setSelectedPlan(plan.id)}
         >
+          {plan.id === 2 && (
+            <span className={styles.recommendationLabel}>
+              {t('profile.subscription.recommended')}
+            </span>
+          )}
           <h4>{plan.title}</h4>
           {plan.bonuses.map((desc, idx) => (
             <p key={idx}>{desc}</p>
@@ -85,7 +90,7 @@ const TariffPlans: React.FC = () => {
         disabled={selectedPlan === null}
       >
         {selectedPlan !== null
-          ? `${t('profile.subscription.subscribe')} - $${tariffPlans.find(plan => plan.id === selectedPlan)?.cost}`
+          ? `${t('profile.subscription.subscribe')} - ${tariffPlans.find(plan => plan.id === selectedPlan)?.cost} ⭐`
           : t('profile.subscription.subscribe')}
       </Button>
     </div>
