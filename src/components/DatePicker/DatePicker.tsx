@@ -5,9 +5,10 @@ import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 interface DatePickerProps {
   onChange?: (date: { day: string; month: string; year: string }) => void;
+  className?: string; // Added className prop
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ onChange }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ onChange, className }) => {
   const { t } = useTranslation();
   const haptics = useTelegramHaptics();
   const [dateValue, setDateValue] = useState('');
@@ -31,7 +32,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange }) => {
   };
 
   return (
-    <div className={styles.datePickerContainer}>
+    <div className={`${styles.datePickerContainer} ${className || ''}`}>
       <input
         type="date"
         id="date-input"

@@ -49,6 +49,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
           <>
             <h4>{t("onboarding.enterBirthDate")}</h4>
             <DatePicker
+              className={styles.datePicker}
               onChange={(date) => setBirthDate(date)}
             />
             <Button

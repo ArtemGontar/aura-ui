@@ -1,6 +1,5 @@
 .datePickerContainer {
   width: 100%;
-  margin: 0 auto;
   padding: 0 var(--tg-theme-spacing-unit-large);
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -67,15 +66,6 @@
   color: var(--tg-theme-text-color);
   margin-bottom: var(--tg-theme-spacing-unit);
   font-family: var(--tg-theme-font-family);
-}
-
-.comment {
-  font-size: var(--tg-theme-font-size-small);
-  color: var(--tg-theme-hint-color);
-  margin-top: var(--tg-theme-spacing-unit);
-  margin-bottom: var(--tg-theme-spacing-unit-large);
-  font-family: var(--tg-theme-font-family);
-  text-align: justify;
 }
 
 /* Custom styling for the date input */

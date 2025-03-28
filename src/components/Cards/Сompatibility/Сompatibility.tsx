@@ -16,7 +16,7 @@ const Compatibility: React.FC = () => {
   const [partnerInfo, setPartnerInfo] = useState({ 
     firstName: '', 
     lastName: '', 
-    dateOfBirth: '', 
+    dateOfBirth: '',
     sex: '', 
     relationshipStatus: '' 
   });
@@ -79,16 +79,16 @@ const Compatibility: React.FC = () => {
         <h4>{t('compatibility.title')}</h4>
         <div>
           <label>
+            {t('compatibility.partnerInfoDateOfBirth')} <span className={styles.required}>*</span>
+            <DatePicker onChange={handleDateChange} />
+          </label>
+          <label>
             {t('compatibility.partnerInfoFirstName')}
             <input type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
           </label>
           <label>
             {t('compatibility.partnerInfoLastName')}
             <input type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
-          </label>
-          <label>
-            {t('compatibility.partnerInfoDateOfBirth')}
-            <DatePicker onChange={handleDateChange} />
           </label>
           <label>
             {t('compatibility.partnerInfoSex')}
@@ -109,7 +109,7 @@ const Compatibility: React.FC = () => {
               <option value="complicated">{t('compatibility.statusComplicated')}</option>
             </select>
           </label>
-          <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading}>
+          <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading || !partnerInfo.dateOfBirth}>
             {loading ? t("cards.loading") : t("compatibility.checkButton")}
           </Button>
         </div>
