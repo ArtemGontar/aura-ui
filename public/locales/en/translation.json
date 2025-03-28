@@ -18,7 +18,11 @@
   },
   "home": {
     "daysStreak": "days streak",
-    "welcomeMessage": "We hope you have a magical day!",
+    "welcomeMessage1": "We hope you have a magical day!",
+    "welcomeMessage2": "May this day bring you joy!",
+    "welcomeMessage3": "Enjoy every moment of today!",
+    "welcomeMessage4": "Let the stars guide you to success!",
+    "welcomeMessage5": "Today is your day for new discoveries!",
     "cards": {
       "horoscope": {
         "title": "Horoscope",
@@ -26,7 +30,7 @@
       },
       "compatibility": {
         "title": "Compatibility",
-        "description": "Check your compatibility with others."
+        "description": "Check your compatibility with partner."
       },
       "psychological": {
         "title": "Psychological",
@@ -118,8 +122,7 @@
       "getHoroscope": "Reveal My Horoscope"
     },
     "datePicker": {
-      "label": "Enter your date of birth:",
-      "comment": "This data will be saved and you can change it later in your profile."
+      "label": "Enter your date of birth:"
     }
   },
   "compatibility": {
@@ -129,6 +132,16 @@
     "partnerInfoFirstName": "Partner's First Name",
     "partnerInfoLastName": "Partner's Last Name",
     "partnerInfoDateOfBirth": "Partner's Date of Birth",
+    "partnerInfoSex": "Partner's Sex",
+    "partnerInfoRelationshipStatus": "Partner's Relationship Status",
+    "selectPlaceholder": "Select an option",
+    "sexMale": "Male",
+    "sexFemale": "Female",
+    "sexOther": "Other",
+    "statusSingle": "Single",
+    "statusInRelationship": "In a Relationship",
+    "statusMarried": "Married",
+    "statusComplicated": "It's Complicated",
     "checkButton": "Check Compatibility",
     "result": "Compatibility Score: {{result}}",
     "strengthsTitle": "Key Strengths",
@@ -201,6 +214,7 @@
     "married": "Married",
     "divorced": "Divorced",
     "widowed": "Widowed",
+    "comment": "This data will be saved and you can change it later in your profile.",
     "finish": "Finish"
   },
   "editUser": {

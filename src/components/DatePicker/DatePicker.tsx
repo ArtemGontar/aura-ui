@@ -41,9 +41,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ onChange }) => {
         max={new Date().toISOString().split('T')[0]}
         aria-label={t('dailyHoroscope.datePicker.label')}
       />
-      <p className={styles.comment}>
-        {t('dailyHoroscope.datePicker.comment')}
-      </p>
     </div>
   );
 };

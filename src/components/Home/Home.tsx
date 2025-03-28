@@ -13,6 +13,15 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   const { t } = useTranslation();
   const { isLoading, error, userData, userStats } = useUserData();
 
+  const welcomeMessages = [
+    t('home.welcomeMessage1'),
+    t('home.welcomeMessage2'),
+    t('home.welcomeMessage3'),
+    t('home.welcomeMessage4'),
+    t('home.welcomeMessage5'),
+  ];
+  const randomWelcomeMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+
   const handleNavigation = (path: string, disabled: boolean) => {
     if (!disabled) {
       navigate(path);
@@ -38,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ className }) => {
           {userStats.streak} {t('home.daysStreak')} {userStats.streak > 0 ? "🔥" : ""}
         </p>
         <h2 className={styles.welcome}>{userData.firstName}</h2>
-        <p className={styles.subtitle}>{t('home.welcomeMessage')}</p>
+        <p className={styles.subtitle}>{randomWelcomeMessage}</p>
         <p className={styles.crystalContainer}>
           <span className={styles.crystal}>
             <span className={styles.crystalEmoji}>💎</span>

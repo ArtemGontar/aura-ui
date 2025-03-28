@@ -106,6 +106,9 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
             >
               {loading ? t("loading") : t("onboarding.finish")}
             </Button>
+            <p className={styles.comment}>
+              {t('onboarding.comment')}
+            </p>
             {error && <p className={styles.error}>{error}</p>}
           </>
         )}

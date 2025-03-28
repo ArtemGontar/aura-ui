@@ -44,6 +44,7 @@
 }
 
 .name {
+  position: relative;
   font-size: var(--tg-theme-font-size-h2);
   font-weight: var(--tg-theme-font-weight-extrabold);
   color: var(--tg-theme-text-color);

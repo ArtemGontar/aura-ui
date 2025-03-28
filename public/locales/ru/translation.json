@@ -18,7 +18,11 @@
   },
   "home": {
     "daysStreak": "дней подряд",
-    "welcomeMessage": "Желаем тебе волшебного дня!",
+    "welcomeMessage1": "Желаем тебе волшебного дня!",
+    "welcomeMessage2": "Пусть этот день принесет тебе радость!",
+    "welcomeMessage3": "Наслаждайся каждым моментом сегодняшнего дня!",
+    "welcomeMessage4": "Пусть звезды ведут тебя к успеху!",
+    "welcomeMessage5": "Сегодня твой день для новых открытий!",
     "cards": {
       "horoscope": {
         "title": "Гороскоп",
@@ -26,7 +30,7 @@
       },
       "compatibility": {
         "title": "Совместимость",
-        "description": "Проверь свою совместимость с другими."
+        "description": "Проверь свою совместимость с партнером."
       },
       "psychological": {
         "title": "Психология",
@@ -119,8 +123,7 @@
       "getHoroscope": "Получить гороскоп"
     },
     "datePicker": {
-      "label": "Введите дату рождения:",
-      "comment": "Мы сохраним эту дату, и ты сможешь изменить ee позже в своем профиле."
+      "label": "Введите дату рождения:"
     }
   },
   "compatibility": {
@@ -129,6 +132,16 @@
     "partnerInfoFirstName": "Имя партнёра",
     "partnerInfoLastName": "Фамилия партнёра",
     "partnerInfoDateOfBirth": "Дата рождения партнёра",
+    "partnerInfoSex": "Пол партнёра",
+    "partnerInfoRelationshipStatus": "Семейное положение партнёра",
+    "selectPlaceholder": "Выберите вариант",
+    "sexMale": "Мужской",
+    "sexFemale": "Женский",
+    "sexOther": "Другой",
+    "statusSingle": "Холост",
+    "statusInRelationship": "В отношениях",
+    "statusMarried": "Женат",
+    "statusComplicated": "Всё сложно",
     "checkButton": "Проверить совместимость",
     "result": "Результат совместимости: {{result}}",
     "strengthsTitle": "Сильные стороны",
@@ -201,6 +214,7 @@
     "married": "Женат",
     "divorced": "Разведен",
     "widowed": "Вдовец",
+    "comment": "Мы сохраним данные и ты сможешь изменить их позже в своем профиле",
     "finish": "Завершить"
   },
   "editUser": {

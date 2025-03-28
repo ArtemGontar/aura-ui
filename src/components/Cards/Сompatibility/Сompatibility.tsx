@@ -13,7 +13,13 @@ import DatePicker from '../../DatePicker/DatePicker';
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const [partnerInfo, setPartnerInfo] = useState({ firstName: '', lastName: '', dateOfBirth: '' });
+  const [partnerInfo, setPartnerInfo] = useState({ 
+    firstName: '', 
+    lastName: '', 
+    dateOfBirth: '', 
+    sex: '', 
+    relationshipStatus: '' 
+  });
   const [compatibilityResult, setCompatibilityResult] = useState<{
     emotionalScore: string;
     communicationScore: string;
@@ -31,7 +37,7 @@ const Compatibility: React.FC = () => {
     navigate("/compatibility");
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setPartnerInfo({ ...partnerInfo, [name]: value });
   };
@@ -83,6 +89,25 @@ const Compatibility: React.FC = () => {
           <label>
             {t('compatibility.partnerInfoDateOfBirth')}
             <DatePicker onChange={handleDateChange} />
+          </label>
+          <label>
+            {t('compatibility.partnerInfoSex')}
+            <select name="sex" value={partnerInfo.sex} onChange={handleInputChange}>
+              <option value="">{t('compatibility.selectPlaceholder')}</option>
+              <option value="male">{t('compatibility.sexMale')}</option>
+              <option value="female">{t('compatibility.sexFemale')}</option>
+              <option value="other">{t('compatibility.sexOther')}</option>
+            </select>
+          </label>
+          <label>
+            {t('compatibility.partnerInfoRelationshipStatus')}
+            <select name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>
+              <option value="">{t('compatibility.selectPlaceholder')}</option>
+              <option value="single">{t('compatibility.statusSingle')}</option>
+              <option value="inRelationship">{t('compatibility.statusInRelationship')}</option>
+              <option value="married">{t('compatibility.statusMarried')}</option>
+              <option value="complicated">{t('compatibility.statusComplicated')}</option>
+            </select>
           </label>
           <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading}>
             {loading ? t("cards.loading") : t("compatibility.checkButton")}
