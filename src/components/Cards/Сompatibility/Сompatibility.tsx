@@ -12,12 +12,13 @@ import DatePicker from '../../DatePicker/DatePicker';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import useShowOnboarding from '../../../hooks/useShowOnboarding';
 import { useTelegramInit } from '../../../hooks/useTelegramInit';
+import CompatibilityResult from '../../Cards/Сompatibility/СompatibilityResult';
 import { CompatibilityData } from '../../../types/prediction';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const { isLoading: isTelegramLoading } = useTelegramInit(); // Use the loading state from Telegram init
+  const { isLoading: isTelegramLoading } = useTelegramInit();
   const [partnerInfo, setPartnerInfo] = useState({ 
     firstName: '', 
     lastName: '', 
@@ -48,7 +49,6 @@ const Compatibility: React.FC = () => {
     setLoading(true);
     try {
       const response: CompatibilityData = await getCompatibility(partnerInfo);
-      console.log("response", response);
       setCompatibilityResult(response);
       haptics.notificationOccurred("success");
     } catch (err) {
@@ -82,44 +82,7 @@ const Compatibility: React.FC = () => {
           {loading ? (
             <LoadingDisplay />
           ) : compatibilityResult ? (
-            <>
-              <div className={styles.partnerInfo}>
-                <h5>{t('compatibility.partnerInfo')}</h5>
-                <p>{t('compatibility.partnerInfoFirstName')}: {partnerInfo.firstName || t('compatibility.notFilled')}</p>
-                <p>{t('compatibility.partnerInfoLastName')}: {partnerInfo.lastName || t('compatibility.notFilled')}</p>
-                <p>{t('compatibility.partnerInfoDateOfBirth')}: {partnerInfo.dateOfBirth || t('compatibility.notFilled')}</p>
-                <p>{t('compatibility.partnerInfoSex')}: {partnerInfo.sex ? t(`compatibility.sex${partnerInfo.sex.charAt(0).toUpperCase() + partnerInfo.sex.slice(1)}`) : t('compatibility.notFilled')}</p>
-                <p>{t('compatibility.partnerInfoRelationshipStatus')}: {partnerInfo.relationshipStatus ? t(`compatibility.status${partnerInfo.relationshipStatus.charAt(0).toUpperCase() + partnerInfo.relationshipStatus.slice(1)}`) : t('compatibility.notFilled')}</p>
-              </div>
-              <div className={styles.resultContainer}>
-                <div className={styles.scores}>
-                  <div>
-                    <p>{t('compatibility.emotional')}</p>
-                    <p>{compatibilityResult.emotionalScore}</p>
-                  </div>
-                  <div>
-                    <p>{t('compatibility.intellectual')}</p>
-                    <p>{compatibilityResult.communicationScore}</p>
-                  </div>
-                  <div>
-                    <p>{t('compatibility.physical')}</p>
-                    <p>{compatibilityResult.passionScore}</p>
-                  </div>
-                </div>
-                <h5>{t('compatibility.strengthsTitle')}</h5>
-                <ul className={styles.list}>
-                  {compatibilityResult.strengths.map((strength, index) => (
-                    <li key={index}>{strength}</li>
-                  ))}
-                </ul>
-                <h5>{t('compatibility.challengesTitle')}</h5>
-                <ul className={styles.list}>
-                  {compatibilityResult.challenges.map((challenge, index) => (
-                    <li key={index}>{challenge}</li>
-                  ))}
-                </ul>
-              </div>
-            </>
+            <CompatibilityResult partnerInfo={partnerInfo} compatibilityResult={compatibilityResult} />
           ) : (
             <>
               <h4>{t('compatibility.title')}</h4>

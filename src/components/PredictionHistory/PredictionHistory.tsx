@@ -7,6 +7,7 @@ import { Pagination } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import HoroscopeResult from "../../components/Cards/HoroscopeResult/HoroscopeResult";
 import { Drawer } from "vaul";
+import CompatibilityResult from "../Cards/Сompatibility/СompatibilityResult";
 
 const PredictionHistory: React.FC = () => {
   const { t } = useTranslation();
@@ -43,6 +44,9 @@ const PredictionHistory: React.FC = () => {
       case "DailyHoroscope":
         const horoscope: HoroscopeData = selectedPrediction.content as HoroscopeData;
         return <HoroscopeResult horoscope={horoscope} />;
+      case "Compatibility":
+        const compatibilityData = selectedPrediction.content as CompatibilityData;
+        return <CompatibilityResult compatibilityResult={compatibilityData} />;
       default:
         return <div>{t('profile.history.unknownPredictionType')}</div>;
     }
@@ -53,13 +57,16 @@ const PredictionHistory: React.FC = () => {
 
     switch (prediction.type) {
       case "DailyHoroscope":
-        console.log("prediction", prediction.type);
-        console.log(prediction.content);
-
         const generalGuidance: string = (prediction.content as HoroscopeData).generalGuidance;
         return generalGuidance.length > 100
           ? `${generalGuidance.substring(0, 100)}...`
           : generalGuidance;
+      case "Compatibility":
+        const compatibilityResult: string = (prediction.content as CompatibilityData).strengths.join(", ");
+        return compatibilityResult.length > 100
+          ? `${compatibilityResult.substring(0, 100)}...`
+          : compatibilityResult;
+      
       default:
         return;
     }
