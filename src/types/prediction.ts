@@ -20,3 +20,18 @@ export interface Compatibility {
   strengths: string[];
   challenges: string[];
 }
+
+export interface CompatibilityData {
+  emotionalScore: string;
+  communicationScore: string;
+  passionScore: string;
+  strengths: string[];
+  challenges: string[];
+}
+
+export interface HoroscopeData {
+  generalGuidance: string;
+  loveRelationshipsAdvice: string;
+  careerFinancialInsights: string;
+  focus: string;
+}

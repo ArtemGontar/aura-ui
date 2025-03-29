@@ -12,6 +12,7 @@ import DatePicker from '../../DatePicker/DatePicker';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import useShowOnboarding from '../../../hooks/useShowOnboarding';
 import { useTelegramInit } from '../../../hooks/useTelegramInit';
+import { CompatibilityData } from '../../../types/prediction';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -24,13 +25,7 @@ const Compatibility: React.FC = () => {
     sex: '', 
     relationshipStatus: '' 
   });
-  const [compatibilityResult, setCompatibilityResult] = useState<{
-    emotionalScore: string;
-    communicationScore: string;
-    passionScore: string;
-    strengths: string[];
-    challenges: string[];
-  } | null>(null);
+  const [compatibilityResult, setCompatibilityResult] = useState<CompatibilityData | null>(null);
   const [loading, setLoading] = useState(false);
   const haptics = useTelegramHaptics();
   const navigate = useNavigate();
@@ -52,7 +47,7 @@ const Compatibility: React.FC = () => {
   const checkCompatibility = async () => {
     setLoading(true);
     try {
-      const response = await getCompatibility(partnerInfo);
+      const response: CompatibilityData = await getCompatibility(partnerInfo);
       console.log("response", response);
       setCompatibilityResult(response);
       haptics.notificationOccurred("success");

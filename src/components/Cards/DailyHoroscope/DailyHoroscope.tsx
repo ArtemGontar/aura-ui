@@ -9,17 +9,19 @@ import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 import Onboarding from "../../Onboarding/Onboarding";
 import { Drawer } from "vaul";
 import { calculateZodiacSign } from "../../../utils/calculateZodiacSign";
+import HoroscopeResult from "../HoroscopeResult/HoroscopeResult";
+import { HoroscopeData } from "../../../types/prediction";
 
-const DailyHoroscope: React.FC = () => {
+interface DailyHoroscopeProps {
+  predictionId?: string;
+  predictionData?: HoroscopeData;
+}
+
+const DailyHoroscope: React.FC<DailyHoroscopeProps> = ({ predictionId, predictionData }) => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const haptics = useTelegramHaptics();
-  const [horoscope, setHoroscope] = useState<{
-    generalGuidance: string;
-    loveRelationshipsAdvice: string;
-    careerFinancialInsights: string;
-    focus: string;
-  } | null>(null);
+  const [horoscope, setHoroscope] = useState<HoroscopeData | null>(predictionData || null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || "aries");
@@ -34,7 +36,7 @@ const DailyHoroscope: React.FC = () => {
   };
 
   const handleBirthDateChange = (date: { day: string; month: string; year: string }) => {
-    const zodiacSign = calculateZodiacSign(date); // Assume this function exists
+    const zodiacSign = calculateZodiacSign(date);
     setHoroscopeSign(zodiacSign);
   };
 
@@ -51,17 +53,29 @@ const DailyHoroscope: React.FC = () => {
   }, [horoscopeSign]);
 
   const requestHoroscope = async () => {
+    if (predictionData) return;
     setLoading(true);
     setError("");
     haptics.impactOccurred("medium");
     try {
-      setHoroscope(await getHoroscope());
+      const fetchedHoroscope: HoroscopeData = await getHoroscope();
+      setHoroscope(fetchedHoroscope);
     } catch {
       setError(t("cards.error"));
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (predictionId && !predictionData) {
+      requestHoroscope();
+    }
+  }, [predictionId]);
+
+  if (horoscope) {
+    return <HoroscopeResult horoscope={horoscope} />;
+  }
 
   return (
     <div className={commonStyles.card}>
@@ -79,7 +93,7 @@ const DailyHoroscope: React.FC = () => {
         </div>
         {showOnboarding ? (
           <Drawer.Root>
-            <Drawer.Trigger>                  
+            <Drawer.Trigger>
               <span className={styles.triggerButton}>{t("onboarding.openDrawer")}</span>
             </Drawer.Trigger>
             <Drawer.Portal container={document.getElementById('telegram-root')!}>
@@ -99,20 +113,7 @@ const DailyHoroscope: React.FC = () => {
           </Button>
         )}
       </div>
-
       {error && <p className={styles.error}>{error}</p>}
-      
-      {horoscope && 
-       <div className={styles.resultContainer}>
-        <h3 className={styles.resultTitle}>{t('dailyHoroscope.generalGuidance')}</h3>
-        <p className={styles.resultText}>{horoscope.generalGuidance}</p>
-        <h3 className={styles.resultTitle}>{t('dailyHoroscope.loveRelationshipsAdvice')}</h3>
-        <p className={styles.resultText}>{horoscope.loveRelationshipsAdvice}</p>
-        <h3 className={styles.resultTitle}>{t('dailyHoroscope.careerFinancialInsights')}</h3>
-        <p className={styles.resultText}>{horoscope.careerFinancialInsights}</p>
-        <h3 className={styles.resultTitle}>{t('dailyHoroscope.focus')}</h3> {/* Added focus section */}
-        <p className={styles.resultText}>{horoscope.focus}</p>
-       </div>}
     </div>
   );
 };
