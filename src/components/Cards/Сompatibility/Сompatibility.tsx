@@ -11,10 +11,12 @@ import Onboarding from "../../Onboarding/Onboarding";
 import DatePicker from '../../DatePicker/DatePicker';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import useShowOnboarding from '../../../hooks/useShowOnboarding';
+import { useTelegramInit } from '../../../hooks/useTelegramInit';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
+  const { isLoading: isTelegramLoading } = useTelegramInit(); // Use the loading state from Telegram init
   const [partnerInfo, setPartnerInfo] = useState({ 
     firstName: '', 
     lastName: '', 
@@ -32,7 +34,6 @@ const Compatibility: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const haptics = useTelegramHaptics();
   const navigate = useNavigate();
-  const showOnboarding = useShowOnboarding(userData);
 
   const handleOnboardingComplete = () => {
     navigate("/compatibility");
@@ -61,6 +62,12 @@ const Compatibility: React.FC = () => {
       setLoading(false);
     }
   };
+
+  if (isTelegramLoading) {
+    return <LoadingDisplay />;
+  }
+
+  const showOnboarding = !isTelegramLoading && useShowOnboarding(userData);
 
   return (
     <div className={commonStyles.card}>
