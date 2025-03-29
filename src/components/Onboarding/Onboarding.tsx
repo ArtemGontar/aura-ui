@@ -7,7 +7,10 @@ import { updateUserData } from "../../services/userService";
 import DatePicker from "../DatePicker/DatePicker";
 import { useUserData } from "../../hooks/useUserData";
 
-const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+const Onboarding: React.FC<{ 
+  onComplete: () => void; 
+  onBirthDateChange: (date: { day: string; month: string; year: string }) => void; 
+}> = ({ onComplete, onBirthDateChange }) => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
@@ -21,6 +24,11 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const handleNextStep = () => {
     haptics.selectionChanged();
     setStep((prev) => prev + 1);
+  };
+
+  const handleDateChange = (date: { day: string; month: string; year: string }) => {
+    setBirthDate(date);
+    onBirthDateChange(date);
   };
 
   const handleFinish = async () => {
@@ -50,7 +58,7 @@ const Onboarding: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
             <h4>{t("onboarding.enterBirthDate")}</h4>
             <DatePicker
               className={styles.datePicker}
-              onChange={(date) => setBirthDate(date)}
+              onChange={handleDateChange}
             />
             <Button
               onClick={handleNextStep}

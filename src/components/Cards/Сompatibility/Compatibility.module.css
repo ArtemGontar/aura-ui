@@ -4,10 +4,10 @@
   margin: 0 auto;
 }
 
-.compatibility h4 {
+.compatibility h5 {
   color: var(--tg-theme-text-color);
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
 .compatibility label {
@@ -40,6 +40,44 @@
   box-sizing: border-box;
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+}
+
+.resultContainer {
+  margin-top: 2rem; /* Add more space above the result container */
+  padding: 1.5rem; /* Add padding inside the result container */
+  border-radius: var(--tg-theme-border-radius);
+}
+
+.resultContainer > .list {
+  text-align: justify;
+  margin-top: 1rem; /* Add space between lists */
+}
+
+.resultContainer > .list li {
+  margin-bottom: 0.5rem; /* Add small margin between list items */
+}
+
+.scores {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem; /* Increase space below scores */
+}
+
+.scores > div {
+  flex: 1;
+  text-align: center;
+}
+
+.scores > div p:first-child {
+  font-size: 0.9rem; /* Reduce font size of score titles */
+  margin-bottom: 0.5rem; /* Add space below score titles */
+  color: var(--tg-theme-hint-color);
+}
+
+.scores > div p:last-child {
+  font-size: 1.5rem; /* Increase font size of score digits */
+  font-weight: bold;
+  margin-top: 0.2rem; /* Add slight space above score digits */
 }
 
 .resultContainer > .list {
@@ -91,4 +129,30 @@
   color: red;
   margin-left: 4px;
   font-size: 0.9em;
+}
+
+.loader {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--tg-theme-hint-color);
+  margin: 2rem 0;
+}
+
+.partnerInfo {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
+}
+
+.partnerInfo h5 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--tg-theme-text-color);
+}
+
+.partnerInfo p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: var(--tg-theme-text-color);
 }

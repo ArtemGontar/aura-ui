@@ -8,6 +8,7 @@ import { Button } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 import Onboarding from "../../Onboarding/Onboarding";
 import { Drawer } from "vaul";
+import { calculateZodiacSign } from "../../../utils/calculateZodiacSign";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
@@ -27,6 +28,14 @@ const DailyHoroscope: React.FC = () => {
 
   const handleOnboardingComplete = () => {
     setShowOnboarding(false);
+    if (userData?.dateOfBirth) {
+      setHoroscopeSign(userData.zodiacSign || "aries");
+    }
+  };
+
+  const handleBirthDateChange = (date: { day: string; month: string; year: string }) => {
+    const zodiacSign = calculateZodiacSign(date); // Assume this function exists
+    setHoroscopeSign(zodiacSign);
   };
 
   useEffect(() => {
@@ -59,7 +68,15 @@ const DailyHoroscope: React.FC = () => {
       <h2 className={commonStyles.title}>{t("dailyHoroscope.title")}</h2>
       <p className={commonStyles.description}>{t("dailyHoroscope.description")}</p>
       <div className={styles.titleContainer}>
-        {backgroundImage && <img src={backgroundImage} alt={horoscopeSign || "Horoscope Sign"} className={styles.horoscopeImage} />}
+        <div className={`${styles.horoscopeImageContainer} ${backgroundImage ? styles.visible : styles.hidden}`}>
+          {backgroundImage && (
+            <img
+              src={backgroundImage}
+              alt={horoscopeSign || "Horoscope Sign"}
+              className={styles.horoscopeImage}
+            />
+          )}
+        </div>
         {showOnboarding ? (
           <Drawer.Root>
             <Drawer.Trigger>                  
@@ -69,7 +86,10 @@ const DailyHoroscope: React.FC = () => {
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
               <Drawer.Content className={`${styles.onboardingContent} fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4`}>
                 <Drawer.Handle />
-              <Onboarding onComplete={handleOnboardingComplete} />
+                <Onboarding 
+                  onComplete={handleOnboardingComplete} 
+                  onBirthDateChange={handleBirthDateChange} 
+                />
               </Drawer.Content>
             </Drawer.Portal>
           </Drawer.Root>

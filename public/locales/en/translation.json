@@ -129,6 +129,7 @@
     "title": "Partner Compatibility",
     "completeProfile": "Complete your profile to see how well you match.",
     "error": "Failed to save your profile. Please try again 😉",
+    "partnerInfo": "Partner Information",
     "partnerInfoFirstName": "Partner's First Name",
     "partnerInfoLastName": "Partner's Last Name",
     "partnerInfoDateOfBirth": "Partner's Date of Birth",
@@ -144,15 +145,16 @@
     "statusComplicated": "It's Complicated",
     "checkButton": "Check Compatibility",
     "result": "Compatibility Score: {{result}}",
-    "strengthsTitle": "Key Strengths",
-    "challengesTitle": "Potential Challenges",
+    "strengthsTitle": "💡 Key Strengths",
+    "challengesTitle": "⚠️ Potential Challenges",
     "emotional": "Emotional Compatibility",
     "intellectual": "Intellectual Compatibility",
     "physical": "Physical Compatibility",
     "banner": {
       "title": "Discover Your Compatibility",
       "subtitle": "Check how well you align emotionally, intellectually, and physically."
-    }
+    },
+    "notFilled": "Information not provided"
   },
   "psychological": {
     "title": "Psychological Insight",
