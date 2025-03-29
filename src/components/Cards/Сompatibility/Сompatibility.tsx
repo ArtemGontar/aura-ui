@@ -14,12 +14,13 @@ import useShowOnboarding from '../../../hooks/useShowOnboarding';
 import { useTelegramInit } from '../../../hooks/useTelegramInit';
 import CompatibilityResult from '../../Cards/Сompatibility/СompatibilityResult';
 import { CompatibilityData } from '../../../types/prediction';
+import { PartnerInfo } from '../../../types/partner';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const { isLoading: isTelegramLoading } = useTelegramInit();
-  const [partnerInfo, setPartnerInfo] = useState({ 
+  const [partnerInfo, setPartnerInfo] = useState<PartnerInfo>({
     firstName: '', 
     lastName: '', 
     dateOfBirth: '',
