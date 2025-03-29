@@ -1,18 +1,31 @@
-.card {
+.affirmationContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px;
-  background-color: var(--tg-theme-bg-color);
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .title {
-  font-size: 20px;
   font-weight: bold;
   color: var(--tg-theme-text-color);
   margin-bottom: 12px;
+}
+
+.goalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0;
 }
 
 .message {
@@ -43,4 +56,9 @@
 .button:hover {
   opacity: 0.9;
   transform: translateY(-2px);
+}
+
+input {
+  width: 100%;
+  border: 1px solid var(--tg-theme-text-color);
 }

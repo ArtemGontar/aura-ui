@@ -24,12 +24,7 @@ const Affirmation: React.FC = () => {
     }
   };
 
-  const handleGoalChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setGoal(value === "custom" ? "" : value);
-  };
-
-  const handleCustomGoalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleGoalChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGoal(event.target.value);
   };
 
@@ -38,34 +33,32 @@ const Affirmation: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.card}>
+    <div className={styles.affirmationContainer}>
       <h2 className={styles.title}>{t("affirmation.title")}</h2>
       <div className={styles.goalContainer}>
-        <label htmlFor="goalSelect">{t("affirmation.goal.label")}</label>
-        <select id="goalSelect" value={goal} onChange={handleGoalChange}>
-          <option value="">{t("affirmation.goal.selectPlaceholder")}</option>
-          <option value="career">{t("affirmation.goal.options.career")}</option>
-          <option value="health">{t("affirmation.goal.options.health")}</option>
-          <option value="relationships">{t("affirmation.goal.options.relationships")}</option>
-          <option value="custom">{t("affirmation.goal.options.custom")}</option>
-        </select>
-        {goal === "" && (
-          <input
-            type="text"
-            placeholder={t("affirmation.goal.customPlaceholder")}
-            value={goal}
-            onChange={handleCustomGoalChange}
-          />
+        <input
+          id="goalInput"
+          list="goalOptions"
+          value={goal}
+          onChange={handleGoalChange}
+          placeholder={t("affirmation.goal.selectPlaceholder")}
+        />
+        <datalist id="goalOptions">
+          <option value={t("affirmation.goal.options.career")} />
+          <option value={t("affirmation.goal.options.health")} />
+          <option value={t("affirmation.goal.options.relationships")} />
+        </datalist>
+      </div>
+      <div className={styles.resultContainer}>
+        {affirmation ? (
+          <>
+            <p className={styles.message}>{affirmation.message}</p>
+            <p className={styles.category}>{t("affirmation.category", { category: affirmation.category })}</p>
+          </>
+        ) : (
+          <p>{loading ? t("cards.loading") : error || t("affirmation.noData")}</p>
         )}
       </div>
-      {affirmation ? (
-        <>
-          <p className={styles.message}>{affirmation.message}</p>
-          <p className={styles.category}>{t("affirmation.category", { category: affirmation.category })}</p>
-        </>
-      ) : (
-        <p>{loading ? t("cards.loading") : error || t("affirmation.noData")}</p>
-      )}
       <Button className={styles.button} onClick={fetchAffirmation} disabled={loading}>
         {loading ? t("cards.loading") : t("affirmation.buttons.refresh")}
       </Button>

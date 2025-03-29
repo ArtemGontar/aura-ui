@@ -32,6 +32,14 @@
         "title": "Compatibility",
         "description": "Check your compatibility with partner."
       },
+      "affirmation": {
+        "title": "Affirmation",
+        "description": "Set your daily intention."
+      },
+      "dreamBook": {
+        "title": "Dream Book",
+        "description": "Explore the meaning of your dreams."
+      },
       "psychological": {
         "title": "Psychological",
         "description": "Explore psychological insights."
