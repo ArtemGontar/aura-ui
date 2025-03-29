@@ -234,5 +234,18 @@
     "widowed": "Вдовец",
     "save": "Сохранить",
     "saveError": "Ошибка при сохранении данных."
+  },
+  "affirmation": {
+    "goal": {
+      "label": "Установить цель",
+      "selectPlaceholder": "Выберите цель",
+      "options": {
+        "career": "Карьера",
+        "health": "Здоровье",
+        "relationships": "Отношения",
+        "custom": "Другое"
+      },
+      "customPlaceholder": "Введите свою цель"
+    }
   }
 }

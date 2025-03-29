@@ -1,4 +1,4 @@
-import { Compatibility, Horoscope, Prediction, HoroscopeData, CompatibilityData } from "../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData, AffirmationData } from "../types/prediction";
 import api from "./api";
 
 const API_BASE = `/api/fortunes`;
@@ -53,3 +53,14 @@ export const getCompatibility = async (partnerData: {
 export const getMagicBallAnswer = async (): Promise<string> => {
  return new Promise(() => {});
 }
+
+export const getAffirmation = async (): Promise<AffirmationData> => {
+  try {
+    const response = await api.post<{ content: string }>(`${API_BASE}/affirmation`);
+    const parsedData: AffirmationData = JSON.parse(response.data.content);
+    return parsedData;
+  } catch (error) {
+    console.error("Error fetching affirmation", error);
+    throw error;
+  }
+};

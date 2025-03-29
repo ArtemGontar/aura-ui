@@ -3,7 +3,7 @@ export interface Prediction {
   type: string;
   createdAt: string;
   updatedAt: string;
-  content: CompatibilityData | HoroscopeData;
+  content: CompatibilityData | HoroscopeData | AffirmationData;
 }
 
 export interface Horoscope {
@@ -34,4 +34,9 @@ export interface HoroscopeData {
   loveRelationshipsAdvice: string;
   careerFinancialInsights: string;
   focus: string;
+}
+
+export interface AffirmationData {
+  message: string;
+  category: string;
 }

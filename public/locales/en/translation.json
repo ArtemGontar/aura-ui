@@ -123,6 +123,17 @@
     },
     "datePicker": {
       "label": "Enter your date of birth:"
+    },
+    "goal": {
+      "label": "Set Goal",
+      "selectPlaceholder": "Select a goal",
+      "options": {
+        "career": "Career",
+        "health": "Health",
+        "relationships": "Relationships",
+        "custom": "Other"
+      },
+      "customPlaceholder": "Enter your goal"
     }
   },
   "compatibility": {
@@ -234,5 +245,18 @@
     "widowed": "Widowed",
     "save": "Save",
     "saveError": "Error saving data."
+  },
+  "affirmation": {
+    "goal": {
+      "label": "Set Goal",
+      "selectPlaceholder": "Select a goal",
+      "options": {
+        "career": "Career",
+        "health": "Health",
+        "relationships": "Relationships",
+        "custom": "Other"
+      },
+      "customPlaceholder": "Enter your goal"
+    }
   }
 }

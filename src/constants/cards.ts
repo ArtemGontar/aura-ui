@@ -14,6 +14,12 @@ export const HOME_CARDS: CardData[] = [
     disabled: false
   },
   {
+    id: 'affirmation',
+    path: '/affirmation',
+    icon: '💬',
+    disabled: false
+  },
+  {
     id: 'psychological',
     path: '/psychological',
     icon: '🧠',

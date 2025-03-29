@@ -23,6 +23,7 @@ import TariffPlans from "./components/TariffPlans/TariffPlans";
 import useTelegramBackButton from "./hooks/useTelegramBackButton";
 import EditUser from "./components/EditUser/EditUser";
 import useTelegramWebApp from "./hooks/useTelegramWebApp";
+import Affirmation from "./components/Cards/Affirmation/Affirmation";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit();
@@ -63,6 +64,7 @@ const AppContent: React.FC = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/horoscope" element={<DailyHoroscope />} />
           <Route path="/compatibility" element={<Compatibility />} />
+          <Route path="/affirmation" element={<Affirmation />} />
           <Route path="/psychological" element={<Psychological />} />
           <Route path="/astrology" element={<Astrology />} />
           <Route path="/magicball" element={<MagicBall />} />
