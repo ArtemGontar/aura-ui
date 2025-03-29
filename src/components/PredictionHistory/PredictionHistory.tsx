@@ -82,10 +82,12 @@ const PredictionHistory: React.FC = () => {
                 </div>
               </Drawer.Trigger>
               <Drawer.Portal container={document.getElementById('telegram-root')!}>
-                <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-                <Drawer.Content className={`${styles.drawerContent} fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4`}>
-                  <Drawer.Handle />
+              <Drawer.Overlay className="fixed inset-0 bg-black/40" />
+              <Drawer.Content className="bg-gray-100 flex flex-col rounded-t-[10px] mt-24 h-[80%] lg:h-[320px] fixed bottom-0 left-0 right-0 outline-none">
+                <Drawer.Handle />
+                <div className="p-4 bg-white rounded-t-[10px] flex-1 overflow-y-auto">
                   {renderPredictionComponent()}
+                </div>
                 </Drawer.Content>
               </Drawer.Portal>
             </Drawer.Root>
