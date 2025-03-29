@@ -24,6 +24,7 @@ import useTelegramBackButton from "./hooks/useTelegramBackButton";
 import EditUser from "./components/EditUser/EditUser";
 import useTelegramWebApp from "./hooks/useTelegramWebApp";
 import Affirmation from "./components/Cards/Affirmation/Affirmation";
+import DreamBook from "./components/Cards/DreamBook/DreamBook";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit();
@@ -71,6 +72,7 @@ const AppContent: React.FC = () => {
           <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} />
           <Route path="/tariff-plans" element={<TariffPlans />} />
           <Route path="/edit-user" element={<EditUser />} />
+          <Route path="/dreambook" element={<DreamBook />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

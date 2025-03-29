@@ -216,6 +216,16 @@
       "defaultText": "Your psychological insight will be displayed here."
     }
   },
+  "dreamBook": {
+    "banner": {
+      "title": "Dream Book",
+      "subtitle": "Unveil the secrets of your dreams"
+    },
+    "title": "Enter your dream description",
+    "placeholder": "Write your dream here...",
+    "interpretButton": "Interpret Dream",
+    "resultTitle": "Interpretation Result"
+  },
   "createPersonalMeditation": {
     "title": "Create Personal Meditation",
     "topic": "Topic",

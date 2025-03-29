@@ -64,3 +64,13 @@ export const getAffirmation = async (): Promise<AffirmationData> => {
     throw error;
   }
 };
+
+export const getDreamInterpretation = async (dreamText: string): Promise<string> => {
+  try {
+    const response = await api.post<{ content: string }>(`${API_BASE}/dream-interpretation`, { dreamText });
+    return response.data.content;
+  } catch (error) {
+    console.error("Error fetching dream interpretation", error);
+    throw error;
+  }
+};
