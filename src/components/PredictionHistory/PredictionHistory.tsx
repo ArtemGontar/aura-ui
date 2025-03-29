@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./PredictionHistory.module.css";
 import { getPredictions } from "../../services/predictionService";
-import { Prediction, HoroscopeData } from "../../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData } from "../../types/prediction";
 import { Pagination } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import HoroscopeResult from "../../components/Cards/HoroscopeResult/HoroscopeResult";
@@ -41,10 +41,27 @@ const PredictionHistory: React.FC = () => {
 
     switch (selectedPrediction.type) {
       case "DailyHoroscope":
-        const horoscope: HoroscopeData = JSON.parse(selectedPrediction.content);
+        const horoscope: HoroscopeData = selectedPrediction.content as HoroscopeData;
         return <HoroscopeResult horoscope={horoscope} />;
       default:
         return <div>{t('profile.history.unknownPredictionType')}</div>;
+    }
+  };
+
+  const renderPredictionPreview = (prediction: Prediction) => {
+    if (!prediction) return null;
+
+    switch (prediction.type) {
+      case "DailyHoroscope":
+        console.log("prediction", prediction.type);
+        console.log(prediction.content);
+
+        const generalGuidance: string = (prediction.content as HoroscopeData).generalGuidance;
+        return generalGuidance.length > 100
+          ? `${generalGuidance.substring(0, 100)}...`
+          : generalGuidance;
+      default:
+        return;
     }
   };
 
@@ -76,7 +93,7 @@ const PredictionHistory: React.FC = () => {
                     <div className={styles.predictionType}>{prediction.type}</div>
                   </div>
                   <p className={styles.predictionContent}>
-                    {prediction.content.length > 100 ? `${prediction.content.substring(0, 100)}...` : prediction.content}
+                    {renderPredictionPreview(prediction)}
                   </p>
                   <div className={styles.predictionDate}>{prediction.createdAt}</div>
                 </div>

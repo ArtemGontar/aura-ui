@@ -3,7 +3,7 @@ export interface Prediction {
   type: string;
   createdAt: string;
   updatedAt: string;
-  content: string;
+  content: CompatibilityData | HoroscopeData;
 }
 
 export interface Horoscope {

@@ -8,7 +8,11 @@ export const getPredictions = async (page: number, limit: number): Promise<{ dat
     const response = await api.get(`${API_BASE}`, {
       params: { page, limit }
     });
-    return { data: response.data.items, total: response.data.totalItems };
+    const parsedData = response.data.items.map((prediction: Prediction) => ({
+      ...prediction,
+      content: JSON.parse(prediction.content as unknown as string),
+    }));
+    return { data: parsedData, total: response.data.totalItems };
   } catch (error) {
     if (error.response && error.response.status === 404) {
       console.warn("No predictions found, returning empty array");
