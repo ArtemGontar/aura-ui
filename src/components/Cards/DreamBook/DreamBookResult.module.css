@@ -1,0 +1,17 @@
+.resultContainer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--tg-theme-border-radius);
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
+.resultContainer h4 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--tg-theme-text-color);
+}
+
+.resultContainer p {
+  font-size: 1rem;
+  color: var(--tg-theme-text-color);
+}

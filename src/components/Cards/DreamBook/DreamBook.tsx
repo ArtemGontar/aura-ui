@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUserData } from '../../../hooks/useUserData';
 import commonStyles from "../Cards.module.css";
 import styles from './DreamBook.module.css';
 import { getDreamInterpretation } from '../../../services/predictionService';
 import { Button } from '@telegram-apps/telegram-ui';
 import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
+import DreamBookResult from './DreamBookResult';
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
-  const { userData } = useUserData();
   const [dreamText, setDreamText] = useState('');
   const [interpretation, setInterpretation] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -45,27 +44,20 @@ const DreamBook: React.FC = () => {
         </p>
       </div>
       <div className={styles.dreamBook}>
-        {loading ? (
-          <LoadingDisplay />
-        ) : interpretation ? (
-          <div className={styles.resultContainer}>
-            <h4>{t('dreamBook.resultTitle')}</h4>
-            <p>{interpretation}</p>
-          </div>
-        ) : (
-          <>
-            <h4>{t('dreamBook.title')}</h4>
-            <textarea
-              className={styles.textarea}
-              value={dreamText}
-              onChange={handleInputChange}
-              placeholder={t('dreamBook.placeholder')}
-            />
-            <Button onClick={interpretDream} disabled={loading || !dreamText}>
-              {t("dreamBook.interpretButton")}
-            </Button>
-          </>
-        )}
+        <>
+          <h4>{t('dreamBook.title')}</h4>
+          <textarea
+            className={styles.textarea}
+            value={dreamText}
+            onChange={handleInputChange}
+            placeholder={t('dreamBook.placeholder')}
+          />
+          <Button onClick={interpretDream} disabled={loading || !dreamText}>
+            {t("dreamBook.interpretButton")}
+          </Button>
+          {loading && <LoadingDisplay />}
+          {interpretation && <DreamBookResult interpretation={interpretation} />}
+        </>
       </div>
     </div>
   );
