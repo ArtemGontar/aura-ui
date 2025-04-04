@@ -23,3 +23,10 @@ export interface Subscription {
   plan: string;
   expiration: string;
 }
+
+export interface UserState {
+  userData: UserData | null;
+  userStats: UserStats;
+  isLoading: boolean;
+  error: string | null;
+}

@@ -5,6 +5,7 @@ import { UserData } from "../types/user";
 import { MOCK_USER_DATA } from "../utils/debug";
 import { setError, setLoading, saveUserDataAsync } from '../store/slices/userSlice';
 import { RootState, AppDispatch } from '../store';
+import { fetchQuotasAsync } from '../store/slices/quotaSlice';
 
 // Helper functions
 const getTelegramUserData = (): UserData => {
@@ -50,6 +51,7 @@ export const useTelegramInit = () => {
 
       // Save user data
       await dispatch(saveUserDataAsync(userData));
+      await dispatch(fetchQuotasAsync());
     } catch (err) {
       dispatch(setError(err instanceof Error ? err.message : "Failed to initialize Telegram WebApp"));
     } finally {

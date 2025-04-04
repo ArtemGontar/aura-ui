@@ -27,8 +27,8 @@ const PredictionHistory: React.FC = () => {
         const { data, total } = await getPredictions(page, 5);
         setPredictions(data);
         setTotalItems(total);
-      } catch (err) {
-        setError(err.message || t('profile.history.error'));
+      } catch (error) {
+        setError(error.message || t('profile.history.error'));
       } finally {
         setIsLoading(false);
       }

@@ -1,61 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserData, UserStats } from '../../types/user';
-import { FEATURES } from '../../config/features';
+import { UserData, UserState, UserStats } from '../../types/user';
 import { getUserData, updateUserData } from '../../services/userService';
 
-export const saveUserDataAsync = createAsyncThunk(
-  'user/saveUserData',
-  async (userData: UserData, { dispatch }) => {
-    dispatch(setUserData(userData));
-
-    // If backend is enabled, try to sync in background
-    if (FEATURES.USE_BACKEND) {
-      const userId = userData.id;
-      if (!userId) {
-        console.warn("Cannot sync with backend: User ID is missing");
-        return userData;
-      }
-
-      try {
-        // Get existing user data from backend
-        const existingUserResponse = await getUserData(userId);
-        const existingUserData = existingUserResponse;
-
-        // Update only specific fields
-        const updatedUserData = {
-          ...existingUserData,
-          firstName: userData.firstName,
-          lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
-          username: userData.username !== undefined ? userData.username : existingUserData.username,
-          languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
-          isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
-          photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
-        };
-
-        const updatedResponse = await updateUserData(updatedUserData);
-        dispatch(setUserData(updatedResponse));
-        return updatedResponse;
-      } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // If user does not exist, create new user data
-          const newUserResponse = await updateUserData(userData);
-          dispatch(setUserData(newUserResponse));
-          return newUserResponse;
-        } else {
-          throw error;
-        }
-      }
-    }
-    return userData;
-  }
-);
-
-export interface UserState {
-  userData: UserData | null;
-  userStats: UserStats;
-  isLoading: boolean;
-  error: string | null;
-}
 
 export const initialState: UserState = {
   userData: null,
@@ -66,6 +12,49 @@ export const initialState: UserState = {
   isLoading: true,
   error: null,
 };
+
+export const saveUserDataAsync = createAsyncThunk(
+  'user/saveUserData',
+  async (userData: UserData, { dispatch }) => {
+    dispatch(setUserData(userData));
+    
+    const userId = userData.id;
+    if (!userId) {
+      console.warn("Cannot sync with backend: User ID is missing");
+      return userData;
+    }
+
+    try {
+      // Get existing user data from backend
+      const existingUserResponse = await getUserData(userId);
+      const existingUserData = existingUserResponse;
+
+      // Update only specific fields
+      const updatedUserData = {
+        ...existingUserData,
+        firstName: userData.firstName,
+        lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
+        username: userData.username !== undefined ? userData.username : existingUserData.username,
+        languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
+        isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
+        photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
+      };
+
+      const updatedResponse = await updateUserData(updatedUserData);
+      dispatch(setUserData(updatedResponse));
+      return updatedResponse;
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        // If user does not exist, create new user data
+        const newUserResponse = await updateUserData(userData);
+        dispatch(setUserData(newUserResponse));
+        return newUserResponse;
+      } else {
+        throw error;
+      }
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: 'user',

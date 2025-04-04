@@ -11,17 +11,14 @@ import { Drawer } from "vaul";
 import { calculateZodiacSign } from "../../../utils/calculateZodiacSign";
 import HoroscopeResult from "../HoroscopeResult/HoroscopeResult";
 import { HoroscopeData } from "../../../types/prediction";
+import { useQuotas } from "../../../hooks/useQuotas";
 
-interface DailyHoroscopeProps {
-  predictionId?: string;
-  predictionData?: HoroscopeData;
-}
-
-const DailyHoroscope: React.FC<DailyHoroscopeProps> = ({ predictionId, predictionData }) => {
+const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const haptics = useTelegramHaptics();
-  const [horoscope, setHoroscope] = useState<HoroscopeData | null>(predictionData || null);
+  const { remainingUses, useFeature } = useQuotas("horoscope");
+  const [horoscope, setHoroscope] = useState<HoroscopeData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || "aries");
@@ -53,13 +50,13 @@ const DailyHoroscope: React.FC<DailyHoroscopeProps> = ({ predictionId, predictio
   }, [horoscopeSign]);
 
   const requestHoroscope = async () => {
-    if (predictionData) return;
     setLoading(true);
     setError("");
     haptics.impactOccurred("medium");
     try {
       const fetchedHoroscope: HoroscopeData = await getHoroscope();
       setHoroscope(fetchedHoroscope);
+      useFeature();
     } catch {
       setError(t("cards.error"));
     } finally {
@@ -67,11 +64,10 @@ const DailyHoroscope: React.FC<DailyHoroscopeProps> = ({ predictionId, predictio
     }
   };
 
-  useEffect(() => {
-    if (predictionId && !predictionData) {
-      requestHoroscope();
-    }
-  }, [predictionId]);
+  const requestPaidHoroscope = async () => {
+      //requestHoroscope();  
+      console.log("Paid horoscope requested"); // Use standard browser console
+    };
 
   if (horoscope) {
     return <HoroscopeResult horoscope={horoscope} />;
@@ -108,9 +104,24 @@ const DailyHoroscope: React.FC<DailyHoroscopeProps> = ({ predictionId, predictio
             </Drawer.Portal>
           </Drawer.Root>
         ) : (
-          <Button onClick={requestHoroscope} disabled={loading}>
-            {loading ? t("cards.loading") : t("dailyHoroscope.buttons.getHoroscope")}
-          </Button>
+          <>
+            <Button
+                onClick={remainingUses > 0 ? requestHoroscope : requestPaidHoroscope}
+                disabled={loading}
+            >
+                {loading
+                    ? t("cards.loading")
+                    : remainingUses > 0
+                    ? t("dailyHoroscope.buttons.getHoroscope", { count: remainingUses })
+                    : t("dailyHoroscope.buttons.usePaidPrediction")}
+            </Button>
+
+            {remainingUses === 0 && (
+                <p className="text-sm text-gray-500">
+                    {t("dailyHoroscope.advice.upgradeToPremium")}
+                </p>
+            )}
+          </>
         )}
       </div>
       {error && <p className={styles.error}>{error}</p>}
