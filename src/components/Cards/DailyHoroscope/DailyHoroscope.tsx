@@ -4,7 +4,6 @@ import commonStyles from "../Cards.module.css";
 import styles from "./DailyHoroscope.module.css";
 import { getHoroscope } from "../../../services/predictionService";
 import { useUserData } from "../../../hooks/useUserData";
-import { Button } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 import Onboarding from "../../Onboarding/Onboarding";
 import { Drawer } from "vaul";
@@ -12,7 +11,7 @@ import { calculateZodiacSign } from "../../../utils/calculateZodiacSign";
 import HoroscopeResult from "../HoroscopeResult/HoroscopeResult";
 import { HoroscopeData } from "../../../types/prediction";
 import { useQuotas } from "../../../hooks/useQuotas";
-import { Link } from "react-router-dom";
+import FeatureButton from "../../FeatureButton/FeatureButton";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
@@ -101,32 +100,15 @@ const DailyHoroscope: React.FC = () => {
             </Drawer.Portal>
           </Drawer.Root>
         ) : (
-          <>
-            <Button
-                onClick={remainingUses > 0 ? requestHoroscope : requestPaidHoroscope}
-                disabled={loading}
-            >
-                {loading
-                    ? t("cards.loading")
-                    : remainingUses > 0
-                    ? t("dailyHoroscope.buttons.getHoroscope")
-                    : t("dailyHoroscope.buttons.usePaidPrediction", { stars: 20 })}
-            </Button>
-
-            {remainingUses > 0 && (
-                <p className="text-sm text-gray-500">
-                    {t("dailyHoroscope.freeUsesLeft", { count: remainingUses })}
-                </p>
-            )}
-
-            {remainingUses === 0 && (
-                <p className="text-sm text-gray-500">
-                    <Link to="/tariff-plans" className="text-blue-500 underline">
-                        {t("cards.upgradeToPremium")}
-                    </Link>
-                </p>
-            )}
-          </>
+          <FeatureButton
+            loading={loading}
+            remainingUses={remainingUses}
+            onFreeAction={requestHoroscope}
+            onPaidAction={requestPaidHoroscope}
+            freeActionTextKey="dailyHoroscope.buttons.getHoroscope"
+            paidActionTextKey="dailyHoroscope.buttons.usePaidPrediction"
+            startAmount={20}
+          />
         )}
       </div>
       {horoscope &&

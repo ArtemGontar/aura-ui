@@ -11,15 +11,17 @@ import Onboarding from "../../Onboarding/Onboarding";
 import DatePicker from '../../DatePicker/DatePicker';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import useShowOnboarding from '../../../hooks/useShowOnboarding';
-import { useTelegramInit } from '../../../hooks/useTelegramInit';
 import CompatibilityResult from '../../Cards/Сompatibility/СompatibilityResult';
 import { CompatibilityData } from '../../../types/prediction';
 import { PartnerInfo } from '../../../types/partner';
+import { Heart } from 'lucide-react';
+import FeatureButton from "../../FeatureButton/FeatureButton";
+import { useQuotas } from '../../../hooks/useQuotas';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
-  const { isLoading: isTelegramLoading } = useTelegramInit();
+  const { remainingUses, useFeature } = useQuotas("Compatibility");
   const [partnerInfo, setPartnerInfo] = useState<PartnerInfo>({
     firstName: '', 
     lastName: '', 
@@ -31,7 +33,6 @@ const Compatibility: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const haptics = useTelegramHaptics();
   const navigate = useNavigate();
-
   const handleOnboardingComplete = () => {
     navigate("/compatibility");
   };
@@ -51,6 +52,7 @@ const Compatibility: React.FC = () => {
     try {
       const response: CompatibilityData = await getCompatibility(partnerInfo);
       setCompatibilityResult(response);
+      useFeature();
       haptics.notificationOccurred("success");
     } catch (err) {
       haptics.notificationOccurred("error");
@@ -59,16 +61,20 @@ const Compatibility: React.FC = () => {
     }
   };
 
-  if (isTelegramLoading) {
-    return <LoadingDisplay />;
-  }
+  const requestCompatibility = () => {
+    checkCompatibility();
+    haptics.impactOccurred("medium");
+  };
 
-  const showOnboarding = !isTelegramLoading && useShowOnboarding(userData);
+
+  const showOnboarding = useShowOnboarding(userData);
 
   return (
     <div className={commonStyles.card}>
       <div className={styles.banner}>
-        <span className={styles.emoji}>💞</span>
+        <div className="flex items-center justify-center mb-2">
+          <Heart className="w-8 h-8 mb-4 text-white" fill="white" />
+        </div>
         <h2 className={styles.bannerText}>
           {t('compatibility.banner.title')}
         </h2>
@@ -83,7 +89,14 @@ const Compatibility: React.FC = () => {
           {loading ? (
             <LoadingDisplay />
           ) : compatibilityResult ? (
-            <CompatibilityResult partnerInfo={partnerInfo} compatibilityResult={compatibilityResult} />
+            <>
+              <CompatibilityResult 
+                partnerInfo={partnerInfo} 
+                compatibilityResult={compatibilityResult} />
+              <Button onClick={() => setCompatibilityResult(null)}>
+                {t("compatibility.checkAgainButton")}
+              </Button>
+            </>
           ) : (
             <>
               <h4>{t('compatibility.title')}</h4>
@@ -92,14 +105,16 @@ const Compatibility: React.FC = () => {
                   {t('compatibility.partnerInfoDateOfBirth')} <span className={styles.required}>*</span>
                   <DatePicker onChange={handleDateChange} />
                 </label>
-                <label>
-                  {t('compatibility.partnerInfoFirstName')}
-                  <input type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
-                </label>
-                <label>
-                  {t('compatibility.partnerInfoLastName')}
-                  <input type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
-                </label>
+                <div className={styles.nameContainer}>
+                  <label>
+                    {t('compatibility.partnerInfoFirstName')}
+                    <input type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
+                  </label>
+                  <label>
+                    {t('compatibility.partnerInfoLastName')}
+                    <input type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
+                  </label>  
+                </div>
                 <label>
                   {t('compatibility.partnerInfoSex')}
                   <select name="sex" value={partnerInfo.sex} onChange={handleInputChange}>
@@ -119,9 +134,15 @@ const Compatibility: React.FC = () => {
                     <option value="complicated">{t('compatibility.statusComplicated')}</option>
                   </select>
                 </label>
-                <Button onClick={() => { checkCompatibility(); haptics.impactOccurred("medium"); }} disabled={loading || !partnerInfo.dateOfBirth}>
-                  {t("compatibility.checkButton")}
-                </Button>
+                <FeatureButton
+                  loading={loading}
+                  remainingUses={remainingUses}
+                  onFreeAction={requestCompatibility}
+                  onPaidAction={() => console.log("Paid compatibility requested")}
+                  freeActionTextKey="compatibility.buttons.checkCompatibility"
+                  paidActionTextKey="compatibility.buttons.usePaidCompatibility"
+                  startAmount={40}
+                />
               </div>
             </>
           )}

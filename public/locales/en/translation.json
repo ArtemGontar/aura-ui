@@ -117,6 +117,7 @@
   "cards": {
     "loading": "Consulting the stars...",
     "error": "Something went wrong... Please try again or check back later 😉",
+    "freeUsesLeft": "{{count}} free uses left",
     "upgradeToPremium": "Or upgrade to Premium"
   },
   "dailyHoroscope": {
@@ -144,19 +145,18 @@
         "custom": "Other"
       },
       "customPlaceholder": "Enter your goal"
-    },
-    "freeUsesLeft": "{{count}} free uses left"
+    }
   },
   "compatibility": {
-    "title": "Partner Compatibility",
+    "title": "Fill Partner Info",
     "completeProfile": "Complete your profile to see how well you match.",
     "error": "Failed to save your profile. Please try again 😉",
     "partnerInfo": "Partner Information",
-    "partnerInfoFirstName": "Partner's First Name",
-    "partnerInfoLastName": "Partner's Last Name",
-    "partnerInfoDateOfBirth": "Partner's Date of Birth",
-    "partnerInfoSex": "Partner's Sex",
-    "partnerInfoRelationshipStatus": "Partner's Relationship Status",
+    "partnerInfoFirstName": "First Name",
+    "partnerInfoLastName": "Last Name",
+    "partnerInfoDateOfBirth": "Date of Birth",
+    "partnerInfoSex": "Gender",
+    "partnerInfoRelationshipStatus": "Relationship Status",
     "selectPlaceholder": "Select an option",
     "sexMale": "Male",
     "sexFemale": "Female",
@@ -166,6 +166,7 @@
     "statusMarried": "Married",
     "statusComplicated": "It's Complicated",
     "checkButton": "Check Compatibility",
+    "checkAgainButton": "Check Again",
     "result": "Compatibility Score: {{result}}",
     "strengthsTitle": "💡 Key Strengths",
     "challengesTitle": "⚠️ Potential Challenges",
@@ -174,9 +175,13 @@
     "physical": "Physical Compatibility",
     "banner": {
       "title": "Discover Your Compatibility",
-      "subtitle": "Check how well you align emotionally, intellectually, and physically."
+      "subtitle": "Discover how compatible you are with your partner"
     },
-    "notFilled": "Information not provided"
+    "notFilled": "Information not provided",
+    "buttons": {
+      "checkCompatibility": "Check Compatibility",
+      "usePaidCompatibility": "Check Compatibility ({{stars}} ⭐)"
+    }
   },
   "psychological": {
     "title": "Psychological Insight",
