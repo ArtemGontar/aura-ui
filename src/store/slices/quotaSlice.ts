@@ -18,12 +18,11 @@ const quotaSlice = createSlice({
   reducers: {
     decrementQuota: (state, action) => {
       const feature = action.payload;
-      console.log("Decrementing quota for feature:", feature);
-      console.log("State:", state.quotas[feature]);
-      if (state.quotas[feature].remainingUses > 0) {
-          state.quotas[feature].remainingUses--;
+      const quota = state.quotas.find((q) => q.predictionType === feature);
+      if (quota && quota.remainingUses > 0) {
+        quota.remainingUses--;
       }
-  }
+    }
   },
   extraReducers: (builder) => {
     builder

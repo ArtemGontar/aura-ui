@@ -117,7 +117,7 @@
   "cards": {
     "loading": "Consulting the stars...",
     "error": "Something went wrong... Please try again or check back later 😉",
-    "upgradeToPremium": "Upgrade to Premium"
+    "upgradeToPremium": "Or upgrade to Premium"
   },
   "dailyHoroscope": {
     "title": "Daily Horoscope",
@@ -129,7 +129,7 @@
     "buttons": {
       "saveBirthDate": "Save Date of Birth",
       "getHoroscope": "Reveal My Horoscope",
-      "usePaidPrediction": "Use Paid Prediction"
+      "usePaidPrediction": "Reveal My Horoscope ({{stars}} ⭐)"
     },
     "datePicker": {
       "label": "Enter your date of birth:"
@@ -144,7 +144,8 @@
         "custom": "Other"
       },
       "customPlaceholder": "Enter your goal"
-    }
+    },
+    "freeUsesLeft": "{{count}} free uses left"
   },
   "compatibility": {
     "title": "Partner Compatibility",
