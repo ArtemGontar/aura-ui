@@ -17,14 +17,15 @@ const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const haptics = useTelegramHaptics();
-  const { remainingUses, useFeature } = useQuotas("horoscope");
+  const { remainingUses, useFeature } = useQuotas("DailyHoroscope");
   const [horoscope, setHoroscope] = useState<HoroscopeData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [horoscopeSign, setHoroscopeSign] = useState(userData?.zodiacSign || "aries");
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
-
+  console.log("remainingUses", remainingUses);
+  
   const handleOnboardingComplete = () => {
     setShowOnboarding(false);
     if (userData?.dateOfBirth) {
@@ -68,10 +69,6 @@ const DailyHoroscope: React.FC = () => {
       //requestHoroscope();  
       console.log("Paid horoscope requested"); // Use standard browser console
     };
-
-  if (horoscope) {
-    return <HoroscopeResult horoscope={horoscope} />;
-  }
 
   return (
     <div className={commonStyles.card}>
@@ -118,13 +115,17 @@ const DailyHoroscope: React.FC = () => {
 
             {remainingUses === 0 && (
                 <p className="text-sm text-gray-500">
-                    {t("dailyHoroscope.advice.upgradeToPremium")}
+                    {t("cards.upgradeToPremium")}
                 </p>
             )}
           </>
         )}
       </div>
+      {horoscope &&
+        <HoroscopeResult horoscope={horoscope} />
+      }
       {error && <p className={styles.error}>{error}</p>}
+
     </div>
   );
 };

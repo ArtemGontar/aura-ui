@@ -18,6 +18,8 @@ const quotaSlice = createSlice({
   reducers: {
     decrementQuota: (state, action) => {
       const feature = action.payload;
+      console.log("Decrementing quota for feature:", feature);
+      console.log("State:", state.quotas[feature]);
       if (state.quotas[feature].remainingUses > 0) {
           state.quotas[feature].remainingUses--;
       }

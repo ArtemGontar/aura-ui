@@ -40,6 +40,7 @@ export const saveUserDataAsync = createAsyncThunk(
         photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
       };
 
+      console.log("Updating user data:", updatedUserData);
       const updatedResponse = await updateUserData(updatedUserData);
       dispatch(setUserData(updatedResponse));
       return updatedResponse;

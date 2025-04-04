@@ -18,6 +18,7 @@ export const getUserData = async (userId: number): Promise<UserData> => {
 
 export const updateUserData = async (userData: UserData): Promise<UserData> => {
   try {
+    console.log("Updating user data", userData);
     const response = await api.put(`${API_BASE}/${userData.id}`, userData);
     store.dispatch(setUserData(response.data));
     return response.data;

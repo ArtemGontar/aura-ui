@@ -1,5 +1,5 @@
 export interface FeatureQuota {
-  featureType: string;
+  predictionType: string;
   remainingUses: number;
 }
 
