@@ -7,6 +7,7 @@ import { HOME_CARDS } from "../../constants/cards";
 import { useUserData } from "../../hooks/useUserData";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
+import { Coins, CoinsIcon, ConeIcon } from "lucide-react";
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
@@ -48,10 +49,10 @@ const Home: React.FC<HomeProps> = ({ className }) => {
         </p>
         <h2 className={styles.welcome}>{userData.firstName}</h2>
         <p className={styles.subtitle}>{randomWelcomeMessage}</p>
-        <p className={styles.crystalContainer}>
-          <span className={styles.crystal}>
-            <span className={styles.crystalEmoji}>💎</span>
-            <span className={styles.crystalAmount}>{userStats.crystalBalance}</span>
+        <p className={styles.coinContainer}>
+          <span className={styles.coin}>
+            <Coins />
+            <span className={styles.coinAmount}>{userStats.coinBalance}</span>
           </span>
         </p>
       </div>

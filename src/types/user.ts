@@ -16,7 +16,7 @@ export interface UserData {
 
 export interface UserStats {
   streak: number;
-  crystalBalance: number;
+  coinBalance: number;
 }
 
 export interface Subscription {

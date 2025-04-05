@@ -69,11 +69,11 @@
   padding: 0 var(--tg-theme-mobile-padding);
 }
 
-.crystalContainer {
+.coinContainer {
   margin: 1rem 0 0;
 }
 
-.crystal {
+.coin {
   display: inline-flex;
   align-items: center;
   gap: 1rem;
@@ -85,17 +85,17 @@
   border: 1px solid var(--tg-theme-button-text-color);
 }
 
-.crystal:hover {
+.coin:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.crystalEmoji {
+.coinEmoji {
   font-size: 2rem;
   animation: float 3s ease-in-out infinite;
 }
 
-.crystalEmoji::after {
+.coinEmoji::after {
   content: '✨';
   position: absolute;
   top: -0.5rem;
@@ -114,14 +114,14 @@
   50% { opacity: 1; transform: scale(1.2); }
 }
 
-.crystalAmount {
+.coinAmount {
   font-size: var(--tg-theme-font-size-xlarge);
   font-weight: 800;
   color: var(--tg-theme-button-text-color);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.crystalAmount::before {
+.coinAmount::before {
   content: '';
   position: absolute;
   bottom: -2px;
