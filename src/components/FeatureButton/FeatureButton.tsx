@@ -38,13 +38,13 @@ const FeatureButton: React.FC<FeatureButtonProps> = ({
       </Button>
 
       {remainingUses > 0 && (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 text-center">
           {t("cards.freeUsesLeft", { count: remainingUses })}
         </p>
       )}
 
       {remainingUses === 0 && (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 text-center">
           <Link to="/tariff-plans" className="text-blue-500 underline">
             {t("cards.upgradeToPremium")}
           </Link>

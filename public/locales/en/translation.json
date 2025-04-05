@@ -231,8 +231,11 @@
     },
     "title": "Enter your dream description",
     "placeholder": "Write your dream here...",
-    "interpretButton": "Interpret Dream",
-    "resultTitle": "Interpretation Result"
+    "resultTitle": "Interpretation Result",
+    "buttons": {
+      "interpret": "Interpret Dream",
+      "paidInterpret": "Interpret Dream ({{stars}} ⭐)"
+    }
   },
   "createPersonalMeditation": {
     "title": "Create Personal Meditation",
@@ -256,6 +259,26 @@
     "comment": "This data will be saved and you can change it later in your profile.",
     "finish": "Finish"
   },
+  "affirmation": {
+    "banner": {
+      "title": "Daily Affirmation",
+      "subtitle": "Set your intention for the day"
+    },
+    "goal": {
+      "label": "Set Goal",
+      "selectPlaceholder": "Select a goal",
+      "options": {
+        "career": "Career",
+        "health": "Health",
+        "relationships": "Relationships"
+      },
+      "customPlaceholder": "Enter your goal"
+    },
+    "buttons": {
+      "generate": "Show Affirmation",
+      "usePaidAffirmation": "Show Affirmation ({{stars}} ⭐)"
+    }
+  },
   "editUser": {
     "title": "Edit User",
     "birthDate": "Date of Birth",
@@ -271,25 +294,5 @@
     "widowed": "Widowed",
     "save": "Save",
     "saveError": "Error saving data."
-  },
-  "affirmation": {
-    "banner": {
-      "title": "Daily Affirmation",
-      "subtitle": "Set your intention for the day"
-    },
-    "goal": {
-      "label": "Set Goal",
-      "selectPlaceholder": "Select a goal",
-      "options": {
-        "career": "Career",
-        "health": "Health",
-        "relationships": "Relationships",
-        "custom": "Other"
-      },
-      "customPlaceholder": "Enter your goal"
-    },
-    "buttons": {
-      "generate": "Show Affirmation"
-    }
   }
 }

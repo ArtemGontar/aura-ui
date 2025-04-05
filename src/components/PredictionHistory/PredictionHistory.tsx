@@ -10,9 +10,10 @@ import { Drawer } from "vaul";
 import CompatibilityResult from "../Cards/Сompatibility/СompatibilityResult";
 import AffirmationResult from "../Cards/Affirmation/AffirmationResult";
 import DreamBookResult from "../Cards/DreamBook/DreamBookResult";
+import { trimContent } from "../../utils/utils";
 
 const PredictionHistory: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [page, setPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
@@ -38,10 +39,6 @@ const PredictionHistory: React.FC = () => {
 
     fetchPredictions();
   }, [page]);
-
-  const trimContent = (content: string, maxLength: number = 100): string => {
-    return content.length > maxLength ? `${content.substring(0, maxLength)}...` : content;
-  };
 
   const renderPredictionComponent = () => {
     if (!selectedPrediction) return null;
@@ -116,7 +113,9 @@ const PredictionHistory: React.FC = () => {
                   <p className={styles.predictionContent}>
                     {renderPredictionPreview(prediction)}
                   </p>
-                  <div className={styles.predictionDate}>{prediction.createdAt}</div>
+                  <div className={styles.predictionDate}>
+                    {formatLocalizedDate(prediction.createdAt, i18n.language)}
+                  </div>
                 </div>
               </Drawer.Trigger>
               <Drawer.Portal container={document.getElementById('telegram-root')!}>

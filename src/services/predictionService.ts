@@ -54,9 +54,9 @@ export const getMagicBallAnswer = async (): Promise<string> => {
  return new Promise(() => {});
 }
 
-export const getAffirmation = async (goals: string[]): Promise<AffirmationData> => {
+export const getAffirmation = async (goal: string): Promise<AffirmationData> => {
   try {
-    const response = await api.post<{ content: string }>(`${API_BASE}/affirmation`, { goals });
+    const response = await api.post<{ content: string }>(`${API_BASE}/affirmation`, { goal });
     const parsedData: AffirmationData = JSON.parse(response.data.content);
     return parsedData;
   } catch (error) {

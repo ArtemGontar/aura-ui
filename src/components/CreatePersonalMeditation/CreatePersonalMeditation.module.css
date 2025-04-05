@@ -45,17 +45,3 @@
   display: flex;
   justify-content: center;
 }
-
-.button {
-  padding: 10px 20px;
-  background-color: var(--tg-theme-primary-color);
-  color: var(--tg-theme-button-text-color);
-  border: none;
-  border-radius: var(--tg-theme-border-radius);
-  cursor: pointer;
-  align-self: center; /* Center the button */
-}
-
-.button:hover {
-  background-color: var(--tg-theme-primary-color-hover);
-}

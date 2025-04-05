@@ -40,7 +40,7 @@ const CreatePersonalMeditation: React.FC = () => {
         />
       </label>
       <div className={styles.buttonContainer}>
-        <Button className={styles.button} onClick={handleSubmit}>
+        <Button onClick={handleSubmit}>
           {t('createPersonalMeditation.createButton')}
         </Button>
       </div>
