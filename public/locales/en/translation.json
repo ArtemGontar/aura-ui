@@ -283,6 +283,9 @@
         "custom": "Other"
       },
       "customPlaceholder": "Enter your goal"
+    },
+    "buttons": {
+      "generate": "Show Affirmation"
     }
   }
 }

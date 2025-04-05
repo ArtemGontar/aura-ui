@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   padding: var(--tg-theme-mobile-padding);
   background-color: var(--tg-theme-bg-color, #ffffff);
 }

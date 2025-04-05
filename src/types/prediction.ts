@@ -37,6 +37,5 @@ export interface HoroscopeData {
 }
 
 export interface AffirmationData {
-  message: string;
-  category: string;
+  text: string;
 }
