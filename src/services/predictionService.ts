@@ -1,4 +1,4 @@
-import { Prediction, HoroscopeData, CompatibilityData, AffirmationData } from "../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData } from "../types/prediction";
 import api from "./api";
 
 const API_BASE = `/api/fortunes`;
@@ -54,12 +54,10 @@ export const getMagicBallAnswer = async (): Promise<string> => {
  return new Promise(() => {});
 }
 
-export const getAffirmation = async (goal: string): Promise<AffirmationData> => {
+export const getAffirmation = async (goals: string[]): Promise<AffirmationData> => {
   try {
-    const response = await api.post<{ content: string }>(`${API_BASE}/affirmation`, { goal });
-    console.log("content", response.data);
+    const response = await api.post<{ content: string }>(`${API_BASE}/affirmation`, { goals });
     const parsedData: AffirmationData = JSON.parse(response.data.content);
-    console.log("parsedData", parsedData);
     return parsedData;
   } catch (error) {
     console.error("Error fetching affirmation", error);
@@ -67,10 +65,12 @@ export const getAffirmation = async (goal: string): Promise<AffirmationData> => 
   }
 };
 
-export const getDreamInterpretation = async (dreamText: string): Promise<string> => {
+export const getDreamInterpretation = async (dreamText: string): Promise<DreamBookData> => {
   try {
     const response = await api.post<{ content: string }>(`${API_BASE}/dream`, { dreamText });
-    return response.data.content;
+    const parsedData: DreamBookData = JSON.parse(response.data.content);
+    console.log("parsedData", parsedData);
+    return parsedData;
   } catch (error) {
     console.error("Error fetching dream interpretation", error);
     throw error;

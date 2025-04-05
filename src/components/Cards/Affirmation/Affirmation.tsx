@@ -8,16 +8,16 @@ import AffirmationResult from "./AffirmationResult";
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
-  const [affirmation, setAffirmation] = useState<{ message: string; category: string } | null>(null);
+  const [affirmation, setAffirmation] = useState<{ text: string; } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [goal, setGoal] = useState<string[]>([]);
+  const [goals, setGoals] = useState<string[]>([]);
 
   const fetchAffirmation = async () => {
     setLoading(true);
     setError("");
     try {
-      const data = await getAffirmation(goal);
+      const data = await getAffirmation(goals);
       setAffirmation(data);
     } catch {
       setError(t("cards.error"));
@@ -38,8 +38,8 @@ const Affirmation: React.FC = () => {
             t("affirmation.goal.options.health"),
             t("affirmation.goal.options.relationships"),
           ]}
-          value={goal}
-          onChange={(_event, newValue) => setGoal(newValue)}
+          value={goals}
+          onChange={(_event, newValue) => setGoals(newValue)}
           renderInput={(params) => (
             <TextField
               {...params}

@@ -17,6 +17,7 @@ import { PartnerInfo } from '../../../types/partner';
 import { Heart } from 'lucide-react';
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import { useQuotas } from '../../../hooks/useQuotas';
+import Banner from '../../Banner/Banner';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -71,17 +72,12 @@ const Compatibility: React.FC = () => {
 
   return (
     <div className={commonStyles.card}>
-      <div className={styles.banner}>
-        <div className="flex items-center justify-center mb-2">
-          <Heart className="w-8 h-8 mb-4 text-white" fill="white" />
-        </div>
-        <h2 className={styles.bannerText}>
-          {t('compatibility.banner.title')}
-        </h2>
-        <p className={styles.subText}>
-          {t('compatibility.banner.subtitle')}
-        </p>
-      </div>
+      <Banner 
+        headerText={t('compatibility.banner.title')} 
+        subText={t('compatibility.banner.subtitle')} 
+        bgColor={styles.bannerBackground}
+        icon={<Heart className="w-8 h-8 mb-4 text-white" fill="white" />} 
+      />
       {showOnboarding ? (
         <Onboarding onBirthDateChange={() => {}} onComplete={handleOnboardingComplete} />
       ) : (

@@ -7,6 +7,8 @@ import { Button } from '@telegram-apps/telegram-ui';
 import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import DreamBookResult from './DreamBookResult';
+import Banner from '../../Banner/Banner'; // Import the Banner component
+import { CloudMoon, Moon } from 'lucide-react';
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +25,7 @@ const DreamBook: React.FC = () => {
     setLoading(true);
     try {
       const response = await getDreamInterpretation(dreamText);
-      setInterpretation(response);
+      setInterpretation(response.interpretation);
       haptics.notificationOccurred("success");
     } catch (err) {
       haptics.notificationOccurred("error");
@@ -34,15 +36,12 @@ const DreamBook: React.FC = () => {
 
   return (
     <div className={commonStyles.card}>
-      <div className={styles.banner}>
-        <span className={styles.emoji}>🌙</span>
-        <h2 className={styles.bannerText}>
-          {t('dreamBook.banner.title')}
-        </h2>
-        <p className={styles.subText}>
-          {t('dreamBook.banner.subtitle')}
-        </p>
-      </div>
+      <Banner 
+        headerText={t('dreamBook.banner.title')} 
+        subText={t('dreamBook.banner.subtitle')} 
+        bgColor={styles.bannerBackground}
+        icon={<CloudMoon className="w-8 h-8 mb-4 text-white" fill="white" />} 
+      />
       <div className={styles.dreamBook}>
         <>
           <h4>{t('dreamBook.title')}</h4>

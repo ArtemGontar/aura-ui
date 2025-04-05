@@ -1,8 +1,6 @@
 .resultContainer {
   margin-top: 2rem;
-  padding: 1.5rem;
-  border-radius: var(--tg-theme-border-radius);
-  background-color: var(--tg-theme-secondary-bg-color);
+  text-align: justify;
 }
 
 .resultContainer h4 {

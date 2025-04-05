@@ -39,3 +39,7 @@ export interface HoroscopeData {
 export interface AffirmationData {
   text: string;
 }
+
+export interface DreamBookData {
+  interpretation: string;
+}
