@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./PredictionHistory.module.css";
 import { getPredictions } from "../../services/predictionService";
-import { Prediction, HoroscopeData, CompatibilityData } from "../../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData, PredictionType } from "../../types/prediction";
 import { Pagination } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import HoroscopeResult from "../../components/Cards/HoroscopeResult/HoroscopeResult";
 import { Drawer } from "vaul";
 import CompatibilityResult from "../Cards/Сompatibility/СompatibilityResult";
+import AffirmationResult from "../Cards/Affirmation/AffirmationResult";
+import DreamBookResult from "../Cards/DreamBook/DreamBookResult";
 
 const PredictionHistory: React.FC = () => {
   const { t } = useTranslation();
@@ -37,16 +39,26 @@ const PredictionHistory: React.FC = () => {
     fetchPredictions();
   }, [page]);
 
+  const trimContent = (content: string, maxLength: number = 100): string => {
+    return content.length > maxLength ? `${content.substring(0, maxLength)}...` : content;
+  };
+
   const renderPredictionComponent = () => {
     if (!selectedPrediction) return null;
 
     switch (selectedPrediction.type) {
-      case "DailyHoroscope":
+      case PredictionType.DailyHoroscope:
         const horoscope: HoroscopeData = selectedPrediction.content as HoroscopeData;
         return <HoroscopeResult horoscope={horoscope} />;
-      case "Compatibility":
+      case PredictionType.Compatibility:
         const compatibilityData = selectedPrediction.content as CompatibilityData;
         return <CompatibilityResult compatibilityResult={compatibilityData} />;
+      case PredictionType.Affirmation:
+        const affirmationData = selectedPrediction.content as AffirmationData;
+        return <AffirmationResult affirmation={affirmationData} />;
+      case PredictionType.DreamInterpretation:
+        const dreamBookData = selectedPrediction.content as DreamBookData;
+        return <DreamBookResult interpretation={dreamBookData.interpretation} />;
       default:
         return <div>{t('profile.history.unknownPredictionType')}</div>;
     }
@@ -56,17 +68,19 @@ const PredictionHistory: React.FC = () => {
     if (!prediction) return null;
 
     switch (prediction.type) {
-      case "DailyHoroscope":
+      case PredictionType.DailyHoroscope:
         const generalGuidance: string = (prediction.content as HoroscopeData).generalGuidance;
-        return generalGuidance.length > 100
-          ? `${generalGuidance.substring(0, 100)}...`
-          : generalGuidance;
-      case "Compatibility":
+        return trimContent(generalGuidance);
+      case PredictionType.Compatibility:
+        console.log("prediction", prediction.content);
         const compatibilityResult: string = (prediction.content as CompatibilityData).strengths.join(", ");
-        return compatibilityResult.length > 100
-          ? `${compatibilityResult.substring(0, 100)}...`
-          : compatibilityResult;
-      
+        return trimContent(compatibilityResult);
+      case PredictionType.Affirmation:
+        const affirmationResult: string = (prediction.content as AffirmationData).text;
+        return trimContent(affirmationResult);
+      case PredictionType.DreamInterpretation:
+        const dreamBookResult: string = (prediction.content as DreamBookData).interpretation;
+        return trimContent(dreamBookResult);
       default:
         return;
     }

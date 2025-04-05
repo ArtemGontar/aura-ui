@@ -3,7 +3,14 @@ export interface Prediction {
   type: string;
   createdAt: string;
   updatedAt: string;
-  content: CompatibilityData | HoroscopeData | AffirmationData;
+  content: CompatibilityData | HoroscopeData | AffirmationData | DreamBookData;
+}
+
+export enum PredictionType {
+  DailyHoroscope = "DailyHoroscope",
+  Compatibility = "Compatibility",
+  Affirmation = "Affirmation",
+  DreamInterpretation = "DreamInterpretation",
 }
 
 export interface Horoscope {
