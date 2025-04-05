@@ -2,7 +2,6 @@ import { useEffect, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import WebApp from '@twa-dev/sdk';
 import { UserData } from "../types/user";
-import { MOCK_USER_DATA } from "../utils/debug";
 import { setError, setLoading, saveUserDataAsync } from '../store/slices/userSlice';
 import { RootState, AppDispatch } from '../store';
 import { fetchQuotasAsync } from '../store/slices/quotaSlice';
@@ -12,10 +11,6 @@ const getTelegramUserData = (): UserData => {
   const initData = WebApp.initData;
 
   if (!initData) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log("No initialization data available, using mock data");
-      return MOCK_USER_DATA;
-    }
     throw new Error("No initialization data available");
   }
 

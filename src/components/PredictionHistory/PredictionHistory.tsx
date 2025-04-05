@@ -10,7 +10,7 @@ import { Drawer } from "vaul";
 import CompatibilityResult from "../Cards/Сompatibility/СompatibilityResult";
 import AffirmationResult from "../Cards/Affirmation/AffirmationResult";
 import DreamBookResult from "../Cards/DreamBook/DreamBookResult";
-import { trimContent } from "../../utils/utils";
+import { formatLocalizedDate, trimContent } from "../../utils/utils";
 
 const PredictionHistory: React.FC = () => {
   const { t, i18n } = useTranslation();
