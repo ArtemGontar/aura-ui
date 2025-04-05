@@ -273,6 +273,10 @@
     "saveError": "Error saving data."
   },
   "affirmation": {
+    "banner": {
+      "title": "Daily Affirmation",
+      "subtitle": "Set your intention for the day"
+    },
     "goal": {
       "label": "Set Goal",
       "selectPlaceholder": "Select a goal",

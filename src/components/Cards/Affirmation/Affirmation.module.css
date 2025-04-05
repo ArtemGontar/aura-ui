@@ -1,17 +1,16 @@
 .affirmationContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 16px;
   border-radius: 12px;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 500px;
 }
 
-.title {
-  font-weight: bold;
-  color: var(--tg-theme-text-color);
-  margin-bottom: 12px;
+.bannerBackground {
+  background: linear-gradient(to right, #ec4899, #8b5cf6);
+  padding: 16px;
+  border-radius: 12px;
 }
 
 .goalContainer {
@@ -20,36 +19,6 @@
   align-items: center;
   margin: 16px 0;
   width: 100%;
-}
-
-.message {
-  font-size: 16px;
-  color: var(--tg-theme-secondary-text-color);
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.category {
-  font-size: 14px;
-  color: var(--tg-theme-hint-color);
-  margin-top: 8px;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px;
-  background-color: var(--tgui--button_color);
-  color: var(--tgui--button_text_color);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.button:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
 }
 
 .autocompleteContainer {

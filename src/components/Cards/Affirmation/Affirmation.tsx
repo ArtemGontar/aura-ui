@@ -5,6 +5,8 @@ import { getAffirmation } from "../../../services/predictionService";
 import { Button } from "@telegram-apps/telegram-ui";
 import { Autocomplete, TextField } from "@mui/material";
 import AffirmationResult from "./AffirmationResult";
+import Banner from "../../Banner/Banner";
+import { Goal } from "lucide-react";
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
@@ -28,7 +30,12 @@ const Affirmation: React.FC = () => {
 
   return (
     <div className={styles.affirmationContainer}>
-      <h2 className={styles.title}>{t("affirmation.title")}</h2>
+      <Banner 
+        headerText={t('affirmation.banner.title')} 
+        subText={t('affirmation.banner.subtitle')} 
+        bgColor={styles.bannerBackground}
+        icon={<Goal className="w-8 h-8 mb-4 text-white" fill="white" />} 
+      />
       <div className={styles.goalContainer}>
         <Autocomplete
           multiple
@@ -52,7 +59,10 @@ const Affirmation: React.FC = () => {
       <Button className={styles.button} onClick={fetchAffirmation} disabled={loading}>
         {loading ? t("cards.loading") : t("affirmation.buttons.generate")}
       </Button>
-      <AffirmationResult affirmation={affirmation} loading={loading} error={error} />
+      {error && <div className={styles.error}>{error}</div>}
+      {!loading && affirmation && (
+        <AffirmationResult affirmation={affirmation} />
+      )}
     </div>
   );
 };
