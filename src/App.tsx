@@ -25,7 +25,7 @@ import EditUser from "./components/EditUser/EditUser";
 import useTelegramWebApp from "./hooks/useTelegramWebApp";
 import Affirmation from "./components/Cards/Affirmation/Affirmation";
 import DreamBook from "./components/Cards/DreamBook/DreamBook";
-import TasksPage from "./components/Tasks/TasksPage";
+import TasksPage from "./components/Tasks/Tasks";
 
 const AppContent: React.FC = () => {
   const { isLoading, error, isTelegram } = useTelegramInit();
