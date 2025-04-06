@@ -12,18 +12,15 @@ api.interceptors.request.use((config) => {
   let tmaToken: string;
   
   if (typeof WebApp !== 'undefined' && WebApp.initData) {
-    // We're in Telegram - use real initData as token
     tmaToken = WebApp.initData;
   } else if (import.meta.env.DEV) {
-    // We're in development - use mock token
-    console.log('Using mock TMA token for development');
     tmaToken = MOCK_AUTH_TOKEN;
   } else {
     throw new Error('No TMA token available and not in development mode');
   }
 
   // Add Authorization header
-  config.headers.Authorization = `tma ${tmaToken}`;
+  config.headers.Authorization = `${tmaToken}`;
   return config;
 });
 

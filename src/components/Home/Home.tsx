@@ -7,7 +7,7 @@ import { HOME_CARDS } from "../../constants/cards";
 import { useUserData } from "../../hooks/useUserData";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
-import { Coins, CoinsIcon, ConeIcon } from "lucide-react";
+import { Coins } from "lucide-react";
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();

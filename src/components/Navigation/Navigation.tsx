@@ -1,6 +1,6 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { Home, Person, SelfImprovement } from "@mui/icons-material";
+import { Home, Person, SelfImprovement, Task } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import styles from "./Navigation.module.css";
@@ -17,7 +17,8 @@ const Navigation: React.FC = () => {
     haptics.selectionChanged();
     if (newValue === 0) navigate("/");
     if (newValue === 1) navigate("/meditations");
-    if (newValue === 2) navigate("/profile");
+    if (newValue === 2) navigate("/tasks");
+    if (newValue === 3) navigate("/profile");
   };
 
   return (
@@ -25,8 +26,7 @@ const Navigation: React.FC = () => {
       <BottomNavigation value={value} onChange={handleChange}>
         <BottomNavigationAction label={t('navigation.home')} icon={<Home />} />
         <BottomNavigationAction label={t('navigation.meditations')} icon={<SelfImprovement />} />
-        {/* <BottomNavigationAction label={t('navigation.task')} icon={<Task />} /> */}
-        {/* <BottomNavigationAction label={t('navigation.leaderboard')} icon={<Leaderboard />} /> */}
+        <BottomNavigationAction label={t('navigation.tasks')} icon={<Task />} />
         <BottomNavigationAction label={t('navigation.profile')} icon={<Person />} />
       </BottomNavigation>
     </div>

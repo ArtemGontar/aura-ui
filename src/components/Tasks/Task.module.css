@@ -1,0 +1,31 @@
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  margin: 8px 0;
+  background-color: #2c2c2e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.task:hover {
+  background-color: #3a3a3c;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.bonuses {
+  font-size: 14px;
+  color: #f9a825;
+}
