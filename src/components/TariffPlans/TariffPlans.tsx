@@ -5,18 +5,19 @@ import { createInvoiceLink } from "../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { Button } from "@telegram-apps/telegram-ui";
+import tariffs from "../../config/tariffs";
 
 const TariffPlans: React.FC = () => {
   const { t } = useTranslation();
   const { notificationOccurred } = useTelegramHaptics();
-  const [selectedPlan, setSelectedPlan] = useState<number>(1); // Base plan selected by default
+  const [selectedPlan, setSelectedPlan] = useState<number>(1);
 
   const tariffPlans = [
     {
       id: 1,
       title: t('profile.subscription.basic.title'),
       description: t('profile.subscription.basic.description'),
-      cost: 200,
+      cost: tariffs.subscriptionCosts.basic,
       bonuses: [
         t('profile.subscription.basic.bonuses.part1'),
         t('profile.subscription.basic.bonuses.part2'),
@@ -27,7 +28,7 @@ const TariffPlans: React.FC = () => {
       id: 2,
       title: t('profile.subscription.premium.title'),
       description: t('profile.subscription.premium.description'),
-      cost: 400,
+      cost: tariffs.subscriptionCosts.premium,
       bonuses: [
         t('profile.subscription.premium.bonuses.part1'),
         t('profile.subscription.premium.bonuses.part2'),
@@ -38,7 +39,7 @@ const TariffPlans: React.FC = () => {
       id: 3,
       title: t('profile.subscription.ultimate.title'),
       description: t('profile.subscription.ultimate.description'),
-      cost: 600,
+      cost: tariffs.subscriptionCosts.ultimate,
       bonuses: [
         t('profile.subscription.ultimate.bonuses.part1'),
         t('profile.subscription.ultimate.bonuses.part2'),

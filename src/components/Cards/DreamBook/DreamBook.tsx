@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next';
 import commonStyles from "../Cards.module.css";
 import styles from './DreamBook.module.css';
 import { getDreamInterpretation } from '../../../services/predictionService';
-import { Button } from '@telegram-apps/telegram-ui';
 import useTelegramHaptics from '../../../hooks/useTelegramHaptic';
 import LoadingDisplay from '../../LoadingDisplay/LoadingDisplay';
 import DreamBookResult from './DreamBookResult';
-import Banner from '../../Banner/Banner'; // Import the Banner component
-import { CloudMoon, Moon } from 'lucide-react';
+import Banner from '../../Banner/Banner';
+import { CloudMoon } from 'lucide-react';
 import FeatureButton from '../../FeatureButton/FeatureButton';
 import { useQuotas } from '../../../hooks/useQuotas';
 import { PredictionType } from '../../../types/prediction';
+import tariffs from "../../../config/tariffs";
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
@@ -66,7 +66,7 @@ const DreamBook: React.FC = () => {
           onPaidAction={requestPaidInterpretDream}
           freeActionTextKey="dreamBook.buttons.interpret"
           paidActionTextKey="dreamBook.buttons.interpretPaid"
-          startAmount={30}
+          starsAmount={tariffs.dreamBookStarsAmount} // Use config value
         />
         {loading && <LoadingDisplay />}
         {interpretation && <DreamBookResult interpretation={interpretation} />}

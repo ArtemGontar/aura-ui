@@ -10,6 +10,7 @@ import { useQuotas } from "../../../hooks/useQuotas";
 import { PredictionType } from "../../../types/prediction";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
+import tariffs from "../../../config/tariffs"; // Import the config file
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ const Affirmation: React.FC = () => {
         onPaidAction={requestPaidAffirmation}
         freeActionTextKey="affirmation.buttons.generate"
         paidActionTextKey="affirmation.buttons.generatePaid"
-        startAmount={10}
+        starsAmount={tariffs.affirmationStarsAmount}
       />
       {error && <div className={styles.error}>{error}</div>}
       {!loading && affirmation && (

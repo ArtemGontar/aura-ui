@@ -18,6 +18,7 @@ import { Heart } from 'lucide-react';
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import { useQuotas } from '../../../hooks/useQuotas';
 import Banner from '../../Banner/Banner';
+import tariffs from "../../../config/tariffs";
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -137,7 +138,7 @@ const Compatibility: React.FC = () => {
                   onPaidAction={() => console.log("Paid compatibility requested")}
                   freeActionTextKey="compatibility.buttons.checkCompatibility"
                   paidActionTextKey="compatibility.buttons.usePaidCompatibility"
-                  startAmount={40}
+                  starsAmount={tariffs.compatibilityStarsAmount}
                 />
               </div>
             </>

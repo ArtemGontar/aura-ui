@@ -12,6 +12,7 @@ import HoroscopeResult from "../HoroscopeResult/HoroscopeResult";
 import { HoroscopeData } from "../../../types/prediction";
 import { useQuotas } from "../../../hooks/useQuotas";
 import FeatureButton from "../../FeatureButton/FeatureButton";
+import tariffs from "../../../config/tariffs";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
@@ -107,7 +108,7 @@ const DailyHoroscope: React.FC = () => {
             onPaidAction={requestPaidHoroscope}
             freeActionTextKey="dailyHoroscope.buttons.getHoroscope"
             paidActionTextKey="dailyHoroscope.buttons.usePaidPrediction"
-            startAmount={20}
+            starsAmount={tariffs.dailyHoroscopeStarsAmount}
           />
         )}
       </div>

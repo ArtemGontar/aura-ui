@@ -10,7 +10,7 @@ interface FeatureButtonProps {
   onPaidAction: () => void;
   freeActionTextKey: string;
   paidActionTextKey: string;
-  startAmount: number;
+  starsAmount: number;
 }
 
 const FeatureButton: React.FC<FeatureButtonProps> = ({
@@ -20,7 +20,7 @@ const FeatureButton: React.FC<FeatureButtonProps> = ({
   onPaidAction,
   freeActionTextKey,
   paidActionTextKey,
-  startAmount,
+  starsAmount,
 }) => {
   const { t } = useTranslation();
 
@@ -34,7 +34,7 @@ const FeatureButton: React.FC<FeatureButtonProps> = ({
           ? t("cards.loading")
           : remainingUses > 0
           ? t(freeActionTextKey)
-          : t(paidActionTextKey, { stars: startAmount })}
+          : t(paidActionTextKey, { stars: starsAmount })}
       </Button>
 
       {remainingUses > 0 && (
