@@ -5,7 +5,7 @@ import { createInvoiceLink } from "../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { Button } from "@telegram-apps/telegram-ui";
-import tariffs from "../../config/tariffs";
+import tariffs from "../../constants/tariffs";
 
 const TariffPlans: React.FC = () => {
   const { t } = useTranslation();

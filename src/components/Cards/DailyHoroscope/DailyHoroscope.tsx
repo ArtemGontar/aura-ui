@@ -12,7 +12,7 @@ import HoroscopeResult from "../HoroscopeResult/HoroscopeResult";
 import { HoroscopeData } from "../../../types/prediction";
 import { useQuotas } from "../../../hooks/useQuotas";
 import FeatureButton from "../../FeatureButton/FeatureButton";
-import tariffs from "../../../config/tariffs";
+import tariffs from "../../../constants/tariffs";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();

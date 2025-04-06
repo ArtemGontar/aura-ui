@@ -18,7 +18,7 @@ import { Heart } from 'lucide-react';
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import { useQuotas } from '../../../hooks/useQuotas';
 import Banner from '../../Banner/Banner';
-import tariffs from "../../../config/tariffs";
+import tariffs from "../../../constants/tariffs";
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();

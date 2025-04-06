@@ -10,7 +10,7 @@ import { useQuotas } from "../../../hooks/useQuotas";
 import { PredictionType } from "../../../types/prediction";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
-import tariffs from "../../../config/tariffs"; // Import the config file
+import tariffs from "../../../constants/tariffs"; // Import the config file
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();

@@ -11,7 +11,7 @@ import { CloudMoon } from 'lucide-react';
 import FeatureButton from '../../FeatureButton/FeatureButton';
 import { useQuotas } from '../../../hooks/useQuotas';
 import { PredictionType } from '../../../types/prediction';
-import tariffs from "../../../config/tariffs";
+import tariffs from "../../../constants/tariffs";
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
