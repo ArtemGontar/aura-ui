@@ -6,7 +6,7 @@ export const createInvoiceLink = async (
   productId: number,
   title: string,
   description: string,
-  providerToken: string,
+  currency: string,
   isSubscription: boolean,
 ): Promise<string> => {
   try {
@@ -14,7 +14,7 @@ export const createInvoiceLink = async (
       title,
       description,
       payload: "{}",
-      providerToken,
+      currency,
       productId,
       isSubscription,
     });
