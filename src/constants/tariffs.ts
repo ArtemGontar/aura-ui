@@ -1,12 +1,12 @@
 const tariffs = {
-  dailyHoroscopeStarsAmount: 20,
-  dreamBookStarsAmount: 30,
-  affirmationStarsAmount: 10,
-  compatibilityStarsAmount: 40,
+  dailyHoroscopeStarsAmount: 1,
+  dreamBookStarsAmount: 1,
+  affirmationStarsAmount: 1,
+  compatibilityStarsAmount: 1,
   subscriptionCosts: {
-    basic: 200,
-    premium: 400,
-    ultimate: 600,
+    basic: 1,
+    premium: 1,
+    ultimate: 1,
   },
 };
 
