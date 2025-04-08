@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./TariffPlans.module.css";
-import { createInvoiceLink } from "../../services/paymentService";
+import { createInvoiceLink, paymentSuccess } from "../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { Button } from "@telegram-apps/telegram-ui";
 import tariffs from "../../constants/tariffs";
+import { useUserData } from "../../hooks/useUserData";
 
 const TariffPlans: React.FC = () => {
   const { t } = useTranslation();
   const { notificationOccurred } = useTelegramHaptics();
   const [selectedPlan, setSelectedPlan] = useState<number>(1);
+  const { userData } = useUserData()
 
   const tariffPlans = [
     {
@@ -53,9 +55,10 @@ const TariffPlans: React.FC = () => {
     const plan = tariffPlans.find(plan => plan.id === selectedPlan);
     if (!plan) return;
 
-    const invoiceLink = await createInvoiceLink(plan.id, plan.title, plan.description, "XTR");
-    WebApp.openInvoice(invoiceLink, (status) => {
+    const invoiceLink = await createInvoiceLink(plan.id, plan.title, plan.description, "XTR", true);
+    WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === 'paid') {
+        await paymentSuccess(userData!.id, plan.id)
         notificationOccurred('success');
       } else if (status === 'failed') {
         notificationOccurred('error');
