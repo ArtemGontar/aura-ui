@@ -1,7 +1,4 @@
 .task {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 12px;
   margin: 8px 0;
   background-color: var(--tg-theme-bg-color);
@@ -13,7 +10,8 @@
 
 .info {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .name {
@@ -24,7 +22,9 @@
 
 .bonuses {
   display: flex;
+  align-items: center;
   gap: 10px;
-  font-size: 14px;
-  color: #f9a825;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--tg-theme-hint-color);
 }

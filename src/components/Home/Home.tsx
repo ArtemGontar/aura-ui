@@ -7,7 +7,7 @@ import { HOME_CARDS } from "../../constants/cards";
 import { useUserData } from "../../hooks/useUserData";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
-import { Coins } from "lucide-react";
+import coin from "../../assets/coin.png";
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
@@ -51,8 +51,8 @@ const Home: React.FC<HomeProps> = ({ className }) => {
         <p className={styles.subtitle}>{randomWelcomeMessage}</p>
         <p className={styles.coinContainer}>
           <span className={styles.coin}>
-            <Coins />
             <span className={styles.coinAmount}>{userStats.coinBalance}</span>
+            <img src={coin} alt="Aura coin" className="w-12 h-12" />
           </span>
         </p>
       </div>

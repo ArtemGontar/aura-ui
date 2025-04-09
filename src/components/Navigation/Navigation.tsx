@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import styles from "./Navigation.module.css";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
+import { Tabbar } from "@telegram-apps/telegram-ui";
+import { AudioLines, House, ListTodo, User } from "lucide-react";
 
 const Navigation: React.FC = () => {
   const [value, setValue] = React.useState(0);
@@ -24,10 +26,10 @@ const Navigation: React.FC = () => {
   return (
     <div className={styles.container}>
       <BottomNavigation value={value} onChange={handleChange}>
-        <BottomNavigationAction label={t('navigation.home')} icon={<Home />} />
-        <BottomNavigationAction label={t('navigation.meditations')} icon={<SelfImprovement />} />
-        <BottomNavigationAction label={t('navigation.tasks')} icon={<Task />} />
-        <BottomNavigationAction label={t('navigation.profile')} icon={<Person />} />
+        <BottomNavigationAction label={t('navigation.home')} icon={<House />} />
+        <BottomNavigationAction label={t('navigation.meditations')} icon={<AudioLines />} />
+        <BottomNavigationAction label={t('navigation.tasks')} icon={<ListTodo />} />
+        <BottomNavigationAction label={t('navigation.profile')} icon={<User />} />
       </BottomNavigation>
     </div>
   );

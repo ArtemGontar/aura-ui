@@ -2,7 +2,7 @@ import React from "react";
 import Task from "./Task";
 import styles from "./Tasks.module.css";
 import Banner from "../Banner/Banner";
-import image from "./../../../public/images/area-of-life/other.png";
+import image from "./../../assets/tasks.png";
 
 const TasksPage: React.FC = () => {
   const tasks = [
