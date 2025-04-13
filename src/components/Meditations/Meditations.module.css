@@ -115,7 +115,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
   background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  cursor: pointer;
 }
 
 .generalCard {
@@ -182,24 +181,6 @@
   background: var(--tg-theme-button-hover-color);
 }
 
-.playButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.playButton svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--tg-theme-text-color);
-}
-
 .controls {
   display: flex;
   justify-content: center;
@@ -217,10 +198,18 @@
   align-items: center;
 }
 
-.controlButton svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--tg-theme-text-color);
+.playButton {
+  border-radius: 50%;
+}
+
+.controlIcon {
+  color: var(--tg-theme-text-color);
+  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+.activeIcon {
+  color: var(--tg-theme-button-color);
+  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
 }
 
 /* Tablet and larger screens */

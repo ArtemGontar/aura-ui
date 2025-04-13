@@ -6,10 +6,7 @@ import { getMeditations } from "../../services/meditationService";
 import { Meditation } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
-import playIcon from "../../assets/player/play.png";
-import pauseIcon from "../../assets/player/pause.png";
-import forwardIcon from "../../assets/player/forward.png";
-import backwardIcon from "../../assets/player/backward.png";
+import { Pause, Play, Rewind, FastForward } from "lucide-react";
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
@@ -73,7 +70,6 @@ const Meditations: React.FC = () => {
   }) => (
     <div
       className={`${styles.card} ${styles.generalCard}`}
-      onClick={onPlayPause}
     >
       <h4 className={styles.cardTitle}>{meditation.text}</h4>
       <div className={styles.controls}>
@@ -85,16 +81,17 @@ const Meditations: React.FC = () => {
           }}
           style={{ display: isPlaying ? "inline-block" : "none" }}
         >
-          <img src={backwardIcon} alt="Backward" />
+          <Rewind size={24} className={styles.controlIcon} />
         </button>
         <button
-          className={styles.playButton}
-          onClick={(e) => {
-            e.stopPropagation();
-            onPlayPause();
-          }}
+          className={`${styles.controlButton} ${styles.playButton}`}
+          onClick={onPlayPause}
         >
-          <img src={isPlaying ? pauseIcon : playIcon} alt="Play/Pause" />
+          {isPlaying ? (
+            <Pause size={24} className={styles.activeIcon} />
+          ) : (
+            <Play size={24} className={styles.controlIcon} />
+          )}
         </button>
         <button
           className={styles.controlButton}
@@ -104,7 +101,7 @@ const Meditations: React.FC = () => {
           }}
           style={{ display: isPlaying ? "inline-block" : "none" }}
         >
-          <img src={forwardIcon} alt="Forward" />
+          <FastForward size={24} className={styles.controlIcon} />
         </button>
       </div>
     </div>

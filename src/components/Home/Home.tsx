@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "./Home.module.css";
@@ -14,14 +14,16 @@ const Home: React.FC<HomeProps> = ({ className }) => {
   const { t } = useTranslation();
   const { isUserLoading, isStatsLoading, error, userData, userStats } = useUserData();
 
-  const welcomeMessages = [
-    t('home.welcomeMessage1'),
-    t('home.welcomeMessage2'),
-    t('home.welcomeMessage3'),
-    t('home.welcomeMessage4'),
-    t('home.welcomeMessage5'),
-  ];
-  const randomWelcomeMessage = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+  const randomWelcomeMessage = useMemo(() => {
+    const welcomeMessages = [
+      t('home.welcomeMessage1'),
+      t('home.welcomeMessage2'),
+      t('home.welcomeMessage3'),
+      t('home.welcomeMessage4'),
+      t('home.welcomeMessage5'),
+    ];
+    return welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+  }, []);
 
   const handleNavigation = (path: string, disabled: boolean) => {
     if (!disabled) {
