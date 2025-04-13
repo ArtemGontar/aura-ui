@@ -7,9 +7,10 @@ export const initialState: UserState = {
   userData: null,
   userStats: {
     streak: 0,
-    crystalBalance: 0
+    coinBalance: 0
   },
-  isLoading: true,
+  isUserLoading: true,
+  isStatsLoading: true,
   error: null,
 };
 
@@ -63,38 +64,48 @@ const userSlice = createSlice({
   reducers: {
     setUserData: (state, action: PayloadAction<UserData>) => {
       state.userData = action.payload;
-      state.isLoading = false;
+      state.isUserLoading = false;
     },
     setUserStats: (state, action: PayloadAction<UserStats>) => {
       state.userStats = action.payload;
+      state.isStatsLoading = false;
     },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
-      state.isLoading = false;
+      state.isUserLoading = false;
+      state.isStatsLoading = false;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
+      state.isUserLoading = action.payload;
+      state.isStatsLoading = action.payload;
+    },
+    setUserLoading: (state, action: PayloadAction<boolean>) => {
+      state.isUserLoading = action.payload;
+    },
+    setStatsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isStatsLoading = action.payload;
     },
     clearUserData: (state) => {
       state.userData = null;
-      state.userStats = { streak: 0, crystalBalance: 0 };
+      state.userStats = { streak: 0, coinBalance: 0 };
       state.error = null;
-      state.isLoading = false;
+      state.isUserLoading = false;
+      state.isStatsLoading = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(saveUserDataAsync.pending, (state) => {
-        state.isLoading = true;
+        state.isUserLoading = true;
         state.error = null;
       })
       .addCase(saveUserDataAsync.fulfilled, (state, action) => {
         state.userData = action.payload;
-        state.isLoading = false;
+        state.isUserLoading = false;
       })
       .addCase(saveUserDataAsync.rejected, (state, action) => {
         state.error = action.error.message || 'Failed to save user data';
-        state.isLoading = false;
+        state.isUserLoading = false;
       });
   },
 });
@@ -103,7 +114,9 @@ export const {
   setUserData, 
   setUserStats,
   setError, 
-  setLoading, 
+  setLoading,
+  setUserLoading,
+  setStatsLoading,
   clearUserData 
 } = userSlice.actions;
 

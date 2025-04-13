@@ -11,7 +11,7 @@ import WebApp from "@twa-dev/sdk";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
-  const { isLoading, error, userData } = useUserData();
+  const { isUserLoading, error, userData } = useUserData();
   const navigate = useNavigate();
 
   const handleDeleteAccount = async () => {
@@ -28,7 +28,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
     });
   };
 
-  if (isLoading) {
+  if (isUserLoading) {
     return (
       <div className={styles.loading} role="status" aria-label={t('profile.loading')}>
         {t('profile.loading')}

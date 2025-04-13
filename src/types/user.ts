@@ -27,6 +27,7 @@ export interface Subscription {
 export interface UserState {
   userData: UserData | null;
   userStats: UserStats;
-  isLoading: boolean;
+  isUserLoading: boolean;
+  isStatsLoading: boolean;
   error: string | null;
 }

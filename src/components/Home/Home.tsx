@@ -12,7 +12,7 @@ import coin from "../../assets/coin.png";
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { isLoading, error, userData, userStats } = useUserData();
+  const { isUserLoading, isStatsLoading, error, userData, userStats } = useUserData();
 
   const welcomeMessages = [
     t('home.welcomeMessage1'),
@@ -29,29 +29,35 @@ const Home: React.FC<HomeProps> = ({ className }) => {
     }
   };
 
-  if (isLoading) {
-    return <LoadingDisplay />;
-  }
-
   if (error) {
     return <ErrorDisplay error={error}></ErrorDisplay>;
   }
 
-  if (!userData) {
+  if (!userData && !isUserLoading) {
     return <ErrorDisplay error={t('error.noUserData')}></ErrorDisplay>;
+  }
+
+  if (isUserLoading && !userData) {
+    return <LoadingDisplay />;
   }
 
   return (
     <div className={`${styles.home} ${className || ''}`}>
       <div className={styles.welcomeContainer}>
         <p className={styles.streak}>
-          {userStats.streak} {t('home.daysStreak')} {userStats.streak > 0 ? "🔥" : ""}
+          {userStats?.streak} {t('home.daysStreak')} {userStats?.streak > 0 ? "🔥" : ""}
         </p>
-        <h2 className={styles.welcome}>{userData.firstName}</h2>
+        <h2 className={styles.welcome}>{userData?.firstName}</h2>
         <p className={styles.subtitle}>{randomWelcomeMessage}</p>
         <p className={styles.coinContainer}>
           <span className={styles.coin}>
-            <span className={styles.coinAmount}>{userStats.coinBalance}</span>
+            {isStatsLoading ? (
+              <span className={styles.coinAmount}>
+                <div className={styles.coinLoader}>...</div>
+              </span>
+            ) : (
+              <span className={styles.coinAmount}>{userStats?.coinBalance}</span>
+            )}
             <img src={coin} alt="Aura coin" className="w-12 h-12" />
           </span>
         </p>
