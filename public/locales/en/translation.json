@@ -11,12 +11,6 @@
     "meditations": "Meditations",
     "tasks": "Tasks"
   },
-  "routes": {
-    "horoscope": "Daily Horoscope",
-    "psychological": "Psychological",
-    "astrology": "Astrology",
-    "magicball": "Magic Ball"
-  },
   "home": {
     "daysStreak": "days streak",
     "welcomeMessage1": "We hope you have a magical day!",
@@ -37,17 +31,17 @@
         "title": "Affirmation",
         "description": "Set your daily intention."
       },
-      "dreambook": {
+      "dreamBook": {
         "title": "Dream Book",
         "description": "Explore the meaning of your dreams."
       },
-      "psychological": {
-        "title": "Psychological",
+      "psychologySuccess": {
+        "title": "Psychology of Success",
         "description": "Explore psychological insights."
       },
-      "astrology": {
-        "title": "Astrology",
-        "description": "Discover astrological predictions."
+      "tarot": {
+        "title": "Tarot",
+        "description": "Get predictions from Tarot cards."
       },
       "magicball": {
         "title": "Magic Ball",

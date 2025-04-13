@@ -14,6 +14,8 @@
   --gradient-three: linear-gradient(135deg, #e9f8f4 0%, #ffeef0 100%);
   --gradient-four: linear-gradient(135deg, #e8f4fd 0%, #fff8e7 100%);
   --gradient-five: linear-gradient(135deg, #f2f0ff 0%, #fffaf1 100%);
+  --gradient-six: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+  --gradient-seven: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
 
   /* Card text colors - light theme */
   --card-text-color: var(--tg-theme-text-color);

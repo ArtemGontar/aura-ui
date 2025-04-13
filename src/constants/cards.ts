@@ -20,20 +20,20 @@ export const HOME_CARDS: CardData[] = [
     disabled: false
   },
   {
-    id: 'dreambook',
+    id: 'dreamBook',
     path: '/dreambook',
     icon: '🌙',
     disabled: false
   },
   {
-    id: 'psychological',
-    path: '/psychological',
+    id: 'psychologySuccess',
+    path: '/psychologySuccess',
     icon: '🧠',
     disabled: true
   },
   {
-    id: 'astrology',
-    path: '/astrology',
+    id: 'tarot',
+    path: '/tarot',
     icon: '🌠',
     disabled: true
   },

@@ -179,19 +179,27 @@
 }
 
 .cardCompatibility {
-  background: var(--gradient-five);
-}
-
-.cardPsychological {
   background: var(--gradient-two);
 }
 
-.cardAstrology {
+.cardAffirmation {
   background: var(--gradient-three);
 }
 
-.cardMagicball {
+.cardDreamBook {
   background: var(--gradient-four);
+}
+
+.cardPsychologySuccess {
+  background: var(--gradient-five);
+}
+
+.cardTarot {
+  background: var(--gradient-six);
+}
+
+.cardMagicball {
+  background: var(--gradient-seven);
 }
 
 .cardDisabled {

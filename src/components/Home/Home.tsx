@@ -53,7 +53,7 @@ const Home: React.FC<HomeProps> = ({ className }) => {
           <span className={styles.coin}>
             {isStatsLoading ? (
               <span className={styles.coinAmount}>
-                <div className={styles.coinLoader}>...</div>
+                <span className={styles.coinLoader}>...</span>
               </span>
             ) : (
               <span className={styles.coinAmount}>{userStats?.coinBalance}</span>

@@ -7,7 +7,7 @@ Aura is a web application that provides various types of predictions and user in
 - Fetches user data from the Telegram API.
 - Displays a personalized welcome message.
 - Shows a daily prediction streak.
-- Provides various types of predictions including Horoscope, Psychological, Astrology, MagicBall, Tarot, and Runes.
+- Provides various types of predictions including Horoscope, Compatibility, DreemBook, Psychology of Success, MagicBall, Tarot.
 
 ## Project Structure
 

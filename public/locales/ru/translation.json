@@ -11,12 +11,6 @@
     "meditations": "Медитации",
     "tasks": "Задачи"
   },
-  "routes": {
-    "horoscope": "Гороскоп",
-    "psychological": "Психология",
-    "astrology": "Астрология",
-    "magicball": "Магический шар"
-  },
   "home": {
     "daysStreak": "дней подряд",
     "welcomeMessage1": "Желаем тебе волшебного дня!",
@@ -37,17 +31,17 @@
         "title": "Аффирмации",
         "description": "Установи свою ежедневную цель."
       },
-      "dreambook": {
+      "dreamBook": {
         "title": "Сонник",
         "description": "Исследуй значение своих снов."
       },
-      "psychological": {
-        "title": "Психология",
+      "psychologySuccess": {
+        "title": "Психология успеха",
         "description": "Исследуй психологические аспекты."
       },
-      "astrology": {
-        "title": "Астрология",
-        "description": "Узнай астрологические предсказания."
+      "tarot": {
+        "title": "Таро",
+        "description": "Получай предсказания от карт Таро."
       },
       "magicball": {
         "title": "Магический шар",

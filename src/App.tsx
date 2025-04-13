@@ -5,8 +5,8 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile/Profile";
 import styles from "./App.module.css";
 import DailyHoroscope from "./components/Cards/DailyHoroscope/DailyHoroscope";
-import Psychological from "./components/Cards/Psychological/Psychological";
-import Astrology from "./components/Cards/Astrology/Astrology";
+import PsychologySuccess from "./components/Cards/PsychologySuccess/PsychologySuccess";
+import Tarot from "./components/Cards/Tarot/Tarot";
 import MagicBall from "./components/Cards/MagicBall/MagicBall";
 import Meditations from "./components/Meditations/Meditations";
 import ErrorDisplay from "./components/ErrorDisplay/ErrorDisplay";
@@ -67,8 +67,8 @@ const AppContent: React.FC = () => {
           <Route path="/horoscope" element={<DailyHoroscope />} />
           <Route path="/compatibility" element={<Compatibility />} />
           <Route path="/affirmation" element={<Affirmation />} />
-          <Route path="/psychological" element={<Psychological />} />
-          <Route path="/astrology" element={<Astrology />} />
+          <Route path="/psychologySuccess" element={<PsychologySuccess />} />
+          <Route path="/tarot" element={<Tarot />} />
           <Route path="/magicball" element={<MagicBall />} />
           <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} />
           <Route path="/tariff-plans" element={<TariffPlans />} />
