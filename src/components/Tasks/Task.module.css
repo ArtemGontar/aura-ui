@@ -1,48 +1,127 @@
 .task {
-  padding: 16px;
-  margin: 10px 0;
-  background-color: var(--tg-theme-bg-color, white);
-  border-radius: 12px;
-  border: 1px solid rgba(var(--tg-theme-button-color-rgb, 0, 0, 0), 0.1);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
+  padding: var(--tg-theme-spacing-unit-large);
+  margin-bottom: var(--tg-theme-spacing-unit-large);
+  /* cursor: pointer; - removed */
+  display: flex;
+  flex-direction: column;
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .task:hover {
-  background-color: rgba(var(--tg-theme-button-color-rgb, 0, 0, 0), 0.03);
+  background-color: var(--tg-theme-secondary-bg-color);
+  opacity: 0.98;
+  /* removed transform since it's no longer clickable */
 }
 
 .info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
 .name {
-  font-size: 18px;
-  font-weight: 500;
-  color: var(--tg-theme-text-color, #000);
+  font-size: var(--tg-theme-font-size-base);
+  color: var(--tg-theme-text-color);
   margin: 0;
-  max-width: 70%;
+  font-weight: var(--tg-theme-font-weight-medium);
 }
 
 .bonuses {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--tg-theme-hint-color, #999);
+  color: #ffd700;
+  font-weight: var(--tg-theme-font-weight-bold);
   margin: 0;
-  min-width: 70px;
-  flex-shrink: 0;
-  justify-content: flex-end;
 }
 
 .coinImg {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
+  width: 16px;
+  height: 16px;
+  margin-left: 5px;
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.externalActions {
+  display: flex;
+  gap: 10px;
+}
+
+.visitBtn, .verifyBtn {
+  padding: 6px 12px;
+  border-radius: var(--tg-theme-border-radius);
+  border: none;
+  font-weight: var(--tg-theme-font-weight-medium);
+  cursor: pointer;
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+.visitBtn {
+  background-color: transparent;
+  color: var(--tg-theme-link-color);
+  border: 1px solid var(--tg-theme-link-color);
+}
+
+.verifyBtn {
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+}
+
+.verifyBtn:disabled {
+  background-color: var(--tg-theme-hint-color);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.verifyBtn.loading {
+  background-color: var(--tg-theme-button-color);
+  opacity: 0.8;
+  position: relative;
+}
+
+.spinnerIcon {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  margin-right: 6px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.completed {
+  background-color: rgba(var(--tg-theme-success-color, #34c759), 0.1);
+  border: 1px solid rgba(var(--tg-theme-success-color, #34c759), 0.3);
+}
+
+.completedBadge {
+  color: var(--tg-theme-success-color, #27ae60);
+  font-weight: var(--tg-theme-font-weight-medium);
+}
+
+.errorMessage {
+  margin-top: var(--tg-theme-spacing-unit);
+  color: var(--tg-theme-error-color, #e74c3c);
+  font-size: var(--tg-theme-font-size-small);
+}
+
+.loading {
+  text-align: center;
+  padding: var(--tg-theme-spacing-unit-large);
+  color: var(--tg-theme-hint-color);
 }

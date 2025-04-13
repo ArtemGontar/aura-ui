@@ -1,4 +1,31 @@
 .tasks {
   max-width: 500px;
   margin: 0 auto;
+  padding: 0 var(--tg-theme-mobile-padding);
+}
+
+/* Add space between banner and first task */
+.tasks > div:first-child {
+  margin-bottom: var(--tg-theme-spacing-unit-large);
+}
+
+.taskList {
+  margin-top: calc(var(--tg-theme-spacing-unit-large) * 2);
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  color: var(--tg-theme-hint-color);
+  font-size: var(--tg-theme-font-size-base);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .tasks {
+    padding: 0 var(--tg-theme-mobile-padding);
+    width: calc(100% - var(--tg-theme-mobile-padding) * 2);
+  }
 }
