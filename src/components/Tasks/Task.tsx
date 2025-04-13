@@ -9,11 +9,21 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ name, bonuses, link }) => {
+  const handleClick = () => {
+    if (link.startsWith('/')) {
+      window.location.href = link;
+    } else {
+      window.open(link, "_blank");
+    }
+  };
+
   return (
-    <div className={styles.task} onClick={() => window.open(link, "_blank")}>
+    <div className={styles.task} onClick={handleClick}>
       <div className={styles.info}>
         <p className={styles.name}>{name}</p>
-        <p className={styles.bonuses}>+{bonuses.toLocaleString()} <img src={coin} alt="Aura coin" className="w-8 h-8" /></p>
+        <p className={styles.bonuses}>
+          +{bonuses} <img src={coin} alt="Aura coin" className={styles.coinImg} />
+        </p>
       </div>
     </div>
   );

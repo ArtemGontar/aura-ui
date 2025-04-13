@@ -289,5 +289,16 @@
     "widowed": "Widowed",
     "save": "Save",
     "saveError": "Error saving data."
+  },
+  "tasks": {
+    "banner": {
+      "title": "Complete Tasks",
+      "subtitle": "Earn AURA tokens by completing tasks"
+    },
+    "taskList": {
+      "telegramAura": "Follow Aura Telegram channel",
+      "telegramPsy": "Follow psyмозг на изнанку Telegram channel",
+      "requestHoroscope": "Request horoscope"
+    }
   }
 }

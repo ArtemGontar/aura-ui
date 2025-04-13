@@ -279,5 +279,16 @@
     "widowed": "Вдовец",
     "save": "Сохранить",
     "saveError": "Ошибка при сохранении данных."
+  },
+  "tasks": {
+    "banner": {
+      "title": "Выполни задания",
+      "subtitle": "Заработай AURA токены, выполняя задания"
+    },
+    "taskList": {
+      "telegramAura": "Подпишись на Aura Telegram канал",
+      "telegramPsy": "Подпишись на psyмозг на изнанку Telegram канал",
+      "requestHoroscope": "Запроси гороскоп"
+    }
   }
 }
