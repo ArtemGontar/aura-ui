@@ -29,15 +29,16 @@ const Task: React.FC<TaskProps> = ({
 
   const handleVisit = () => {
     if (link) {
-      if (link.startsWith('/')) {
-        // For in-app tasks, mark as completed when navigating
-        if (type === "in-app" && status === "incomplete") {
-          onComplete(id);
-        }
-        window.location.href = link;
-      } else {
-        window.open(link, "_blank");
-      }
+      window.location.href = link;
+      // if (link.startsWith('/')) {
+      //   // For in-app tasks, mark as completed when navigating
+      //   if (type === "in-app" && status === "incomplete") {
+      //     onComplete(id);
+      //   }
+      //   window.location.href = link;
+      // } else {
+      //   window.open(link, "_blank");
+      // }
     }
   };
 
