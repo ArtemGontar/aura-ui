@@ -4,14 +4,14 @@ import coin from "../../assets/coin.png";
 import { TaskStatus, TaskType } from "../../types/task";
 
 interface TaskProps {
-  id: string;
+  id: number;
   name: string;
   bonuses: number;
   link: string;
   type: TaskType;
   status: TaskStatus;
-  onVerify: (taskId: string) => Promise<boolean>;
-  onComplete: (taskId: string) => void;
+  onVerify: (taskId: number) => Promise<boolean>;
+  onComplete: (taskId: number) => void;
 }
 
 const Task: React.FC<TaskProps> = ({ 

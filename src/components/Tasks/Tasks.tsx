@@ -41,11 +41,11 @@ const TasksPage: React.FC = () => {
     fetchTasks();
   }, [t]);
 
-  const verifyTask = async (taskId: string) => {
+  const verifyTask = async (taskId: number) => {
     return await taskService.verifyTask(taskId);
   };
 
-  const completeTask = async (taskId: string) => {
+  const completeTask = async (taskId: number) => {
     const success = await taskService.completeTask(taskId);
     
     if (success) {
