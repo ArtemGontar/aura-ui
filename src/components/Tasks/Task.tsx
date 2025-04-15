@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Task.module.css";
 import coin from "../../assets/coin.png";
 import { TaskStatus, TaskType } from "../../types/task";
@@ -24,6 +26,7 @@ const Task: React.FC<TaskProps> = ({
   onVerify,
   onComplete 
 }) => {
+  const { t } = useTranslation();
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationError, setVerificationError] = useState<string | null>(null);
 
@@ -52,10 +55,10 @@ const Task: React.FC<TaskProps> = ({
       if (verified) {
         onComplete(id);
       } else {
-        setVerificationError("Verification failed. Please make sure you've completed the task.");
+        setVerificationError(t("tasks.verification.failed"));
       }
     } catch (error) {
-      setVerificationError("Error during verification. Please try again.");
+      setVerificationError(t("tasks.verification.error"));
     } finally {
       setIsVerifying(false);
     }
@@ -72,7 +75,7 @@ const Task: React.FC<TaskProps> = ({
       
       <div className={styles.actions}>
         {status === "completed" ? (
-          <span className={styles.completedBadge}>✓ Completed</span>
+          <span className={styles.completedBadge}>{t("tasks.buttons.completed")}</span>
         ) : (
           <>
             <button 
@@ -80,7 +83,7 @@ const Task: React.FC<TaskProps> = ({
               onClick={handleVisit}
               disabled={isVerifying}
             >
-              Visit
+              {t("tasks.buttons.visit")}
             </button>
             <button 
               className={`${styles.verifyBtn} ${isVerifying ? styles.loading : ''}`}
@@ -90,9 +93,9 @@ const Task: React.FC<TaskProps> = ({
               {isVerifying ? (
                 <>
                   <span className={styles.spinnerIcon}></span>
-                  Checking...
+                  {t("tasks.buttons.checking")}
                 </>
-              ) : "Verify"}
+              ) : t("tasks.buttons.verify")}
             </button>
           </>
         )}

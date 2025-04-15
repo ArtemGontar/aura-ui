@@ -6,9 +6,14 @@ import Banner from "../Banner/Banner";
 import image from "./../../assets/tasks.png";
 import taskService from "../../services/taskService";
 import { TaskData, TaskStatus } from "../../types/task";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { fetchUserStatsAsync } from "../../store/slices/userSlice";
 
 const TasksPage: React.FC = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.user.userData);  
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -55,6 +60,9 @@ const TasksPage: React.FC = () => {
           task.id === taskId ? {...task, status: "completed" as TaskStatus} : task
         )
       );
+      if (userData) {
+        dispatch(fetchUserStatsAsync(userData.id));
+      }
     }
   };
 

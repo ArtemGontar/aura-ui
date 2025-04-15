@@ -299,6 +299,16 @@
       "telegramAura": "Follow Aura Telegram channel",
       "telegramPsy": "Follow psyмозг на изнанку Telegram channel",
       "requestHoroscope": "Request horoscope"
+    },
+    "verification": {
+      "failed": "Verification failed. Please make sure you've completed the task.",
+      "error": "Error during verification. Please try again."
+    },
+    "buttons": {
+      "visit": "Visit",
+      "verify": "Verify",
+      "checking": "Checking...",
+      "completed": "✓ Completed"
     }
   }
 }

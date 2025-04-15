@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserData, UserState, UserStats } from '../../types/user';
 import { getUserData, updateUserData } from '../../services/userService';
-
+import { getUserStats } from '../../services/userStatsService';
 
 export const initialState: UserState = {
   userData: null,
@@ -58,6 +58,18 @@ export const saveUserDataAsync = createAsyncThunk(
   }
 );
 
+export const fetchUserStatsAsync = createAsyncThunk(
+  'user/fetchStats',
+  async (userId: string) => {
+    try {
+      const userStats = await getUserStats(userId);
+      return userStats;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -106,6 +118,18 @@ const userSlice = createSlice({
       .addCase(saveUserDataAsync.rejected, (state, action) => {
         state.error = action.error.message || 'Failed to save user data';
         state.isUserLoading = false;
+      })
+      .addCase(fetchUserStatsAsync.pending, (state) => {
+        state.isStatsLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserStatsAsync.fulfilled, (state, action) => {
+        state.userStats = action.payload;
+        state.isStatsLoading = false;
+      })
+      .addCase(fetchUserStatsAsync.rejected, (state, action) => {
+        state.error = action.error.message || 'Failed to fetch user stats';
+        state.isStatsLoading = false;
       });
   },
 });
