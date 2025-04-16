@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreatePersonalMeditation.module.css";
 import { Button, Slider, Checkbox, Select } from "@telegram-apps/telegram-ui";
+import { createPersonalMeditation } from "../../services/meditationService";
+import { MeditationSettings } from "../../types/meditation";
 
 const CreatePersonalMeditation: React.FC = () => {
   const { t } = useTranslation();
@@ -17,21 +19,27 @@ const CreatePersonalMeditation: React.FC = () => {
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
 
   const handleSubmit = async () => {
-    // Add logic to create meditation with all settings
-    const meditationSettings = {
-      topic,
-      voicePreference,
-      speechRate,
-      pitch,
-      pauseStrength,
-      addBreathingEffects,
-      backgroundAudio
-    };
-    
-    console.log("Creating meditation with settings:", meditationSettings);
-    
-    // After creation, redirect back to Meditations component
-    navigate("/meditations");
+    try {
+      const meditationSettings: MeditationSettings = {
+        topic,
+        voicePreference,
+        speechRate,
+        pitch,
+        pauseStrength,
+        addBreathingEffects,
+        backgroundAudio
+      };
+      
+      // Call the service function with settings object
+      const result = await createPersonalMeditation(meditationSettings);
+      console.log("Meditation created successfully:", result);
+      
+      // After creation, redirect back to Meditations component
+      navigate("/meditations");
+    } catch (error) {
+      console.error("Failed to create meditation:", error);
+      // You could add error handling UI feedback here
+    }
   };
 
   return (

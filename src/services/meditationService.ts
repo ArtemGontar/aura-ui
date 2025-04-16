@@ -1,5 +1,5 @@
 import api from "./api";
-import { Meditation } from "../types/meditation";
+import { Meditation, MeditationSettings } from "../types/meditation";
 
 const API_BASE = `/api/meditations`;
 
@@ -16,6 +16,19 @@ export const getMeditations = async (type: string): Promise<Meditation[]> => {
       return [];
     }
     console.error("Error ", error);
+    throw error;
+  }
+};
+
+export const createPersonalMeditation = async (settings: MeditationSettings): Promise<Meditation> => {
+  try {
+    const response = await api.post<Meditation>(`${API_BASE}`, settings);
+    
+    console.log("response", response.data);
+
+    return response.data;
+  } catch (error) {
+    console.error("Error creating meditation:", error);
     throw error;
   }
 };
