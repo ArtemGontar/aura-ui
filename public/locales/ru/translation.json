@@ -225,6 +225,19 @@
     "title": "Создать личную медитацию",
     "topic": "Тема",
     "voicePreference": "Предпочтение голоса",
+    "advancedSettings": "Продвинутые настройки",
+    "speechRate": "Скорость речи",
+    "pitch": "Высота голоса",
+    "pauseStrength": "Сила паузы",
+    "addBreathingEffects": "Добавить эффекты дыхания",
+    "backgroundAudio": "Фоновая музыка",
+    "noBackgroundAudio": "Без фоновой музыки",
+    "backgroundOptions": {
+      "nature": "Звуки природы",
+      "rain": "Дождь",
+      "ocean": "Океанские волны",
+      "ambient": "Фоновая музыка"
+    },
     "createButton": "Создать"
   },
   "onboarding": {

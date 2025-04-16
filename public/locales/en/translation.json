@@ -236,6 +236,19 @@
     "title": "Create Personal Meditation",
     "topic": "Topic",
     "voicePreference": "Voice Preference",
+    "advancedSettings": "Advanced Settings",
+    "speechRate": "Speech Rate",
+    "pitch": "Pitch",
+    "pauseStrength": "Pause Strength",
+    "addBreathingEffects": "Add Breathing Effects",
+    "backgroundAudio": "Background Audio",
+    "noBackgroundAudio": "No Background Audio",
+    "backgroundOptions": {
+      "nature": "Nature Sounds",
+      "rain": "Rain",
+      "ocean": "Ocean Waves",
+      "ambient": "Ambient Music"
+    },
     "createButton": "Create"
   },
   "onboarding": {
