@@ -16,6 +16,7 @@ const TasksPage: React.FC = () => {
   const userData = useSelector((state: RootState) => state.user.userData);  
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCompletedExpanded, setIsCompletedExpanded] = useState(false);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -66,6 +67,14 @@ const TasksPage: React.FC = () => {
     }
   };
 
+  // Separate active and completed tasks
+  const activeTasks = tasks.filter(task => task.status !== "completed");
+  const completedTasks = tasks.filter(task => task.status === "completed");
+
+  const toggleCompletedTasks = () => {
+    setIsCompletedExpanded(!isCompletedExpanded);
+  };
+
   return (
     <div className={styles.tasks}>
       <Banner 
@@ -79,19 +88,53 @@ const TasksPage: React.FC = () => {
         {isLoading ? (
           <div className={styles.loading}>Loading tasks...</div>
         ) : (
-          tasks.map((task) => (
-            <Task 
-              key={task.id} 
-              id={task.id}
-              name={task.name} 
-              bonuses={task.bonuses} 
-              link={task.link}
-              type={task.type}
-              status={task.status}
-              onVerify={verifyTask}
-              onComplete={completeTask}
-            />
-          ))
+          <>
+            {/* Active Tasks */}
+            {activeTasks.map((task) => (
+              <Task 
+                key={task.id} 
+                id={task.id}
+                name={task.name} 
+                bonuses={task.bonuses} 
+                link={task.link}
+                type={task.type}
+                status={task.status}
+                onVerify={verifyTask}
+                onComplete={completeTask}
+              />
+            ))}
+
+            {/* Completed Tasks Section */}
+            {completedTasks.length > 0 && (
+              <div className={styles.completedSection}>
+                <button 
+                  className={styles.completedToggle}
+                  onClick={toggleCompletedTasks}
+                >
+                  {isCompletedExpanded ? '▼ ' : '► '}
+                  {t('tasks.completedTasks')} ({completedTasks.length})
+                </button>
+                
+                {isCompletedExpanded && (
+                  <div className={styles.completedTasks}>
+                    {completedTasks.map((task) => (
+                      <Task 
+                        key={task.id} 
+                        id={task.id}
+                        name={task.name} 
+                        bonuses={task.bonuses} 
+                        link={task.link}
+                        type={task.type}
+                        status={task.status}
+                        onVerify={verifyTask}
+                        onComplete={completeTask}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
