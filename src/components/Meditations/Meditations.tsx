@@ -3,10 +3,15 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./Meditations.module.css";
 import { getMeditations } from "../../services/meditationService";
-import { Meditation } from "../../types/meditation";
+import { Meditation, MeditationCategory } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
-import { Pause, Play, Rewind, FastForward } from "lucide-react";
+import MeditationCard from "./MeditationCard";
+
+type FilterCategory = "All" | MeditationCategory;
+
+// Define categories as a separate entity
+const MEDITATION_CATEGORIES: FilterCategory[] = ["All", "Neural", "Humanic", "Noize"];
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
@@ -15,6 +20,7 @@ const Meditations: React.FC = () => {
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
   const [playingId, setPlayingId] = useState<number | null>(null);
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -33,6 +39,21 @@ const Meditations: React.FC = () => {
 
     fetchMeditations();
   }, []);
+
+  // Filter meditations by category
+  const filteredGeneralMeditations = generalMeditations.filter(
+    (meditation) => activeCategory === "All" || meditation.category === activeCategory
+  );
+  
+  const filteredPersonalMeditations = personalMeditations.filter(
+    (meditation) => activeCategory === "All" || meditation.category === activeCategory
+  );
+
+  // Change category handler
+  const handleCategoryChange = (category: FilterCategory) => {
+    impactOccurred("light");
+    setActiveCategory(category);
+  };
 
   const togglePlayPause = (audioUrl: string, id: number) => {
     if (!audioRef.current) return;
@@ -59,54 +80,6 @@ const Meditations: React.FC = () => {
     }
   };
 
-  const MeditationCard = ({
-    meditation,
-    isPlaying,
-    onPlayPause,
-  }: {
-    meditation: Meditation;
-    isPlaying: boolean;
-    onPlayPause: () => void;
-  }) => (
-    <div
-      className={`${styles.card} ${styles.generalCard}`}
-    >
-      <h4 className={styles.cardTitle}>{meditation.text}</h4>
-      <div className={styles.controls}>
-        <button
-          className={styles.controlButton}
-          onClick={(e) => {
-            e.stopPropagation();
-            moveAudio("backward");
-          }}
-          style={{ display: isPlaying ? "inline-block" : "none" }}
-        >
-          <Rewind size={24} className={styles.controlIcon} />
-        </button>
-        <button
-          className={`${styles.controlButton} ${styles.playButton}`}
-          onClick={onPlayPause}
-        >
-          {isPlaying ? (
-            <Pause size={24} className={styles.activeIcon} />
-          ) : (
-            <Play size={24} className={styles.controlIcon} />
-          )}
-        </button>
-        <button
-          className={styles.controlButton}
-          onClick={(e) => {
-            e.stopPropagation();
-            moveAudio("forward");
-          }}
-          style={{ display: isPlaying ? "inline-block" : "none" }}
-        >
-          <FastForward size={24} className={styles.controlIcon} />
-        </button>
-      </div>
-    </div>
-  );
-
   const handleCreatePersonalMeditation = () => {
     impactOccurred("light");
     navigate("/create-personal-meditation");
@@ -119,21 +92,35 @@ const Meditations: React.FC = () => {
         <h2 className={styles.bannerText}>{t("meditations.banner.title")}</h2>
         <p className={styles.subText}>{t("meditations.banner.subtitle")}</p>
       </div>
+      
+      <div className={styles.categoryFilters}>
+        {MEDITATION_CATEGORIES.map((category) => (
+          <button 
+            key={category}
+            className={`${styles.telegramButton} ${activeCategory === category ? styles.activeButton : ""}`}
+            onClick={() => handleCategoryChange(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      
       <div className={styles.cards}>
         <h3>{t("meditations.general.title")}</h3>
-        {generalMeditations.map((meditation) => (
+        {filteredGeneralMeditations.map((meditation) => (
           <MeditationCard
             key={meditation.id}
             meditation={meditation}
             isPlaying={playingId === meditation.id}
             onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
+            onMoveAudio={moveAudio}
           />
         ))}
       </div>
       <div className={styles.cards}>
         <h3>{t("meditations.personal.title")}</h3>
-        {personalMeditations.length > 0 ? (
-          personalMeditations.map((meditation) => (
+        {filteredPersonalMeditations.length > 0 ? (
+          filteredPersonalMeditations.map((meditation) => (
             <MeditationCard
               key={meditation.id}
               meditation={meditation}
@@ -141,6 +128,7 @@ const Meditations: React.FC = () => {
               onPlayPause={() =>
                 togglePlayPause(meditation.audioUrl, meditation.id)
               }
+              onMoveAudio={moveAudio}
             />
           ))
         ) : (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import Task from "./Task";
 import styles from "./Tasks.module.css";
 import Banner from "../Banner/Banner";
@@ -86,7 +87,7 @@ const TasksPage: React.FC = () => {
       
       <div className={styles.taskList}>
         {isLoading ? (
-          <div className={styles.loading}>Loading tasks...</div>
+          <div className={styles.loading}>{t("tasks.loading")}</div>
         ) : (
           <>
             {/* Active Tasks */}
@@ -111,7 +112,10 @@ const TasksPage: React.FC = () => {
                   className={styles.completedToggle}
                   onClick={toggleCompletedTasks}
                 >
-                  {isCompletedExpanded ? '▼ ' : '► '}
+                  {isCompletedExpanded ? 
+                    <ChevronDown className={styles.toggleIcon} size={16} /> : 
+                    <ChevronRight className={styles.toggleIcon} size={16} />
+                  }
                   {t('tasks.completedTasks')} ({completedTasks.length})
                 </button>
                 

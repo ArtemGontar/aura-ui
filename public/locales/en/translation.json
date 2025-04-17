@@ -322,6 +322,8 @@
       "verify": "Verify",
       "checking": "Checking...",
       "completed": "✓ Completed"
-    }
+    },
+    "completedTasks": "Completed Tasks",
+    "loading": "Loading tasks..."
   }
 }

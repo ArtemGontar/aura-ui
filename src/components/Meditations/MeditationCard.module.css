@@ -1,0 +1,83 @@
+.card {
+  background: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-theme-border-radius);
+  padding: 24px var(--tg-theme-mobile-card-padding);
+  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.generalCard {
+  background: var(--gradient-one);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.categoryLabel {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tg-theme-text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-weight: var(--tg-theme-font-weight-bold);
+  color: var(--tg-theme-text-color);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controlButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playButton {
+  border-radius: 50%;
+}
+
+.controlIcon {
+  color: var(--tg-theme-text-color);
+  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+.activeIcon {
+  color: var(--tg-theme-button-color);
+  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
+}
+
+/* Tablet and larger screens */
+@media (min-width: 768px) {
+  .card {
+    padding: calc(var(--tg-theme-spacing-unit) * 2.5);
+  }
+
+  .cardTitle {
+    font-size: var(--tg-theme-font-size-xlarge);
+  }
+}
