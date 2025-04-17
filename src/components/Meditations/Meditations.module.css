@@ -214,13 +214,19 @@
 
 .categoryFilters {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;  /* Changed from center to make scrolling more obvious */
   gap: 8px;
   margin: 12px 0 20px;
   padding: 0 var(--tg-theme-mobile-padding);
+  padding-right: calc(var(--tg-theme-mobile-padding) * 2); /* Extra padding to ensure last item is fully visible */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
+  flex-wrap: nowrap; /* Ensure no wrapping occurs */
+  width: 100%;
+  position: relative; /* For potential scroll indicators */
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
 }
 
 .categoryFilters::-webkit-scrollbar {
@@ -228,12 +234,12 @@
 }
 
 .telegramButton {
-  padding: 8px 16px;
+  padding: 6px 12px; /* Slightly smaller padding on small screens */
   background-color: var(--tg-theme-button-color);
   color: var(--tg-theme-button-text-color);
   border: none;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13px; /* Slightly smaller font on small screens */
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -241,10 +247,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   opacity: 0.7;
-}
-
-.telegramButton:hover {
-  opacity: 0.9;
+  flex-shrink: 0; /* Prevent buttons from shrinking */
 }
 
 .activeButton {
@@ -307,8 +310,10 @@
   }
 
   .categoryFilters {
-    margin: 20px 0 30px;
-    gap: 12px;
+    justify-content: center; /* Center on larger screens */
+    padding-right: var(--tg-theme-mobile-padding); /* Reset extra padding */
+    mask-image: none; /* Remove fade effect on larger screens */
+    -webkit-mask-image: none;
   }
   
   .telegramButton {

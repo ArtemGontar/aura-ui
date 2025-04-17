@@ -10,6 +10,12 @@
   user-select: none;
 }
 
+/* Keep the original button style for backward compatibility */
 button {
   width: 100%;
+}
+
+/* Add a new class for buttons that should NOT be full width */
+.autoWidthButton {
+  width: auto !important;
 }

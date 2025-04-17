@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./Meditations.module.css";
+import appStyles from "../../App.module.css"; // Import App styles
 import { getMeditations } from "../../services/meditationService";
 import { Meditation, MeditationCategory } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
@@ -11,7 +12,7 @@ import MeditationCard from "./MeditationCard";
 type FilterCategory = "All" | MeditationCategory;
 
 // Define categories as a separate entity
-const MEDITATION_CATEGORIES: FilterCategory[] = ["All", "Neural", "Humanic", "Noize"];
+const MEDITATION_CATEGORIES: FilterCategory[] = ["All", "Neural", "Humanic", "Ambient"];
 
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
@@ -97,7 +98,7 @@ const Meditations: React.FC = () => {
         {MEDITATION_CATEGORIES.map((category) => (
           <button 
             key={category}
-            className={`${styles.telegramButton} ${activeCategory === category ? styles.activeButton : ""}`}
+            className={`${styles.telegramButton} ${activeCategory === category ? styles.activeButton : ""} ${appStyles.autoWidthButton}`}
             onClick={() => handleCategoryChange(category)}
           >
             {category}
