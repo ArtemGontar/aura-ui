@@ -224,12 +224,13 @@
   "createPersonalMeditation": {
     "title": "Создать личную медитацию",
     "topic": "Тема",
-    "voicePreference": "Предпочтение голоса",
+    "voiceName": "Выбор голоса",
+    "selectVoice": "Выберите голос",
     "advancedSettings": "Продвинутые настройки",
     "speechRate": "Скорость речи",
     "pitch": "Высота голоса",
     "pauseStrength": "Сила паузы",
-    "addBreathingEffects": "Добавить эффекты дыхания",
+    "addBreathingEffects": "Эффект дыхания",
     "backgroundAudio": "Фоновая музыка",
     "noBackgroundAudio": "Без фоновой музыки",
     "backgroundOptions": {
@@ -315,5 +316,14 @@
     },
     "completedTasks": "Выполненные задания",
     "loading": "Загрузка заданий..."
+  },
+  "common": {
+    "gender": {
+      "male": "Мужской",
+      "female": "Женский",
+      "neutral": "Нейтральный"
+    },
+    "enabled": "Включено",
+    "disabled": "Выключено"
   }
 }

@@ -235,12 +235,13 @@
   "createPersonalMeditation": {
     "title": "Create Personal Meditation",
     "topic": "Topic",
-    "voicePreference": "Voice Preference",
+    "voiceName": "Voice Selection",
+    "selectVoice": "Select a voice",
     "advancedSettings": "Advanced Settings",
     "speechRate": "Speech Rate",
     "pitch": "Pitch",
     "pauseStrength": "Pause Strength",
-    "addBreathingEffects": "Add Breathing Effects",
+    "addBreathingEffects": "Breath Effect",
     "backgroundAudio": "Background Audio",
     "noBackgroundAudio": "No Background Audio",
     "backgroundOptions": {
@@ -325,5 +326,14 @@
     },
     "completedTasks": "Completed Tasks",
     "loading": "Loading tasks..."
+  },
+  "common": {
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "neutral": "Neutral"
+    },
+    "enabled": "Enabled",
+    "disabled": "Disabled"
   }
 }

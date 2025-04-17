@@ -1,4 +1,4 @@
-export type MeditationCategory = "Neural" | "Humanic" | "Noize";
+export type MeditationCategory = "Neural" | "Humanic" | "Ambient";
 
 export interface Meditation {
   id: number;
@@ -10,7 +10,7 @@ export interface Meditation {
 
 export interface MeditationSettings {
   topic: string;
-  voicePreference: string;
+  voiceName: string;
   speechRate: number;
   pitch: number;
   pauseStrength: number;
