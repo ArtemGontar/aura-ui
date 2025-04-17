@@ -2,6 +2,7 @@
   padding: var(--tg-theme-mobile-padding);
   max-width: 600px;
   margin: 0 auto;
+  padding-bottom: calc(var(--tg-theme-mobile-button-height) + var(--tg-theme-spacing-unit) * 2);
 }
 
 .createPersonalMeditation h2 {
