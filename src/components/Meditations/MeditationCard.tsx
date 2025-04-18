@@ -1,7 +1,7 @@
 import React from "react";
 import { Pause, Play, Rewind, FastForward } from "lucide-react";
 import { Meditation } from "../../types/meditation";
-import styles from "./Meditations.module.css"; // Changed to use the correct module
+import styles from "./MeditationCard.module.css";
 
 interface MeditationCardProps {
   meditation: Meditation;
@@ -17,9 +17,6 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
   onMoveAudio,
 }) => (
   <div className={`${styles.card} ${styles.generalCard}`} style={{ position: 'relative' }}>
-    <div className={styles.categoryLabelContainer}>
-      <span className={styles.categoryLabel}>{meditation.category}</span>
-    </div>
     <h4 className={styles.cardTitle}>{meditation.text}</h4>
     <div className={styles.controls}>
       <button
@@ -52,6 +49,9 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
       >
         <FastForward size={24} className={styles.controlIcon} />
       </button>
+    </div>
+    <div className={styles.categoryLabelContainer}>
+      <span className={styles.categoryLabel}>{meditation.category}</span>
     </div>
   </div>
 );

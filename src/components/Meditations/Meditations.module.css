@@ -104,22 +104,8 @@
   padding: var(--tg-theme-mobile-padding);
 }
 
-.card {
-  background: var(--tg-theme-secondary-bg-color);
-  border-radius: var(--tg-theme-border-radius);
-  padding: 24px var(--tg-theme-mobile-card-padding);
-  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.05),
-    0 10px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-}
-
-.generalCard {
-  background: var(--gradient-one);
-}
+/* Removing redundant .card class as it's in MeditationCard.module.css */
+/* Removing redundant .generalCard class as it's in MeditationCard.module.css */
 
 .personalCard {
   background: var(--gradient-two);
@@ -147,10 +133,7 @@
   color: var(--tg-theme-button-color);
 }
 
-.cardTitle {
-  font-weight: var(--tg-theme-font-weight-bold);
-  color: var(--tg-theme-text-color);
-}
+/* Removing redundant .cardTitle class as it's in MeditationCard.module.css */
 
 .cardText {
   color: var(--tg-theme-text-color);
@@ -181,36 +164,8 @@
   background: var(--tg-theme-button-hover-color);
 }
 
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.controlButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.playButton {
-  border-radius: 50%;
-}
-
-.controlIcon {
-  color: var(--tg-theme-text-color);
-  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-}
-
-.activeIcon {
-  color: var(--tg-theme-button-color);
-  transition: color var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-}
+/* Removing redundant control classes as they're in MeditationCard.module.css */
+/* .controls, .controlButton, .playButton, .controlIcon, .activeIcon */
 
 .categoryFilters {
   display: flex;
@@ -255,25 +210,7 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.categoryLabelContainer {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 1;
-  pointer-events: none; /* Makes sure it doesn't interfere with click events */
-}
-
-.categoryLabel {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  padding: 3px 8px;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--tg-theme-text-color);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: inline-block; /* Ensure proper rendering */
-}
+/* Removing redundant .categoryLabel class as it's in MeditationCard.module.css */
 
 /* Tablet and larger screens */
 @media (min-width: 768px) {
@@ -301,13 +238,7 @@
     gap: calc(var(--tg-theme-spacing-unit) * 2.5);
   }
 
-  .card {
-    padding: calc(var(--tg-theme-spacing-unit) * 2.5);
-  }
-
-  .cardTitle {
-    font-size: var(--tg-theme-font-size-xlarge);
-  }
+  /* Removing redundant media query styles for .card and .cardTitle as they're in MeditationCard.module.css */
 
   .categoryFilters {
     justify-content: center; /* Center on larger screens */

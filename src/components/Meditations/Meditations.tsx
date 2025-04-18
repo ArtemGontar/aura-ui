@@ -23,37 +23,47 @@ const Meditations: React.FC = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const audioRef = useRef<HTMLAudioElement>(null);
+  
+  // Pagination state
+  const [generalPage, setGeneralPage] = useState<number>(1);
+  const [personalPage, setPersonalPage] = useState<number>(1);
+  const [generalTotal, setGeneralTotal] = useState<number>(0);
+  const [personalTotal, setPersonalTotal] = useState<number>(0);
+  const limit = 5; // Items per page
 
   useEffect(() => {
     const fetchMeditations = async () => {
       try {
         const [generalData, personalData] = await Promise.all([
-          getMeditations("general"),
-          getMeditations("personal"),
+          getMeditations("general", generalPage, limit, activeCategory === "All" ? undefined : activeCategory),
+          getMeditations("personal", personalPage, limit, activeCategory === "All" ? undefined : activeCategory),
         ]);
-        setGeneralMeditations(generalData);
-        setPersonalMeditations(personalData);
+        
+        setGeneralMeditations(generalData.data);
+        setGeneralTotal(generalData.total);
+        
+        setPersonalMeditations(personalData.data);
+        setPersonalTotal(personalData.total);
       } catch (error) {
         console.error("Failed to fetch meditations", error);
       }
     };
 
     fetchMeditations();
-  }, []);
-
-  // Filter meditations by category
-  const filteredGeneralMeditations = generalMeditations.filter(
-    (meditation) => activeCategory === "All" || meditation.category === activeCategory
-  );
-  
-  const filteredPersonalMeditations = personalMeditations.filter(
-    (meditation) => activeCategory === "All" || meditation.category === activeCategory
-  );
+  }, [activeCategory, generalPage, personalPage]);
 
   // Change category handler
   const handleCategoryChange = (category: FilterCategory) => {
     impactOccurred("light");
     setActiveCategory(category);
+    // Reset pagination when changing category
+    setGeneralPage(1);
+    setPersonalPage(1);
+  };
+
+  // Calculate total pages
+  const calculateTotalPages = (totalItems: number) => {
+    return Math.max(1, Math.ceil(totalItems / limit));
   };
 
   const togglePlayPause = (audioUrl: string, id: number) => {
@@ -86,6 +96,48 @@ const Meditations: React.FC = () => {
     navigate("/create-personal-meditation");
   };
 
+  // Pagination handlers
+  const handleGeneralPageChange = (newPage: number) => {
+    impactOccurred("light");
+    setGeneralPage(newPage);
+  };
+
+  const handlePersonalPageChange = (newPage: number) => {
+    impactOccurred("light");
+    setPersonalPage(newPage);
+  };
+
+  // Pagination component
+  const PaginationControls = ({ currentPage, totalItems, onPageChange }: { 
+    currentPage: number; 
+    totalItems: number; 
+    onPageChange: (page: number) => void;
+  }) => {
+    const totalPages = calculateTotalPages(totalItems);
+    
+    if (totalPages <= 1) return null;
+    
+    return (
+      <div className={styles.paginationControls}>
+        <button 
+          className={`${styles.pageButton} ${currentPage === 1 ? styles.disabled : ''}`} 
+          onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          &lt;
+        </button>
+        <span className={styles.pageIndicator}>{currentPage} / {totalPages}</span>
+        <button 
+          className={`${styles.pageButton} ${currentPage === totalPages ? styles.disabled : ''}`}
+          onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          &gt;
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.meditations}>
       <div className={styles.banner}>
@@ -108,7 +160,7 @@ const Meditations: React.FC = () => {
       
       <div className={styles.cards}>
         <h3>{t("meditations.general.title")}</h3>
-        {filteredGeneralMeditations.map((meditation) => (
+        {generalMeditations.map((meditation) => (
           <MeditationCard
             key={meditation.id}
             meditation={meditation}
@@ -117,21 +169,31 @@ const Meditations: React.FC = () => {
             onMoveAudio={moveAudio}
           />
         ))}
+        <PaginationControls 
+          currentPage={generalPage} 
+          totalItems={generalTotal}
+          onPageChange={handleGeneralPageChange}
+        />
       </div>
       <div className={styles.cards}>
         <h3>{t("meditations.personal.title")}</h3>
-        {filteredPersonalMeditations.length > 0 ? (
-          filteredPersonalMeditations.map((meditation) => (
-            <MeditationCard
-              key={meditation.id}
-              meditation={meditation}
-              isPlaying={playingId === meditation.id}
-              onPlayPause={() =>
-                togglePlayPause(meditation.audioUrl, meditation.id)
-              }
-              onMoveAudio={moveAudio}
+        {personalMeditations.length > 0 ? (
+          <>
+            {personalMeditations.map((meditation) => (
+              <MeditationCard
+                key={meditation.id}
+                meditation={meditation}
+                isPlaying={playingId === meditation.id}
+                onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
+                onMoveAudio={moveAudio}
+              />
+            ))}
+            <PaginationControls 
+              currentPage={personalPage} 
+              totalItems={personalTotal}
+              onPageChange={handlePersonalPageChange}
             />
-          ))
+          </>
         ) : (
           <div
             className={`${styles.card} ${styles.createCard}`}

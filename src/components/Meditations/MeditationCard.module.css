@@ -22,6 +22,14 @@
   margin-bottom: 12px;
 }
 
+.categoryLabelContainer {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 1;
+  pointer-events: none; /* Makes sure it doesn't interfere with click events */
+}
+
 .categoryLabel {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
@@ -32,7 +40,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: inline-block;
-  margin-bottom: 8px;
+  margin-bottom: 0; /* Remove the bottom margin */
 }
 
 .cardTitle {

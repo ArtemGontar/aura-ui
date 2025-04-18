@@ -1,19 +1,34 @@
 import api from "./api";
-import { Meditation, MeditationSettings } from "../types/meditation";
+import { Meditation, MeditationSettings, MeditationCategory } from "../types/meditation";
 
 const API_BASE = `/api/meditations`;
 
-export const getMeditations = async (type: string): Promise<Meditation[]> => {
+export const getMeditations = async (
+  type: string, 
+  page: number = 1, 
+  limit: number = 10, 
+  category?: MeditationCategory | "All"
+): Promise<{ data: Meditation[], total: number }> => {
   try {
-    const response = await api.get<Meditation[]>(`${API_BASE}?type=${type}`);
+    let url = `${API_BASE}?type=${type}&page=${page}&limit=${limit}`;
     
-    console.log("response", response.data);
+    if (category && category !== "All") {
+      url += `&category=${category}`;
+    }
+    
+    const response = await api.get(url);
+    
+    console.log("meditation response", response.data);
 
-    return response.data;
+    // Match the prediction service format
+    return { 
+      data: response.data.items || [], 
+      total: response.data.totalItems || 0 
+    };
   } catch (error) {
     if (error.response && error.response.status === 404) {
       console.warn("No meditations found, returning empty array");
-      return [];
+      return { data: [], total: 0 };
     }
     console.error("Error ", error);
     throw error;
