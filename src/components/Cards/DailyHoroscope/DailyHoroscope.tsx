@@ -21,12 +21,12 @@ const DailyHoroscope: React.FC = () => {
   const [horoscope, setHoroscope] = useState<HoroscopeData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [horoscopeSign, setHoroscopeSign] = useState("aries");
+  const [horoscopeSign, setHoroscopeSign] = useState("undefined");
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   const handleUserDataChange = (userData: any) => {
-    setHoroscopeSign(userData?.zodiacSign || "aries");
+    setHoroscopeSign(userData?.zodiacSign || "undefined");
     setShowOnboarding(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
   };
 
@@ -35,7 +35,7 @@ const DailyHoroscope: React.FC = () => {
   const handleOnboardingComplete = () => {
     setShowOnboarding(false);
     if (userData?.dateOfBirth) {
-      setHoroscopeSign(userData.zodiacSign || "aries");
+      setHoroscopeSign(userData.zodiacSign || "undefined");
     }
   };
 
