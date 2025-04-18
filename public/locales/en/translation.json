@@ -156,9 +156,11 @@
     "sexMale": "Male",
     "sexFemale": "Female",
     "sexOther": "Other",
-    "statusSingle": "Single",
-    "statusInRelationship": "In a Relationship",
+    "statusLovers": "Lovers",
+    "statusInRelationship": "Meeting",
     "statusMarried": "Married",
+    "statusDivorced": "Divorced",
+    "statusFriends": "Friends",
     "statusComplicated": "It's Complicated",
     "checkButton": "Check Compatibility",
     "checkAgainButton": "Check Again",
@@ -173,6 +175,7 @@
       "subtitle": "Discover how compatible you are with your partner"
     },
     "notFilled": "Information not provided",
+    "verifyingCompatibility": "Verifying compatibility...",
     "buttons": {
       "checkCompatibility": "Check Compatibility",
       "usePaidCompatibility": "Check Compatibility ({{stars}} ⭐)"
@@ -227,6 +230,7 @@
     "title": "Enter your dream description",
     "placeholder": "Write your dream here...",
     "resultTitle": "Interpretation Result",
+    "interpretingDream": "Interpreting your dream...",
     "buttons": {
       "interpret": "Interpret Dream",
       "paidInterpret": "Interpret Dream ({{stars}} ⭐)"
@@ -262,6 +266,7 @@
     "other": "Other",
     "enterMaritalStatus": "Enter your marital status",
     "single": "Single",
+    "relationship": "In a relationship",
     "married": "Married",
     "divorced": "Divorced",
     "widowed": "Widowed",
@@ -307,7 +312,7 @@
   "tasks": {
     "banner": {
       "title": "Complete Tasks",
-      "subtitle": "Earn AURA tokens by completing tasks"
+      "subtitle": "Earn AURA tokens by completing tasks. You can use them to unlock paid features"
     },
     "taskList": {
       "telegramAura": "Follow Aura Telegram channel",

@@ -104,6 +104,7 @@ const Onboarding: React.FC<{
               }}
             >
               <option value="single">{t("onboarding.single")}</option>
+              <option value="relationship">{t("onboarding.relationship")}</option>
               <option value="married">{t("onboarding.married")}</option>
               <option value="divorced">{t("onboarding.divorced")}</option>
               <option value="widowed">{t("onboarding.widowed")}</option>

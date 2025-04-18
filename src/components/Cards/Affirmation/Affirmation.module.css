@@ -8,7 +8,7 @@
 }
 
 .bannerBackground {
-  background: linear-gradient(to right, #99f2c8, #1f4037);
+  background: linear-gradient(to top, #2980b9, #6dd5fa);
   padding: 16px;
   border-radius: 12px;
 }
@@ -18,4 +18,28 @@
   flex-direction: column;
   margin: 16px 0;
   width: 100%;
+}
+
+/* Add these styles to match the CreatePersonalMeditation select styles */
+.selectContainer {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--tg-theme-text-primary);
+}
+
+.select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px solid var(--tg-theme-hint-color);
+  border-radius: var(--tg-theme-border-radius);
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
 }

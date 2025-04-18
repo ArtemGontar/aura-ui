@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Affirmation.module.css";
 import { getAffirmation } from "../../../services/predictionService";
-import { Select } from "@telegram-apps/telegram-ui";
+// Remove the Select import from @telegram-apps/telegram-ui
 import AffirmationResult from "./AffirmationResult";
 import Banner from "../../Banner/Banner";
 import { Goal } from "lucide-react";
@@ -18,7 +18,7 @@ const Affirmation: React.FC = () => {
   const { remainingUses, useFeature } = useQuotas(PredictionType.Affirmation);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [goal, setGoal] = useState<string>("");
+  const [goal, setGoal] = useState<string>("career");
   const haptics = useTelegramHaptics();
 
   const requestAffirmation = async () => {
@@ -49,23 +49,24 @@ const Affirmation: React.FC = () => {
         bgColor={styles.bannerBackground}
         icon={<Goal className="w-8 h-8 mb-4 text-white" />} 
       />
-      <div className={styles.goalContainer}>
-        <Select
+      <div className={styles.selectContainer}>
+        <label htmlFor="goalSelect" className={styles.label}>{t("affirmation.goal.label")}</label>
+        <select
+          id="goalSelect"
           className={styles.select}
-          header={t("affirmation.goal.label")}
           value={goal}
           onChange={(event) => setGoal(event.target.value)}
         >
-          <option value={t("affirmation.goal.options.career")}>
+          <option value="career">
             {t("affirmation.goal.options.career")}
           </option>
-          <option value={t("affirmation.goal.options.health")}>
+          <option value="health">
             {t("affirmation.goal.options.health")}
           </option>
-          <option value={t("affirmation.goal.options.relationships")}>
+          <option value="relationships">
             {t("affirmation.goal.options.relationships")}
           </option>
-        </Select>
+        </select>
       </div>
       <FeatureButton
         loading={loading}

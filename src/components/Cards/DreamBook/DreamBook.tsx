@@ -68,7 +68,11 @@ const DreamBook: React.FC = () => {
           paidActionTextKey="dreamBook.buttons.interpretPaid"
           starsAmount={tariffs.dreamBookStarsAmount} // Use config value
         />
-        {loading && <LoadingDisplay />}
+        {loading && (
+          <div className={styles.loadingWrapper}>
+            <LoadingDisplay message={t('dreamBook.interpretingDream')} />
+          </div>
+        )}
         {interpretation && <DreamBookResult interpretation={interpretation} />}
       </div>
     </div>

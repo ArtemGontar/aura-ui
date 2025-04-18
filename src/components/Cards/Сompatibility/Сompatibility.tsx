@@ -84,7 +84,9 @@ const Compatibility: React.FC = () => {
       ) : (
         <div className={styles.compatibility}>
           {loading ? (
-            <LoadingDisplay />
+            <div className={styles.loadingWrapper}>
+              <LoadingDisplay message={t('compatibility.verifyingCompatibility')} />
+            </div>
           ) : compatibilityResult ? (
             <>
               <CompatibilityResult 
@@ -125,9 +127,11 @@ const Compatibility: React.FC = () => {
                   {t('compatibility.partnerInfoRelationshipStatus')}
                   <select name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>
                     <option value="">{t('compatibility.selectPlaceholder')}</option>
-                    <option value="single">{t('compatibility.statusSingle')}</option>
                     <option value="inRelationship">{t('compatibility.statusInRelationship')}</option>
                     <option value="married">{t('compatibility.statusMarried')}</option>
+                    <option value="lovers">{t('compatibility.statusLovers')}</option>
+                    <option value="divorced">{t('compatibility.statusDivorced')}</option>
+                    <option value="freinds">{t('compatibility.statusFriends')}</option>
                     <option value="complicated">{t('compatibility.statusComplicated')}</option>
                   </select>
                 </label>

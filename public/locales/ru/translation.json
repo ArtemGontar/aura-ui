@@ -140,14 +140,16 @@
     "partnerInfoLastName": "Фамилия",
     "partnerInfoDateOfBirth": "Дата рождения",
     "partnerInfoSex": "Пол",
-    "partnerInfoRelationshipStatus": "Семейное положение",
+    "partnerInfoRelationshipStatus": "Статус отношений",
     "selectPlaceholder": "Выберите вариант",
     "sexMale": "Мужской",
     "sexFemale": "Женский",
     "sexOther": "Другой",
-    "statusSingle": "Холост",
-    "statusInRelationship": "В отношениях",
-    "statusMarried": "Женат",
+    "statusInRelationship": "Встречаемся",
+    "statusMarried": "Женаты",
+    "statusDivorced": "Разведены",
+    "statusLovers": "Любовники",
+    "statusFriends": "Друзья",
     "statusComplicated": "Всё сложно",
     "checkButton": "Проверить совместимость",
     "checkAgainButton": "Проверить снова",
@@ -162,6 +164,7 @@
       "subtitle": "Узнай насколько вы подходите друг другу"
     },
     "notFilled": "Информация отсутствует",
+    "verifyingCompatibility": "Проверяем совместимость...",
     "buttons": {
       "checkCompatibility": "Проверить совместимость",
       "usePaidCompatibility": "Проверить совместимость ({{stars}} ⭐)"
@@ -216,6 +219,7 @@
     "title": "Введите описание вашего сна",
     "placeholder": "Напишите здесь ваш сон...",
     "resultTitle": "Результат интерпретации",
+    "interpretingDream": "Интерпретация вашего сна...",
     "buttons": {
       "interpret": "Рассказать значение сна",
       "paidInterpret": "Рассказать значение сна ({{stars}} ⭐)"
@@ -251,6 +255,7 @@
     "other": "Другой",
     "enterMaritalStatus": "Введите ваше семейное положение",
     "single": "Холост",
+    "relationship": "В отношениях",
     "married": "Женат",
     "divorced": "Разведен",
     "widowed": "Вдовец",
@@ -296,8 +301,8 @@
   },
   "tasks": {
     "banner": {
-      "title": "Выполни задания",
-      "subtitle": "Заработай AURA токены, выполняя задания"
+      "title": "Выполняй задания",
+      "subtitle": "Заработай AURA токены, выполняя задания. Собирай токены и получай доступ к премиум контенту"
     },
     "taskList": {
       "telegramAura": "Подпишись на Aura Telegram канал",
