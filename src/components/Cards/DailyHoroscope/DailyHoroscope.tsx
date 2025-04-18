@@ -26,8 +26,12 @@ const DailyHoroscope: React.FC = () => {
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   const handleUserDataChange = (userData: any) => {
-    setHoroscopeSign(userData?.zodiacSign || "undefined");
-    setShowOnboarding(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
+    console.log("Zodiac sign calculated:", userData?.zodiacSign);
+    if (userData?.zodiacSign || userData?.dateOfBirth) {
+      setHoroscopeSign(userData?.zodiacSign || "undefined");
+      setShowOnboarding(!userData?.dateOfBirth || !userData?.sex || !userData?.maritalStatus);
+    }
+
   };
 
   const { userData } = useUserData(handleUserDataChange);
