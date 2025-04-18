@@ -58,24 +58,34 @@
         "title": "Basic",
         "bonuses": {
           "part1": "📢 Ads remain",
-          "part2": "🔮 5 predictions per day",
-          "part3": "🧘 1 personal meditation per day"
+          "part2": "🔮 5 horoscopes",
+          "part3": "🔮 1 compatibility check",
+          "part4": "🔮 5 affirmations",
+          "part5": "🔮 2 dream interpretations",
+          "part6": "🧘 1 personal meditation"
         }
       },
       "premium": {
         "title": "Premium",
         "bonuses": {
           "part1": "🚫 No ads",
-          "part2": "🔮 10 predictions per day",
-          "part3": "🧘 2 personal meditations per day"
+          "part2": "🔮 15 horoscopes",
+          "part3": "🔮 3 compatibility checks",
+          "part4": "🔮 15 affirmations",
+          "part5": "🔮 5 dream interpretations",
+          "part6": "🧘 3 personal meditations"
         }
       },
       "ultimate": {
         "title": "Ultimate",
+        "description": "Ultimate plan description",
         "bonuses": {
           "part1": "🚫 No ads",
-          "part2": "🔮 20 predictions per day",
-          "part3": "🧘 4 personal meditations per day"
+          "part2": "🔮 Unlimited predictions",
+          "part3": "🔮 10 compatibility checks",
+          "part4": "🔮 Unlimited affirmations",
+          "part5": "🔮 10 dream interpretations",
+          "part6": "🧘 6 personal meditations"
         }
       },
       "choosePlan": "Choose a plan",

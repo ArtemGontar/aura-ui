@@ -23,7 +23,10 @@ const TariffPlans: React.FC = () => {
       bonuses: [
         t('profile.subscription.basic.bonuses.part1'),
         t('profile.subscription.basic.bonuses.part2'),
-        t('profile.subscription.basic.bonuses.part3')
+        t('profile.subscription.basic.bonuses.part3'),
+        t('profile.subscription.basic.bonuses.part4'),
+        t('profile.subscription.basic.bonuses.part5'),
+        t('profile.subscription.basic.bonuses.part6')
       ]
     },
     {
@@ -34,7 +37,10 @@ const TariffPlans: React.FC = () => {
       bonuses: [
         t('profile.subscription.premium.bonuses.part1'),
         t('profile.subscription.premium.bonuses.part2'),
-        t('profile.subscription.premium.bonuses.part3')
+        t('profile.subscription.premium.bonuses.part3'),
+        t('profile.subscription.premium.bonuses.part4'),
+        t('profile.subscription.premium.bonuses.part5'),
+        t('profile.subscription.premium.bonuses.part6')
       ]
     },
     {
@@ -45,7 +51,10 @@ const TariffPlans: React.FC = () => {
       bonuses: [
         t('profile.subscription.ultimate.bonuses.part1'),
         t('profile.subscription.ultimate.bonuses.part2'),
-        t('profile.subscription.ultimate.bonuses.part3')
+        t('profile.subscription.ultimate.bonuses.part3'),
+        t('profile.subscription.ultimate.bonuses.part4'),
+        t('profile.subscription.ultimate.bonuses.part5'),
+        t('profile.subscription.ultimate.bonuses.part6')
       ]
     }
   ];
