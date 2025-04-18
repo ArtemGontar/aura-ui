@@ -112,7 +112,8 @@
       "subtitle": "Listen to these positive meditations to start your day with intention and mindfulness"
     },
     "general": {
-      "title": "Daily Meditations"
+      "title": "Daily Meditations",
+      "notFound": "Meditations not found"
     },
     "personal": {
       "title": "Personal Meditations",

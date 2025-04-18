@@ -223,6 +223,20 @@
 
 /* Removing redundant .categoryLabel class as it's in MeditationCard.module.css */
 
+.paginationControls {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.noContent {
+  text-align: center;
+  color: var(--tg-theme-hint-color);
+  font-size: var(--tg-theme-font-size-base);
+  margin: 1rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .meditations {

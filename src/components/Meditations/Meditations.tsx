@@ -8,6 +8,7 @@ import { Meditation, MeditationCategory } from "../../types/meditation";
 import { API_CONFIG } from "../../config/api";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
+import { Pagination } from "@telegram-apps/telegram-ui";
 
 type FilterCategory = "All" | MeditationCategory;
 
@@ -17,7 +18,7 @@ const MEDITATION_CATEGORIES: FilterCategory[] = ["All", "Neural", "Humanic", "Am
 const Meditations: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { impactOccurred } = useTelegramHaptics();
+  const { impactOccurred, selectionChanged } = useTelegramHaptics();
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
   const [playingId, setPlayingId] = useState<number | null>(null);
@@ -97,45 +98,14 @@ const Meditations: React.FC = () => {
   };
 
   // Pagination handlers
-  const handleGeneralPageChange = (newPage: number) => {
-    impactOccurred("light");
+  const handleGeneralPageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     setGeneralPage(newPage);
+    selectionChanged();
   };
 
-  const handlePersonalPageChange = (newPage: number) => {
-    impactOccurred("light");
+  const handlePersonalPageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     setPersonalPage(newPage);
-  };
-
-  // Pagination component
-  const PaginationControls = ({ currentPage, totalItems, onPageChange }: { 
-    currentPage: number; 
-    totalItems: number; 
-    onPageChange: (page: number) => void;
-  }) => {
-    const totalPages = calculateTotalPages(totalItems);
-    
-    if (totalPages <= 1) return null;
-    
-    return (
-      <div className={styles.paginationControls}>
-        <button 
-          className={`${styles.pageButton} ${currentPage === 1 ? styles.disabled : ''}`} 
-          onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &lt;
-        </button>
-        <span className={styles.pageIndicator}>{currentPage} / {totalPages}</span>
-        <button 
-          className={`${styles.pageButton} ${currentPage === totalPages ? styles.disabled : ''}`}
-          onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &gt;
-        </button>
-      </div>
-    );
+    selectionChanged();
   };
 
   return (
@@ -160,20 +130,34 @@ const Meditations: React.FC = () => {
       
       <div className={styles.cards}>
         <h3>{t("meditations.general.title")}</h3>
-        {generalMeditations.map((meditation) => (
-          <MeditationCard
-            key={meditation.id}
-            meditation={meditation}
-            isPlaying={playingId === meditation.id}
-            onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
-            onMoveAudio={moveAudio}
-          />
-        ))}
-        <PaginationControls 
-          currentPage={generalPage} 
-          totalItems={generalTotal}
-          onPageChange={handleGeneralPageChange}
-        />
+        {generalMeditations.length > 0 ? (
+          <>
+            {generalMeditations.map((meditation) => (
+              <MeditationCard
+                key={meditation.id}
+                meditation={meditation}
+                isPlaying={playingId === meditation.id}
+                onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
+                onMoveAudio={moveAudio}
+              />
+            ))}
+            {generalTotal > limit && (
+              <div className={styles.paginationControls}>
+                <Pagination 
+                  page={generalPage}
+                  onChange={handleGeneralPageChange}
+                  count={calculateTotalPages(generalTotal)}
+                  hideNextButton={generalPage >= calculateTotalPages(generalTotal)}
+                  hidePrevButton={generalPage === 1}
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          <div className={styles.noContent}>
+            {t("meditations.general.notFound")}
+          </div>
+        )}
       </div>
       <div className={styles.cards}>
         <h3>{t("meditations.personal.title")}</h3>
@@ -188,11 +172,17 @@ const Meditations: React.FC = () => {
                 onMoveAudio={moveAudio}
               />
             ))}
-            <PaginationControls 
-              currentPage={personalPage} 
-              totalItems={personalTotal}
-              onPageChange={handlePersonalPageChange}
-            />
+            {personalTotal > limit && (
+              <div className={styles.paginationControls}>
+                <Pagination 
+                  page={personalPage}
+                  onChange={handlePersonalPageChange}
+                  count={calculateTotalPages(personalTotal)}
+                  hideNextButton={personalPage >= calculateTotalPages(personalTotal)}
+                  hidePrevButton={personalPage === 1}
+                />
+              </div>
+            )}
           </>
         ) : (
           <div
