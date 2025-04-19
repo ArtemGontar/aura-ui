@@ -24,6 +24,8 @@ const Meditations: React.FC = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const audioRef = useRef<HTMLAudioElement>(null);
+  // Add a new state to store SAS URLs for each meditation
+  const [audioSasUrls, setAudioSasUrls] = useState<Record<string, string>>({});
   
   // Pagination state
   const [generalPage, setGeneralPage] = useState<number>(1);
@@ -71,15 +73,25 @@ const Meditations: React.FC = () => {
     if (!audioRef.current) return;
 
     if (playingId === id) {
+      // Just pause the current audio without changing the source
       audioRef.current.pause();
       setPlayingId(null);
     } else {
       try {
-        // Get SAS URL for the audio
-        const sasUrl = await getAudioSasUrl(audioUrl);
+        // Check if we already have a SAS URL for this audio
+        if (!audioSasUrls[audioUrl]) {
+          // If not, fetch a new one and store it
+          const sasUrl = await getAudioSasUrl(audioUrl);
+          setAudioSasUrls(prev => ({
+            ...prev,
+            [audioUrl]: sasUrl
+          }));
+          audioRef.current.src = sasUrl;
+        } else {
+          // Use the cached SAS URL
+          audioRef.current.src = audioSasUrls[audioUrl];
+        }
         
-        // Play using the SAS URL
-        audioRef.current.src = sasUrl;
         await audioRef.current.play();
         setPlayingId(id);
       } catch (error) {
