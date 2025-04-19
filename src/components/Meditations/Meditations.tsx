@@ -5,10 +5,10 @@ import styles from "./Meditations.module.css";
 import appStyles from "../../App.module.css"; // Import App styles
 import { getMeditations } from "../../services/meditationService";
 import { Meditation, MeditationCategory } from "../../types/meditation";
-import { API_CONFIG } from "../../config/api";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
 import { Pagination } from "@telegram-apps/telegram-ui";
+import { getAudioSasUrl } from "../../services/audioService";
 
 type FilterCategory = "All" | MeditationCategory;
 
@@ -67,18 +67,24 @@ const Meditations: React.FC = () => {
     return Math.max(1, Math.ceil(totalItems / limit));
   };
 
-  const togglePlayPause = (audioUrl: string, id: number) => {
+  const togglePlayPause = async (audioUrl: string, id: number) => {
     if (!audioRef.current) return;
 
     if (playingId === id) {
       audioRef.current.pause();
       setPlayingId(null);
     } else {
-      audioRef.current.src = API_CONFIG.BASE_URL + "/" + audioUrl;
-      audioRef.current
-        .play()
-        .then(() => setPlayingId(id))
-        .catch((error) => console.error("Error playing audio:", error));
+      try {
+        // Get SAS URL for the audio
+        const sasUrl = await getAudioSasUrl(audioUrl);
+        
+        // Play using the SAS URL
+        audioRef.current.src = sasUrl;
+        await audioRef.current.play();
+        setPlayingId(id);
+      } catch (error) {
+        console.error("Error playing audio:", error);
+      }
     }
   };
 
