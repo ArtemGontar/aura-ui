@@ -231,31 +231,37 @@ const Meditations: React.FC = () => {
           <div className={styles.loadingWrapper}>
             <LoadingDisplay message={t("meditations.loading")} />
           </div>
-        ) : personalMeditations.length > 0 ? (
-          <>
-            {personalMeditations.map((meditation) => renderMeditationCard(meditation, true))}
-            {personalTotal > limit && (
-              <div className={styles.paginationControls}>
-                <Pagination 
-                  page={personalPage}
-                  onChange={handlePersonalPageChange}
-                  count={calculateTotalPages(personalTotal)}
-                  hideNextButton={personalPage >= calculateTotalPages(personalTotal)}
-                  hidePrevButton={personalPage === 1}
-                />
-              </div>
-            )}
-          </>
         ) : (
-          <div
-            className={`${styles.card} ${styles.createCard}`}
-            onClick={handleCreatePersonalMeditation}
-          >
-            <h4 className={styles.createText}>
-              {t("meditations.personal.create")}
-            </h4>
-            <div className={styles.createIcon}>+</div>
-          </div>
+          <>
+            {/* Display any existing personal meditations */}
+            {personalMeditations.length > 0 && (
+              <>
+                {personalMeditations.map((meditation) => renderMeditationCard(meditation, true))}
+                {personalTotal > limit && (
+                  <div className={styles.paginationControls}>
+                    <Pagination 
+                      page={personalPage}
+                      onChange={handlePersonalPageChange}
+                      count={calculateTotalPages(personalTotal)}
+                      hideNextButton={personalPage >= calculateTotalPages(personalTotal)}
+                      hidePrevButton={personalPage === 1}
+                    />
+                  </div>
+                )}
+              </>
+            )}
+            
+            {/* Always show the create card */}
+            <div
+              className={`${styles.card} ${styles.createCard}`}
+              onClick={handleCreatePersonalMeditation}
+            >
+              <h4 className={styles.createText}>
+                {t("meditations.personal.create")}
+              </h4>
+              <div className={styles.createIcon}>+</div>
+            </div>
+          </>
         )}
       </div>
       <div className={styles.player}>
