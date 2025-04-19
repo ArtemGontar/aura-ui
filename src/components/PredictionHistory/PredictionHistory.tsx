@@ -15,10 +15,15 @@ import { formatLocalizedDate, trimContent } from "../../utils/utils";
 const PredictionHistory: React.FC = () => {
   const { t, i18n } = useTranslation();
   const [predictions, setPredictions] = useState<Prediction[]>([]);
-  const [page, setPage] = useState(0);
+
+  // Pagination state
+  const [page, setPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+
+  // Loading and error states
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
   const haptics = useTelegramHaptics();
   const [selectedPrediction, setSelectedPrediction] = useState<Prediction | null>(null);
 

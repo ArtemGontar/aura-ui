@@ -25,7 +25,6 @@ const Meditations: React.FC = () => {
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
   const audioRef = useRef<HTMLAudioElement>(null);
-  // Add a new state to store SAS URLs for each meditation
   const [audioSasUrls, setAudioSasUrls] = useState<Record<string, string>>({});
   
   // Pagination state
@@ -33,6 +32,7 @@ const Meditations: React.FC = () => {
   const [personalPage, setPersonalPage] = useState<number>(1);
   const [generalTotal, setGeneralTotal] = useState<number>(0);
   const [personalTotal, setPersonalTotal] = useState<number>(0);
+  
   // Add loading states
   const [isGeneralLoading, setIsGeneralLoading] = useState<boolean>(false);
   const [isPersonalLoading, setIsPersonalLoading] = useState<boolean>(false);
@@ -171,7 +171,7 @@ const Meditations: React.FC = () => {
       <div className={styles.cards}>
         <h3>{t("meditations.general.title")}</h3>
         {isGeneralLoading ? (
-          <div className={styles.loadingContainer}>
+          <div className={styles.loadingWrapper}>
             <LoadingDisplay message={t("meditations.loading")} />
           </div>
         ) : generalMeditations.length > 0 ? (
