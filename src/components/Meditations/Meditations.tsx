@@ -9,6 +9,7 @@ import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
 import { Pagination } from "@telegram-apps/telegram-ui";
 import { getAudioSasUrl, downloadAudio } from "../../services/audioService";
+import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
 
 type FilterCategory = "All" | MeditationCategory;
 
@@ -32,11 +33,18 @@ const Meditations: React.FC = () => {
   const [personalPage, setPersonalPage] = useState<number>(1);
   const [generalTotal, setGeneralTotal] = useState<number>(0);
   const [personalTotal, setPersonalTotal] = useState<number>(0);
+  // Add loading states
+  const [isGeneralLoading, setIsGeneralLoading] = useState<boolean>(false);
+  const [isPersonalLoading, setIsPersonalLoading] = useState<boolean>(false);
   const limit = 5; // Items per page
 
   useEffect(() => {
     const fetchMeditations = async () => {
       try {
+        // Set loading states to true before fetching
+        setIsGeneralLoading(true);
+        setIsPersonalLoading(true);
+        
         const [generalData, personalData] = await Promise.all([
           getMeditations("general", generalPage, limit, activeCategory === "All" ? undefined : activeCategory),
           getMeditations("personal", personalPage, limit, activeCategory === "All" ? undefined : activeCategory),
@@ -49,6 +57,10 @@ const Meditations: React.FC = () => {
         setPersonalTotal(personalData.total);
       } catch (error) {
         console.error("Failed to fetch meditations", error);
+      } finally {
+        // Set loading states to false after fetching (whether successful or not)
+        setIsGeneralLoading(false);
+        setIsPersonalLoading(false);
       }
     };
 
@@ -115,10 +127,10 @@ const Meditations: React.FC = () => {
     navigate("/create-personal-meditation");
   };
 
-  const handleDownload = async (audioUrl: string) => {
+  const handleDownload = async (audioUrl: string, name: string) => {
     try {
       impactOccurred("light");
-      await downloadAudio(audioUrl);
+      await downloadAudio(audioUrl, name);
       // Optional: Add some UI feedback here (toast, notification, etc.)
     } catch (error) {
       console.error("Error downloading audio:", error);
@@ -158,7 +170,11 @@ const Meditations: React.FC = () => {
       
       <div className={styles.cards}>
         <h3>{t("meditations.general.title")}</h3>
-        {generalMeditations.length > 0 ? (
+        {isGeneralLoading ? (
+          <div className={styles.loadingContainer}>
+            <LoadingDisplay message={t("meditations.loading")} />
+          </div>
+        ) : generalMeditations.length > 0 ? (
           <>
             {generalMeditations.map((meditation) => (
               <MeditationCard
@@ -167,7 +183,7 @@ const Meditations: React.FC = () => {
                 isPlaying={playingId === meditation.id}
                 onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
                 onMoveAudio={moveAudio}
-                onDownload={() => handleDownload(meditation.audioUrl)}
+                onDownload={() => handleDownload(meditation.audioUrl, meditation.text)}
               />
             ))}
             {generalTotal > limit && (
@@ -190,7 +206,11 @@ const Meditations: React.FC = () => {
       </div>
       <div className={styles.cards}>
         <h3>{t("meditations.personal.title")}</h3>
-        {personalMeditations.length > 0 ? (
+        {isPersonalLoading ? (
+          <div className={styles.loadingWrapper}>
+            <LoadingDisplay message={t("meditations.loading")} />
+          </div>
+        ) : personalMeditations.length > 0 ? (
           <>
             {personalMeditations.map((meditation) => (
               <MeditationCard
@@ -199,7 +219,7 @@ const Meditations: React.FC = () => {
                 isPlaying={playingId === meditation.id}
                 onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
                 onMoveAudio={moveAudio}
-                onDownload={() => handleDownload(meditation.audioUrl)}
+                onDownload={() => handleDownload(meditation.audioUrl, meditation.text)}
               />
             ))}
             {personalTotal > limit && (

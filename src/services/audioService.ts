@@ -12,10 +12,10 @@ export const getAudioSasUrl = async (audioUrl: string): Promise<string> => {
   }
 };
 
-export const downloadAudio = async (audioUrl: string) => {
+export const downloadAudio = async (audioUrl: string, name: string) => {
   try {
     const fileName = audioUrl.split('/').pop() || '';
-    await api.post(`${API_BASE}/meditations/download-via-telegram`, {fileName});
+    await api.post(`${API_BASE}/meditations/download-via-telegram`, {fileName, name});
   } catch (error) {
     console.error("Error downloading audio:", error);
     throw error;
