@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreatePersonalMeditation.module.css";
 import { Button, Slider } from "@telegram-apps/telegram-ui";
-import { ChevronDown, ChevronUp, Check } from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { createPersonalMeditation } from "../../services/meditationService";
 import { MeditationSettings } from "../../types/meditation";
 import { getVoiceOptions, VoiceOption } from "../../utils/voiceUtils";
@@ -20,7 +20,6 @@ const CreatePersonalMeditation: React.FC = () => {
   const [speechRate, setSpeechRate] = useState<number>(0);
   const [pitch, setPitch] = useState<number>(0);
   const [pauseStrength, setPauseStrength] = useState<number>(1);
-  const [addBreathingEffects, setAddBreathingEffects] = useState<boolean>(false);
   const [backgroundAudio, setBackgroundAudio] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
 
@@ -41,11 +40,10 @@ const CreatePersonalMeditation: React.FC = () => {
     try {
       const meditationSettings: MeditationSettings = {
         topic,
-        voiceName: voiceName, // Keep property name compatible with backend if needed
+        voiceName,
         speechRate,
         pitch,
         pauseStrength,
-        addBreathingEffects,
         backgroundAudio
       };
       
@@ -142,18 +140,6 @@ const CreatePersonalMeditation: React.FC = () => {
                   className={styles.slider}
                 />
                 <span className={styles.sliderValue}>{pauseStrength}</span>
-              </label>
-            </div>
-
-            <div className={styles.buttonContainer}>
-              <label className={styles.label}>
-                {t('createPersonalMeditation.addBreathingEffects')}
-                <Button 
-                  onClick={() => setAddBreathingEffects(!addBreathingEffects)}
-                  className={addBreathingEffects ? styles.activeButton : ''}
-                >
-                  {addBreathingEffects ? t('common.enabled') : t('common.disabled')}
-                </Button>
               </label>
             </div>
           </div>
