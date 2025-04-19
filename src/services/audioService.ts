@@ -10,3 +10,12 @@ export const getAudioSasUrl = async (audioUrl: string): Promise<string> => {
     throw error;
   }
 };
+
+export const downloadAudio = async (audioUrl: string) => {
+  try {
+    await api.post(`${audioUrl}/download-via-telegram`);
+  } catch (error) {
+    console.error("Error downloading audio:", error);
+    throw error;
+  }
+};

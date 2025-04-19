@@ -8,7 +8,7 @@ import { Meditation, MeditationCategory } from "../../types/meditation";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
 import { Pagination } from "@telegram-apps/telegram-ui";
-import { getAudioSasUrl } from "../../services/audioService";
+import { getAudioSasUrl, downloadAudio } from "../../services/audioService";
 
 type FilterCategory = "All" | MeditationCategory;
 
@@ -115,6 +115,16 @@ const Meditations: React.FC = () => {
     navigate("/create-personal-meditation");
   };
 
+  const handleDownload = async (audioUrl: string) => {
+    try {
+      impactOccurred("light");
+      await downloadAudio(audioUrl);
+      // Optional: Add some UI feedback here (toast, notification, etc.)
+    } catch (error) {
+      console.error("Error downloading audio:", error);
+    }
+  };
+
   // Pagination handlers
   const handleGeneralPageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     setGeneralPage(newPage);
@@ -157,6 +167,7 @@ const Meditations: React.FC = () => {
                 isPlaying={playingId === meditation.id}
                 onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
                 onMoveAudio={moveAudio}
+                onDownload={() => handleDownload(meditation.audioUrl)}
               />
             ))}
             {generalTotal > limit && (
@@ -188,6 +199,7 @@ const Meditations: React.FC = () => {
                 isPlaying={playingId === meditation.id}
                 onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
                 onMoveAudio={moveAudio}
+                onDownload={() => handleDownload(meditation.audioUrl)}
               />
             ))}
             {personalTotal > limit && (
