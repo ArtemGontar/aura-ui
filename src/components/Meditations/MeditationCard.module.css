@@ -89,6 +89,40 @@
   z-index: 2;
 }
 
+.disabledCard {
+  opacity: 0.7;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.disabledCard button {
+  cursor: not-allowed;
+}
+
+.statusMessage {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 8px;
+  color: var(--tg-theme-hint-color, rgba(255, 255, 255, 0.7));
+}
+
+.loadingSpinner {
+  animation: spin 1.5s linear infinite;
+  display: inline-flex;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Tablet and larger screens */
 @media (min-width: 768px) {
   .card {

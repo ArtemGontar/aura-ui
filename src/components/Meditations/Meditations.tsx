@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Meditations.module.css";
 import appStyles from "../../App.module.css"; // Import App styles
 import { getMeditations } from "../../services/meditationService";
-import { Meditation, MeditationCategory } from "../../types/meditation";
+import { Meditation, MeditationCategory, MeditationStatus } from "../../types/meditation";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
 import { Pagination } from "@telegram-apps/telegram-ui";
@@ -81,7 +81,10 @@ const Meditations: React.FC = () => {
     return Math.max(1, Math.ceil(totalItems / limit));
   };
 
-  const togglePlayPause = async (audioUrl: string, id: number) => {
+  const togglePlayPause = async (audioUrl: string, id: number, status: MeditationStatus) => {
+    // Don't allow playing inprogress or failed meditations
+    if (status === "inprogress" || status === "failed") return;
+    
     if (!audioRef.current) return;
 
     if (playingId === id) {
@@ -127,7 +130,10 @@ const Meditations: React.FC = () => {
     navigate("/create-personal-meditation");
   };
 
-  const handleDownload = async (audioUrl: string, name: string) => {
+  const handleDownload = async (audioUrl: string, name: string, status: MeditationStatus) => {
+    // Don't allow downloading inprogress or failed meditations
+    if (status === "inprogress" || status === "failed") return;
+    
     try {
       impactOccurred("light");
       await downloadAudio(audioUrl, name);
@@ -146,6 +152,30 @@ const Meditations: React.FC = () => {
   const handlePersonalPageChange = (_event: React.ChangeEvent<unknown>, newPage: number) => {
     setPersonalPage(newPage);
     selectionChanged();
+  };
+
+  // Helper function to render meditation card with status handling
+  const renderMeditationCard = (meditation: Meditation, isPersonal: boolean = false) => {
+    const isInProgress = meditation.readinessStatus === "inprogress";
+    const isFailed = meditation.readinessStatus === "failed";
+    
+    return (
+      <MeditationCard
+        key={meditation.id}
+        meditation={meditation}
+        isPlaying={playingId === meditation.id}
+        onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id, meditation.readinessStatus)}
+        onMoveAudio={moveAudio}
+        onDownload={() => handleDownload(meditation.audioUrl, meditation.text, meditation.readinessStatus)}
+        disabled={isInProgress || isFailed}
+        statusMessage={
+          isInProgress ? t("meditations.status.inprogress") :
+          isFailed ? t("meditations.status.failed") : 
+          undefined
+        }
+        showLoadingAnimation={isPersonal && isInProgress}
+      />
+    );
   };
 
   return (
@@ -176,16 +206,7 @@ const Meditations: React.FC = () => {
           </div>
         ) : generalMeditations.length > 0 ? (
           <>
-            {generalMeditations.map((meditation) => (
-              <MeditationCard
-                key={meditation.id}
-                meditation={meditation}
-                isPlaying={playingId === meditation.id}
-                onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
-                onMoveAudio={moveAudio}
-                onDownload={() => handleDownload(meditation.audioUrl, meditation.text)}
-              />
-            ))}
+            {generalMeditations.map((meditation) => renderMeditationCard(meditation))}
             {generalTotal > limit && (
               <div className={styles.paginationControls}>
                 <Pagination 
@@ -212,16 +233,7 @@ const Meditations: React.FC = () => {
           </div>
         ) : personalMeditations.length > 0 ? (
           <>
-            {personalMeditations.map((meditation) => (
-              <MeditationCard
-                key={meditation.id}
-                meditation={meditation}
-                isPlaying={playingId === meditation.id}
-                onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id)}
-                onMoveAudio={moveAudio}
-                onDownload={() => handleDownload(meditation.audioUrl, meditation.text)}
-              />
-            ))}
+            {personalMeditations.map((meditation) => renderMeditationCard(meditation, true))}
             {personalTotal > limit && (
               <div className={styles.paginationControls}>
                 <Pagination 

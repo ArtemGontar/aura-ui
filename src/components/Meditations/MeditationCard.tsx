@@ -1,5 +1,5 @@
 import React from "react";
-import { Pause, Play, Rewind, FastForward, Download } from "lucide-react";
+import { Pause, Play, Rewind, FastForward, Download, Loader } from "lucide-react";
 import { Meditation } from "../../types/meditation";
 import styles from "./MeditationCard.module.css";
 
@@ -8,7 +8,10 @@ interface MeditationCardProps {
   isPlaying: boolean;
   onPlayPause: () => void;
   onMoveAudio: (direction: "forward" | "backward") => void;
-  onDownload?: () => void; // Added optional download handler
+  onDownload?: () => void;
+  disabled?: boolean;
+  statusMessage?: string;
+  showLoadingAnimation?: boolean;
 }
 
 const MeditationCard: React.FC<MeditationCardProps> = ({
@@ -17,9 +20,25 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
   onPlayPause,
   onMoveAudio,
   onDownload,
+  disabled = false,
+  statusMessage,
+  showLoadingAnimation = false,
 }) => (
-  <div className={`${styles.card} ${styles.generalCard}`} style={{ position: 'relative' }}>
+  <div 
+    className={`${styles.card} ${styles.generalCard} ${disabled ? styles.disabledCard : ''}`} 
+    style={{ position: 'relative' }}
+  >
     <h4 className={styles.cardTitle}>{meditation.text}</h4>
+    
+    {statusMessage && (
+      <div className={styles.statusMessage}>
+        {showLoadingAnimation && (
+          <span className={styles.loadingSpinner}><Loader size={16} /></span>
+        )}
+        <span>{statusMessage}</span>
+      </div>
+    )}
+    
     <div className={styles.controls}>
       <button
         className={styles.controlButton}
@@ -28,12 +47,14 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
           onMoveAudio("backward");
         }}
         style={{ display: isPlaying ? "inline-block" : "none" }}
+        disabled={disabled}
       >
         <Rewind size={24} className={styles.controlIcon} />
       </button>
       <button
         className={`${styles.controlButton} ${styles.playButton}`}
         onClick={onPlayPause}
+        disabled={disabled}
       >
         {isPlaying ? (
           <Pause size={24} className={styles.activeIcon} />
@@ -48,6 +69,7 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
           onMoveAudio("forward");
         }}
         style={{ display: isPlaying ? "inline-block" : "none" }}
+        disabled={disabled}
       >
         <FastForward size={24} className={styles.controlIcon} />
       </button>
@@ -60,6 +82,7 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
           onDownload();
         }}
         aria-label="Download meditation"
+        disabled={disabled}
       >
         <Download size={18} className={styles.downloadIcon} />
       </button>

@@ -6,11 +6,11 @@ const API_BASE = `/api/meditations`;
 export const getMeditations = async (
   type: string, 
   page: number = 1, 
-  limit: number = 10, 
+  top: number = 5, 
   category?: MeditationCategory | "All"
 ): Promise<{ data: Meditation[], total: number }> => {
   try {
-    let url = `${API_BASE}?type=${type}&page=${page}&limit=${limit}`;
+    let url = `${API_BASE}?type=${type}&page=${page}&top=${top}`;
     
     if (category && category !== "All") {
       url += `&category=${category}`;

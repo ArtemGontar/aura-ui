@@ -1,4 +1,5 @@
 export type MeditationCategory = "Neural" | "Humanic" | "Ambient";
+export type MeditationStatus = "ready" | "inprogress" | "failed";
 
 export interface Meditation {
   id: number;
@@ -6,6 +7,7 @@ export interface Meditation {
   audioUrl: string;
   backgroundColor: string;
   category: MeditationCategory;
+  readinessStatus: MeditationStatus;
 }
 
 export interface MeditationSettings {
