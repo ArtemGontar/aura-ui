@@ -10,11 +10,14 @@ import { getVoiceOptions, VoiceOption } from "../../utils/voiceUtils";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import FeatureButton from "../FeatureButton/FeatureButton";
+import { useQuotas } from "../../hooks/useQuotas";
+import tariffs from "../../constants/tariffs";
 
 const CreatePersonalMeditation: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.user.userData);
+  const { remainingUses, useFeature } = useQuotas("CreatePersonalMeditation");
   const [topic, setTopic] = useState<string>("");
   const [voiceName, setVoiceName] = useState<string>("");
   const [voiceOptions, setVoiceOptions] = useState<VoiceOption[]>([]);
@@ -24,10 +27,6 @@ const CreatePersonalMeditation: React.FC = () => {
   const [backgroundAudio, setBackgroundAudio] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-
-  // This would typically come from user data in a real app
-  const remainingFreeUses = 3;
-  const meditationStarsCost = 5;
 
   // Get voice options based on user language when component mounts
   useEffect(() => {
@@ -58,6 +57,9 @@ const CreatePersonalMeditation: React.FC = () => {
       const result = await createPersonalMeditation(meditationSettings);
       console.log("Meditation created successfully:", result);
       
+      // Use a quota when meditation is created successfully
+      useFeature();
+      
       // After creation, redirect back to Meditations component
       navigate("/meditations");
     } catch (error) {
@@ -71,9 +73,8 @@ const CreatePersonalMeditation: React.FC = () => {
   const handlePaidAction = () => {
     // Logic to handle when user needs to pay with stars
     // This would typically integrate with your payment/stars system
-    console.log("User needs to pay stars for this feature");
-    // After payment confirmation, call handleSubmit
-    handleSubmit();
+    //handleSubmit();  
+    console.log("Paid meditation creation requested"); // Use standard browser console
   };
 
   return (
@@ -181,12 +182,12 @@ const CreatePersonalMeditation: React.FC = () => {
       )}
       <FeatureButton
         loading={loading}
-        remainingUses={remainingFreeUses}
+        remainingUses={remainingUses}
         onFreeAction={handleSubmit}
         onPaidAction={handlePaidAction}
         freeActionTextKey="createPersonalMeditation.createButton"
         paidActionTextKey="createPersonalMeditation.createButtonPaid"
-        starsAmount={meditationStarsCost}
+        starsAmount={tariffs.createPersonalMeditationStarsAmount}
       />
     </div>
   );

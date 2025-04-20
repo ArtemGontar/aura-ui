@@ -3,6 +3,7 @@ const tariffs = {
   dreamBookStarsAmount: 1,
   affirmationStarsAmount: 1,
   compatibilityStarsAmount: 1,
+  createPersonalMeditationStarsAmount: 1,
   subscriptionCosts: {
     basic: 1,
     premium: 1,

@@ -71,8 +71,8 @@ const DailyHoroscope: React.FC = () => {
   };
 
   const requestPaidHoroscope = async () => {
-      //requestHoroscope();  
-      console.log("Paid horoscope requested"); // Use standard browser console
+      //requestHoroscope();
+      console.log("Paid horoscope requested");
     };
 
   return (
