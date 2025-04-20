@@ -357,5 +357,12 @@
     },
     "enabled": "Enabled",
     "disabled": "Disabled"
+  },
+  "products": {
+    "dailyHoroscope": "Daily Horoscope",
+    "compatibility": "Compatibility",
+    "affirmation": "Affirmation",
+    "dreamInterpretation": "Dream Interpretation",
+    "personalMeditation": "Personal Meditation"
   }
 }

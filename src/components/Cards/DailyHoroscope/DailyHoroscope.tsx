@@ -13,10 +13,13 @@ import { HoroscopeData } from "../../../types/prediction";
 import { useQuotas } from "../../../hooks/useQuotas";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import tariffs from "../../../constants/tariffs";
+import { createInvoiceLink, paymentSuccess } from "../../../services/paymentService";
+import WebApp from "@twa-dev/sdk";
+import { FeatureType, PRODUCT_NAME_KEYS } from "../../../constants/products";
 
 const DailyHoroscope: React.FC = () => {
   const { t } = useTranslation();
-  const haptics = useTelegramHaptics();
+  const { impactOccurred, notificationOccurred } = useTelegramHaptics();
   const { remainingUses, useFeature } = useQuotas("DailyHoroscope");
   const [horoscope, setHoroscope] = useState<HoroscopeData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -58,7 +61,7 @@ const DailyHoroscope: React.FC = () => {
   const requestHoroscope = async () => {
     setLoading(true);
     setError("");
-    haptics.impactOccurred("medium");
+    impactOccurred("medium");
     try {
       const fetchedHoroscope: HoroscopeData = await getHoroscope();
       setHoroscope(fetchedHoroscope);
@@ -72,7 +75,20 @@ const DailyHoroscope: React.FC = () => {
 
   const requestPaidHoroscope = async () => {
       //requestHoroscope();
-      console.log("Paid horoscope requested");
+      const featureId = FeatureType.DailyHoroscope;
+      const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+      const invoiceLink = await createInvoiceLink(featureId, featureName, "", "XTR", false);
+      WebApp.openInvoice(invoiceLink, async (status) => {
+        if (status === 'paid') {
+          await paymentSuccess(userData!.id, featureId)
+          await requestHoroscope();
+          notificationOccurred('success');
+        } else if (status === 'failed') {
+          notificationOccurred('error');
+        } else {
+          notificationOccurred('warning');
+        }
+      });
     };
 
   return (
