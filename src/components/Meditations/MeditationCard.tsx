@@ -2,6 +2,7 @@ import React from "react";
 import { Pause, Play, Rewind, FastForward, Download, Loader } from "lucide-react";
 import { Meditation } from "../../types/meditation";
 import styles from "./MeditationCard.module.css";
+import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
 
 interface MeditationCardProps {
   meditation: Meditation;
@@ -33,9 +34,8 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
     {statusMessage && (
       <div className={styles.statusMessage}>
         {showLoadingAnimation && (
-          <span className={styles.loadingSpinner}><Loader size={16} /></span>
+          <LoadingDisplay size="s" message={statusMessage} />
         )}
-        <span>{statusMessage}</span>
       </div>
     )}
     

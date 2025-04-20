@@ -83,7 +83,7 @@ const Meditations: React.FC = () => {
 
   const togglePlayPause = async (audioUrl: string, id: number, status: MeditationStatus) => {
     // Don't allow playing inprogress or failed meditations
-    if (status === "inprogress" || status === "failed") return;
+    if (status === "InProgress" || status === "Failed") return;
     
     if (!audioRef.current) return;
 
@@ -132,7 +132,7 @@ const Meditations: React.FC = () => {
 
   const handleDownload = async (audioUrl: string, name: string, status: MeditationStatus) => {
     // Don't allow downloading inprogress or failed meditations
-    if (status === "inprogress" || status === "failed") return;
+    if (status === "InProgress" || status === "Failed") return;
     
     try {
       impactOccurred("light");
@@ -156,8 +156,8 @@ const Meditations: React.FC = () => {
 
   // Helper function to render meditation card with status handling
   const renderMeditationCard = (meditation: Meditation, isPersonal: boolean = false) => {
-    const isInProgress = meditation.readinessStatus === "inprogress";
-    const isFailed = meditation.readinessStatus === "failed";
+    const isInProgress = meditation.readinessStatus === "InProgress";
+    const isFailed = meditation.readinessStatus === "Failed";
     
     return (
       <MeditationCard

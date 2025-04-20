@@ -102,25 +102,15 @@
 .statusMessage {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-size: 12px;
   font-style: italic;
   margin-top: 8px;
   color: var(--tg-theme-hint-color, rgba(255, 255, 255, 0.7));
-}
-
-.loadingSpinner {
-  animation: spin 1.5s linear infinite;
-  display: inline-flex;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  text-align: center;
+  position: relative;
+  padding: 4px 0;
 }
 
 /* Tablet and larger screens */

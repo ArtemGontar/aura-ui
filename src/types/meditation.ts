@@ -1,5 +1,5 @@
 export type MeditationCategory = "Neural" | "Humanic" | "Ambient";
-export type MeditationStatus = "ready" | "inprogress" | "failed";
+export type MeditationStatus = "Ready" | "InProgress" | "Failed";
 
 export interface Meditation {
   id: number;

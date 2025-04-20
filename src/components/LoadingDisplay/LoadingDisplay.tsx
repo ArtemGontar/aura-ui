@@ -5,17 +5,19 @@ import { Spinner } from '@telegram-apps/telegram-ui';
 
 interface LoadingDisplayProps {
   message?: string;
+  size?: 's' | 'm' | 'l';
 }
 
 const LoadingDisplay: React.FC<LoadingDisplayProps> = ({ 
-  message
+  message,
+  size = 'l'
 }) => {
   const { t } = useTranslation();
   const displayMessage = message || t('loading');
 
   return (
     <>
-      <Spinner size="l" />
+      <Spinner size={size} />
       <div className={styles.loadingText}>
         {displayMessage}
       </div>
@@ -23,4 +25,4 @@ const LoadingDisplay: React.FC<LoadingDisplayProps> = ({
   );
 };
 
-export default LoadingDisplay; 
+export default LoadingDisplay;

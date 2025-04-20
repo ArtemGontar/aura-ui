@@ -119,6 +119,10 @@
     "personal": {
       "title": "Personal Meditations",
       "create": "Create a new meditation"
+    },
+    "status": {
+      "inprogress": "Creating meditation...",
+      "failed": "Creation failed"
     }
   },
   "cards": {

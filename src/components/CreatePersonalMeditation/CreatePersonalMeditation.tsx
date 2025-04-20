@@ -179,18 +179,15 @@ const CreatePersonalMeditation: React.FC = () => {
           </div>
         </div>
       )}
-
-      <div className={styles.buttonContainer}>
-        <FeatureButton
-          loading={loading}
-          remainingUses={remainingFreeUses}
-          onFreeAction={handleSubmit}
-          onPaidAction={handlePaidAction}
-          freeActionTextKey="createPersonalMeditation.createButton"
-          paidActionTextKey="createPersonalMeditation.createButtonPaid"
-          starsAmount={meditationStarsCost}
-        />
-      </div>
+      <FeatureButton
+        loading={loading}
+        remainingUses={remainingFreeUses}
+        onFreeAction={handleSubmit}
+        onPaidAction={handlePaidAction}
+        freeActionTextKey="createPersonalMeditation.createButton"
+        paidActionTextKey="createPersonalMeditation.createButtonPaid"
+        starsAmount={meditationStarsCost}
+      />
     </div>
   );
 };
