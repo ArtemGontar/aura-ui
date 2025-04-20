@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./CreatePersonalMeditation.module.css";
-import { Button, Slider } from "@telegram-apps/telegram-ui";
+import { Slider } from "@telegram-apps/telegram-ui";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { createPersonalMeditation } from "../../services/meditationService";
 import { MeditationSettings } from "../../types/meditation";
 import { getVoiceOptions, VoiceOption } from "../../utils/voiceUtils";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import FeatureButton from "../FeatureButton/FeatureButton";
 
 const CreatePersonalMeditation: React.FC = () => {
   const { t } = useTranslation();
@@ -22,6 +23,11 @@ const CreatePersonalMeditation: React.FC = () => {
   const [pauseStrength, setPauseStrength] = useState<number>(1);
   const [backgroundAudio, setBackgroundAudio] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  // This would typically come from user data in a real app
+  const remainingFreeUses = 3;
+  const meditationStarsCost = 5;
 
   // Get voice options based on user language when component mounts
   useEffect(() => {
@@ -38,6 +44,7 @@ const CreatePersonalMeditation: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const meditationSettings: MeditationSettings = {
         topic,
         voiceName,
@@ -56,7 +63,17 @@ const CreatePersonalMeditation: React.FC = () => {
     } catch (error) {
       console.error("Failed to create meditation:", error);
       // You could add error handling UI feedback here
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handlePaidAction = () => {
+    // Logic to handle when user needs to pay with stars
+    // This would typically integrate with your payment/stars system
+    console.log("User needs to pay stars for this feature");
+    // After payment confirmation, call handleSubmit
+    handleSubmit();
   };
 
   return (
@@ -164,9 +181,15 @@ const CreatePersonalMeditation: React.FC = () => {
       )}
 
       <div className={styles.buttonContainer}>
-        <Button onClick={handleSubmit}>
-          {t('createPersonalMeditation.createButton')}
-        </Button>
+        <FeatureButton
+          loading={loading}
+          remainingUses={remainingFreeUses}
+          onFreeAction={handleSubmit}
+          onPaidAction={handlePaidAction}
+          freeActionTextKey="createPersonalMeditation.createButton"
+          paidActionTextKey="createPersonalMeditation.createButtonPaid"
+          starsAmount={meditationStarsCost}
+        />
       </div>
     </div>
   );

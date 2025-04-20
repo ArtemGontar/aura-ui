@@ -266,7 +266,8 @@
       "ocean": "Ocean Waves",
       "ambient": "Ambient Music"
     },
-    "createButton": "Create"
+    "createButton": "Create",
+    "createButtonPaid": "Create Meditation ({{stars}} ⭐)"
   },
   "onboarding": {
     "openDrawer": "Fill the personal data",

@@ -254,7 +254,8 @@
       "ocean": "Океанские волны",
       "ambient": "Фоновая музыка"
     },
-    "createButton": "Создать"
+    "createButton": "Создать",
+    "createButtonPaid": "Создать медитацию ({{stars}} ⭐)"
   },
   "onboarding": {
     "openDrawer": "Заполни свои данные",
