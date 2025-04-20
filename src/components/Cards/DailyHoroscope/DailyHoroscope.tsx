@@ -74,10 +74,9 @@ const DailyHoroscope: React.FC = () => {
   };
 
   const requestPaidHoroscope = async () => {
-      //requestHoroscope();
       const featureId = FeatureType.DailyHoroscope;
       const featureName = t(PRODUCT_NAME_KEYS[featureId]);
-      const invoiceLink = await createInvoiceLink(featureId, featureName, "", "XTR", false);
+      const invoiceLink = await createInvoiceLink(featureId, featureName, t("dailyHoroscope.description"), "XTR", false);
       WebApp.openInvoice(invoiceLink, async (status) => {
         if (status === 'paid') {
           await paymentSuccess(userData!.id, featureId)
