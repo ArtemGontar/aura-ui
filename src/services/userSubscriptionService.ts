@@ -6,7 +6,7 @@ const API_BASE = `${API_CONFIG.BASE_URL}/api/users`;
 
 export const getUserSubscription = async (userId: string): Promise<UserSubscription | null> => {
   try {
-    const response = await api.get(`${API_BASE}/${userId}/subscriptions`);
+    const response = await api.get(`${API_BASE}/${userId}/subscription`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user subscription", error);

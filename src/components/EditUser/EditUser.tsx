@@ -80,10 +80,11 @@ const EditUser: React.FC = () => {
           }}
         >
           <option value="default">{t("editUser.default")}</option>
-          <option value="single">{t("editUser.single")}</option>
-          <option value="married">{t("editUser.married")}</option>
-          <option value="divorced">{t("editUser.divorced")}</option>
-          <option value="widowed">{t("editUser.widowed")}</option>
+          <option value="single">{t("onboarding.single")}</option>
+          <option value="relationship">{t("onboarding.relationship")}</option>
+          <option value="married">{t("onboarding.married")}</option>
+          <option value="divorced">{t("onboarding.divorced")}</option>
+          <option value="widowed">{t("onboarding.widowed")}</option>
         </select>
       </div>
       {error && <p className={styles.error}>{error}</p>}
