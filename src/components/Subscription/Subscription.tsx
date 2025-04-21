@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { UserSubscription } from "../../services/userSubscriptionService";
 import styles from "./Subscription.module.css";
+import { Button } from "@telegram-apps/telegram-ui";
 
 interface SubscriptionProps {
   isSubscribed?: boolean;
@@ -51,13 +52,12 @@ const Subscription: React.FC<SubscriptionProps> = ({
           )}
         </div>
       ) : (
-        <button 
+        <Button 
           className={styles.subscribeButton}
-          aria-label={t('profile.subscription.subscribe')}
           onClick={handleSubscribeClick}
         >
           {t('profile.subscription.subscribe')}
-        </button>
+        </Button>
       )}
     </section>
   );

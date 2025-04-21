@@ -26,21 +26,3 @@
   font-size: var(--tg-theme-font-size-base);
   line-height: 1.4;
 }
-
-.subscribeButton {
-  width: 100%;
-  height: var(--tg-theme-mobile-button-height);
-  background: var(--tg-theme-button-color);
-  color: var(--tg-theme-button-text-color);
-  border: none;
-  border-radius: var(--tg-theme-border-radius);
-  font-size: var(--tg-theme-font-size-base);
-  font-weight: var(--tg-theme-font-weight-medium);
-  cursor: pointer;
-  transition: all var(--tg-theme-transition-duration) var(--tg-theme-transition-timing);
-}
-
-.subscribeButton:hover {
-  opacity: 0.9;
-  transform: translateY(-2px);
-}
