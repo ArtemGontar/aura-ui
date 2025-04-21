@@ -111,7 +111,7 @@ const DailyHoroscope: React.FC = () => {
             </Drawer.Trigger>
             <Drawer.Portal container={document.getElementById('telegram-root')!}>
               <Drawer.Overlay className="fixed inset-0 bg-black/40" />
-              <Drawer.Content className={`${styles.onboardingContent} fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl p-4`}>
+              <Drawer.Content className={`${styles.onboardingContent} fixed bottom-0 left-0 right-0 rounded-t-2xl p-4`}>
                 <Drawer.Handle />
                 <Onboarding 
                   onComplete={handleOnboardingComplete} 

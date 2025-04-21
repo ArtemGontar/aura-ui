@@ -57,6 +57,10 @@
   font-size: var(--tg-theme-font-size-base);
 }
 
+.drawerContent {
+  background-color: var(--tg-theme-bg-color);
+}
+
 .predictionDate {
   align-self: flex-end;
   color: var(--tg-theme-text-color);
