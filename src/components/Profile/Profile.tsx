@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./Profile.module.css";
 import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
 import { ProfileProps } from "../../types/profile";
 import Subscription from "../Subscription/Subscription";
 import { deleteUser } from "../../services/userService";
+import { fetchUserSubscriptionAsync } from "../../store/slices/userSlice";
 import WebApp from "@twa-dev/sdk";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
   const { isUserLoading, error, userData } = useUserData();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const userSubscription = useSelector((state) => state.user.userSubscription);
+  const isSubscriptionLoading = useSelector((state) => state.user.isSubscriptionLoading);
+
+  useEffect(() => {
+    if (userData?.id) {
+      dispatch(fetchUserSubscriptionAsync(userData.id.toString()));
+    }
+  }, [userData, dispatch]);
 
   const handleDeleteAccount = async () => {
     WebApp.showConfirm(t('profile.confirmDelete'), async (result) => {
@@ -81,7 +93,11 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
         </div>
       </section>
 
-      <Subscription isSubscribed={false} />
+      <Subscription 
+        isSubscribed={userSubscription?.isActive}
+        subscription={userSubscription}
+        isLoading={isSubscriptionLoading}
+      />
 
       <PredictionHistory />
 

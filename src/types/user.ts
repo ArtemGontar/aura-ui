@@ -24,6 +24,14 @@ export interface Subscription {
   expiration: string;
 }
 
+export interface UserSubscription {
+  id: number;
+  name: string;
+  startDate: string;
+  endDate?: string;
+  isActive: boolean;
+}
+
 export interface UserState {
   userData: UserData | null;
   userStats: UserStats;

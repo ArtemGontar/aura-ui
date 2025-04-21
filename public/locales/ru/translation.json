@@ -90,7 +90,9 @@
       },
       "choosePlan": "Выберите план",
       "subscribe": "Оформить подписку",
-      "recommended": "Популярный"
+      "recommended": "Популярный",
+      "startDate": "Дата начала",
+      "endDate": "Дата окончания"
     },
     "history": {
       "title": "История предсказаний",

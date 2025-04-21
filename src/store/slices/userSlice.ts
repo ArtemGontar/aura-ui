@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { UserData, UserState, UserStats } from '../../types/user';
+import { UserData, UserState, UserStats, UserSubscription } from '../../types/user';
 import { getUserData, updateUserData } from '../../services/userService';
 import { getUserStats } from '../../services/userStatsService';
+import { getUserSubscription } from '../../services/userSubscriptionService';
 
 export const initialState: UserState = {
   userData: null,
@@ -9,8 +10,10 @@ export const initialState: UserState = {
     streak: 0,
     coinBalance: 0
   },
+  userSubscription: null,
   isUserLoading: true,
   isStatsLoading: true,
+  isSubscriptionLoading: false,
   error: null,
 };
 
@@ -70,6 +73,18 @@ export const fetchUserStatsAsync = createAsyncThunk(
   }
 );
 
+export const fetchUserSubscriptionAsync = createAsyncThunk(
+  'user/fetchSubscription',
+  async (userId: string) => {
+    try {
+      const subscription = await getUserSubscription(userId);
+      return subscription;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -82,14 +97,20 @@ const userSlice = createSlice({
       state.userStats = action.payload;
       state.isStatsLoading = false;
     },
+    setUserSubscription: (state, action: PayloadAction<UserSubscription | null>) => {
+      state.userSubscription = action.payload;
+      state.isSubscriptionLoading = false;
+    },
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.isUserLoading = false;
       state.isStatsLoading = false;
+      state.isSubscriptionLoading = false;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isUserLoading = action.payload;
       state.isStatsLoading = action.payload;
+      state.isSubscriptionLoading = action.payload;
     },
     setUserLoading: (state, action: PayloadAction<boolean>) => {
       state.isUserLoading = action.payload;
@@ -97,12 +118,17 @@ const userSlice = createSlice({
     setStatsLoading: (state, action: PayloadAction<boolean>) => {
       state.isStatsLoading = action.payload;
     },
+    setSubscriptionLoading: (state, action: PayloadAction<boolean>) => {
+      state.isSubscriptionLoading = action.payload;
+    },
     clearUserData: (state) => {
       state.userData = null;
       state.userStats = { streak: 0, coinBalance: 0 };
+      state.userSubscription = null;
       state.error = null;
       state.isUserLoading = false;
       state.isStatsLoading = false;
+      state.isSubscriptionLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -130,6 +156,18 @@ const userSlice = createSlice({
       .addCase(fetchUserStatsAsync.rejected, (state, action) => {
         state.error = action.error.message || 'Failed to fetch user stats';
         state.isStatsLoading = false;
+      })
+      .addCase(fetchUserSubscriptionAsync.pending, (state) => {
+        state.isSubscriptionLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserSubscriptionAsync.fulfilled, (state, action) => {
+        state.userSubscription = action.payload;
+        state.isSubscriptionLoading = false;
+      })
+      .addCase(fetchUserSubscriptionAsync.rejected, (state, action) => {
+        state.error = action.error.message || 'Failed to fetch user subscription';
+        state.isSubscriptionLoading = false;
       });
   },
 });
@@ -137,10 +175,12 @@ const userSlice = createSlice({
 export const { 
   setUserData, 
   setUserStats,
+  setUserSubscription,
   setError, 
   setLoading,
   setUserLoading,
   setStatsLoading,
+  setSubscriptionLoading,
   clearUserData 
 } = userSlice.actions;
 

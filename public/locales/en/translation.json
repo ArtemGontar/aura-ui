@@ -88,6 +88,8 @@
           "part6": "🧘 6 personal meditations"
         }
       },
+      "startDate": "Start Date",
+      "endDate": "End Date",
       "choosePlan": "Choose a plan",
       "subscribe": "Subscribe Now",
       "recommended": "Popular"
