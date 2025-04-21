@@ -77,7 +77,7 @@
   display: inline-flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1.5rem;
   background: var(--tg-theme-button-color);
   border-radius: var(--tg-theme-border-radius);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
