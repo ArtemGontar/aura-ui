@@ -48,13 +48,14 @@
 
 .compatibility select {
   width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  padding: 12px;
   border: 1px solid var(--tg-theme-hint-color);
   border-radius: var(--tg-theme-border-radius);
   box-sizing: border-box;
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+  transition: border-color 0.2s;
+  margin: 20px 0;
 }
 
 .resultContainer {
