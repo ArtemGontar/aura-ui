@@ -8,12 +8,12 @@ import image from "./../../assets/tasks.png";
 import taskService from "../../services/taskService";
 import { TaskData, TaskStatus } from "../../types/task";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { AppDispatch, RootState } from "../../store";
 import { fetchUserStatsAsync } from "../../store/slices/userSlice";
 
 const TasksPage: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const userData = useSelector((state: RootState) => state.user.userData);  
   const [tasks, setTasks] = useState<TaskData[]>([]);
   const [isLoading, setIsLoading] = useState(true);

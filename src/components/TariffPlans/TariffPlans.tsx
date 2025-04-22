@@ -7,12 +7,14 @@ import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { Button } from "@telegram-apps/telegram-ui";
 import tariffs from "../../constants/tariffs";
 import { useUserData } from "../../hooks/useUserData";
+import { useNavigate } from "react-router-dom";
 
 const TariffPlans: React.FC = () => {
   const { t } = useTranslation();
   const { notificationOccurred } = useTelegramHaptics();
   const [selectedPlan, setSelectedPlan] = useState<number>(1);
   const { userData } = useUserData()
+  const navigate = useNavigate();
 
   const tariffPlans = [
     {
@@ -69,6 +71,7 @@ const TariffPlans: React.FC = () => {
       if (status === 'paid') {
         await paymentSuccess(userData!.id, plan.id)
         notificationOccurred('success');
+        navigate(-1);
       } else if (status === 'failed') {
         notificationOccurred('error');
       } else {

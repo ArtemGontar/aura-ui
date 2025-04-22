@@ -35,7 +35,9 @@ export interface UserSubscription {
 export interface UserState {
   userData: UserData | null;
   userStats: UserStats;
+  userSubscription: UserSubscription | null;
   isUserLoading: boolean;
   isStatsLoading: boolean;
+  isSubscriptionLoading: boolean;
   error: string | null;
 }

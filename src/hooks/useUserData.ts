@@ -3,7 +3,13 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 
 export const useUserData = (onUserDataChange?: (userData: any) => void) => {
-  const { userData, userStats, isUserLoading, isStatsLoading, error } = useSelector((state: RootState) => state.user);
+  const { userData, 
+    userStats, 
+    userSubscription,
+    isUserLoading, 
+    isStatsLoading, 
+    isSubscriptionLoading,
+    error } = useSelector((state: RootState) => state.user);
   
   useEffect(() => {
     if (onUserDataChange && userData) {
@@ -14,8 +20,10 @@ export const useUserData = (onUserDataChange?: (userData: any) => void) => {
   return {
     isUserLoading,
     isStatsLoading,
+    isSubscriptionLoading,
     error,
     userData,
-    userStats
+    userStats,
+    userSubscription
   };
 };

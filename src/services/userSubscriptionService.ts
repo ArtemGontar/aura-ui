@@ -4,7 +4,7 @@ import api from "./api";
 
 const API_BASE = `${API_CONFIG.BASE_URL}/api/users`;
 
-export const getUserSubscription = async (userId: string): Promise<UserSubscription | null> => {
+export const getUserSubscription = async (userId: number): Promise<UserSubscription | null> => {
   try {
     const response = await api.get(`${API_BASE}/${userId}/subscription`);
     return response.data;
@@ -18,7 +18,7 @@ export const getUserSubscription = async (userId: string): Promise<UserSubscript
   }
 };
 
-export const hasActiveSubscription = async (userId: string): Promise<boolean> => {
+export const hasActiveSubscription = async (userId: number): Promise<boolean> => {
   try {
     const subscription = await getUserSubscription(userId);
     return !!subscription && subscription.isActive;

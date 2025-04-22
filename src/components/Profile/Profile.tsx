@@ -10,19 +10,17 @@ import Subscription from "../Subscription/Subscription";
 import { deleteUser } from "../../services/userService";
 import { fetchUserSubscriptionAsync } from "../../store/slices/userSlice";
 import WebApp from "@twa-dev/sdk";
+import { AppDispatch } from "../../store";
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
-  const { isUserLoading, error, userData } = useUserData();
+  const { isUserLoading, error, userData, userSubscription, isSubscriptionLoading } = useUserData();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  
-  const userSubscription = useSelector((state) => state.user.userSubscription);
-  const isSubscriptionLoading = useSelector((state) => state.user.isSubscriptionLoading);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     if (userData?.id) {
-      dispatch(fetchUserSubscriptionAsync(userData.id.toString()));
+      dispatch(fetchUserSubscriptionAsync(userData.id));
     }
   }, [userData, dispatch]);
 

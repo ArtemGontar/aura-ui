@@ -35,7 +35,7 @@ const AppContent: React.FC = () => {
   useTelegramWebApp(); // Call the new hook here
 
   useEffect(() => {
-    const fetchUserStats = async (userId: string) => {
+    const fetchUserStats = async (userId: number) => {
       try {
         await incrementStreak(userId);
         await getUserStats(userId);
@@ -45,7 +45,7 @@ const AppContent: React.FC = () => {
     };
 
     if (userData?.id) {
-      fetchUserStats(userData.id.toString());
+      fetchUserStats(userData.id);
     }
   }, [userData?.id]);
 

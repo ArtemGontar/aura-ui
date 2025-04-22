@@ -63,7 +63,7 @@ export const saveUserDataAsync = createAsyncThunk(
 
 export const fetchUserStatsAsync = createAsyncThunk(
   'user/fetchStats',
-  async (userId: string) => {
+  async (userId: number) => {
     try {
       const userStats = await getUserStats(userId);
       return userStats;
@@ -75,7 +75,7 @@ export const fetchUserStatsAsync = createAsyncThunk(
 
 export const fetchUserSubscriptionAsync = createAsyncThunk(
   'user/fetchSubscription',
-  async (userId: string) => {
+  async (userId: number) => {
     try {
       const subscription = await getUserSubscription(userId);
       return subscription;

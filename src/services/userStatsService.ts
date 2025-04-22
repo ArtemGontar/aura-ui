@@ -10,7 +10,7 @@ export interface UserStats {
 
 const API_BASE = `${API_CONFIG.BASE_URL}/api/users`;
 
-export const getUserStats = async (userId: string): Promise<UserStats> => {
+export const getUserStats = async (userId: number): Promise<UserStats> => {
   try {
     const response = await api.get(`${API_BASE}/${userId}/stats`);
     store.dispatch(setUserStats(response.data));
@@ -21,7 +21,7 @@ export const getUserStats = async (userId: string): Promise<UserStats> => {
   }
 };
 
-export const incrementStreak = async (userId: string): Promise<UserStats> => {
+export const incrementStreak = async (userId: number): Promise<UserStats> => {
   try {
     const response = await api.put(`${API_BASE}/${userId}/stats/streak`);
     store.dispatch(setUserStats(response.data));
