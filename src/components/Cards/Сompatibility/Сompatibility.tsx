@@ -107,16 +107,16 @@ const Compatibility: React.FC = () => {
                 <div className={styles.nameContainer}>
                   <label>
                     {t('compatibility.partnerInfoFirstName')}
-                    <input type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
+                    <input className={styles.input} type="text" name="firstName" value={partnerInfo.firstName} onChange={handleInputChange} />
                   </label>
                   <label>
                     {t('compatibility.partnerInfoLastName')}
-                    <input type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
+                    <input className={styles.input} type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
                   </label>  
                 </div>
                 <label>
                   {t('compatibility.partnerInfoSex')}
-                  <select name="sex" value={partnerInfo.sex} onChange={handleInputChange}>
+                  <select className={styles.select} name="sex" value={partnerInfo.sex} onChange={handleInputChange}>
                     <option value="">{t('compatibility.selectPlaceholder')}</option>
                     <option value="male">{t('compatibility.sexMale')}</option>
                     <option value="female">{t('compatibility.sexFemale')}</option>
@@ -125,7 +125,7 @@ const Compatibility: React.FC = () => {
                 </label>
                 <label>
                   {t('compatibility.partnerInfoRelationshipStatus')}
-                  <select name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>
+                  <select className={styles.select} name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>
                     <option value="">{t('compatibility.selectPlaceholder')}</option>
                     <option value="inRelationship">{t('compatibility.statusInRelationship')}</option>
                     <option value="married">{t('compatibility.statusMarried')}</option>
