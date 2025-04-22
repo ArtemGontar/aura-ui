@@ -10,7 +10,7 @@ export interface UserData {
   zodiacSign?: string;
   sex?: string;
   maritalStatus?: string;
-  subscription?: Subscription;
+  userSubscription?: UserSubscription;
   stats?: UserStats;
 }
 
@@ -20,8 +20,8 @@ export interface UserStats {
 }
 
 export interface Subscription {
-  plan: string;
-  expiration: string;
+  name: string;
+  price: number;
 }
 
 export interface UserSubscription {
@@ -30,6 +30,7 @@ export interface UserSubscription {
   startDate: string;
   endDate?: string;
   isActive: boolean;
+  subscription: Subscription;
 }
 
 export interface UserState {

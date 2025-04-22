@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { UserSubscription } from "../../services/userSubscriptionService";
 import styles from "./Subscription.module.css";
 import { Button } from "@telegram-apps/telegram-ui";
+import { UserSubscription } from "../../types/user";
 
 interface SubscriptionProps {
   isSubscribed?: boolean;
@@ -38,7 +38,7 @@ const Subscription: React.FC<SubscriptionProps> = ({
         <div className={styles.subscribed}>
           {subscription ? (
             <>
-              <p><strong>{subscription.name}</strong></p>
+              <p><strong>{subscription.subscription.name}</strong></p>
               <p>{t('profile.subscription.startDate')}: {formatDate(subscription.startDate)}</p>
               {subscription.endDate && (
                 <p>{t('profile.subscription.endDate')}: {formatDate(subscription.endDate)}</p>
