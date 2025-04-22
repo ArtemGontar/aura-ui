@@ -28,7 +28,7 @@ const Compatibility: React.FC = () => {
     firstName: '', 
     lastName: '', 
     dateOfBirth: '',
-    sex: 'female',
+    sex: 'male',
     relationshipStatus: 'inRelationship' 
   });
   const [compatibilityResult, setCompatibilityResult] = useState<CompatibilityData | null>(null);
