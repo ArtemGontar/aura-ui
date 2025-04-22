@@ -114,7 +114,8 @@ const Compatibility: React.FC = () => {
                     <input className={styles.input} type="text" name="lastName" value={partnerInfo.lastName} onChange={handleInputChange} />
                   </label>  
                 </div>
-                <label>{t('compatibility.partnerInfoSex')}</label>
+                <div className={styles.field}>
+                  <label>{t('compatibility.partnerInfoSex')}</label>
                   <select 
                     className={styles.select} 
                     name="sex" 
@@ -126,7 +127,7 @@ const Compatibility: React.FC = () => {
                     <option value="female">{t('compatibility.sexFemale')}</option>
                     <option value="other">{t('compatibility.sexOther')}</option>
                   </select>
-
+                </div>
                 <label>
                   {t('compatibility.partnerInfoRelationshipStatus')}
                   <select className={styles.select} name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>

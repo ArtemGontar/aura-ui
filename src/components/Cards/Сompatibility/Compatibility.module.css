@@ -34,6 +34,18 @@
   width: 48%;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-color);
+}
+
 .input {
   width: 100%;
   padding: 0.5rem;
