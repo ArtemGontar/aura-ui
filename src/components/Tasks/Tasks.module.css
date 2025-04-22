@@ -42,10 +42,6 @@
   font-weight: 500;
 }
 
-.completedToggle:hover {
-  background-color: #f5f5f5;
-}
-
 .completedTasks {
   margin-top: 10px;
   animation: fadeIn 0.3s ease-in-out;
