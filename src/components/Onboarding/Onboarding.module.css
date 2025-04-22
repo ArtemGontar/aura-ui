@@ -19,6 +19,8 @@ h4 {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: border-color 0.2s;
   margin: 20px 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .datePicker {

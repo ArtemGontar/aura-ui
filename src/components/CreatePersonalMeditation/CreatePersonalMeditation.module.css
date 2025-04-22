@@ -109,6 +109,8 @@
   border-radius: var(--tg-theme-border-radius);
   background-color: var(--tg-theme-bg-color);
   color: var(--tg-theme-text-color);
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .buttonContainer {

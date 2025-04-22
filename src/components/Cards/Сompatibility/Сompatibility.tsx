@@ -28,8 +28,8 @@ const Compatibility: React.FC = () => {
     firstName: '', 
     lastName: '', 
     dateOfBirth: '',
-    sex: '', 
-    relationshipStatus: '' 
+    sex: 'female',
+    relationshipStatus: 'inRelationship' 
   });
   const [compatibilityResult, setCompatibilityResult] = useState<CompatibilityData | null>(null);
   const [loading, setLoading] = useState(false);
@@ -122,7 +122,6 @@ const Compatibility: React.FC = () => {
                     value={partnerInfo.sex} 
                     onChange={handleInputChange}
                   >
-                    <option value="">{t('compatibility.selectPlaceholder')}</option>
                     <option value="male">{t('compatibility.sexMale')}</option>
                     <option value="female">{t('compatibility.sexFemale')}</option>
                     <option value="other">{t('compatibility.sexOther')}</option>
@@ -131,7 +130,6 @@ const Compatibility: React.FC = () => {
                 <label>
                   {t('compatibility.partnerInfoRelationshipStatus')}
                   <select className={styles.select} name="relationshipStatus" value={partnerInfo.relationshipStatus} onChange={handleInputChange}>
-                    <option value="">{t('compatibility.selectPlaceholder')}</option>
                     <option value="inRelationship">{t('compatibility.statusInRelationship')}</option>
                     <option value="married">{t('compatibility.statusMarried')}</option>
                     <option value="lovers">{t('compatibility.statusLovers')}</option>
