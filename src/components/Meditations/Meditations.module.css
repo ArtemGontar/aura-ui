@@ -130,6 +130,19 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative; /* Added to position betaLabel */
+}
+
+.betaLabel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--gradient-one);
+  color: var(--tg-theme-text-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: var(--tg-theme-font-size-small);
+  font-weight: var(--tg-theme-font-weight-bold);
 }
 
 .createText {

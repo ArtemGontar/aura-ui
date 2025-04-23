@@ -256,6 +256,7 @@ const Meditations: React.FC = () => {
               className={`${styles.card} ${styles.createCard}`}
               onClick={handleCreatePersonalMeditation}
             >
+              <div className={styles.betaLabel}>Beta</div> {/* Moved betaLabel here */}
               <h4 className={styles.createText}>
                 {t("meditations.personal.create")}
               </h4>
