@@ -24,7 +24,7 @@ const CreatePersonalMeditation: React.FC = () => {
   const [speechRate, setSpeechRate] = useState<number>(0);
   const [pitch, setPitch] = useState<number>(0);
   const [pauseStrength, setPauseStrength] = useState<number>(1);
-  const [backgroundAudio, setBackgroundAudio] = useState<string>("");
+  // const [backgroundAudio, setBackgroundAudio] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -50,7 +50,7 @@ const CreatePersonalMeditation: React.FC = () => {
         speechRate,
         pitch,
         pauseStrength,
-        backgroundAudio
+        // backgroundAudio
       };
       
       // Call the service function with settings object
@@ -160,23 +160,6 @@ const CreatePersonalMeditation: React.FC = () => {
                 <span className={styles.sliderValue}>{pauseStrength}</span>
               </label>
             </div>
-          </div>
-
-          <div className={styles.selectContainer}>
-            <label className={styles.label}>
-              {t('createPersonalMeditation.backgroundAudio')}
-              <select
-                value={backgroundAudio}
-                onChange={(e) => setBackgroundAudio(e.target.value)}
-                className={styles.select}
-              >
-                <option value="">{t('createPersonalMeditation.noBackgroundAudio')}</option>
-                <option value="nature">{t('createPersonalMeditation.backgroundOptions.nature')}</option>
-                <option value="rain">{t('createPersonalMeditation.backgroundOptions.rain')}</option>
-                <option value="ocean">{t('createPersonalMeditation.backgroundOptions.ocean')}</option>
-                <option value="ambient">{t('createPersonalMeditation.backgroundOptions.ambient')}</option>
-              </select>
-            </label>
           </div>
         </div>
       )}
