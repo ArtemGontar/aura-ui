@@ -16,5 +16,5 @@ export interface MeditationSettings {
   speechRate: number;
   pitch: number;
   pauseStrength: number;
-  // backgroundAudio: string;
+  backgroundAudioFileName: string;
 }

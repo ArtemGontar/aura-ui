@@ -24,7 +24,7 @@ const CreatePersonalMeditation: React.FC = () => {
   const [speechRate, setSpeechRate] = useState<number>(0);
   const [pitch, setPitch] = useState<number>(0);
   const [pauseStrength, setPauseStrength] = useState<number>(1);
-  // const [backgroundAudio, setBackgroundAudio] = useState<string>("");
+  const [backgroundAudioFileName, setBackgroundAudioFileName] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -50,7 +50,7 @@ const CreatePersonalMeditation: React.FC = () => {
         speechRate,
         pitch,
         pauseStrength,
-        // backgroundAudio
+        backgroundAudioFileName,
       };
       
       // Call the service function with settings object
@@ -160,6 +160,20 @@ const CreatePersonalMeditation: React.FC = () => {
                 <span className={styles.sliderValue}>{pauseStrength}</span>
               </label>
             </div>
+          </div>
+          <div className={styles.selectContainer}>
+            <label className={styles.label}>
+              {t('createPersonalMeditation.backgroundAudio')}
+              <select
+                value={backgroundAudioFileName}
+                onChange={(e) => setBackgroundAudioFileName(e.target.value)}
+                className={styles.select}
+              >
+                <option value="">{t('createPersonalMeditation.noBackgroundAudio')}</option>
+                <option value="8635ec9d-2e6f-4bc6-a8cf-48c7cfa3b3c4.wav">{t('createPersonalMeditation.backgroundOptions.forest')}</option>
+                <option value="61eccef4-f0e6-40c6-8686-13a4c342d3bd.wav">{t('createPersonalMeditation.backgroundOptions.ambient')}</option>
+              </select>
+            </label>
           </div>
         </div>
       )}

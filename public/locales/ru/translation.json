@@ -257,7 +257,7 @@
     "backgroundOptions": {
       "nature": "Звуки природы",
       "rain": "Дождь",
-      "ocean": "Океанские волны",
+      "forest": "Лес",
       "ambient": "Фоновая музыка"
     },
     "createButton": "Создать",

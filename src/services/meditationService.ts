@@ -37,6 +37,7 @@ export const getMeditations = async (
 
 export const createPersonalMeditation = async (settings: MeditationSettings): Promise<Meditation> => {
   try {
+    console.log("Creating meditation with settings:", settings);
     const response = await api.post<Meditation>(`${API_BASE}`, settings);
     
     console.log("response", response.data);
