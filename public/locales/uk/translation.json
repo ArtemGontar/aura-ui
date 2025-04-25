@@ -316,7 +316,8 @@
     },
     "buttons": {
       "generate": "Отримати афірмацію",
-      "usePaidAffirmation": "Отримати афірмацію ({{stars}} ⭐)"
+      "usePaidAffirmation": "Отримати афірмацію ({{stars}} ⭐)",
+      "generatePaid": "Отримати афірмацію за зірки"
     }
   },
   "editUser": {

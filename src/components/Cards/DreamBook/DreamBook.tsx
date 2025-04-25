@@ -12,6 +12,9 @@ import FeatureButton from '../../FeatureButton/FeatureButton';
 import { useQuotas } from '../../../hooks/useQuotas';
 import { PredictionType } from '../../../types/prediction';
 import tariffs from "../../../constants/tariffs";
+import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
+import { createInvoiceLink, paymentSuccess } from '../../../services/paymentService';
+import WebApp from '@twa-dev/sdk';
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ const DreamBook: React.FC = () => {
   const [interpretation, setInterpretation] = useState<string | null>(null);
   const { remainingUses, useFeature } = useQuotas(PredictionType.DreamInterpretation);
   const [loading, setLoading] = useState(false);
-  const haptics = useTelegramHaptics();
+  const { notificationOccurred } = useTelegramHaptics();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDreamText(e.target.value);
@@ -31,16 +34,29 @@ const DreamBook: React.FC = () => {
       const response = await getDreamInterpretation(dreamText);
       setInterpretation(response.interpretation);
       useFeature();
-      haptics.notificationOccurred("success");
+      notificationOccurred("success");
     } catch (err) {
-      haptics.notificationOccurred("error");
+      notificationOccurred("error");
     } finally {
       setLoading(false);
     }
   };
   
   const requestPaidInterpretDream = async () => {
-    console.log("Paid action triggered");
+    const featureId = FeatureType.DreamInterpretation;
+    const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+    const invoiceLink = await createInvoiceLink(featureId, featureName, t("dreamInterpretation.description"), "XTR", false);
+    WebApp.openInvoice(invoiceLink, async (status) => {
+      if (status === 'paid') {
+        await paymentSuccess(userData!.id, featureId)
+        await requestInterpretDream();
+        notificationOccurred('success');
+      } else if (status === 'failed') {
+        notificationOccurred('error');
+      } else {
+        notificationOccurred('warning');
+      }
+    });
   }
 
   return (
@@ -52,7 +68,7 @@ const DreamBook: React.FC = () => {
         icon={<CloudMoon className="w-8 h-8 mb-4 text-white" fill="white" />} 
       />
       <div className={styles.dreamBook}>
-        <h4>{t('dreamBook.title')}</h4>
+        <h4>{t('dreamBook.dreamLabel')}</h4>
         <textarea
           className={styles.textarea}
           value={dreamText}

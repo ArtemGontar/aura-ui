@@ -11,6 +11,9 @@ import { PredictionType } from "../../../types/prediction";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
 import tariffs from "../../../constants/tariffs"; // Import the config file
+import { FeatureType, PRODUCT_NAME_KEYS } from "../../../constants/products";
+import { createInvoiceLink, paymentSuccess } from "../../../services/paymentService";
+import WebApp from "@twa-dev/sdk";
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
@@ -19,7 +22,7 @@ const Affirmation: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [goal, setGoal] = useState<string>("career");
-  const haptics = useTelegramHaptics();
+  const { notificationOccurred } = useTelegramHaptics();
 
   const requestAffirmation = async () => {
     setLoading(true);
@@ -28,17 +31,30 @@ const Affirmation: React.FC = () => {
       const data = await getAffirmation(goal);
       setAffirmation(data);
       useFeature();
-      haptics.notificationOccurred("success");
+      notificationOccurred("success");
     } catch {
       setError(t("cards.error"));
-      haptics.notificationOccurred("error");
+      notificationOccurred("error");
     } finally {
       setLoading(false);
     }
   };
 
   const requestPaidAffirmation = async () => {
-    console.log("Paid action triggered");
+    const featureId = FeatureType.Affirmation;
+    const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+    const invoiceLink = await createInvoiceLink(featureId, featureName, t("affirmation.description"), "XTR", false);
+    WebApp.openInvoice(invoiceLink, async (status) => {
+      if (status === 'paid') {
+        await paymentSuccess(userData!.id, featureId)
+        await requestAffirmation();
+        notificationOccurred('success');
+      } else if (status === 'failed') {
+        notificationOccurred('error');
+      } else {
+        notificationOccurred('warning');
+      }
+    });
   }
 
   return (

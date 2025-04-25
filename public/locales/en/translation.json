@@ -169,6 +169,7 @@
   },
   "compatibility": {
     "title": "Fill Partner Info",
+    "description": "Check how compatible you are with your partner.",
     "completeProfile": "Complete your profile to see how well you match.",
     "error": "Failed to save your profile. Please try again 😉",
     "partnerInfo": "Partner Information",
@@ -248,11 +249,13 @@
     }
   },
   "dreamBook": {
+    "title": "Dream Interpretation",
+    "description": "Uncover the secrets of your dreams.",
     "banner": {
       "title": "Dream Book",
       "subtitle": "Unveil the secrets of your dreams"
     },
-    "title": "Enter your dream description",
+    "dreamLabel": "Enter your dream description",
     "placeholder": "Write your dream here...",
     "resultTitle": "Interpretation Result",
     "interpretingDream": "Interpreting your dream...",
@@ -300,6 +303,8 @@
     "finish": "Finish"
   },
   "affirmation": {
+    "title": "Daily Affirmation",
+    "description": "Set a positive intention for the day.",
     "banner": {
       "title": "Daily Affirmation",
       "subtitle": "Set your intention for the day"
@@ -316,7 +321,7 @@
     },
     "buttons": {
       "generate": "Show Affirmation",
-      "usePaidAffirmation": "Show Affirmation ({{stars}} ⭐)"
+      "generatePaid": "Show Affirmation ({{stars}} ⭐)"
     }
   },
   "editUser": {

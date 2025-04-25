@@ -19,6 +19,9 @@ import FeatureButton from "../../FeatureButton/FeatureButton";
 import { useQuotas } from '../../../hooks/useQuotas';
 import Banner from '../../Banner/Banner';
 import tariffs from "../../../constants/tariffs";
+import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
+import { createInvoiceLink, paymentSuccess } from '../../../services/paymentService';
+import WebApp from '@twa-dev/sdk';
 
 const Compatibility: React.FC = () => {
   const { t } = useTranslation();
@@ -33,7 +36,7 @@ const Compatibility: React.FC = () => {
   });
   const [compatibilityResult, setCompatibilityResult] = useState<CompatibilityData | null>(null);
   const [loading, setLoading] = useState(false);
-  const haptics = useTelegramHaptics();
+  const { notificationOccurred } = useTelegramHaptics();
   const navigate = useNavigate();
   const handleOnboardingComplete = () => {
     navigate("/compatibility");
@@ -49,24 +52,37 @@ const Compatibility: React.FC = () => {
     setPartnerInfo({ ...partnerInfo, dateOfBirth: formattedDate });
   };
 
-  const checkCompatibility = async () => {
+
+  const requestCompatibility = async () => {
     setLoading(true);
     try {
       const response: CompatibilityData = await getCompatibility(partnerInfo);
       setCompatibilityResult(response);
       useFeature();
-      haptics.notificationOccurred("success");
+      notificationOccurred("success");
     } catch (err) {
-      haptics.notificationOccurred("error");
+      notificationOccurred("error");
     } finally {
       setLoading(false);
     }
   };
 
-  const requestCompatibility = () => {
-    checkCompatibility();
-    haptics.impactOccurred("medium");
-  };
+  const requestPaidCompatibility = async () => {
+      const featureId = FeatureType.Compatibility;
+      const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+      const invoiceLink = await createInvoiceLink(featureId, featureName, t("compatibility.description"), "XTR", false);
+      WebApp.openInvoice(invoiceLink, async (status) => {
+        if (status === 'paid') {
+          await paymentSuccess(userData!.id, featureId)
+          await requestCompatibility();
+          notificationOccurred('success');
+        } else if (status === 'failed') {
+          notificationOccurred('error');
+        } else {
+          notificationOccurred('warning');
+        }
+      });
+    };
 
 
   const showOnboarding = useShowOnboarding(userData);
@@ -152,7 +168,7 @@ const Compatibility: React.FC = () => {
                   loading={loading}
                   remainingUses={remainingUses}
                   onFreeAction={requestCompatibility}
-                  onPaidAction={() => console.log("Paid compatibility requested")}
+                  onPaidAction={requestPaidCompatibility}
                   freeActionTextKey="compatibility.buttons.checkCompatibility"
                   paidActionTextKey="compatibility.buttons.usePaidCompatibility"
                   starsAmount={tariffs.compatibilityStarsAmount}
