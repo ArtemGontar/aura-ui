@@ -113,7 +113,9 @@ const PredictionHistory: React.FC = () => {
                   onClick={() => setSelectedPrediction(prediction)}
                 >
                   <div className={styles.predictionHeader}>
-                    <div className={styles.predictionType}>{prediction.type}</div>
+                    <div className={styles.predictionType}>
+                      {t(`products.${prediction.type}`)}
+                    </div>
                   </div>
                   <p className={styles.predictionContent}>
                     {renderPredictionPreview(prediction)}
