@@ -34,7 +34,14 @@ const MeditationCard: React.FC<MeditationCardProps> = ({
     {statusMessage && (
       <div className={styles.statusMessage}>
         {showLoadingAnimation && (
-          <LoadingDisplay size="s" message={statusMessage} />
+          <LoadingDisplay 
+            size="s" 
+            message={statusMessage} 
+            wrapperStyle={{ 
+              display: 'flex', 
+              alignItems: 'center' 
+            }}
+          />
         )}
       </div>
     )}

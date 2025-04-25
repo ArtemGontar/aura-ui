@@ -69,9 +69,18 @@ const DreamBook: React.FC = () => {
           starsAmount={tariffs.dreamBookStarsAmount} // Use config value
         />
         {loading && (
-          <div className={styles.loadingWrapper}>
-            <LoadingDisplay message={t('dreamBook.interpretingDream')} />
-          </div>
+          <LoadingDisplay 
+            message={t('dreamBook.interpretingDream')}
+            size="s"
+            wrapperStyle={{ 
+              display: 'flex', 
+              flexDirection: 'column',
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              width: '100%', 
+              margin: '2rem 0'
+            }}
+            />
         )}
         {interpretation && <DreamBookResult interpretation={interpretation} />}
       </div>

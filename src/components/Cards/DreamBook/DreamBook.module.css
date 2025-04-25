@@ -20,13 +20,3 @@
 .bannerBackground {
   background: linear-gradient(to bottom, #0b0c2a 0%, #1a1d4a 40%, #2d2f5d 75%, #3b3f6e 100%);
 }
-
-.loadingWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: 2rem 0;
-  text-align: center;
-}

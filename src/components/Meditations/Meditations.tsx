@@ -202,7 +202,17 @@ const Meditations: React.FC = () => {
         <h3>{t("meditations.general.title")}</h3>
         {isGeneralLoading ? (
           <div className={styles.loadingWrapper}>
-            <LoadingDisplay message={t("meditations.loading")} />
+            <LoadingDisplay 
+              message={t("meditations.loading")} 
+              wrapperStyle={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                width: '100%', 
+                margin: '2rem 0'
+              }}
+            />
           </div>
         ) : generalMeditations.length > 0 ? (
           <>

@@ -1,5 +1,5 @@
 {
-  "loading": "Loading...",
+  "loading": "Loading data...",
   "error": {
     "retry": "Retry",
     "noUserData": "No user data found. Please log in again.",

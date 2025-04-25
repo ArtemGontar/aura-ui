@@ -6,22 +6,24 @@ import { Spinner } from '@telegram-apps/telegram-ui';
 interface LoadingDisplayProps {
   message?: string;
   size?: 's' | 'm' | 'l';
+  wrapperStyle?: React.CSSProperties; // New prop for custom styles
 }
 
 const LoadingDisplay: React.FC<LoadingDisplayProps> = ({ 
   message,
-  size = 'l'
+  size = 'l',
+  wrapperStyle = {} // Ensure a default empty object for safety
 }) => {
   const { t } = useTranslation();
   const displayMessage = message || t('loading');
 
   return (
-    <>
+    <div style={wrapperStyle}> {/* Add wrapper div with custom styles */}
       <Spinner size={size} />
       <div className={styles.loadingText}>
         {displayMessage}
       </div>
-    </>  
+    </div>  
   );
 };
 

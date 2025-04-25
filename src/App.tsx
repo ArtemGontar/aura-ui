@@ -32,7 +32,7 @@ const AppContent: React.FC = () => {
   useApplyTheme();
   const { userData } = useUserData();
   useTelegramBackButton();
-  useTelegramWebApp(); // Call the new hook here
+  useTelegramWebApp();
 
   useEffect(() => {
     const fetchUserStats = async (userId: number) => {
@@ -50,7 +50,10 @@ const AppContent: React.FC = () => {
   }, [userData?.id]);
 
   if (isLoading) {
-    return <LoadingDisplay />;
+    return <LoadingDisplay 
+      size="l" 
+      wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+    />;
   }
 
   if (error) {

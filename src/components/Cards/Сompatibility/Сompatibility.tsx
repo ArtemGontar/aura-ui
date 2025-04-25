@@ -85,7 +85,17 @@ const Compatibility: React.FC = () => {
         <div className={styles.compatibility}>
           {loading ? (
             <div className={styles.loadingWrapper}>
-              <LoadingDisplay message={t('compatibility.verifyingCompatibility')} />
+              <LoadingDisplay 
+                message={t('compatibility.verifyingCompatibility')} 
+                size="s"
+                wrapperStyle={{ 
+                  display: 'flex', 
+                  justifyContent: 'center', 
+                  alignItems: 'center', 
+                  width: '100%', 
+                  margin: '2rem 0' 
+                }}
+              />
             </div>
           ) : compatibilityResult ? (
             <>
