@@ -1,43 +1,43 @@
 {
-  "loading": "Loading data...",
+  "loading": "Loading...",
   "error": {
-    "retry": "Retry",
-    "noUserData": "No user data found. Please log in again.",
-    "somethingWentWrong": "Something went wrong. Please try again."
+    "retry": "Try Again",
+    "noUserData": "We couldn't find your data. Please log in again.",
+    "somethingWentWrong": "Oops, something went wrong. Please try again."
   },
   "navigation": {
     "home": "Home",
-    "profile": "Profile",
+    "profile": "My Profile",
     "meditations": "Meditations",
     "tasks": "Tasks"
   },
   "home": {
-    "daysStreak": "days streak",
-    "welcomeMessage1": "We hope you have a magical day!",
+    "daysStreak": "days in a row",
+    "welcomeMessage1": "Have a magical day!",
     "welcomeMessage2": "May this day bring you joy!",
-    "welcomeMessage3": "Enjoy every moment of today!",
+    "welcomeMessage3": "Enjoy every moment!",
     "welcomeMessage4": "Let the stars guide you to success!",
-    "welcomeMessage5": "Today is your day for new discoveries!",
+    "welcomeMessage5": "Today is a day for new discoveries!",
     "cards": {
       "horoscope": {
         "title": "Horoscope",
-        "description": "Get your daily horoscope reading."
+        "description": "See what the stars say."
       },
       "compatibility": {
         "title": "Compatibility",
-        "description": "Check your compatibility with partner."
+        "description": "Check how well you match."
       },
       "affirmation": {
-        "title": "Affirmation",
-        "description": "Set your daily intention."
+        "title": "Affirmations",
+        "description": "Set a positive intention for the day."
       },
       "dreamBook": {
-        "title": "Dream Book",
-        "description": "Explore the meaning of your dreams."
+        "title": "Dreams",
+        "description": "Uncover the secrets of your dreams."
       },
       "psychologySuccess": {
-        "title": "Psychology of Success",
-        "description": "Explore psychological insights."
+        "title": "Success Psychology",
+        "description": "Discover the secrets of success."
       },
       "tarot": {
         "title": "Tarot",
@@ -45,19 +45,19 @@
       },
       "magicball": {
         "title": "Magic Ball",
-        "description": "Ask the magic ball for answers."
+        "description": "Ask the ball about your future."
       }
     }
   },
   "profile": {
-    "loading": "Loading profile data...",
-    "noData": "No user data found.",
+    "loading": "Loading profile...",
+    "noData": "No data found.",
     "subscription": {
       "title": "Subscription",
       "basic": {
         "title": "Basic",
         "bonuses": {
-          "part1": "📢 Ads remain",
+          "part1": "📢 Ads included",
           "part2": "🔮 5 horoscopes",
           "part3": "🔮 1 compatibility check",
           "part4": "🔮 5 affirmations",
@@ -78,7 +78,7 @@
       },
       "ultimate": {
         "title": "Ultimate",
-        "description": "Ultimate plan description",
+        "description": "All-inclusive plan",
         "bonuses": {
           "part1": "🚫 No ads",
           "part2": "🔮 Unlimited predictions",
@@ -88,23 +88,24 @@
           "part6": "🧘 6 personal meditations"
         }
       },
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "choosePlan": "Choose a plan",
-      "subscribe": "Subscribe Now",
-      "recommended": "Popular"
+      "choosePlan": "Choose a subscription",
+      "subscribe": "Subscribe",
+      "recommended": "Popular Choice",
+      "startDate": "Start",
+      "endDate": "End"
     },
     "history": {
       "title": "Prediction History",
-      "noPredictions": "No predictions found.",
+      "noPredictions": "No predictions yet.",
       "loading": "Loading predictions...",
-      "error": "Error loading predictions.",
-      "previous": "Previous",
-      "next": "Next"
+      "error": "Failed to load predictions.",
+      "previous": "Back",
+      "next": "Next",
+      "label": "Prediction History"
     },
     "edit": "Edit",
     "deleteAccount": "Delete Account",
-    "editUser": "Edit User",
+    "editUser": "Edit Profile",
     "confirmDelete": "Are you sure you want to delete your account?",
     "deleteError": "Error deleting account."
   },
@@ -125,6 +126,12 @@
     "status": {
       "inprogress": "Creating meditation...",
       "failed": "Creation failed"
+    },
+    "categories": {
+      "all": "All",
+      "neural": "Neural",
+      "humanic": "Humanic",
+      "ambient": "Ambient"
     }
   },
   "cards": {

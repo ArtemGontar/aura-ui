@@ -39,33 +39,48 @@ const Meditations: React.FC = () => {
   const limit = 5; // Items per page
 
   useEffect(() => {
-    const fetchMeditations = async () => {
+    const fetchGeneralMeditations = async () => {
       try {
-        // Set loading states to true before fetching
         setIsGeneralLoading(true);
-        setIsPersonalLoading(true);
-        
-        const [generalData, personalData] = await Promise.all([
-          getMeditations("general", generalPage, limit, activeCategory === "All" ? undefined : activeCategory),
-          getMeditations("personal", personalPage, limit, activeCategory === "All" ? undefined : activeCategory),
-        ]);
-        
+        const generalData = await getMeditations(
+          "general",
+          generalPage,
+          limit,
+          activeCategory === "All" ? undefined : activeCategory
+        );
         setGeneralMeditations(generalData.data);
         setGeneralTotal(generalData.total);
-        
+      } catch (error) {
+        console.error("Failed to fetch general meditations", error);
+      } finally {
+        setIsGeneralLoading(false);
+      }
+    };
+
+    fetchGeneralMeditations();
+  }, [activeCategory, generalPage]);
+
+  useEffect(() => {
+    const fetchPersonalMeditations = async () => {
+      try {
+        setIsPersonalLoading(true);
+        const personalData = await getMeditations(
+          "personal",
+          personalPage,
+          limit,
+          activeCategory === "All" ? undefined : activeCategory
+        );
         setPersonalMeditations(personalData.data);
         setPersonalTotal(personalData.total);
       } catch (error) {
-        console.error("Failed to fetch meditations", error);
+        console.error("Failed to fetch personal meditations", error);
       } finally {
-        // Set loading states to false after fetching (whether successful or not)
-        setIsGeneralLoading(false);
         setIsPersonalLoading(false);
       }
     };
 
-    fetchMeditations();
-  }, [activeCategory, generalPage, personalPage]);
+    fetchPersonalMeditations();
+  }, [activeCategory, personalPage]);
 
   // Change category handler
   const handleCategoryChange = (category: FilterCategory) => {
@@ -193,7 +208,7 @@ const Meditations: React.FC = () => {
             className={`${styles.telegramButton} ${activeCategory === category ? styles.activeButton : ""} ${appStyles.autoWidthButton}`}
             onClick={() => handleCategoryChange(category)}
           >
-            {category}
+            {t(`meditations.categories.${category.toLowerCase()}`)}
           </button>
         ))}
       </div>
@@ -239,7 +254,17 @@ const Meditations: React.FC = () => {
         <h3>{t("meditations.personal.title")}</h3>
         {isPersonalLoading ? (
           <div className={styles.loadingWrapper}>
-            <LoadingDisplay message={t("meditations.loading")} />
+            <LoadingDisplay 
+              message={t("meditations.loading")} 
+              wrapperStyle={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                justifyContent: 'center', 
+                alignItems: 'center', 
+                width: '100%', 
+                margin: '2rem 0'
+              }}
+            />
           </div>
         ) : (
           <>

@@ -51,18 +51,20 @@ const Home: React.FC<HomeProps> = ({ className }) => {
         </p>
         <h2 className={styles.welcome}>{userData?.firstName}</h2>
         <p className={styles.subtitle}>{randomWelcomeMessage}</p>
-        <p className={styles.coinContainer}>
-          <span className={styles.coin}>
-            {isStatsLoading ? (
-              <span className={styles.coinAmount}>
-                <span className={styles.coinLoader}>...</span>
-              </span>
-            ) : (
-              <span className={styles.coinAmount}>{userStats?.coinBalance}</span>
-            )}
-            <img src={coin} alt="Aura coin" className="w-12 h-12" />
-          </span>
-        </p>
+        <div className={styles.coinContainer}>
+          <div className={styles.coin}>
+            <div className={styles.coinInfo}>
+              {isStatsLoading ? (
+                <span className={styles.coinAmount}>
+                  <span className={styles.coinLoader}>...</span>
+                </span>
+              ) : (
+                <span className={styles.coinAmount}>{userStats?.coinBalance}</span>
+              )}
+              <img src={coin} alt="Aura coin" className="w-12 h-12" />
+            </div>
+          </div>
+        </div>
       </div>
       <div className={styles.cards} role="grid">
         {HOME_CARDS.map((card) => (
