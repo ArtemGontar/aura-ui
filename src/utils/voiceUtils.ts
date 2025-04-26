@@ -36,6 +36,7 @@ export const getVoiceOptions = (languageCode: string = 'en'): VoiceOption[] => {
   // Get base language code if hyphenated (e.g., 'en-US' -> 'en')
   const baseLanguage = languageCode.split('-')[0].toLowerCase();
   
+  console.log(`Fetching voice options for language code: ${languageCode}`);
   // Return voices for the language or default to English voices
   return voicesByLanguage[baseLanguage] || defaultVoices;
 };

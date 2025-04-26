@@ -39,8 +39,8 @@ export const useTelegramInit = () => {
   const dispatch = useDispatch<AppDispatch>();
   
   // Memoize the selector result
-  const { isLoading, error } = useSelector((state: RootState) => state.user, (prev, next) => 
-    prev.isLoading === next.isLoading && prev.error === next.error
+  const { isUserLoading, error } = useSelector((state: RootState) => state.user, (prev, next) => 
+    prev.isUserLoading === next.isUserLoading && prev.error === next.error
   );
 
   // Memoize the initialization function
@@ -68,5 +68,5 @@ export const useTelegramInit = () => {
   const isTelegram = !!WebApp.initData;
 
   // Memoize the return value
-  return useMemo(() => ({ isLoading, error, isTelegram }), [isLoading, error, isTelegram]);
+  return useMemo(() => ({ isUserLoading, error, isTelegram }), [isUserLoading, error, isTelegram]);
 };

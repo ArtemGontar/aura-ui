@@ -68,21 +68,21 @@ const Compatibility: React.FC = () => {
   };
 
   const requestPaidCompatibility = async () => {
-      const featureId = FeatureType.Compatibility;
-      const featureName = t(PRODUCT_NAME_KEYS[featureId]);
-      const invoiceLink = await createInvoiceLink(featureId, featureName, t("compatibility.description"), "XTR", false);
-      WebApp.openInvoice(invoiceLink, async (status) => {
-        if (status === 'paid') {
-          await paymentSuccess(userData!.id, featureId)
-          await requestCompatibility();
-          notificationOccurred('success');
-        } else if (status === 'failed') {
-          notificationOccurred('error');
-        } else {
-          notificationOccurred('warning');
-        }
-      });
-    };
+    const featureId = FeatureType.Compatibility;
+    const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+    const invoiceLink = await createInvoiceLink(featureId, featureName, t("compatibility.description"), "XTR", false);
+    WebApp.openInvoice(invoiceLink, async (status) => {
+      if (status === 'paid') {
+        await paymentSuccess(userData!.id, featureId)
+        await requestCompatibility();
+        notificationOccurred('success');
+      } else if (status === 'failed') {
+        notificationOccurred('error');
+      } else {
+        notificationOccurred('warning');
+      }
+    });
+  };
 
 
   const showOnboarding = useShowOnboarding(userData);

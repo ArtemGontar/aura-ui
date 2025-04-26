@@ -7,16 +7,18 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { createPersonalMeditation } from "../../services/meditationService";
 import { MeditationSettings } from "../../types/meditation";
 import { getVoiceOptions, VoiceOption } from "../../utils/voiceUtils";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import FeatureButton from "../FeatureButton/FeatureButton";
 import { useQuotas } from "../../hooks/useQuotas";
 import tariffs from "../../constants/tariffs";
+import { useUserData } from "../../hooks/useUserData";
+import { FeatureType, PRODUCT_NAME_KEYS } from "../../constants/products";
+import { createInvoiceLink, paymentSuccess } from "../../services/paymentService";
+import WebApp from "@twa-dev/sdk";
+import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 const CreatePersonalMeditation: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const user = useSelector((state: RootState) => state.user.userData);
   const { remainingUses, useFeature } = useQuotas("CreatePersonalMeditation");
   const [topic, setTopic] = useState<string>("");
   const [voiceName, setVoiceName] = useState<string>("");
@@ -27,11 +29,12 @@ const CreatePersonalMeditation: React.FC = () => {
   const [backgroundAudioFileName, setBackgroundAudioFileName] = useState<string>("");
   const [showAdvancedSettings, setShowAdvancedSettings] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const { userData } = useUserData();
+  const { notificationOccurred } = useTelegramHaptics();
 
-  // Get voice options based on user language when component mounts
   useEffect(() => {
-    if (user?.languageCode) {
-      const options = getVoiceOptions(user.languageCode);
+    if (userData?.languageCode) {
+      const options = getVoiceOptions(userData.languageCode);
       setVoiceOptions(options);
       
       // Set default voice if available
@@ -39,9 +42,9 @@ const CreatePersonalMeditation: React.FC = () => {
         setVoiceName(options[0].id);
       }
     }
-  }, [user?.languageCode, voiceName]);
+  }, [userData?.languageCode, voiceName]);
 
-  const handleSubmit = async () => {
+  const requestPersonalMeditation = async () => {
     try {
       setLoading(true);
       const meditationSettings: MeditationSettings = {
@@ -53,28 +56,31 @@ const CreatePersonalMeditation: React.FC = () => {
         backgroundAudioFileName,
       };
       
-      // Call the service function with settings object
-      const result = await createPersonalMeditation(meditationSettings);
-      console.log("Meditation created successfully:", result);
-      
-      // Use a quota when meditation is created successfully
+      await createPersonalMeditation(meditationSettings);
       useFeature();
-      
-      // After creation, redirect back to Meditations component
       navigate("/meditations");
     } catch (error) {
       console.error("Failed to create meditation:", error);
-      // You could add error handling UI feedback here
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePaidAction = () => {
-    // Logic to handle when user needs to pay with stars
-    // This would typically integrate with your payment/stars system
-    //handleSubmit();  
-    console.log("Paid meditation creation requested"); // Use standard browser console
+  const requestPaidPersonalMeditation = async () => {
+    const featureId = FeatureType.CreatePersonalMeditation;
+    const featureName = t(PRODUCT_NAME_KEYS[featureId]);
+    const invoiceLink = await createInvoiceLink(featureId, featureName, t("compatibility.description"), "XTR", false);
+    WebApp.openInvoice(invoiceLink, async (status) => {
+      if (status === 'paid') {
+        await paymentSuccess(userData!.id, featureId)
+        await requestPersonalMeditation();
+        notificationOccurred('success');
+      } else if (status === 'failed') {
+        notificationOccurred('error');
+      } else {
+        notificationOccurred('warning');
+      }
+    });
   };
 
   return (
@@ -180,8 +186,8 @@ const CreatePersonalMeditation: React.FC = () => {
       <FeatureButton
         loading={loading}
         remainingUses={remainingUses}
-        onFreeAction={handleSubmit}
-        onPaidAction={handlePaidAction}
+        onFreeAction={requestPersonalMeditation}
+        onPaidAction={requestPaidPersonalMeditation}
         freeActionTextKey="createPersonalMeditation.createButton"
         paidActionTextKey="createPersonalMeditation.createButtonPaid"
         starsAmount={tariffs.createPersonalMeditationStarsAmount}
