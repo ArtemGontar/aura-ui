@@ -40,7 +40,6 @@ export const saveUserDataAsync = createAsyncThunk(
         username: userData.username !== undefined ? userData.username : existingUserData.username,
       };
 
-      console.log("Updating user data:", backendUserData);
       const updatedResponse = await updateUserData(backendUserData);
       
       const completeUserData = {
@@ -49,7 +48,8 @@ export const saveUserDataAsync = createAsyncThunk(
         languageCode: userData.languageCode,
         photoUrl: userData.photoUrl,
       };
-      
+
+      console.log("Updating user data:", completeUserData);      
       dispatch(setUserData(completeUserData));
       return completeUserData;
     } catch (error) {
