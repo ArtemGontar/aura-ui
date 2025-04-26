@@ -17,7 +17,7 @@ i18n
   .init({
     lng: getUserLanguage(),
     fallbackLng: 'en',
-    supportedLngs: ['en', 'ru'],
+    supportedLngs: ['en', 'ru', 'be', 'uk'],
     debug: process.env.NODE_ENV === 'development',
     interpolation: {
       escapeValue: false,
