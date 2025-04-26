@@ -69,7 +69,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
       {/* Profile Info */}
       <section className={styles.profileInfo} aria-labelledby="profile-title">
         <img
-          src={userData.photoUrl || '/default-avatar.png'}
+          src={userData.photoUrl || '/images/default-avatar.png'}
           alt={`${displayName}'s avatar`}
           className={styles.avatar}
           loading="lazy"
