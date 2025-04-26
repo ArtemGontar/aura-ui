@@ -83,8 +83,8 @@ const DreamBook: React.FC = () => {
           onFreeAction={requestInterpretDream}
           onPaidAction={requestPaidInterpretDream}
           freeActionTextKey="dreamBook.buttons.interpret"
-          paidActionTextKey="dreamBook.buttons.interpretPaid"
-          starsAmount={tariffs.dreamBookStarsAmount} // Use config value
+          paidActionTextKey="dreamBook.buttons.paidInterpret"
+          starsAmount={tariffs.dreamBookStarsAmount}
         />
         {loading && (
           <LoadingDisplay 
