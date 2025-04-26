@@ -3,7 +3,6 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import WebApp from '@twa-dev/sdk';
 import { MOCK_USER_DATA } from './utils/debug';
-import { console } from 'inspector';
 
 const getUserLanguage = (): string => {
   try {
