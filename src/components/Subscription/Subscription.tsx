@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Subscription.module.css";
 import { Button } from "@telegram-apps/telegram-ui";
 import { UserSubscription } from "../../types/user";
+import { formatLocalizedDate } from "../../utils/utils";
 
 interface SubscriptionProps {
   isSubscribed?: boolean;
@@ -16,15 +17,11 @@ const Subscription: React.FC<SubscriptionProps> = ({
   subscription, 
   isLoading = false 
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const handleSubscribeClick = () => {
     navigate('/tariff-plans');
-  };
-
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString();
   };
 
   const isUserSubscribed = isSubscribedProp !== undefined ? isSubscribedProp : (subscription && subscription.isActive);
@@ -39,9 +36,9 @@ const Subscription: React.FC<SubscriptionProps> = ({
           {subscription ? (
             <>
               <p><strong>{subscription.subscription.name}</strong></p>
-              <p>{t('profile.subscription.startDate')}: {formatDate(subscription.startDate)}</p>
+              <p>{t('profile.subscription.startDate')}: {formatLocalizedDate(subscription.startDate, i18n.language)}</p>
               {subscription.endDate && (
-                <p>{t('profile.subscription.endDate')}: {formatDate(subscription.endDate)}</p>
+                <p>{t('profile.subscription.endDate')}: {formatLocalizedDate(subscription.endDate, i18n.language)}</p>
               )}
             </>
           ) : (

@@ -5,11 +5,10 @@ export const trimContent = (content: string, maxLength: number = 100): string =>
 export const formatLocalizedDate = (dateString: string, locale: string): string => {
   const date = new Date(dateString);
   
-  // Map language codes to full locale codes to ensure proper formatting
   const localeMap: Record<string, string> = {
     'en': 'en-US',
     'ru': 'ru-RU',
-    'be': 'be-BY', // Explicit Belarusian locale with country code
+    'be': 'be-BY',
     'uk': 'uk-UA'
   };
   
