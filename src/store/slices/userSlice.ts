@@ -33,27 +33,45 @@ export const saveUserDataAsync = createAsyncThunk(
       const existingUserResponse = await getUserData(userId);
       const existingUserData = existingUserResponse;
 
-      // Update only specific fields
-      const updatedUserData = {
+      const backendUserData = {
         ...existingUserData,
         firstName: userData.firstName,
         lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
         username: userData.username !== undefined ? userData.username : existingUserData.username,
-        languageCode: userData.languageCode !== undefined ? userData.languageCode : existingUserData.languageCode,
-        isPremium: userData.isPremium !== undefined ? userData.isPremium : existingUserData.isPremium,
-        photoUrl: userData.photoUrl !== undefined ? userData.photoUrl : existingUserData.photoUrl,
       };
 
-      console.log("Updating user data:", updatedUserData);
-      const updatedResponse = await updateUserData(updatedUserData);
-      dispatch(setUserData(updatedResponse));
-      return updatedResponse;
+      console.log("Updating user data:", backendUserData);
+      const updatedResponse = await updateUserData(backendUserData);
+      
+      const completeUserData = {
+        ...updatedResponse,
+        isPremium: userData.isPremium,
+        languageCode: userData.languageCode,
+        photoUrl: userData.photoUrl,
+      };
+      
+      dispatch(setUserData(completeUserData));
+      return completeUserData;
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        // If user does not exist, create new user data
-        const newUserResponse = await updateUserData(userData);
-        dispatch(setUserData(newUserResponse));
-        return newUserResponse;
+        const backendUserData = {
+          ...userData,
+          isPremium: undefined,
+          languageCode: undefined,
+          photoUrl: undefined,
+        };
+        
+        const newUserResponse = await updateUserData(backendUserData);
+        
+        const completeUserData = {
+          ...newUserResponse,
+          isPremium: userData.isPremium,
+          languageCode: userData.languageCode,
+          photoUrl: userData.photoUrl,
+        };
+        
+        dispatch(setUserData(completeUserData));
+        return completeUserData;
       } else {
         throw error;
       }
