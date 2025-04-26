@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "./Profile.module.css";
 import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
@@ -61,10 +61,9 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
       </div>
     );
   }
-
+  console.log("User Data:", userData);
   const fullName = `${userData.firstName} ${userData.lastName ? ` ${userData.lastName}` : ''}`;
   const displayName = fullName || userData.username;
-
   return (
     <div className={`${styles.container} ${className || ''}`}>
       {/* Profile Info */}
