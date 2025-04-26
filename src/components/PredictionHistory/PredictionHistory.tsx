@@ -141,7 +141,7 @@ const PredictionHistory: React.FC = () => {
           <Pagination 
             page={page}
             onChange={(_event, newPage) => {
-              setPage(newPage - 1);
+              setPage(newPage);
               haptics.selectionChanged();
             }}
             count={Math.ceil(totalItems / 5)}

@@ -9,14 +9,9 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   let tmaToken: string;
-  let languageCode: string = 'en';
   
   if (typeof WebApp !== 'undefined' && WebApp.initData) {
     tmaToken = WebApp.initData;
-    
-    if (WebApp.initDataUnsafe && WebApp.initDataUnsafe.user && WebApp.initDataUnsafe.user.language_code) {
-      languageCode = WebApp.initDataUnsafe.user.language_code;
-    }
   } else if (import.meta.env.DEV) {
     tmaToken = MOCK_AUTH_TOKEN;
   } else {
@@ -24,7 +19,6 @@ api.interceptors.request.use((config) => {
   }
 
   config.headers.Authorization = `${tmaToken}`;
-  config.headers['Accept-Language'] = languageCode;
   return config;
 });
 
