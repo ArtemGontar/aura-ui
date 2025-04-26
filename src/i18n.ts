@@ -6,7 +6,11 @@ const getUserLanguage = (): string => {
   const savedUserData = localStorage.getItem("telegramUserData");
   if (savedUserData) {
     const userData = JSON.parse(savedUserData);
-    return userData.languageCode === 'ru' ? 'ru' : 'en';
+    const { languageCode } = userData;
+    if (['ru', 'be', 'uk'].includes(languageCode)) {
+      return languageCode;
+    }
+    return 'en';
   }
   return 'en';
 };
@@ -27,4 +31,4 @@ i18n
     },
   });
 
-export default i18n; 
+export default i18n;
