@@ -14,6 +14,7 @@ import tariffs from "../../../constants/tariffs"; // Import the config file
 import { FeatureType, PRODUCT_NAME_KEYS } from "../../../constants/products";
 import { createInvoiceLink, paymentSuccess } from "../../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
+import { useUserData } from "../../../hooks/useUserData";
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ const Affirmation: React.FC = () => {
   const [error, setError] = useState("");
   const [goal, setGoal] = useState<string>("career");
   const { notificationOccurred } = useTelegramHaptics();
+  const { userData } = useUserData();
 
   const requestAffirmation = async () => {
     setLoading(true);

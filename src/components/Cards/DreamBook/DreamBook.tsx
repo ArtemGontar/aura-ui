@@ -15,6 +15,7 @@ import tariffs from "../../../constants/tariffs";
 import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
 import { createInvoiceLink, paymentSuccess } from '../../../services/paymentService';
 import WebApp from '@twa-dev/sdk';
+import { useUserData } from '../../../hooks/useUserData';
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ const DreamBook: React.FC = () => {
   const { remainingUses, useFeature } = useQuotas(PredictionType.DreamInterpretation);
   const [loading, setLoading] = useState(false);
   const { notificationOccurred } = useTelegramHaptics();
+  const { userData } = useUserData();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDreamText(e.target.value);
