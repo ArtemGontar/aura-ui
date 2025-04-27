@@ -20,7 +20,7 @@ import { useQuotas } from '../../../hooks/useQuotas';
 import Banner from '../../Banner/Banner';
 import tariffs from "../../../constants/tariffs";
 import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
-import { createInvoiceLink, paymentSuccess } from '../../../services/paymentService';
+import { createInvoiceLink } from '../../../services/paymentService';
 import WebApp from '@twa-dev/sdk';
 
 const Compatibility: React.FC = () => {
@@ -73,7 +73,6 @@ const Compatibility: React.FC = () => {
     const invoiceLink = await createInvoiceLink(featureId, featureName, t("compatibility.description"), "XTR", false);
     WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === 'paid') {
-        await paymentSuccess(userData!.id, featureId)
         await requestCompatibility();
         notificationOccurred('success');
       } else if (status === 'failed') {

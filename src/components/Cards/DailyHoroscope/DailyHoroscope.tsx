@@ -13,7 +13,7 @@ import { HoroscopeData } from "../../../types/prediction";
 import { useQuotas } from "../../../hooks/useQuotas";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import tariffs from "../../../constants/tariffs";
-import { createInvoiceLink, paymentSuccess } from "../../../services/paymentService";
+import { createInvoiceLink } from "../../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
 import { FeatureType, PRODUCT_NAME_KEYS } from "../../../constants/products";
 
@@ -79,7 +79,6 @@ const DailyHoroscope: React.FC = () => {
       const invoiceLink = await createInvoiceLink(featureId, featureName, t("dailyHoroscope.description"), "XTR", false);
       WebApp.openInvoice(invoiceLink, async (status) => {
         if (status === 'paid') {
-          await paymentSuccess(userData!.id, featureId)
           await requestHoroscope();
           notificationOccurred('success');
         } else if (status === 'failed') {

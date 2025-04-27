@@ -13,7 +13,7 @@ export const createInvoiceLink = async (
     const response = await api.post<string>(`${API_BASE}/create-invoice-link`, {
       title,
       description,
-      payload: "{}",
+      payload: `${productId}`,
       currency,
       productId,
       isSubscription,
@@ -26,19 +26,19 @@ export const createInvoiceLink = async (
   }
 };
 
-export const paymentSuccess = async (
-  userId: number,
-  productId: number
-): Promise<string> => {
-  try {
-    const response = await api.post<string>(`${API_BASE}/success`, {
-      userId,
-      productId
-    });
-    console.log("response", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Error ", error);
-    throw error;
-  }
-};
+// export const paymentSuccess = async (
+//   userId: number,
+//   productId: number
+// ): Promise<string> => {
+//   try {
+//     const response = await api.post<string>(`${API_BASE}/success`, {
+//       userId,
+//       productId
+//     });
+//     console.log("response", response.data);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error ", error);
+//     throw error;
+//   }
+// };

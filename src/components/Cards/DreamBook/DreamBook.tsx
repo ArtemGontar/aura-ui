@@ -13,9 +13,8 @@ import { useQuotas } from '../../../hooks/useQuotas';
 import { PredictionType } from '../../../types/prediction';
 import tariffs from "../../../constants/tariffs";
 import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
-import { createInvoiceLink, paymentSuccess } from '../../../services/paymentService';
+import { createInvoiceLink } from '../../../services/paymentService';
 import WebApp from '@twa-dev/sdk';
-import { useUserData } from '../../../hooks/useUserData';
 
 const DreamBook: React.FC = () => {
   const { t } = useTranslation();
@@ -24,7 +23,6 @@ const DreamBook: React.FC = () => {
   const { remainingUses, useFeature } = useQuotas(PredictionType.DreamInterpretation);
   const [loading, setLoading] = useState(false);
   const { notificationOccurred } = useTelegramHaptics();
-  const { userData } = useUserData();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDreamText(e.target.value);
@@ -50,7 +48,6 @@ const DreamBook: React.FC = () => {
     const invoiceLink = await createInvoiceLink(featureId, featureName, t("dreamInterpretation.description"), "XTR", false);
     WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === 'paid') {
-        await paymentSuccess(userData!.id, featureId)
         await requestInterpretDream();
         notificationOccurred('success');
       } else if (status === 'failed') {

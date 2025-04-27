@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Affirmation.module.css";
 import { getAffirmation } from "../../../services/predictionService";
-// Remove the Select import from @telegram-apps/telegram-ui
 import AffirmationResult from "./AffirmationResult";
 import Banner from "../../Banner/Banner";
 import { Goal } from "lucide-react";
@@ -10,11 +9,10 @@ import { useQuotas } from "../../../hooks/useQuotas";
 import { PredictionType } from "../../../types/prediction";
 import FeatureButton from "../../FeatureButton/FeatureButton";
 import useTelegramHaptics from "../../../hooks/useTelegramHaptic";
-import tariffs from "../../../constants/tariffs"; // Import the config file
+import tariffs from "../../../constants/tariffs";
 import { FeatureType, PRODUCT_NAME_KEYS } from "../../../constants/products";
-import { createInvoiceLink, paymentSuccess } from "../../../services/paymentService";
+import { createInvoiceLink } from "../../../services/paymentService";
 import WebApp from "@twa-dev/sdk";
-import { useUserData } from "../../../hooks/useUserData";
 
 const Affirmation: React.FC = () => {
   const { t } = useTranslation();
@@ -24,7 +22,6 @@ const Affirmation: React.FC = () => {
   const [error, setError] = useState("");
   const [goal, setGoal] = useState<string>("career");
   const { notificationOccurred } = useTelegramHaptics();
-  const { userData } = useUserData();
 
   const requestAffirmation = async () => {
     setLoading(true);
@@ -48,7 +45,6 @@ const Affirmation: React.FC = () => {
     const invoiceLink = await createInvoiceLink(featureId, featureName, t("affirmation.description"), "XTR", false);
     WebApp.openInvoice(invoiceLink, async (status) => {
       if (status === 'paid') {
-        await paymentSuccess(userData!.id, featureId)
         await requestAffirmation();
         notificationOccurred('success');
       } else if (status === 'failed') {
