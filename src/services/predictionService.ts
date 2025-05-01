@@ -3,10 +3,10 @@ import api, { is404Error } from "./api";
 
 const API_BASE = `/api/fortunes`;
 
-export const getPredictions = async (page: number, limit: number): Promise<{ data: Prediction[], total: number }> => {
+export const getPredictions = async (page: number, top: number): Promise<{ data: Prediction[], total: number }> => {
   try {
     const response = await api.get(`${API_BASE}`, {
-      params: { page, limit }
+      params: { page, top }
     });
     const parsedData = response.data.items.map((prediction: Prediction) => ({
       ...prediction,
