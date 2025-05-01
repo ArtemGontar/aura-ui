@@ -5,19 +5,25 @@ import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 
 interface DatePickerProps {
   onChange?: (date: { day: string; month: string; year: string }) => void;
-  className?: string; // Added className prop
+  date?: string;
+  className?: string;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ onChange, className }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ onChange, date, className }) => {
   const { t } = useTranslation();
   const haptics = useTelegramHaptics();
   const [dateValue, setDateValue] = useState('');
 
   useEffect(() => {
-    const today = new Date();
-    const defaultDate = today.toISOString().split('T')[0];
-    setDateValue(defaultDate);
-  }, []);
+    if (date) {
+      setDateValue(date);
+    } else {
+      // Use today's date as default if no date prop provided
+      const today = new Date();
+      const defaultDate = today.toISOString().split('T')[0];
+      setDateValue(defaultDate);
+    }
+  }, [date]);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const date = new Date(e.target.value);

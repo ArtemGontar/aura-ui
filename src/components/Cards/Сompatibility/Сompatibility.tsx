@@ -27,10 +27,11 @@ const Compatibility: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const { remainingUses, useFeature } = useQuotas("Compatibility");
+  const today = new Date().toISOString().split('T')[0];
   const [partnerInfo, setPartnerInfo] = useState<PartnerInfo>({
     firstName: '', 
     lastName: '', 
-    dateOfBirth: '',
+    dateOfBirth: today,
     sex: 'male',
     relationshipStatus: 'inRelationship' 
   });
@@ -127,7 +128,7 @@ const Compatibility: React.FC = () => {
               <div>
                 <label>
                   {t('compatibility.partnerInfoDateOfBirth')} <span className={styles.required}>*</span>
-                  <DatePicker onChange={handleDateChange} />
+                  <DatePicker onChange={handleDateChange} date={today} />
                 </label>
                 <div className={styles.nameContainer}>
                   <label>
