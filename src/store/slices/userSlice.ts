@@ -21,7 +21,6 @@ export const initialState: UserState = {
 export const saveUserDataAsync = createAsyncThunk(
   'user/saveUserData',
   async (userData: UserData, { dispatch }) => {
-    dispatch(setUserData(userData));
     
     const userId = userData.id;
     if (!userId) {
@@ -30,18 +29,7 @@ export const saveUserDataAsync = createAsyncThunk(
     }
 
     try {
-      // Get existing user data from backend
-      const existingUserResponse = await getUserData(userId);
-      const existingUserData = existingUserResponse;
-
-      const backendUserData = {
-        ...existingUserData,
-        firstName: userData.firstName,
-        lastName: userData.lastName !== undefined ? userData.lastName : existingUserData.lastName,
-        username: userData.username !== undefined ? userData.username : existingUserData.username,
-      };
-
-      const updatedResponse = await updateUserData(backendUserData);
+      const updatedResponse = await updateUserData(userData);
       
       const completeUserData = {
         ...updatedResponse,
@@ -53,28 +41,7 @@ export const saveUserDataAsync = createAsyncThunk(
       dispatch(setUserData(completeUserData));
       return completeUserData;
     } catch (error) {
-      if (is404Error(error)) {
-        const backendUserData = {
-          ...userData,
-          isPremium: undefined,
-          languageCode: undefined,
-          photoUrl: undefined,
-        };
-        
-        const newUserResponse = await updateUserData(backendUserData);
-        
-        const completeUserData = {
-          ...newUserResponse,
-          isPremium: userData.isPremium,
-          languageCode: userData.languageCode,
-          photoUrl: userData.photoUrl,
-        };
-        
-        dispatch(setUserData(completeUserData));
-        return completeUserData;
-      } else {
-        throw error;
-      }
+      throw error;
     }
   }
 );

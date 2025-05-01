@@ -44,9 +44,7 @@ export const useTelegramInit = () => {
   // Memoize the initialization function
   const initializeTelegram = useCallback(async () => {
     try {
-      // Get user data
       const userData = getTelegramUserData();
-      // Save user data
       await dispatch(saveUserDataAsync(userData));
       await dispatch(fetchQuotasAsync());
     } catch (err) {
