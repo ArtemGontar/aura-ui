@@ -13,7 +13,9 @@ const Onboarding: React.FC<{
 }> = ({ onComplete, onBirthDateChange }) => {
   const { t } = useTranslation();
   const [step, setStep] = useState(1);
-  const [birthDate, setBirthDate] = useState({ day: "", month: "", year: "" });
+  const today = new Date();
+  const formattedToday = today.toISOString().split('T')[0]
+  const [birthDate, setBirthDate] = useState({ day: today.getDay.toString(), month: today.getMonth.toString(), year: today.getFullYear.toString() });
   const [sex, setSex] = useState("female");
   const [maritalStatus, setMaritalStatus] = useState("single");
   const [loading, setLoading] = useState(false);
@@ -59,6 +61,7 @@ const Onboarding: React.FC<{
             <DatePicker
               className={styles.datePicker}
               onChange={handleDateChange}
+              date={formattedToday}
             />
             <Button
               onClick={handleNextStep}
