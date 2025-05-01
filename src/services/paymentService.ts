@@ -18,27 +18,9 @@ export const createInvoiceLink = async (
       productId,
       isSubscription,
     });
-    console.log("response", response.data);
     return response.data;
   } catch (error) {
     console.error("Error ", error);
     throw error;
   }
 };
-
-// export const paymentSuccess = async (
-//   userId: number,
-//   productId: number
-// ): Promise<string> => {
-//   try {
-//     const response = await api.post<string>(`${API_BASE}/success`, {
-//       userId,
-//       productId
-//     });
-//     console.log("response", response.data);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Error ", error);
-//     throw error;
-//   }
-// };

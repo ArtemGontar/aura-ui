@@ -22,4 +22,18 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+/**
+ * Checks if an error response has a specific status code
+ */
+export const isStatusError = (error: any, statusCode: number): boolean => {
+  return error?.response?.status === statusCode;
+};
+
+/**
+ * Helper to check if error is a 404 Not Found
+ */
+export const is404Error = (error: any): boolean => {
+  return isStatusError(error, 404);
+};
+
 export default api;

@@ -1,12 +1,15 @@
-import api from "./api";
+import api, { is404Error } from "./api";
 
 const API_BASE = `/api/audio`;
 
-export const getAudioSasUrl = async (audioUrl: string): Promise<string> => {
+export const getAudioSasUrl = async (audioUrl: string): Promise<string | null> => {
   try {
     const response = await api.get(`${audioUrl}`);
     return response.data;
   } catch (error) {
+    if (is404Error(error)) {
+      return null;
+    }
     console.error("Error fetching audio SAS URL:", error);
     throw error;
   }

@@ -1,4 +1,4 @@
-import api from './api';
+import api, { is404Error } from './api';
 import { TaskData } from '../types/task';
 
 /**
@@ -13,6 +13,9 @@ export const taskService = {
       const response = await api.get('/api/tasks');
       return response.data;
     } catch (error) {
+      if (is404Error(error)) {
+        return [];
+      }
       console.error('Error fetching tasks:', error);
       // Return empty array if API is unavailable
       return [];
@@ -40,15 +43,6 @@ export const taskService = {
   async completeTask(taskId: number): Promise<boolean> {
     try {
       const response = await api.post(`/api/tasks/${taskId}/complete`);
-      
-      // Save to localStorage as fallback
-      if (response.status === 200) {
-        const completedTasks = JSON.parse(localStorage.getItem('completedTasks') || '[]');
-        if (!completedTasks.includes(taskId)) {
-          localStorage.setItem('completedTasks', JSON.stringify([...completedTasks, taskId]));
-        }
-      }
-      
       return response.status === 200;
     } catch (error) {
       console.error('Error completing task:', error);

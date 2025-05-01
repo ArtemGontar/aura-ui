@@ -1,7 +1,8 @@
 import { store } from "../store";
 import { setUserStats } from "../store/slices/userSlice";
 import { API_CONFIG } from "../config/api";
-import api from "./api";
+import api, { is404Error } from "./api";
+import { DEFAULT_USER_STATS } from "../constants/userStats";
 
 export interface UserStats {
   streak: number;
@@ -16,7 +17,9 @@ export const getUserStats = async (userId: number): Promise<UserStats> => {
     store.dispatch(setUserStats(response.data));
     return response.data;
   } catch (error) {
-    console.error("Error fetching user stats", error);
+    if (is404Error(error)) {
+      return DEFAULT_USER_STATS;
+    }
     throw error;
   }
 };
@@ -27,11 +30,13 @@ export const incrementStreak = async (userId: number): Promise<UserStats> => {
     store.dispatch(setUserStats(response.data));
     return response.data;
   } catch (error) {
-    console.error("Error incrementing streak", error);
+    if (is404Error(error)) {
+      return DEFAULT_USER_STATS;
+    }
     throw error;
   }
 };
 
 export const getUserStatsFromStore = (): UserStats => {
   return store.getState().user.userStats;
-}; 
+};

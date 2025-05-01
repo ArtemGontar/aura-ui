@@ -1,4 +1,4 @@
-import api from "./api";
+import api, { is404Error } from "./api";
 import { Meditation, MeditationSettings, MeditationCategory } from "../types/meditation";
 
 const API_BASE = `/api/meditations`;
@@ -26,8 +26,7 @@ export const getMeditations = async (
       total: response.data.totalItems || 0 
     };
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.warn("No meditations found, returning empty array");
+    if (is404Error(error)) {
       return { data: [], total: 0 };
     }
     console.error("Error ", error);

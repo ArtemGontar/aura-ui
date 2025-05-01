@@ -1,5 +1,5 @@
 import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData } from "../types/prediction";
-import api from "./api";
+import api, { is404Error } from "./api";
 
 const API_BASE = `/api/fortunes`;
 
@@ -14,8 +14,7 @@ export const getPredictions = async (page: number, limit: number): Promise<{ dat
     }));
     return { data: parsedData, total: response.data.totalItems };
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.warn("No predictions found, returning empty array");
+    if (is404Error(error)) {
       return { data: [], total: 0 };
     }
     console.error("Error fetching prediction history", error);
@@ -29,7 +28,7 @@ export const getHoroscope = async (): Promise<HoroscopeData> => {
     const parsedData: HoroscopeData = JSON.parse(response.data.content);
     return parsedData;
   } catch (error) {
-    console.error("Error parsing GPT horoscope response:", error);
+    console.error("Error fetching response:", error);
     throw error;
   }
 };
@@ -39,19 +38,12 @@ export const getCompatibility = async (partnerData: {
 }): Promise<CompatibilityData> => {
   try {
     const response = await api.post<{ content: string }>(`${API_BASE}/compatibility`, partnerData);
-    console.log("response", response.data);
-
     const parsedData: CompatibilityData = JSON.parse(response.data.content);
-
     return parsedData;
   } catch (error) {
-    console.error("Error fetching compatibility", error);
+    console.error("Error fetching response", error);
     throw error;
   }
-}
-
-export const getMagicBallAnswer = async (): Promise<string> => {
- return new Promise(() => {});
 }
 
 export const getAffirmation = async (goal: string): Promise<AffirmationData> => {
@@ -60,7 +52,7 @@ export const getAffirmation = async (goal: string): Promise<AffirmationData> => 
     const parsedData: AffirmationData = JSON.parse(response.data.content);
     return parsedData;
   } catch (error) {
-    console.error("Error fetching affirmation", error);
+    console.error("Error fetching response", error);
     throw error;
   }
 };
@@ -72,7 +64,7 @@ export const getDreamInterpretation = async (dreamText: string): Promise<DreamBo
     console.log("parsedData", parsedData);
     return parsedData;
   } catch (error) {
-    console.error("Error fetching dream interpretation", error);
+    console.error("Error fetching response", error);
     throw error;
   }
 };

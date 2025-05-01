@@ -1,5 +1,5 @@
 import { FeatureQuota } from "../types/quota";
-import api from './api';
+import api, { is404Error } from './api';
 
 const API_BASE = `/api/quota`;
 
@@ -9,6 +9,9 @@ export const getQuota = async (): Promise<FeatureQuota[]> => {
     console.log(response.data);
     return response.data;
   } catch (error) {
+    if (is404Error(error)) {
+      return [];
+    }
     console.error("Error fetching user data", error);
     throw error;
   }
