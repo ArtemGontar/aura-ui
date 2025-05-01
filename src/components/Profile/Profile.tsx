@@ -61,7 +61,7 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
       </div>
     );
   }
-  console.log("User Data:", userData);
+  
   const fullName = `${userData.firstName} ${userData.lastName ? ` ${userData.lastName}` : ''}`;
   const displayName = fullName || userData.username;
   return (

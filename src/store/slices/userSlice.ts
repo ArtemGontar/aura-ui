@@ -3,6 +3,7 @@ import { UserData, UserState, UserStats, UserSubscription } from '../../types/us
 import { getUserData, updateUserData } from '../../services/userService';
 import { getUserStats } from '../../services/userStatsService';
 import { getUserSubscription } from '../../services/userSubscriptionService';
+import { is404Error } from '../../services/api';
 
 export const initialState: UserState = {
   userData: null,
@@ -49,11 +50,10 @@ export const saveUserDataAsync = createAsyncThunk(
         photoUrl: userData.photoUrl,
       };
 
-      console.log("Updating user data:", completeUserData);      
       dispatch(setUserData(completeUserData));
       return completeUserData;
     } catch (error) {
-      if (error.response && error.response.status === 404) {
+      if (is404Error(error)) {
         const backendUserData = {
           ...userData,
           isPremium: undefined,

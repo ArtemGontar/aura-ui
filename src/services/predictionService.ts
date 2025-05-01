@@ -61,10 +61,13 @@ export const getDreamInterpretation = async (dreamText: string): Promise<DreamBo
   try {
     const response = await api.post<{ content: string }>(`${API_BASE}/dream`, { dreamText });
     const parsedData: DreamBookData = JSON.parse(response.data.content);
-    console.log("parsedData", parsedData);
     return parsedData;
   } catch (error) {
-    console.error("Error fetching response", error);
+    console.error("Error fetching dream response", error);
     throw error;
   }
 };
+
+export const getMagicBallAnswer = async (): Promise<string> => {
+  return new Promise(() => {});
+} 

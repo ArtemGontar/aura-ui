@@ -6,7 +6,6 @@ const API_BASE = `/api/quota`;
 export const getQuota = async (): Promise<FeatureQuota[]> => {
   try {
     const response = await api.get(`${API_BASE}`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     if (is404Error(error)) {

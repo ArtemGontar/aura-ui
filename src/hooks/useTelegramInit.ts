@@ -13,7 +13,6 @@ const getTelegramUserData = (): UserData => {
 
   if (!initData) {
     if (process.env.NODE_ENV === 'development') {
-      console.log("No initialization data available, using mock data");
       return MOCK_USER_DATA;
     }
     throw new Error("No initialization data available");
@@ -23,7 +22,6 @@ const getTelegramUserData = (): UserData => {
   if (!user) {
     throw new Error("User data not available");
   }
-  console.log("User data from WebApp lang code:", user.language_code);
   return {
     id: user.id,
     firstName: user.first_name,
@@ -48,7 +46,6 @@ export const useTelegramInit = () => {
     try {
       // Get user data
       const userData = getTelegramUserData();
-      console.log("TelegramUserData:", userData);
       // Save user data
       await dispatch(saveUserDataAsync(userData));
       await dispatch(fetchQuotasAsync());

@@ -12,7 +12,6 @@ export const useQuotas = (predictionType: string) => {
     const remainingUses = quota?.remainingUses ?? 0;
 
     const useFeature = () => {
-        console.log("Using feature:", predictionType);
         if (remainingUses > 0) {
             dispatch(decrementQuota(predictionType));
         }

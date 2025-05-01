@@ -12,7 +12,6 @@ const MagicBall: React.FC = () => {
   const askMagicBall = async () => {
     try {
       const answer = await getMagicBallAnswer();
-      console.log("Magic Ball answer:", answer);
       setMagicText(answer);
     } catch (error) {
       console.error("Failed to get Magic Ball answer", error);

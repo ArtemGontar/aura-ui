@@ -6,14 +6,11 @@ import { MOCK_USER_DATA } from './utils/debug';
 
 const getUserLanguage = (): string => {
   try {
-    console.log('WebApp:', WebApp);
     if (WebApp.initData) {
       // Get language from Telegram WebApp
       const user = WebApp.initDataUnsafe.user;
-      console.log('User data from WebApp:', user);
       if (user && user.language_code) {
         const { language_code } = user;
-        console.log('User language code:', language_code);
         if (['ru', 'be', 'uk'].includes(language_code)) {
           return language_code;
         }
@@ -24,7 +21,7 @@ const getUserLanguage = (): string => {
     }
     return 'en';
   } catch (error) {
-    console.error('Error getting user language:', error);
+    console.warn('Error getting user language:', error);
     return 'en';
   }
 };

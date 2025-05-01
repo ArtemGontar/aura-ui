@@ -74,7 +74,6 @@ const PredictionHistory: React.FC = () => {
         const generalGuidance: string = (prediction.content as HoroscopeData).generalGuidance;
         return trimContent(generalGuidance);
       case PredictionType.Compatibility:
-        console.log("prediction", prediction.content);
         const compatibilityResult: string = (prediction.content as CompatibilityData).strengths.join(", ");
         return trimContent(compatibilityResult);
       case PredictionType.Affirmation:

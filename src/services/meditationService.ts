@@ -18,9 +18,6 @@ export const getMeditations = async (
     
     const response = await api.get(url);
     
-    console.log("meditation response", response.data);
-
-    // Match the prediction service format
     return { 
       data: response.data.items || [], 
       total: response.data.totalItems || 0 
@@ -36,11 +33,7 @@ export const getMeditations = async (
 
 export const createPersonalMeditation = async (settings: MeditationSettings): Promise<Meditation> => {
   try {
-    console.log("Creating meditation with settings:", settings);
     const response = await api.post<Meditation>(`${API_BASE}`, settings);
-    
-    console.log("response", response.data);
-
     return response.data;
   } catch (error) {
     console.error("Error creating meditation:", error);

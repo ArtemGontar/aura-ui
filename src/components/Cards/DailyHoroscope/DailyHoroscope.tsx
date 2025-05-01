@@ -47,12 +47,10 @@ const DailyHoroscope: React.FC = () => {
 
   const handleBirthDateChange = (date: { day: string; month: string; year: string }) => {
     const zodiacSign = calculateZodiacSign(date);
-    console.log("Zodiac sign calculated:", zodiacSign);
     setHoroscopeSign(zodiacSign);
   };
 
   useEffect(() => {
-    console.log("Horoscope sign changed:", horoscopeSign);
     if (horoscopeSign) {
       setBackgroundImage(`/images/horoscope-signs/${horoscopeSign.toLowerCase()}.png`);
     }
