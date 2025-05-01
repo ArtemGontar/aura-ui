@@ -28,7 +28,7 @@ import DreamBook from "./components/Cards/DreamBook/DreamBook";
 import TasksPage from "./components/Tasks/Tasks";
 
 const AppContent: React.FC = () => {
-  const { isLoading, error, isTelegram } = useTelegramInit();
+  const { isUserLoading, error, isTelegram } = useTelegramInit();
   useApplyTheme();
   const { userData } = useUserData();
   useTelegramBackButton();
@@ -49,7 +49,7 @@ const AppContent: React.FC = () => {
     }
   }, [userData?.id]);
 
-  if (isLoading) {
+  if (isUserLoading) {
     return <LoadingDisplay 
       size="l" 
       wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}

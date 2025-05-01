@@ -23,7 +23,7 @@ const getTelegramUserData = (): UserData => {
   if (!user) {
     throw new Error("User data not available");
   }
-
+  console.log("User data from WebApp lang code:", user.language_code);
   return {
     id: user.id,
     firstName: user.first_name,
@@ -48,7 +48,7 @@ export const useTelegramInit = () => {
     try {
       // Get user data
       const userData = getTelegramUserData();
-
+      console.log("TelegramUserData:", userData);
       // Save user data
       await dispatch(saveUserDataAsync(userData));
       await dispatch(fetchQuotasAsync());
