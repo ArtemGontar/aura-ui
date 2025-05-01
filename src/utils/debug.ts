@@ -5,7 +5,7 @@ export const MOCK_USER_DATA: UserData = {
   firstName: "Artsiom",
   lastName: "Hontar",
   username: "ArtemGontar",
-  languageCode: "ru",
+  languageCode: "en",
   isPremium: true,
   photoUrl: "https://t.me/i/userpic/320/iWfnVKq3jLrPgWnMyV012di6rvFIrFa-z8Sh7pPl9Tk.svg", // A placeholder image
 }
