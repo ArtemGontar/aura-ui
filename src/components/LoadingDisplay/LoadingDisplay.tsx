@@ -12,13 +12,13 @@ interface LoadingDisplayProps {
 const LoadingDisplay: React.FC<LoadingDisplayProps> = ({ 
   message,
   size = 'l',
-  wrapperStyle = {} // Ensure a default empty object for safety
+  wrapperStyle = {}
 }) => {
   const { t } = useTranslation();
   const displayMessage = message || t('loading');
 
   return (
-    <div style={wrapperStyle}> {/* Add wrapper div with custom styles */}
+    <div style={wrapperStyle}>
       <Spinner size={size} />
       <div className={styles.loadingText}>
         {displayMessage}

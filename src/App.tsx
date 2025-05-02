@@ -54,10 +54,12 @@ const AppContent: React.FC = () => {
       size="l" 
       wrapperStyle={{ 
         display: 'flex', 
+        flexDirection: 'column',
         justifyContent: 'center', 
         alignItems: 'center', 
         width: '100%', 
-        margin: '2rem 0' 
+        margin: '2rem 0',
+        height: '100vh'
       }}
     />;
   }
