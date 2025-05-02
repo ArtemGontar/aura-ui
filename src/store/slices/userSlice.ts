@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk, isRejectedWithValue } from '@reduxjs/toolkit';
 import { UserData, UserState, UserStats, UserSubscription } from '../../types/user';
 import { updateUserData } from '../../services/userService';
 import { getUserStats } from '../../services/userStatsService';
@@ -63,9 +63,9 @@ export const fetchUserSubscriptionAsync = createAsyncThunk(
     try {
       const subscription = await getUserSubscription(userId);
       return subscription;
-    } catch (error) {
-      console.error("Error fetching user subscription", error);
-      throw error;
+    } catch (error: any) {
+      console.warn("Handled fetch error:", error);
+      return isRejectedWithValue(error?.response?.data || 'Unknown error');
     }
   }
 );
