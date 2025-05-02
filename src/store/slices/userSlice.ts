@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { UserData, UserState, UserStats, UserSubscription } from '../../types/user';
-import { getUserData, updateUserData } from '../../services/userService';
+import { updateUserData } from '../../services/userService';
 import { getUserStats } from '../../services/userStatsService';
 import { getUserSubscription } from '../../services/userSubscriptionService';
-import { is404Error } from '../../services/api';
 
 export const initialState: UserState = {
   userData: null,
@@ -65,6 +64,7 @@ export const fetchUserSubscriptionAsync = createAsyncThunk(
       const subscription = await getUserSubscription(userId);
       return subscription;
     } catch (error) {
+      console.error("Error fetching user subscription", error);
       throw error;
     }
   }

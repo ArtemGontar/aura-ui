@@ -52,7 +52,13 @@ const AppContent: React.FC = () => {
   if (isUserLoading) {
     return <LoadingDisplay 
       size="l" 
-      wrapperStyle={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+      wrapperStyle={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        width: '100%', 
+        margin: '2rem 0' 
+      }}
     />;
   }
 

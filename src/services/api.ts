@@ -5,6 +5,7 @@ import { MOCK_AUTH_TOKEN } from '../utils/debug';
 
 const api = axios.create({
   baseURL: API_CONFIG.BASE_URL,
+  validateStatus: (status) => status >= 200 && status < 300 || status === 404,
 });
 
 api.interceptors.request.use((config) => {
@@ -21,19 +22,5 @@ api.interceptors.request.use((config) => {
   config.headers.Authorization = `${tmaToken}`;
   return config;
 });
-
-/**
- * Checks if an error response has a specific status code
- */
-export const isStatusError = (error: any, statusCode: number): boolean => {
-  return error?.response?.status === statusCode;
-};
-
-/**
- * Helper to check if error is a 404 Not Found
- */
-export const is404Error = (error: any): boolean => {
-  return isStatusError(error, 404);
-};
 
 export default api;

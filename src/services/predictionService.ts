@@ -1,5 +1,5 @@
 import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData } from "../types/prediction";
-import api, { is404Error } from "./api";
+import api from "./api";
 
 const API_BASE = `/api/fortunes`;
 
@@ -8,15 +8,15 @@ export const getPredictions = async (page: number, top: number): Promise<{ data:
     const response = await api.get(`${API_BASE}`, {
       params: { page, top }
     });
+    if (response.status === 404) {
+      return { data: [], total: 0 };
+    }
     const parsedData = response.data.items.map((prediction: Prediction) => ({
       ...prediction,
       content: JSON.parse(prediction.content as unknown as string),
     }));
     return { data: parsedData, total: response.data.totalItems };
   } catch (error) {
-    if (is404Error(error)) {
-      return { data: [], total: 0 };
-    }
     console.error("Error fetching prediction history", error);
     throw error;
   }

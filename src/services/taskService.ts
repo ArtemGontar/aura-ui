@@ -1,4 +1,4 @@
-import api, { is404Error } from './api';
+import api from './api';
 import { TaskData } from '../types/task';
 
 /**
@@ -11,13 +11,12 @@ export const taskService = {
   async getTasks(): Promise<TaskData[]> {
     try {
       const response = await api.get('/api/tasks');
-      return response.data;
-    } catch (error) {
-      if (is404Error(error)) {
+      if (response.status === 404) {
         return [];
       }
+      return response.data;
+    } catch (error) {
       console.error('Error fetching tasks:', error);
-      // Return empty array if API is unavailable
       return [];
     }
   },

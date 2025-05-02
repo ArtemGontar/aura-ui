@@ -1,4 +1,4 @@
-import api, { is404Error } from "./api";
+import api from "./api";
 import { Meditation, MeditationSettings, MeditationCategory } from "../types/meditation";
 
 const API_BASE = `/api/meditations`;
@@ -17,15 +17,14 @@ export const getMeditations = async (
     }
     
     const response = await api.get(url);
-    
+    if (response.status === 404) {
+      return { data: [], total: 0 };
+    }
     return { 
       data: response.data.items || [], 
       total: response.data.totalItems || 0 
     };
   } catch (error) {
-    if (is404Error(error)) {
-      return { data: [], total: 0 };
-    }
     console.error("Error ", error);
     throw error;
   }
