@@ -11,7 +11,7 @@ export enum FeatureType {
   DreamInterpretation = 7,
   CreatePersonalMeditation = 8,
   TarotReading = 9,
-  HandFortune = "HandFortune"
+  HandFortune = 10
 }
 
 // Replace with translation keys
