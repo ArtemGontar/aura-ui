@@ -68,6 +68,19 @@ export const getDreamInterpretation = async (dreamText: string): Promise<DreamBo
   }
 };
 
+export const getTarotReading = async (spreadType = "Three Cards") => {
+  try {
+    const response = await api.post<{ content: string }>(`${API_BASE}/tarot-reading`, { 
+      spreadType 
+    });
+    const parsedData = JSON.parse(response.data.content);
+    return parsedData;
+  } catch (error) {
+    console.error("Error fetching tarot reading", error);
+    throw error;
+  }
+};
+
 export const getMagicBallAnswer = async (): Promise<string> => {
   return new Promise(() => {});
-} 
+}

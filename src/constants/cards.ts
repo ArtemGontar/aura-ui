@@ -35,7 +35,7 @@ export const HOME_CARDS: CardData[] = [
     id: 'tarot',
     path: '/tarot',
     icon: '🌠',
-    disabled: true
+    disabled: false
   },
   {
     id: 'magicball',

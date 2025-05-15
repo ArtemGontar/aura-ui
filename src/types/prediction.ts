@@ -11,6 +11,7 @@ export enum PredictionType {
   Compatibility = "Compatibility",
   Affirmation = "Affirmation",
   DreamInterpretation = "DreamInterpretation",
+  TarotReading = "TarotReading",
 }
 
 export interface Horoscope {
