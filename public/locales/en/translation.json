@@ -382,6 +382,33 @@
     "Compatibility": "Compatibility",
     "Affirmation": "Affirmation",
     "DreamInterpretation": "Dream Interpretation",
-    "PersonalMeditation": "Personal Meditation"
+    "PersonalMeditation": "Personal Meditation",
+    "TarotReading": "Tarot Reading"
+  },
+  "tarot": {
+    "banner": {
+      "title": "Tarot Reading",
+      "subtitle": "Discover insights from the ancient cards"
+    },
+    "description": "Get predictions from tarot cards",
+    "introText": "Tarot cards can provide insight into your past, present, and future. Choose a spread type and begin your reading.",
+    "selectSpreadType": "Select spread type",
+    "spreadTypes": {
+      "threeCards": "Three Cards",
+      "celticCross": "Celtic Cross",
+      "singleCard": "Single Card",
+      "horseshoe": "Horseshoe",
+      "loveSpread": "Love Spread"
+    },
+    "buttons": {
+      "getReading": "Get Reading",
+      "getPaidReading": "Get Reading ({{stars}} ⭐)",
+      "newReading": "New Reading"
+    },
+    "loadingMessage": "Shuffling the cards...",
+    "upright": "Upright",
+    "reversed": "Reversed",
+    "overallInterpretation": "Overall Interpretation",
+    "productName": "Tarot Reading"
   }
 }

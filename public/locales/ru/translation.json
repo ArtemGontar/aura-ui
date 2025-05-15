@@ -371,6 +371,33 @@
     "Compatibility": "Совместимость",
     "Affirmation": "Аффирмация",
     "DreamInterpretation": "Толкование снов",
-    "PersonalMeditation": "Персональная медитация"
+    "PersonalMeditation": "Персональная медитация",
+    "TarotReading": "Гадание на Таро"
+  },
+  "tarot": {
+    "banner": {
+      "title": "Гадание на Таро",
+      "subtitle": "Откройте для себя мудрость древних карт"
+    },
+    "description": "Получите предсказания от карт Таро",
+    "introText": "Карты Таро могут дать понимание вашего прошлого, настоящего и будущего. Выберите тип расклада и начните гадание.",
+    "selectSpreadType": "Выберите тип расклада",
+    "spreadTypes": {
+      "threeCards": "Три карты",
+      "celticCross": "Кельтский крест",
+      "singleCard": "Одна карта",
+      "horseshoe": "Подкова",
+      "loveSpread": "Расклад на любовь"
+    },
+    "buttons": {
+      "getReading": "Получить предсказание",
+      "getPaidReading": "Получить предсказание ({{stars}} ⭐)",
+      "newReading": "Новое гадание"
+    },
+    "loadingMessage": "Тасуем карты...",
+    "upright": "Прямое положение",
+    "reversed": "Перевёрнутое положение",
+    "overallInterpretation": "Общее толкование",
+    "productName": "Гадание на Таро"
   }
 }

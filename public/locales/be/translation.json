@@ -383,6 +383,33 @@
     "Compatibility": "Сумяшчальнасць",
     "Affirmation": "Афірмацыя",
     "DreamInterpretation": "Тлумачэнне сноў",
-    "PersonalMeditation": "Персанальная медытацыя"
+    "PersonalMeditation": "Персанальная медытацыя",
+    "TarotReading": "Варажба на Таро"
+  },
+  "tarot": {
+    "banner": {
+      "title": "Варажба на Таро",
+      "subtitle": "Адкрыйце для сябе мудрасць старажытных карт"
+    },
+    "description": "Атрымайце прадказанні ад карт Таро",
+    "introText": "Карты Таро могуць даць разуменне вашага мінулага, сапраўднага і будучыні. Выберыце тып раскладу і пачніце варажбу.",
+    "selectSpreadType": "Выберыце тып раскладу",
+    "spreadTypes": {
+      "threeCards": "Тры карты",
+      "celticCross": "Кельцкі крыж",
+      "singleCard": "Адна карта",
+      "horseshoe": "Падкова",
+      "loveSpread": "Расклад на каханне"
+    },
+    "buttons": {
+      "getReading": "Атрымаць прадказанне",
+      "getPaidReading": "Атрымаць прадказанне ({{stars}} ⭐)",
+      "newReading": "Новая варажба"
+    },
+    "loadingMessage": "Тасуем карты...",
+    "upright": "Прамое становішча",
+    "reversed": "Перавернутае становішча",
+    "overallInterpretation": "Агульнае тлумачэнне",
+    "productName": "Варажба на Таро"
   }
 }
