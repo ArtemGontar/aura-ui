@@ -3,7 +3,7 @@ export interface Prediction {
   type: string;
   createdAt: string;
   updatedAt: string;
-  content: CompatibilityData | HoroscopeData | AffirmationData | DreamBookData;
+  content: CompatibilityData | HoroscopeData | AffirmationData | DreamBookData | TarotReading | HandFortuneData;
 }
 
 export enum PredictionType {
@@ -12,6 +12,7 @@ export enum PredictionType {
   Affirmation = "Affirmation",
   DreamInterpretation = "DreamInterpretation",
   TarotReading = "TarotReading",
+  HandFortune = "HandFortune",
 }
 
 export interface Horoscope {
@@ -50,4 +51,24 @@ export interface AffirmationData {
 
 export interface DreamBookData {
   interpretation: string;
+}
+
+export interface TarotReading {
+  spreadType: string;
+  cards: {
+    position: string;
+    cardName: string;
+    orientation: string;
+    interpretation: string;
+  }[];
+  overallInterpretation: string;
+}
+
+export interface HandFortuneData {
+  lifeLineReading: string;
+  heartLineReading: string;
+  headLineReading: string;
+  fateLineReading: string;
+  mountsAnalysis: string;
+  overallInterpretation: string;
 }

@@ -10,7 +10,8 @@ export enum FeatureType {
   Affirmation = 6,
   DreamInterpretation = 7,
   CreatePersonalMeditation = 8,
-  TarotReading = 9
+  TarotReading = 9,
+  HandFortune = "HandFortune"
 }
 
 // Replace with translation keys
@@ -20,5 +21,6 @@ export const PRODUCT_NAME_KEYS = {
   [FeatureType.Affirmation]: "products.affirmation",
   [FeatureType.DreamInterpretation]: "products.dreamInterpretation",
   [FeatureType.CreatePersonalMeditation]: "products.personalMeditation",
-  [FeatureType.TarotReading]: "tarot.productName"
+  [FeatureType.TarotReading]: "tarot.productName",
+  [FeatureType.HandFortune]: "handFortune.title"
 };

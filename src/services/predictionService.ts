@@ -1,4 +1,4 @@
-import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData } from "../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData, HandFortuneData } from "../types/prediction";
 import api from "./api";
 
 const API_BASE = `/api/fortunes`;
@@ -84,3 +84,22 @@ export const getTarotReading = async (spreadType = "Three Cards") => {
 export const getMagicBallAnswer = async (): Promise<string> => {
   return new Promise(() => {});
 }
+
+export const getHandFortune = async (imageFile: File): Promise<HandFortuneData> => {
+  try {
+    const formData = new FormData();
+    formData.append('image', imageFile);
+    
+    const response = await api.post<{ content: string }>(`${API_BASE}/hand-fortune`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    
+    const parsedData: HandFortuneData = JSON.parse(response.data.content);
+    return parsedData;
+  } catch (error) {
+    console.error("Error getting hand fortune reading", error);
+    throw error;
+  }
+};
