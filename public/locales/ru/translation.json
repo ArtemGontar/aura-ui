@@ -46,6 +46,10 @@
       "magicball": {
         "title": "Магический шар",
         "description": "Спросите шар о будущем."
+      },
+      "handFortune": {
+        "title": "Хиромантия",
+        "description": "Откройте тайны на своей ладони."
       }
     }
   },
@@ -372,7 +376,8 @@
     "Affirmation": "Аффирмация",
     "DreamInterpretation": "Толкование снов",
     "PersonalMeditation": "Персональная медитация",
-    "TarotReading": "Гадание на Таро"
+    "TarotReading": "Гадание на Таро",
+    "HandFortune": "Хиромантия"
   },
   "tarot": {
     "banner": {
@@ -399,5 +404,34 @@
     "reversed": "Перевёрнутое положение",
     "overallInterpretation": "Общее толкование",
     "productName": "Гадание на Таро"
+  },
+  "handFortune": {
+    "banner": {
+      "title": "Хиромантия",
+      "subtitle": "Узнайте историю, написанную на ваших руках"
+    },
+    "description": "Получите прогнозы из линий на вашей ладони",
+    "introText": "Хиромантия - это древняя практика интерпретации линий на вашей ладони, чтобы раскрыть секреты о вашем характере и будущем. Загрузите четкое фото вашей ладони, чтобы получить толкование.",
+    "uploadImage": "Загрузить фото руки",
+    "handPreview": "Предпросмотр фото вашей руки",
+    "removeImage": "Удалить изображение",
+    "selectOption": "Выберите опцию",
+    "chooseImageSource": "Как бы вы хотели сделать фото?",
+    "camera": "Использовать камеру",
+    "gallery": "Выбрать из галереи",
+    "scanHand": "Сделайте фото вашей ладони",
+    "loadingMessage": "Анализируем линии вашей ладони...",
+    "noImageError": "Сначала загрузите фотографию вашей ладони",
+    "lifeLineReading": "Линия жизни",
+    "heartLineReading": "Линия сердца",
+    "headLineReading": "Линия ума",
+    "fateLineReading": "Линия судьбы",
+    "mountsAnalysis": "Анализ холмов",
+    "overallInterpretation": "Общее толкование",
+    "buttons": {
+      "getReading": "Получить толкование",
+      "getPaidReading": "Получить толкование ({{stars}} ⭐)",
+      "newReading": "Новое толкование"
+    }
   }
 }

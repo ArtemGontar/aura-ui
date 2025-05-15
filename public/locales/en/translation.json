@@ -46,6 +46,10 @@
       "magicball": {
         "title": "Magic Ball",
         "description": "Ask the ball about your future."
+      },
+      "handFortune": {
+        "title": "Palm Reading",
+        "description": "Discover the secrets in your palm."
       }
     }
   },
@@ -383,7 +387,8 @@
     "Affirmation": "Affirmation",
     "DreamInterpretation": "Dream Interpretation",
     "PersonalMeditation": "Personal Meditation",
-    "TarotReading": "Tarot Reading"
+    "TarotReading": "Tarot Reading",
+    "HandFortune": "Palm Reading"
   },
   "tarot": {
     "banner": {
@@ -410,5 +415,34 @@
     "reversed": "Reversed",
     "overallInterpretation": "Overall Interpretation",
     "productName": "Tarot Reading"
+  },
+  "handFortune": {
+    "banner": {
+      "title": "Palm Reading",
+      "subtitle": "Discover the story written in your hands"
+    },
+    "description": "Get insights from the lines on your palm",
+    "introText": "Palm reading, or palmistry, is an ancient practice of interpreting the lines on your palm to reveal insights about your character and future. Upload a clear photo of your palm to receive a reading.",
+    "uploadImage": "Upload Hand Image",
+    "handPreview": "Your hand image preview",
+    "removeImage": "Remove image",
+    "selectOption": "Choose Option",
+    "chooseImageSource": "How would you like to take a photo?",
+    "camera": "Use Camera",
+    "gallery": "Choose from Gallery",
+    "scanHand": "Take a photo of your palm",
+    "loadingMessage": "Analyzing your palm lines...",
+    "noImageError": "Please upload an image of your palm first",
+    "lifeLineReading": "Life Line",
+    "heartLineReading": "Heart Line",
+    "headLineReading": "Head Line",
+    "fateLineReading": "Fate Line",
+    "mountsAnalysis": "Mounts Analysis",
+    "overallInterpretation": "Overall Interpretation",
+    "buttons": {
+      "getReading": "Get Palm Reading",
+      "getPaidReading": "Get Palm Reading ({{stars}} ⭐)",
+      "newReading": "New Reading"
+    }
   }
 }

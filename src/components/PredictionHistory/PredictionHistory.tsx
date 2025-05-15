@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./PredictionHistory.module.css";
 import { getPredictions } from "../../services/predictionService";
-import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData, PredictionType, TarotReadingData } from "../../types/prediction";
+import { Prediction, HoroscopeData, CompatibilityData, AffirmationData, DreamBookData, PredictionType, TarotReadingData, HandFortuneData } from "../../types/prediction";
 import { Pagination } from "@telegram-apps/telegram-ui";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import HoroscopeResult from "../../components/Cards/HoroscopeResult/HoroscopeResult";
@@ -11,6 +11,7 @@ import CompatibilityResult from "../Cards/Сompatibility/СompatibilityResult";
 import AffirmationResult from "../Cards/Affirmation/AffirmationResult";
 import DreamBookResult from "../Cards/DreamBook/DreamBookResult";
 import TarotResult from "../Cards/Tarot/TarotResult";
+import HandFortuneResult from "../Cards/HandFortune/HandFortuneResult";
 import { formatLocalizedDate, trimContent } from "../../utils/utils";
 
 const PredictionHistory: React.FC = () => {
@@ -65,6 +66,9 @@ const PredictionHistory: React.FC = () => {
       case PredictionType.TarotReading:
         const tarotData = selectedPrediction.content as TarotReadingData;
         return <TarotResult reading={tarotData} />;
+      case PredictionType.HandFortune:
+        const handFortuneData = selectedPrediction.content as HandFortuneData;
+        return <HandFortuneResult reading={handFortuneData} />;
       default:
         return <div>{t('profile.history.unknownPredictionType')}</div>;
     }
@@ -89,6 +93,9 @@ const PredictionHistory: React.FC = () => {
       case PredictionType.TarotReading:
         const tarotData = prediction.content as TarotReadingData;
         return trimContent(tarotData.overallInterpretation);
+      case PredictionType.HandFortune:
+        const handFortuneData = prediction.content as HandFortuneData;
+        return trimContent(handFortuneData.overallInterpretation);
       default:
         return;
     }

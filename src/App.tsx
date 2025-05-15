@@ -26,6 +26,7 @@ import useTelegramWebApp from "./hooks/useTelegramWebApp";
 import Affirmation from "./components/Cards/Affirmation/Affirmation";
 import DreamBook from "./components/Cards/DreamBook/DreamBook";
 import TasksPage from "./components/Tasks/Tasks";
+import HandFortune from "./components/Cards/HandFortune/HandFortune";
 
 const AppContent: React.FC = () => {
   const { isUserLoading, error, isTelegram } = useTelegramInit();
@@ -79,6 +80,7 @@ const AppContent: React.FC = () => {
           <Route path="/compatibility" element={<Compatibility />} />
           <Route path="/affirmation" element={<Affirmation />} />
           <Route path="/psychologySuccess" element={<PsychologySuccess />} />
+          <Route path="/handfortune" element={<HandFortune />} />
           <Route path="/tarot" element={<Tarot />} />
           <Route path="/magicball" element={<MagicBall />} />
           <Route path="/create-personal-meditation" element={<CreatePersonalMeditation />} />

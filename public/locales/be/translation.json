@@ -46,6 +46,10 @@
       "magicball": {
         "title": "Магічны шар",
         "description": "Спытайце шар пра сваё будучыню."
+      },
+      "handFortune": {
+        "title": "Хірамантыя",
+        "description": "Адкрыйце таямніцы на сваёй далоні."
       }
     }
   },
@@ -384,7 +388,8 @@
     "Affirmation": "Афірмацыя",
     "DreamInterpretation": "Тлумачэнне сноў",
     "PersonalMeditation": "Персанальная медытацыя",
-    "TarotReading": "Варажба на Таро"
+    "TarotReading": "Варажба на Таро",
+    "HandFortune": "Хірамантыя"
   },
   "tarot": {
     "banner": {
@@ -411,5 +416,34 @@
     "reversed": "Перавернутае становішча",
     "overallInterpretation": "Агульнае тлумачэнне",
     "productName": "Варажба на Таро"
+  },
+  "handFortune": {
+    "banner": {
+      "title": "Хірамантыя",
+      "subtitle": "Даведайцеся гісторыю, напісаную на вашых руках"
+    },
+    "description": "Атрымайце прагнозы з ліній на вашай далоні",
+    "introText": "Хірамантыя - гэта старажытная практыка інтэрпрэтацыі ліній на вашай далоні, каб раскрыць сакрэты пра ваш характар і будучыню. Загрузіце выразнае фота вашай далоні, каб атрымаць тлумачэнне.",
+    "uploadImage": "Загрузіць фота рукі",
+    "handPreview": "Перагляд фота вашай рукі",
+    "removeImage": "Выдаліць выяву",
+    "selectOption": "Выберыце опцыю",
+    "chooseImageSource": "Як бы вы хацелі зрабіць фота?",
+    "camera": "Выкарыстаць камеру",
+    "gallery": "Выбраць з галерэі",
+    "scanHand": "Зрабіце фота вашай далоні",
+    "loadingMessage": "Аналізуем лініі вашай далоні...",
+    "noImageError": "Спачатку загрузіце фатаграфію вашай далоні",
+    "lifeLineReading": "Лінія жыцця",
+    "heartLineReading": "Лінія сэрца",
+    "headLineReading": "Лінія розуму",
+    "fateLineReading": "Лінія лёсу",
+    "mountsAnalysis": "Аналіз узгоркаў",
+    "overallInterpretation": "Агульнае тлумачэнне",
+    "buttons": {
+      "getReading": "Атрымаць тлумачэнне",
+      "getPaidReading": "Атрымаць тлумачэнне ({{stars}} ⭐)",
+      "newReading": "Новае тлумачэнне"
+    }
   }
 }
