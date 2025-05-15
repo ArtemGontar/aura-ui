@@ -1,0 +1,66 @@
+.tarotContainer {
+  padding: var(--tg-theme-mobile-padding);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bannerBackground {
+  background: linear-gradient(to right, #3e1f79, #7c2788);
+}
+
+.introText {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.spreadTypeSelector {
+  margin-bottom: 2rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: var(--tg-theme-font-weight-medium);
+  text-align: left;
+}
+
+.select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--tg-theme-hint-color);
+  border-radius: var(--tg-theme-border-radius);
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  font-size: var(--tg-theme-font-size-base);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 1em;
+}
+
+.error {
+  color: var(--tg-theme-error-color);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.newReadingButton {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  border: none;
+  border-radius: var(--tg-theme-border-radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.newReadingButton:hover {
+  opacity: 0.9;
+}

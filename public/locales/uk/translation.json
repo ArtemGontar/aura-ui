@@ -383,6 +383,33 @@
     "Compatibility": "Сумісність",
     "Affirmation": "Афірмація",
     "DreamInterpretation": "Тлумачення снів",
-    "PersonalMeditation": "Персональна медитація"
+    "PersonalMeditation": "Персональна медитація",
+    "TarotReading": "Ворожіння на Таро"
+  },
+  "tarot": {
+    "banner": {
+      "title": "Ворожіння на Таро",
+      "subtitle": "Відкрийте для себе мудрість древніх карт"
+    },
+    "description": "Отримайте передбачення від карт Таро",
+    "introText": "Карти Таро можуть дати розуміння вашого минулого, теперішнього та майбутнього. Виберіть тип розкладу і почніть ворожіння.",
+    "selectSpreadType": "Виберіть тип розкладу",
+    "spreadTypes": {
+      "threeCards": "Три карти",
+      "celticCross": "Кельтський хрест",
+      "singleCard": "Одна карта",
+      "horseshoe": "Підкова",
+      "loveSpread": "Розклад на кохання"
+    },
+    "buttons": {
+      "getReading": "Отримати передбачення",
+      "getPaidReading": "Отримати передбачення ({{stars}} ⭐)",
+      "newReading": "Нове ворожіння"
+    },
+    "loadingMessage": "Тасуємо карти...",
+    "upright": "Пряме положення",
+    "reversed": "Перевернуте положення",
+    "overallInterpretation": "Загальне тлумачення",
+    "productName": "Ворожіння на Таро"
   }
 }
