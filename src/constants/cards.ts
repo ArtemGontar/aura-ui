@@ -32,16 +32,16 @@ export const HOME_CARDS: CardData[] = [
     disabled: false
   },
   {
-    id: 'psychologySuccess',
-    path: '/psychologySuccess',
-    icon: '🧠',
-    disabled: true
-  },
-  {
     id: 'tarot',
     path: '/tarot',
     icon: '🌠',
     disabled: false
+  },
+    {
+    id: 'psychologySuccess',
+    path: '/psychologySuccess',
+    icon: '🧠',
+    disabled: true
   },
   {
     id: 'magicball',
