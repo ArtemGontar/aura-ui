@@ -33,6 +33,14 @@
   border: 1px solid var(--tg-theme-hint-color);
 }
 
+.cardImageContent {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: var(--tg-theme-border-radius);
+}
+
 .cardPlaceholder {
   text-align: center;
   font-weight: bold;

@@ -29,13 +29,13 @@ export const HOME_CARDS: CardData[] = [
     id: 'handFortune',
     path: '/handfortune',
     icon: '✋',
-    disabled: true
+    disabled: false
   },
   {
     id: 'tarot',
     path: '/tarot',
     icon: '🌠',
-    disabled: true
+    disabled: false
   },
   {
     id: 'psychologySuccess',

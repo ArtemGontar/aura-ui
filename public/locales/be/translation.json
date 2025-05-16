@@ -440,6 +440,7 @@
     "fateLineReading": "Лінія лёсу",
     "mountsAnalysis": "Аналіз узгоркаў",
     "overallInterpretation": "Агульнае тлумачэнне",
+    "changeImage": "Змяніць фота",
     "buttons": {
       "getReading": "Атрымаць тлумачэнне",
       "getPaidReading": "Атрымаць тлумачэнне ({{stars}} ⭐)",
