@@ -32,7 +32,7 @@ const TarotResult: React.FC<TarotResultProps> = ({ reading }) => {
           <div key={index} className={styles.card}>
             <div className={`${styles.cardImage} ${styles[card.orientation]}`}>
               <img 
-                src={`/images/${card.cardImageFilename}.png`} 
+                src={`/images/rider-waite-tarot/${card.cardImageFilename}.png`} 
                 alt={card.cardName} 
                 className={styles.cardImageContent} 
               />
