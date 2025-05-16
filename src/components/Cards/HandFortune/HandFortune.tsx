@@ -50,28 +50,20 @@ const HandFortune: React.FC = () => {
         {
           id: "camera",
           type: "default",
-          text: t('handFortune.camera')
+          text: t('handFortune.openCamera')
         },
         {
           id: "gallery",
           type: "default",
-          text: t('handFortune.gallery')
+          text: t('handFortune.openGallery')
         }
       ]
     }, (buttonId) => {
       if (buttonId === "camera") {
-        WebApp.showScanQrPopup({
-          text: t('handFortune.scanHand')
-        }, (qrText) => {
-          // This callback isn't really used for camera, but is required by the API
-          WebApp.closeScanQrPopup();
-          // After camera is closed, we'll check if the fileInputRef has a file
-          if (fileInputRef.current && fileInputRef.current.files && fileInputRef.current.files[0]) {
-            handleImageUpload({ target: { files: fileInputRef.current.files } } as any);
-          }
-        });
+        // Directly trigger the file input for camera
+        takePicture();
       } else if (buttonId === "gallery") {
-        // For gallery, we directly trigger the file input
+        // Directly trigger the file input for gallery
         takePicture();
       }
     });
@@ -154,7 +146,7 @@ const HandFortune: React.FC = () => {
               className={styles.uploadButton}
               onClick={openTelegramCamera}
             >
-              {t('handFortune.uploadImage')}
+              {handImage ? t('handFortune.changeImage') : t('handFortune.uploadImage')}
             </button>
 
             {imagePreview && (

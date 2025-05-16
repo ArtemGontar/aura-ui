@@ -7,6 +7,7 @@ interface Card {
   cardName: string;
   orientation: string;
   interpretation: string;
+  cardImageFilename: string;
 }
 
 interface TarotReadingData {
@@ -30,9 +31,11 @@ const TarotResult: React.FC<TarotResultProps> = ({ reading }) => {
         {reading.cards.map((card, index) => (
           <div key={index} className={styles.card}>
             <div className={`${styles.cardImage} ${styles[card.orientation]}`}>
-              <div className={styles.cardPlaceholder}>
-                {card.cardName}
-              </div>
+              <img 
+                src={`/images/${card.cardImageFilename}.png`} 
+                alt={card.cardName} 
+                className={styles.cardImageContent} 
+              />
             </div>
             <div className={styles.cardInfo}>
               <h4 className={styles.position}>{card.position}</h4>
