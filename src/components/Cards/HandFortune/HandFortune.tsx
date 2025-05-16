@@ -50,20 +50,11 @@ const HandFortune: React.FC = () => {
         {
           id: "camera",
           type: "default",
-          text: t('handFortune.openCamera')
-        },
-        {
-          id: "gallery",
-          type: "default",
-          text: t('handFortune.openGallery')
+          text: t('handFortune.camera')
         }
       ]
     }, (buttonId) => {
       if (buttonId === "camera") {
-        // Directly trigger the file input for camera
-        takePicture();
-      } else if (buttonId === "gallery") {
-        // Directly trigger the file input for gallery
         takePicture();
       }
     });
