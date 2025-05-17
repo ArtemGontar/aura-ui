@@ -15,6 +15,7 @@ import tariffs from "../../../constants/tariffs";
 import { FeatureType, PRODUCT_NAME_KEYS } from '../../../constants/products';
 import { createInvoiceLink } from '../../../services/paymentService';
 import WebApp from '@twa-dev/sdk';
+import { Button } from '@mui/material';
 
 const HandFortune: React.FC = () => {
   const { t } = useTranslation();
@@ -133,12 +134,13 @@ const HandFortune: React.FC = () => {
               ref={fileInputRef}
             />
             
-            <button 
-              className={styles.uploadButton}
+            <Button 
+              className={styles.uploadButton} // Keep the same class for additional styles
               onClick={openTelegramCamera}
+              disabled={loading} // Optional: Disable the button if needed
             >
               {handImage ? t('handFortune.changeImage') : t('handFortune.uploadImage')}
-            </button>
+            </Button>
 
             {imagePreview && (
               <div className={styles.imagePreviewContainer}>
