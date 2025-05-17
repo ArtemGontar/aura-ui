@@ -88,7 +88,7 @@ export const getMagicBallAnswer = async (): Promise<string> => {
 export const getHandFortune = async (imageFile: File): Promise<HandFortuneData> => {
   try {
     const formData = new FormData();
-    formData.append('image', imageFile);
+    formData.append('handImage', imageFile);
     
     const response = await api.post<{ content: string }>(`${API_BASE}/hand-fortune`, formData, {
       headers: {
