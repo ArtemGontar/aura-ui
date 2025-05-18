@@ -34,6 +34,11 @@
   object-fit: contain;
 }
 
+.removeImageButton {
+  margin-top: 0.5rem;
+  color: var(--tgui--button_text_color);
+}
+
 .error {
   color: var(--error);
   margin-top: 1rem;

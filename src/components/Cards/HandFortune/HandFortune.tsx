@@ -152,6 +152,7 @@ const HandFortune: React.FC = () => {
                 <Button 
                   className={styles.removeImageButton}
                   onClick={resetHandFortune}
+                  mode='plain'
                 >
                   {t('handFortune.removeImage')}
                 </Button>
