@@ -5,7 +5,7 @@ const tariffs = {
   compatibilityStarsAmount: 40,
   createPersonalMeditationStarsAmount: 50,
   tarotReadingStarsAmount: 50,
-  handFortuneStarsAmount: 15,
+  handFortuneStarsAmount: 50,
   subscriptionCosts: {
     basic: 200,
     premium: 400,
