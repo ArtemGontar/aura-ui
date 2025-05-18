@@ -19,22 +19,6 @@
   display: none;
 }
 
-.uploadButton {
-  background-color: var(--tgui--button_color);
-  color: var(--tgui--button_text_color);
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-size: var(--tg-theme-font-size-base);
-  cursor: pointer;
-  margin-bottom: 1rem;
-  transition: all 0.2s ease;
-}
-
-.uploadButton:hover {
-  opacity: 0.9;
-}
-
 .imagePreviewContainer {
   margin-top: 1rem;
   margin-bottom: 1.5rem;
