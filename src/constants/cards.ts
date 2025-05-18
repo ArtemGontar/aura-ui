@@ -2,6 +2,12 @@ import { CardData } from '../types';
 
 export const HOME_CARDS: CardData[] = [
   {
+    id: 'tarot',
+    path: '/tarot',
+    icon: '🌠',
+    disabled: false
+  },
+  {
     id: 'horoscope',
     path: '/horoscope',
     icon: '⭐',
@@ -29,12 +35,6 @@ export const HOME_CARDS: CardData[] = [
     id: 'handFortune',
     path: '/handfortune',
     icon: '✋',
-    disabled: false
-  },
-  {
-    id: 'tarot',
-    path: '/tarot',
-    icon: '🌠',
     disabled: false
   },
   {
