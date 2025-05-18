@@ -137,6 +137,7 @@ const HandFortune: React.FC = () => {
             <Button 
               className={styles.uploadButton}
               onClick={openTelegramCamera}
+              mode='plain'
             >
               {handImage ? t('handFortune.changeImage') : t('handFortune.uploadImage')}
             </Button>
@@ -148,12 +149,12 @@ const HandFortune: React.FC = () => {
                   alt={t('handFortune.handPreview')}
                   className={styles.imagePreview} 
                 />
-                <button 
+                <Button 
                   className={styles.removeImageButton}
                   onClick={resetHandFortune}
                 >
                   {t('handFortune.removeImage')}
-                </button>
+                </Button>
               </div>
             )}
 

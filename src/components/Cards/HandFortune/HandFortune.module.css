@@ -34,17 +34,6 @@
   object-fit: contain;
 }
 
-.removeImageButton {
-  margin-top: 0.5rem;
-  background-color: var(--error);
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: var(--tg-theme-font-size-small);
-  cursor: pointer;
-}
-
 .error {
   color: var(--error);
   margin-top: 1rem;
