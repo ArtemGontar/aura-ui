@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@telegram-apps/telegram-ui";
 import styles from "./Onboarding.module.css";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
-import { updateUserData } from "../../services/userService";
 import DatePicker from "../DatePicker/DatePicker";
 import { useUserData } from "../../hooks/useUserData";
+import { useDispatch } from "react-redux";
+import { saveUserDataAsync } from "../../store/slices/userSlice";
+import { AppDispatch } from "../../store";
 
 const Onboarding: React.FC<{ 
   onComplete: () => void; 
@@ -22,6 +24,7 @@ const Onboarding: React.FC<{
   const [error, setError] = useState("");
   const haptics = useTelegramHaptics();
   const { userData } = useUserData();
+    const dispatch = useDispatch<AppDispatch>();
 
   const handleNextStep = () => {
     haptics.selectionChanged();
@@ -40,7 +43,7 @@ const Onboarding: React.FC<{
     try {
       const dateOfBirth = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
       if (userData) {
-        await updateUserData({ ...userData, dateOfBirth, sex, maritalStatus });
+        await dispatch(saveUserDataAsync({ ...userData, dateOfBirth, sex, maritalStatus }));
       } else {
         haptics.notificationOccurred("error");
       }

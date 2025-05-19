@@ -3,16 +3,19 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@telegram-apps/telegram-ui";
 import styles from "./EditUser.module.css";
 import DatePicker from "../DatePicker/DatePicker";
-import { updateUserData } from "../../services/userService";
 import { useUserData } from "../../hooks/useUserData";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUserDataAsync } from "../../store/slices/userSlice";
+import { AppDispatch } from "../../store";
 
 const EditUser: React.FC = () => {
   const { t } = useTranslation();
   const { userData } = useUserData();
   const haptics = useTelegramHaptics();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const [birthDate, setBirthDate] = useState({
     day: userData?.dateOfBirth?.split("-")[2] || "",
@@ -31,7 +34,7 @@ const EditUser: React.FC = () => {
     try {
       const dateOfBirth = `${birthDate.year}-${birthDate.month.padStart(2, "0")}-${birthDate.day.padStart(2, "0")}`;
       if (userData) {
-        await updateUserData({ ...userData, dateOfBirth, sex, maritalStatus });
+        await dispatch(saveUserDataAsync({ ...userData, dateOfBirth, sex, maritalStatus }));
         navigate(-1);
       } else {
         haptics.notificationOccurred("error");

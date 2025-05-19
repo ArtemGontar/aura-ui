@@ -65,7 +65,7 @@ export const fetchUserSubscriptionAsync = createAsyncThunk(
       return subscription;
     } catch (error: any) {
       console.warn("Handled fetch error:", error);
-      return isRejectedWithValue(error?.response?.data || 'Unknown error');
+      return null; // Return null on error
     }
   }
 );
@@ -147,7 +147,7 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUserSubscriptionAsync.fulfilled, (state, action) => {
-        state.userSubscription = action.payload;
+        state.userSubscription = action.payload; // action.payload can be UserSubscription or null
         state.isSubscriptionLoading = false;
       })
       .addCase(fetchUserSubscriptionAsync.rejected, (state, action) => {
