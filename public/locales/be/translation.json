@@ -9,7 +9,8 @@
     "home": "Галоўная",
     "profile": "Профіль",
     "meditations": "Медытацыі",
-    "tasks": "Заданні"
+    "tasks": "Заданні",
+    "leaderboard": "Табліца лідараў"
   },
   "home": {
     "daysStreak": "дзён запар",
@@ -446,5 +447,10 @@
       "getPaidReading": "Атрымаць тлумачэнне ({{stars}} ⭐)",
       "newReading": "Новае тлумачэнне"
     }
+  },
+  "leaderboard": {
+    "byReferrals": "Па рэфералах",
+    "byCoins": "Па манетах",
+    "referralsShort": "рэф"
   }
 }

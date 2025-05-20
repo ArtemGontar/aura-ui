@@ -40,3 +40,23 @@ export const deleteUser = async (userId: number): Promise<void> => {
     throw error;
   }
 };
+
+export const getLeaderboardByReferrals = async (): Promise<{id: number, name: string, avatarUrl?: string, coins: number, referrals: number}[]> => {
+  try {
+    const response = await api.get(`/api/leaderboard/referrals`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching leaderboard by referrals", error);
+    return [];
+  }
+};
+
+export const getLeaderboardByCoins = async (): Promise<{id: number, name: string, avatarUrl?: string, coins: number, referrals: number}[]> => {
+  try {
+    const response = await api.get(`/api/leaderboard/coins`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching leaderboard by coins", error);
+    return [];
+  }
+};

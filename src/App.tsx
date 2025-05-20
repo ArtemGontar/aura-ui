@@ -27,6 +27,7 @@ import Affirmation from "./components/Cards/Affirmation/Affirmation";
 import DreamBook from "./components/Cards/DreamBook/DreamBook";
 import TasksPage from "./components/Tasks/Tasks";
 import HandFortune from "./components/Cards/HandFortune/HandFortune";
+import Leaderboard from "./components/Leaderboard/Leaderboard";
 
 const AppContent: React.FC = () => {
   const { isUserLoading, error, isTelegram } = useTelegramInit();
@@ -88,6 +89,7 @@ const AppContent: React.FC = () => {
           <Route path="/edit-user" element={<EditUser />} />
           <Route path="/dreambook" element={<DreamBook />} />
           <Route path="/tasks" element={<TasksPage />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>

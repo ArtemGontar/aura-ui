@@ -9,7 +9,8 @@
     "home": "Home",
     "profile": "Profile",
     "meditations": "Meditations",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "leaderboard": "Leaderboard"
   },
   "home": {
     "daysStreak": "days in a row",
@@ -445,5 +446,10 @@
       "getPaidReading": "Get Palm Reading ({{stars}} ⭐)",
       "newReading": "New Reading"
     }
+  },
+  "leaderboard": {
+    "byReferrals": "By Referrals",
+    "byCoins": "By Coins",
+    "referralsShort": "ref"
   }
 }

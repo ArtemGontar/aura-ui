@@ -9,7 +9,8 @@
     "home": "Домой",
     "profile": "профиль",
     "meditations": "Медитации",
-    "tasks": "Задания"
+    "tasks": "Задания",
+    "leaderboard": "Таблица лидеров"
   },
   "home": {
     "daysStreak": "дней подряд",
@@ -434,5 +435,10 @@
       "newReading": "Новое толкование"
     },
     "changeImage": "Изменить фото"
+  },
+  "leaderboard": {
+    "byReferrals": "По рефералам",
+    "byCoins": "По монетам",
+    "referralsShort": "реф"
   }
 }
