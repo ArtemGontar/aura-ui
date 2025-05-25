@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -14,8 +13,8 @@ import LoadingDisplay from "./components/LoadingDisplay/LoadingDisplay";
 import { useTelegramInit } from "./hooks/useTelegramInit";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { useApplyTheme } from "./hooks/useApplyTheme";
-import { incrementStreak, getUserStats } from "./services/userStatsService";
 import { useUserData } from "./hooks/useUserData";
+import { useUserStats } from "./hooks/useUserStats"; // Added import
 import ThemeSwitcher from "./components/ThemeSwitcher/ThemeSwitcher"; 
 import Compatibility from "./components/Cards/Сompatibility/Сompatibility";
 import CreatePersonalMeditation from "./components/CreatePersonalMeditation/CreatePersonalMeditation"; 
@@ -31,24 +30,10 @@ import HandFortune from "./components/Cards/HandFortune/HandFortune";
 const AppContent: React.FC = () => {
   const { isUserLoading, error, isTelegram } = useTelegramInit();
   useApplyTheme();
-  const { userData } = useUserData();
+  const { userData } = useUserData(); // Retain for potential other uses, though useUserStats also uses it.
   useTelegramBackButton();
   useTelegramWebApp();
-
-  useEffect(() => {
-    const fetchUserStats = async (userId: number) => {
-      try {
-        await incrementStreak(userId);
-        await getUserStats(userId);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (userData?.id) {
-      fetchUserStats(userData.id);
-    }
-  }, [userData?.id]);
+  useUserStats(); // Use the new hook
 
   if (isUserLoading) {
     return <LoadingDisplay 

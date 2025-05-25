@@ -1,35 +1,27 @@
-import React, { useMemo } from "react";
+import { useCallback } from "react"; // Added useCallback
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styles from "./Home.module.css";
 import { HomeProps } from "../../types";
 import { HOME_CARDS } from "../../constants/cards";
 import { useUserData } from "../../hooks/useUserData";
+import { useRandomWelcomeMessage } from "../../hooks/useRandomWelcomeMessage";
 import ErrorDisplay from "../ErrorDisplay/ErrorDisplay";
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
-import coin from "../../assets/coin.png";
+import HomeHeader from "./HomeHeader";
+import HomeCardsGrid from "./HomeCardsGrid"; // Added import
 
 const Home: React.FC<HomeProps> = ({ className }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { isUserLoading, isStatsLoading, error, userData, userStats } = useUserData();
+  const randomWelcomeMessage = useRandomWelcomeMessage(t);
 
-  const randomWelcomeMessage = useMemo(() => {
-    const welcomeMessages = [
-      t('home.welcomeMessage1'),
-      t('home.welcomeMessage2'),
-      t('home.welcomeMessage3'),
-      t('home.welcomeMessage4'),
-      t('home.welcomeMessage5'),
-    ];
-    return welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
-  }, []);
-
-  const handleNavigation = (path: string, disabled: boolean) => {
+  const handleNavigation = useCallback((path: string, disabled: boolean) => {
     if (!disabled) {
       navigate(path);
     }
-  };
+  }, [navigate]); // Wrapped with useCallback
 
   if (error) {
     return <ErrorDisplay error={error}></ErrorDisplay>;
@@ -45,49 +37,19 @@ const Home: React.FC<HomeProps> = ({ className }) => {
 
   return (
     <div className={`${styles.home} ${className || ''}`}>
-      <div className={styles.welcomeContainer}>
-        <p className={styles.streak}>
-          {userStats?.streak} {t('home.daysStreak')} {userStats?.streak > 0 ? "🔥" : ""}
-        </p>
-        <h2 className={styles.welcome}>{userData?.firstName}</h2>
-        <p className={styles.subtitle}>{randomWelcomeMessage}</p>
-        <div className={styles.coinContainer}>
-          <div className={styles.coin}>
-            <div className={styles.coinInfo}>
-              {isStatsLoading ? (
-                <span className={styles.coinAmount}>
-                  <span className={styles.coinLoader}>...</span>
-                </span>
-              ) : (
-                <span className={styles.coinAmount}>{userStats?.coinBalance}</span>
-              )}
-              <img src={coin} alt="Aura coin" className="w-12 h-12" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.cards} role="grid">
-        {HOME_CARDS.map((card) => (
-          <div
-            key={card.id}
-            onClick={() => handleNavigation(card.path, card.disabled)}
-            className={`${styles.card} ${card.disabled ? styles.cardDisabled : ''} ${styles[`card${card.id.charAt(0).toUpperCase() + card.id.slice(1)}`]}`}
-            role="gridcell"
-            tabIndex={0}
-            onKeyPress={(e) => {
-              if (!card.disabled && (e.key === 'Enter' || e.key === ' ')) {
-                handleNavigation(card.path, card.disabled);
-              }
-            }}
-          >
-            <h3 className={styles.cardTitle}>
-              {card.icon && <span className={styles.cardIcon}>{card.icon}</span>}
-              {t(`home.cards.${card.id}.title`)}
-            </h3>
-            <p className={styles.cardDescription}>{t(`home.cards.${card.id}.description`)}</p>
-          </div>
-        ))}
-      </div>
+      <HomeHeader
+        userName={userData?.firstName}
+        streak={userStats?.streak}
+        coinBalance={userStats?.coinBalance}
+        welcomeMessage={randomWelcomeMessage}
+        isStatsLoading={isStatsLoading}
+        t={t}
+      />
+      <HomeCardsGrid
+        cards={HOME_CARDS}
+        onCardClick={handleNavigation}
+        t={t}
+      />
     </div>
   );
 };

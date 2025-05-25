@@ -1,29 +1,23 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserStats, setError } from '../store/slices/userSlice';
-import { RootState } from '../store';
-import { getUserStats } from '../services/userStatsService';
+import { useEffect } from "react";
+import { useUserData } from "./useUserData";
+import { incrementStreak, getUserStats } from "../services/userStatsService";
 
 export const useUserStats = () => {
-  const dispatch = useDispatch();
-  const { userData } = useSelector((state: RootState) => state.user);
+  const { userData } = useUserData();
 
   useEffect(() => {
-    const initializeUserStats = async () => {
-      if (!userData?.id) return;
-
+    const fetchUserStats = async (userId: number) => {
       try {
-        await getUserStats(userData.id.toString());
+        await incrementStreak(userId);
+        await getUserStats(userId);
+        // console.log("User stats fetched and streak incremented successfully for user:", userId);
       } catch (error) {
-        dispatch(setError('Failed to fetch user stats'));
-        // Set default stats as fallback
-        dispatch(setUserStats({
-          streak: 0,
-          crystalBalance: 0
-        }));
+        console.error("Failed to fetch user stats or increment streak for user:", userId, error);
       }
     };
 
-    initializeUserStats();
-  }, [dispatch, userData?.id]);
-}; 
+    if (userData?.id) {
+      fetchUserStats(userData.id);
+    }
+  }, [userData?.id]);
+};

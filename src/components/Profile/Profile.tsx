@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useCallback } from "react"; // Added useCallback, removed React
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -7,10 +7,12 @@ import { useUserData } from "../../hooks/useUserData";
 import PredictionHistory from "../PredictionHistory/PredictionHistory";
 import { ProfileProps } from "../../types/profile";
 import Subscription from "../Subscription/Subscription";
-import { deleteUser } from "../../services/userService";
+// deleteUser import removed, now handled by useDeleteAccount
+import ProfileHeader from "./ProfileHeader";
 import { fetchUserSubscriptionAsync } from "../../store/slices/userSlice";
-import WebApp from "@twa-dev/sdk";
+import WebApp from "@twa-dev/sdk"; // WebApp might still be used by other parts or TWA specific features
 import { AppDispatch } from "../../store";
+import { useDeleteAccount } from "../../hooks/useDeleteAccount"; // Added import
 
 const Profile: React.FC<ProfileProps> = ({ className }) => {
   const { t } = useTranslation();
@@ -18,25 +20,23 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
+  const { 
+    confirmAndDeleteAccount, 
+    isDeleting, 
+    deleteError 
+  } = useDeleteAccount({ userId: userData?.id, t });
+
+  const handleEditClick = useCallback(() => {
+    navigate('/edit-user');
+  }, [navigate]);
+
   useEffect(() => {
     if (userData?.id) {
       dispatch(fetchUserSubscriptionAsync(userData.id));
     }
-  }, [userData, dispatch]);
+  }, [userData?.id, dispatch]); // userData.id for more specific dependency
 
-  const handleDeleteAccount = async () => {
-    WebApp.showConfirm(t('profile.confirmDelete'), async (result) => {
-      if (result && userData) {
-        try {
-          await deleteUser(userData.id);
-          WebApp.close();
-        } catch (error) {
-          console.error("Error deleting account", error);
-          alert(t('profile.deleteError'));
-        }
-      }
-    });
-  };
+  // handleDeleteAccount function is removed
 
   if (isUserLoading) {
     return (
@@ -66,29 +66,13 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
   const displayName = fullName || userData.username;
   return (
     <div className={`${styles.container} ${className || ''}`}>
-      {/* Profile Info */}
-      <section className={styles.profileInfo} aria-labelledby="profile-title">
-        <img
-          src={userData.photoUrl || '/images/default-avatar.png'}
-          alt={`${displayName}'s avatar`}
-          className={styles.avatar}
-          loading="lazy"
-        />
-        <div className={styles.userInfo}>
-          <h2 id="profile-title" className={styles.name}>{displayName}</h2>
-          {userData.username && (
-            <div className={styles.userActions}>
-              <p className={styles.email}>@{userData.username}</p>
-              <button
-                className={styles.editButton}
-                onClick={() => navigate('/edit-user')}
-              >
-                {t('profile.edit')}
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
+      <ProfileHeader
+        photoUrl={userData.photoUrl}
+        displayName={displayName || ''}
+        username={userData.username}
+        onEditClick={handleEditClick}
+        t={t}
+      />
 
       <Subscription 
         isSubscribed={userSubscription?.isActive}
@@ -98,11 +82,15 @@ const Profile: React.FC<ProfileProps> = ({ className }) => {
 
       <PredictionHistory />
 
+      {/* Optional: Display deleteError prominently if needed */}
+      {deleteError && <p className={styles.error} role="alert">{deleteError}</p>}
+
       <button
         className={styles.deleteButton}
-        onClick={handleDeleteAccount}
+        onClick={confirmAndDeleteAccount}
+        disabled={isDeleting}
       >
-        {t('profile.deleteAccount')}
+        {isDeleting ? t('profile.deleting', 'Deleting...') : t('profile.deleteAccount', 'Delete Account')}
       </button>
     </div>
   );
