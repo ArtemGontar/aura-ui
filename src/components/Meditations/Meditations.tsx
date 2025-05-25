@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Removed useRef
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./Meditations.module.css";
@@ -8,8 +8,9 @@ import { Meditation, MeditationCategory, MeditationStatus } from "../../types/me
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
 import MeditationCard from "./MeditationCard";
 import { Pagination } from "@telegram-apps/telegram-ui";
-import { getAudioSasUrl, downloadAudio } from "../../services/audioService";
+import { downloadAudio } from "../../services/audioService"; // Removed getAudioSasUrl
 import LoadingDisplay from "../LoadingDisplay/LoadingDisplay";
+import { useMeditationPlayer } from "../../hooks/useMeditationPlayer"; // Added import
 
 type FilterCategory = "All" | MeditationCategory;
 
@@ -22,11 +23,17 @@ const Meditations: React.FC = () => {
   const { impactOccurred, selectionChanged } = useTelegramHaptics();
   const [generalMeditations, setGeneralMeditations] = useState<Meditation[]>([]);
   const [personalMeditations, setPersonalMeditations] = useState<Meditation[]>([]);
-  const [playingId, setPlayingId] = useState<number | null>(null);
+  // playingId, audioRef, audioSasUrls are now managed by useMeditationPlayer
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("All");
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [audioSasUrls, setAudioSasUrls] = useState<Record<string, string>>({});
   
+  const { 
+    playingId, 
+    audioRef, 
+    togglePlayPause: playerTogglePlayPause, 
+    moveAudio: playerMoveAudio,
+    isLoadingSasUrl 
+  } = useMeditationPlayer();
+
   // Pagination state
   const [generalPage, setGeneralPage] = useState<number>(1);
   const [personalPage, setPersonalPage] = useState<number>(1);
@@ -96,48 +103,19 @@ const Meditations: React.FC = () => {
     return Math.max(1, Math.ceil(totalItems / limit));
   };
 
-  const togglePlayPause = async (audioUrl: string, id: number, status: MeditationStatus) => {
-    // Don't allow playing inprogress or failed meditations
-    if (status === "InProgress" || status === "Failed") return;
-    
-    if (!audioRef.current) return;
+  // togglePlayPause and moveAudio are now provided by useMeditationPlayer
+  // Renamed to playerTogglePlayPause and playerMoveAudio to avoid naming conflicts if any local handlers were needed.
 
-    if (playingId === id) {
-      // Just pause the current audio without changing the source
-      audioRef.current.pause();
-      setPlayingId(null);
-    } else {
-      try {
-        // Check if we already have a SAS URL for this audio
-        if (!audioSasUrls[audioUrl]) {
-          // If not, fetch a new one and store it
-          const sasUrl = await getAudioSasUrl(audioUrl);
-          setAudioSasUrls(prev => ({
-            ...prev,
-            [audioUrl]: sasUrl
-          }));
-          audioRef.current.src = sasUrl;
-        } else {
-          // Use the cached SAS URL
-          audioRef.current.src = audioSasUrls[audioUrl];
-        }
-        
-        await audioRef.current.play();
-        setPlayingId(id);
-      } catch (error) {
-        console.error("Error playing audio:", error);
-      }
-    }
+  const handlePlayPause = (meditation: Meditation) => {
+    if (meditation.readinessStatus === "InProgress" || meditation.readinessStatus === "Failed") return;
+    // Ensure meditation.id is a string if your hook expects string IDs
+    playerTogglePlayPause(String(meditation.id), meditation.audioUrl);
   };
 
-  const moveAudio = (direction: "forward" | "backward") => {
-    if (audioRef.current) {
-      const offset = direction === "forward" ? 10 : -10;
-      audioRef.current.currentTime = Math.max(
-        0,
-        Math.min(audioRef.current.duration, audioRef.current.currentTime + offset)
-      );
-    }
+  const handleMoveAudio = (meditationId: number, direction: "forward" | "backward") => {
+    const amount = direction === "forward" ? 10 : -10;
+    // Ensure meditationId is a string if your hook expects string IDs
+    playerMoveAudio(String(meditationId), amount);
   };
 
   const handleCreatePersonalMeditation = () => {
@@ -178,17 +156,17 @@ const Meditations: React.FC = () => {
       <MeditationCard
         key={meditation.id}
         meditation={meditation}
-        isPlaying={playingId === meditation.id}
-        onPlayPause={() => togglePlayPause(meditation.audioUrl, meditation.id, meditation.readinessStatus)}
-        onMoveAudio={moveAudio}
+        isPlaying={playingId === String(meditation.id)} // Compare with string ID
+        onPlayPause={() => handlePlayPause(meditation)}
+        onMoveAudio={(direction) => handleMoveAudio(meditation.id, direction)} // Pass direction
         onDownload={() => handleDownload(meditation.audioUrl, meditation.text, meditation.readinessStatus)}
-        disabled={isInProgress || isFailed}
+        disabled={(isInProgress || isFailed) || (isLoadingSasUrl && playingId === String(meditation.id))} // Disable if this card's SAS is loading
         statusMessage={
           isInProgress ? t("meditations.status.inprogress") :
           isFailed ? t("meditations.status.failed") : 
           undefined
         }
-        showLoadingAnimation={isPersonal && isInProgress}
+        showLoadingAnimation={(isPersonal && isInProgress) || (isLoadingSasUrl && playingId === String(meditation.id))} // Show loader if this card's SAS is loading
       />
     );
   };
@@ -301,7 +279,7 @@ const Meditations: React.FC = () => {
         )}
       </div>
       <div className={styles.player}>
-        <audio ref={audioRef} controls style={{ display: "none" }} />
+        <audio ref={audioRef} controls style={{ display: "none" }} /> {/* Assign audioRef from hook */}
       </div>
     </div>
   );
