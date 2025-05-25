@@ -1,11 +1,9 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { Home, Person, SelfImprovement, Task } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import styles from "./Navigation.module.css";
 import useTelegramHaptics from "../../hooks/useTelegramHaptic";
-import { Tabbar } from "@telegram-apps/telegram-ui";
 import { AudioLines, House, ListTodo, User, Trophy } from "lucide-react";
 
 const Navigation: React.FC = () => {

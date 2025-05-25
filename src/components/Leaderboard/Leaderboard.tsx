@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styles from "./Leaderboard.module.css";
 import Banner from "../Banner/Banner";
 import { RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { getLeaderboardByReferrals, getLeaderboardByCoins } from "../../services/userService";
-import trophyImg from "../../assets/trophy.png";
+import { Trophy } from "lucide-react";
 
 interface LeaderboardUser {
   id: number;
@@ -18,15 +18,30 @@ const Leaderboard: React.FC = () => {
   const { t } = useTranslation();
   const [tab, setTab] = useState<"referrals" | "coins">("referrals");
   const [users, setUsers] = useState<LeaderboardUser[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    let fetchFn = tab === "referrals" ? getLeaderboardByReferrals : getLeaderboardByCoins;
-    setLoading(true);
-    fetchFn()
-      .then(setUsers)
-      .finally(() => setLoading(false));
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const data =
+          tab === "referrals"
+            ? await getLeaderboardByReferrals()
+            : await getLeaderboardByCoins();
+        setUsers(data);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUsers();
   }, [tab]);
+
+  const handleTabChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setTab(event.target.value as "referrals" | "coins");
+    },
+    []
+  );
 
   return (
     <div className={styles.leaderboardContainer}>
@@ -34,14 +49,14 @@ const Leaderboard: React.FC = () => {
         headerText={t("navigation.leaderboard")}
         subText={t("Earn rewards by inviting friends or collecting coins!")}
         bgColor="bg-yellow-400"
-        icon={<img src={trophyImg} alt="Trophy" style={{ width: 48, height: 48 }} />}
+        icon={<Trophy />}
       />
 
       <div className={styles.tabs}>
         <RadioGroup
           row
           value={tab}
-          onChange={e => setTab(e.target.value as "referrals" | "coins")}
+          onChange={handleTabChange}
         >
           <FormControlLabel
             value="referrals"
